@@ -15,12 +15,8 @@
  */
 package org.springframework.social.quickstart;
 
-import java.util.List;
-
-import javax.inject.Inject;
-
-import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.google.api.Google;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,17 +30,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 
-	private final Facebook facebook;
+	private final Google google;
 	
-	@Inject
-	public HomeController(Facebook facebook) {
-		this.facebook = facebook;
+	@Autowired
+	public HomeController(Google google) {
+		this.google = google;
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		List<Reference> friends = facebook.friendOperations().getFriends();
-		model.addAttribute("friends", friends);
+//		List<Reference> friends = google.friendOperations().getFriends();
+//		model.addAttribute("friends", friends);
 		return "home";
 	}
 

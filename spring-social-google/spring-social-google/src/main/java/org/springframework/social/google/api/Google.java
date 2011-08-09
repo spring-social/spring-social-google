@@ -4,5 +4,5 @@ import org.springframework.social.ApiBinding;
 
 public interface Google extends ApiBinding {
 
-	
+	UserOperations userOperations();
 }

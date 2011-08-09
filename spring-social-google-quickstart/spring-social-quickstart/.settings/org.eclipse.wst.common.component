@@ -3,6 +3,9 @@
     <wb-module deploy-name="spring-social-quickstart">
         <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/spring-social-google/spring-social-google">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="spring-social-quickstart"/>
         <property name="java-output-path" value="/spring-social-quickstart/target/classes"/>
     </wb-module>

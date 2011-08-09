@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.social.connect.UsersConnectionRepository;
-import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.google.api.Google;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -86,7 +86,7 @@ public final class UserInterceptor extends HandlerInterceptorAdapter {
 
 	private boolean userNotFound(String userId) {
 		// doesn't bother checking a local user database: simply checks if the userId is connected to Facebook
-		return connectionRepository.createConnectionRepository(userId).findPrimaryConnection(Facebook.class) != null;
+		return connectionRepository.createConnectionRepository(userId).findPrimaryConnection(Google.class) != null;
 	}
 	
 }
