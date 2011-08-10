@@ -8,21 +8,19 @@ import org.springframework.social.google.api.Google;
 public class GoogleAdapter implements ApiAdapter<Google> {
 
 	public boolean test(Google google) {
-		return false;
+		return true;
 	}
 
 	public void setConnectionValues(Google google, ConnectionValues values) {
-		// TODO Auto-generated method stub
-		
+		google.userOperations().getUserProfile();
+		System.out.println("############################################");
 	}
 
 	public UserProfile fetchUserProfile(Google google) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public void updateStatus(Google google, String message) {
-		// TODO Auto-generated method stub
 		
 	}
 

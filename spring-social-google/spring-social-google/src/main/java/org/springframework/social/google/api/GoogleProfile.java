@@ -1,16 +1,14 @@
 package org.springframework.social.google.api;
 
-public class GoogleProfile {
+import java.io.Serializable;
 
-	private final String username;
-	private final String firstName;
-	private final String lastName;
-	
-	public GoogleProfile(String username, String firstName, String lastName) {
-		this.username = username;
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
+@SuppressWarnings("serial")
+public class GoogleProfile implements Serializable {
+
+	private String id;
+	private String username;
+	private String firstName;
+	private String lastName;
 	
 	public String getUsername() {
 		return username;
