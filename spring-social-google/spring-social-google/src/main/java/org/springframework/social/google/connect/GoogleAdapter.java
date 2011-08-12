@@ -3,7 +3,9 @@ package org.springframework.social.google.connect;
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfile;
+import org.springframework.social.connect.UserProfileBuilder;
 import org.springframework.social.google.api.Google;
+import org.springframework.social.google.api.GoogleProfile;
 
 public class GoogleAdapter implements ApiAdapter<Google> {
 
@@ -12,12 +14,22 @@ public class GoogleAdapter implements ApiAdapter<Google> {
 	}
 
 	public void setConnectionValues(Google google, ConnectionValues values) {
-		google.userOperations().getUserProfile();
-		System.out.println("############################################");
+		GoogleProfile profile = google.userOperations().getUserProfile();
+		values.setProviderUserId(profile.getId());
+		values.setDisplayName(profile.getName());
+		values.setProfileUrl(profile.getLink());
+		values.setImageUrl(profile.getProfilePictureUrl());
 	}
 
 	public UserProfile fetchUserProfile(Google google) {
-		return null;
+		GoogleProfile profile = google.userOperations().getUserProfile();
+		return new UserProfileBuilder()
+			.setUsername(profile.getEmail())
+			.setEmail(profile.getEmail())
+			.setName(profile.getName())
+			.setFirstName(profile.getFirstName())
+			.setLastName(profile.getLastName())
+			.build();
 	}
 
 	public void updateStatus(Google google, String message) {
