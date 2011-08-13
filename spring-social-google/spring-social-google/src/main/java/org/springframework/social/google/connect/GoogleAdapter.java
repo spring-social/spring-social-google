@@ -33,7 +33,7 @@ public class GoogleAdapter implements ApiAdapter<Google> {
 	}
 
 	public void updateStatus(Google google, String message) {
-		
+		throw new UnsupportedOperationException();
 	}
 
 }

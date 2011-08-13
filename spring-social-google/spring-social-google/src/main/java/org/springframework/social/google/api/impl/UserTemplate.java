@@ -6,16 +6,13 @@ import org.springframework.web.client.RestTemplate;
 
 public class UserTemplate extends AbstractGoogleOperations implements UserOperations {
 
-	private final RestTemplate restTemplate;
-	
 	public UserTemplate(RestTemplate restTemplate, boolean authorized) {
-		super(authorized);
-		this.restTemplate = restTemplate;
+		super(restTemplate, authorized);
 	}
 
 	public GoogleProfile getUserProfile() {
+		requireAuthorization();
 		return restTemplate.getForObject("https://www.googleapis.com/oauth2/v1/userinfo", GoogleProfile.class);
 	}
-
 
 }

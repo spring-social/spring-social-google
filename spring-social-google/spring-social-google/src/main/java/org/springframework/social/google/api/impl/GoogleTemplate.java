@@ -19,6 +19,7 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	
 	public GoogleTemplate(String accessToken) {
 		super(accessToken);
+		System.out.println(accessToken);
 		userOperations = new UserTemplate(getRestTemplate(), isAuthorized());
 	}
 	

@@ -22,6 +22,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.quickstart.user.UserInterceptor;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -36,13 +37,20 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
+	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new UserInterceptor(usersConnectionRepository));
 	}
 
+	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/signin");
 		registry.addViewController("/signout");
+	}
+	
+	@Override
+	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+		configurer.enable();
 	}
 
 	@Bean
