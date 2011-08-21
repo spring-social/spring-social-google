@@ -40,6 +40,16 @@
 			</div>
 		</div>
 		<img src="${profile.profilePictureUrl}" />
+		<div class="clear"></div>
+		
+		<h3>Google Contacts</h3>
+		<table>
+			<c:forEach items="${contacts}" var="contact">
+				<tr>
+					<td>${contact.name}</td>
+				</tr>
+			</c:forEach>
+		</table>
 	</div>
 </body>
 </html>

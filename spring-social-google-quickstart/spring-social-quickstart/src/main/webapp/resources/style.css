@@ -51,3 +51,10 @@ table {
 #details {
 	float: left;
 }
+
+.clear {
+	clear: both;
+}
+h3 {
+	margin-top: 1em;
+}
