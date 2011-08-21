@@ -4,7 +4,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.springframework.social</groupId>
 	<artifactId>spring-social-quickstart</artifactId>
-	<name>Spring Social Quickstart</name>
 	<packaging>war</packaging>
 	<version>1.0.0</version>
 	<properties>
@@ -13,6 +12,17 @@
 		<org.springframework-version>3.1.0.BUILD-SNAPSHOT</org.springframework-version>
 		<org.springframework.security.crypto-version>3.1.0.RC2.crypto</org.springframework.security.crypto-version>
 	</properties>
+	
+	<name>Spring Social Google Quickstart</name>
+	<description>Example application that fetches the user email, profile details and contacts from Google.</description>
+	<url>https://github.com/guznik/spring-social-google/tree/master/spring-social-google-quickstart</url>
+	<developers>
+		<developer>
+			<name>Gabriel Axel</name>
+			<email>guznik@gmail.com</email>
+		</developer>
+	</developers>
+	
 	<dependencies>
 		<dependency>
 		    <groupId>org.springframework</groupId>
@@ -97,6 +107,7 @@
 			<snapshots><enabled>false</enabled></snapshots>
 		</repository>
 	</repositories>
+	
 	<build>
 		<resources>
 			<resource>

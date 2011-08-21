@@ -1,0 +1,12 @@
+Spring Social Google
+====================
+
+See spring-social-quickstart project for usage Example.
+
+Currently supported operations: fetch user email, profile and contact list.
+
+Example:
+
+Google google = ... // create with factory
+GoogleProfile profile = google.userOperations().getUserProfile();
+List<Contact> contacts = google.contactOperations().getContactList();

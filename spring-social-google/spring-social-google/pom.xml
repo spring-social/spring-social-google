@@ -3,12 +3,22 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.springframework.social</groupId>
 	<artifactId>spring-social-google</artifactId>
+	<name>Spring Social Google</name>
 	<version>0.0.1-SNAPSHOT</version>
 	
 	<properties>
 		<spring.social.version>1.0.0.RC2</spring.social.version>
 	</properties>
 
+	<description>Spring Social extension with connection support and an API binding for Google</description>
+	<url>https://github.com/guznik/spring-social-google</url>
+	<developers>
+		<developer>
+			<name>Gabriel Axel</name>
+			<email>guznik@gmail.com</email>
+		</developer>
+	</developers>
+	
 	<repositories>
 		<repository>
 			<id>org.springframework.maven.release</id>
