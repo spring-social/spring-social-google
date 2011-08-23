@@ -5,7 +5,7 @@
 	<artifactId>spring-social-google</artifactId>
 	<name>Spring Social Google</name>
 	<version>0.0.1-SNAPSHOT</version>
-	
+
 	<properties>
 		<spring.social.version>1.0.0.RC2</spring.social.version>
 	</properties>
@@ -18,7 +18,7 @@
 			<email>guznik@gmail.com</email>
 		</developer>
 	</developers>
-	
+
 	<repositories>
 		<repository>
 			<id>org.springframework.maven.release</id>
@@ -52,6 +52,11 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+
+		<repository>
+			<id>google-api-services</id>
+			<url>http://mavenrepo.google-api-java-client.googlecode.com/hg</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -75,6 +80,11 @@
 			<artifactId>rome</artifactId>
 			<version>0.9</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.apis</groupId>
+			<artifactId>google-api-services-tasks</artifactId>
+			<version>v1-1.2.0-beta</version>
+		</dependency>
 	</dependencies>
-	
+
 </project>

@@ -42,6 +42,13 @@
 		<img src="${profile.profilePictureUrl}" />
 		<div class="clear"></div>
 		
+		<h3>Task Lists</h3>
+		<ul>
+			<c:forEach items="${taskLists}" var="taskList">
+				<li>${taskList.title}</li>
+			</c:forEach>
+		</ul>
+		
 		<h3>Google Contacts</h3>
 		<table>
 			<c:forEach items="${contacts}" var="contact">

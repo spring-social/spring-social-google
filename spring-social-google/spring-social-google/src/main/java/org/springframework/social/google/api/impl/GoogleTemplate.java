@@ -15,16 +15,26 @@ import org.springframework.social.google.api.UserOperations;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
 
+import com.google.api.client.googleapis.auth.oauth2.draft10.GoogleAccessProtectedResource;
+import com.google.api.client.http.apache.ApacheHttpTransport;
+import com.google.api.client.json.jackson.JacksonFactory;
+import com.google.api.services.tasks.Tasks;
+
+
 public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 
 	private final UserOperations userOperations;
 	private final ContactOperations contactOperations;
+	private final Tasks taskOperations;
 	
 	public GoogleTemplate(String accessToken) {
 		super(accessToken);
 		System.out.println(accessToken);
 		userOperations = new UserTemplate(getRestTemplate(), isAuthorized());
 		contactOperations = new ContactTemplate(getRestTemplate(), isAuthorized());
+		
+		GoogleAccessProtectedResource accessProtectedResource = new GoogleAccessProtectedResource(accessToken);
+		taskOperations = new Tasks(new ApacheHttpTransport(), accessProtectedResource, new JacksonFactory());
 	}
 	
 	@Override
@@ -48,11 +58,18 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 		return OAuth2Version.DRAFT_10;
 	}
 
+	@Override
 	public UserOperations userOperations() {
 		return userOperations;
 	}
 
+	@Override
 	public ContactOperations contactOperations() {
 		return contactOperations;
+	}
+	
+	@Override
+	public Tasks getTaskOperations() {
+		return taskOperations;
 	}
 }

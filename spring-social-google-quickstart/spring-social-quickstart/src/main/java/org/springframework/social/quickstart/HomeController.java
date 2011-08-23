@@ -15,6 +15,7 @@
  */
 package org.springframework.social.quickstart;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.google.api.services.tasks.model.TaskList;
 
 /**
  * Simple little @Controller that invokes Facebook and renders the result.
@@ -42,13 +45,19 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
+	public String home(Model model) throws IOException {
 		
 		GoogleProfile profile = google.userOperations().getUserProfile();
 		List<Contact> contacts = google.contactOperations().getContactList();
 		
+		List<TaskList> taskLists = google.getTaskOperations().tasklists.list().execute().getItems();
+		
+		google.getTaskOperations().tasks.clear("").execute();
+				
+		
 		model.addAttribute("profile", profile);
 		model.addAttribute("contacts", contacts);
+		model.addAttribute("taskLists", taskLists);
 		
 		return "home";
 	}
