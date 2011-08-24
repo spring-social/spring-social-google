@@ -57,6 +57,10 @@
 			<id>google-api-services</id>
 			<url>http://mavenrepo.google-api-java-client.googlecode.com/hg</url>
 		</repository>
+		<repository>
+			<id>eclipse</id>
+			<url>http://mirror.upm.edu.my/eclipse/rt/eclipselink/maven.repo</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -84,6 +88,11 @@
 			<groupId>com.google.apis</groupId>
 			<artifactId>google-api-services-tasks</artifactId>
 			<version>v1-1.2.0-beta</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>org.eclipse.persistence.moxy</artifactId>
+			<version>2.3.0</version>
 		</dependency>
 	</dependencies>
 
