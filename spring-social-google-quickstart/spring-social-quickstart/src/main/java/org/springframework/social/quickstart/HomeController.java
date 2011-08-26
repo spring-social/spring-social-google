@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.google.api.Contact;
+import org.springframework.social.google.api.ContactGroup;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.GoogleProfile;
 import org.springframework.stereotype.Controller;
@@ -49,15 +50,14 @@ public class HomeController {
 		
 		GoogleProfile profile = google.userOperations().getUserProfile();
 		List<Contact> contacts = google.contactOperations().getContactList();
+		List<ContactGroup> groups = google.contactOperations().getContactGroupList();
 		
-		List<TaskList> taskLists = google.getTaskOperations().tasklists.list().execute().getItems();
-		
-		google.getTaskOperations().tasks.clear("").execute();
-				
+//		List<TaskList> taskLists = google.getTaskOperations().tasklists.list().execute().getItems();
 		
 		model.addAttribute("profile", profile);
 		model.addAttribute("contacts", contacts);
-		model.addAttribute("taskLists", taskLists);
+		model.addAttribute("groups", groups);
+//		model.addAttribute("taskLists", taskLists);
 		
 		return "home";
 	}

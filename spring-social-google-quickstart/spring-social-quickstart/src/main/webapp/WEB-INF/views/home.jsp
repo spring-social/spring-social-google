@@ -42,21 +42,21 @@
 		<img src="${profile.profilePictureUrl}" />
 		<div class="clear"></div>
 		
-		<h3>Task Lists</h3>
+		<h3>Contact Groups</h3>
 		<ul>
-			<c:forEach items="${taskLists}" var="taskList">
-				<li>${taskList.title}</li>
+			<c:forEach items="${groups}" var="group">
+				<li>${group}</li>
 			</c:forEach>
 		</ul>
 		
-		<h3>Google Contacts</h3>
-		<table>
+		<h3>Contacts</h3>
+		<ul>
 			<c:forEach items="${contacts}" var="contact">
-				<tr>
-					<td>${contact.name}</td>
-				</tr>
+				<li>
+					<td>${contact}</td>
+				</li>
 			</c:forEach>
-		</table>
+		</ul>
 	</div>
 </body>
 </html>

@@ -5,4 +5,6 @@ import java.util.List;
 public interface ContactOperations {
 
 	List<Contact> getContactList();
+
+	List<ContactGroup> getContactGroupList();
 }

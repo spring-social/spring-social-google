@@ -1,24 +1,21 @@
 package org.springframework.social.google.api;
 
-public class Contact {
+public class ContactGroup {
 
 	private final String id;
 	private final String name;
-	private final String email;
-	private final String pictureUrl;
 	private final String self;
 	
-	public Contact(String id, String name, String email, String pictureUrl, String self) {
+	public ContactGroup(String id, String name, String self) {
+		super();
 		this.id = id;
 		this.name = name;
-		this.email = email;
-		this.pictureUrl = pictureUrl;
 		this.self = self;
 	}
 	
 	@Override
 	public String toString() {
-		return name + " <" + email + ">";
+		return name;
 	}
 
 	public String getId() {
@@ -27,14 +24,6 @@ public class Contact {
 
 	public String getName() {
 		return name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public String getPictureUrl() {
-		return pictureUrl;
 	}
 
 	public String getSelf() {

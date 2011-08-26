@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.feed.AtomFeedHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
@@ -14,6 +15,7 @@ import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.UserOperations;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
+import org.springframework.web.client.RestTemplate;
 
 import com.google.api.client.googleapis.auth.oauth2.draft10.GoogleAccessProtectedResource;
 import com.google.api.client.http.apache.ApacheHttpTransport;
@@ -29,7 +31,17 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	
 	public GoogleTemplate(String accessToken) {
 		super(accessToken);
+
 		System.out.println(accessToken);
+		
+		RestTemplate restTemplate = getRestTemplate();
+		
+		ClientHttpRequestInterceptor[] interceptors = restTemplate.getInterceptors();
+		ClientHttpRequestInterceptor[] newInterceptors = new ClientHttpRequestInterceptor[interceptors.length+1];
+		System.arraycopy(interceptors, 0, newInterceptors, 0, interceptors.length);
+		newInterceptors[interceptors.length] = new GDataVersionInterceptor();
+		restTemplate.setInterceptors(newInterceptors);
+		
 		userOperations = new UserTemplate(getRestTemplate(), isAuthorized());
 		contactOperations = new ContactTemplate(getRestTemplate(), isAuthorized());
 		
