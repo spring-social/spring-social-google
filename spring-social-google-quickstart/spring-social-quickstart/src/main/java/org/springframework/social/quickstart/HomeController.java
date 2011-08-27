@@ -28,8 +28,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.google.api.services.tasks.model.TaskList;
-
 /**
  * Simple little @Controller that invokes Facebook and renders the result.
  * The injected {@link Facebook} reference is configured with the required authorization credentials for the current user behind the scenes.
@@ -52,12 +50,9 @@ public class HomeController {
 		List<Contact> contacts = google.contactOperations().getContactList();
 		List<ContactGroup> groups = google.contactOperations().getContactGroupList();
 		
-//		List<TaskList> taskLists = google.getTaskOperations().tasklists.list().execute().getItems();
-		
 		model.addAttribute("profile", profile);
 		model.addAttribute("contacts", contacts);
 		model.addAttribute("groups", groups);
-//		model.addAttribute("taskLists", taskLists);
 		
 		return "home";
 	}
