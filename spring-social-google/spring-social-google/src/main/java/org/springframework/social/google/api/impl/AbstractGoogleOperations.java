@@ -1,15 +1,32 @@
 package org.springframework.social.google.api.impl;
 
+import static org.apache.commons.io.IOUtils.toInputStream;
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.MediaType.APPLICATION_ATOM_XML;
+import static org.springframework.social.google.api.impl.helper.EntryExtractor.NamespaceContext;
+
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jdom.Element;
-import org.springframework.social.MissingAuthorizationException;
-import org.springframework.web.client.RestTemplate;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamSource;
 
-import com.sun.syndication.feed.atom.Entry;
-import com.sun.syndication.feed.atom.Feed;
-import com.sun.syndication.feed.atom.Link;
+import nu.xom.Builder;
+import nu.xom.Document;
+import nu.xom.Element;
+import nu.xom.Nodes;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.social.MissingAuthorizationException;
+import org.springframework.social.UncategorizedApiException;
+import org.springframework.social.google.api.impl.helper.EntryExtractor;
+import org.springframework.web.client.RestTemplate;
 
 public class AbstractGoogleOperations {
 
@@ -19,6 +36,7 @@ public class AbstractGoogleOperations {
 	public AbstractGoogleOperations(RestTemplate restTemplate, boolean isAuthorized) {
 		this.restTemplate = restTemplate;
 		this.isAuthorized = isAuthorized;
+		
 	}
 
 	protected void requireAuthorization() {
@@ -27,53 +45,67 @@ public class AbstractGoogleOperations {
 		}
 	}
 	
+	protected <E> E extractEntry(String url, EntryExtractor<E> extractor) {
+		Document document = getDocument(url);
+		Element entry = document.getRootElement();
+		return extractor.extractEntry(entry);
+	}
+	
 	protected <E> List<E> extractFeedEntries(String url, EntryExtractor<E> extractor) {
-		
-		Feed feed = restTemplate.getForObject(url, Feed.class);
-		
-		@SuppressWarnings("unchecked")
-		List<Entry> entries = (List<Entry>)feed.getEntries();
-		
+		Document document = getDocument(url);
+		Nodes entries = document.query("/atom:feed/atom:entry", NamespaceContext);
 		List<E> list = new ArrayList<E>();
-		for(Entry entry : entries) {
+		for(int i = 0; i < entries.size(); i++) {
+			Element entry = (Element)entries.get(i);
 			list.add(extractor.extractEntry(entry));
 		}
-		
 		return list;
 	}
 	
-	protected static String getLinkHref(Entry entry, String rel) {
-		
-		@SuppressWarnings("unchecked")
-		List<Link> links = (List<Link>)entry.getOtherLinks();
-		for(Link link : links) {
-			if(rel.equals(link.getRel())) {
-				return link.getHref();
-			}
+	private String urlDecode(String url) {
+		try {
+			return URLDecoder.decode(url, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			throw new IllegalStateException(e);
 		}
-		return null;
+	}
+
+	private Document getDocument(String url) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(APPLICATION_ATOM_XML);
+		HttpEntity<StreamSource> requestEntity = new HttpEntity<StreamSource>(headers);
+		
+		ResponseEntity<StreamSource> response = restTemplate.exchange(
+				urlDecode(url), GET, requestEntity, StreamSource.class);
+		
+		InputStream inputStream = response.getBody().getInputStream();
+		Builder parser = new Builder();
+		Document document;
+		try {
+			document = parser.build(inputStream);
+		} catch(Exception e) {
+			throw new UncategorizedApiException("Error parsing response XML", e);
+		}
+		return document;
 	}
 	
-	protected static String getSelf(Entry entry) {
-		return getLinkHref(entry, "self");
-	}
-	
-	protected static String getForeignMarkupAttribute(Entry entry, String elementName, 
-			String attributeName, String attributeValue, String fetchAttribute) {
+	protected <E> E postEntry(String url, Element entry, EntryExtractor<E> responseEntryExtractor) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(APPLICATION_ATOM_XML);
+		Source requestSource = new StreamSource(toInputStream(entry.toXML()));
+		HttpEntity<Source> request = new HttpEntity<Source>(requestSource, headers);
 		
-		@SuppressWarnings("unchecked")
-		List<Element> foreignMarkup = (List<Element>)entry.getForeignMarkup();
-		for(Element gd : foreignMarkup) {
-			if(gd.getName().equals(elementName) && 
-					attributeValue.equals(gd.getAttributeValue(attributeName))) {
-				if(fetchAttribute == null) {
-					return gd.getValue();
-				} else {
-					return gd.getAttributeValue(fetchAttribute);
-				}
-			}
+		System.out.println(entry.toXML());
+		
+		ResponseEntity<StreamSource> response = restTemplate.exchange(url, HttpMethod.POST, request, StreamSource.class);
+		InputStream responseSource = response.getBody().getInputStream();
+		Element responseEntry;
+		try {
+			responseEntry = new Builder().build(responseSource).getRootElement();
+		} catch(Exception e) {
+			throw new UncategorizedApiException("Error parsing response XML", e);
 		}
-		return null;
+		return responseEntryExtractor.extractEntry(responseEntry);
 	}
 	
 }

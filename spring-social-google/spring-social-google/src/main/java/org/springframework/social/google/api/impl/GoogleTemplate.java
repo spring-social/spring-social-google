@@ -1,22 +1,26 @@
 package org.springframework.social.google.api.impl;
 
+import static java.util.Collections.singletonList;
 import static org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES;
+import static org.springframework.http.MediaType.APPLICATION_ATOM_XML;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.transform.Source;
+
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.feed.AtomFeedHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.http.converter.xml.SourceHttpMessageConverter;
 import org.springframework.social.google.api.ContactOperations;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.UserOperations;
+import org.springframework.social.google.api.impl.contact.ContactTemplate;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
 import org.springframework.web.client.RestTemplate;
-
 
 public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 
@@ -49,11 +53,12 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 		objectMapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
 		jsonConverter.setObjectMapper(objectMapper);
 		
-		AtomFeedHttpMessageConverter atomConverter = new AtomFeedHttpMessageConverter();
+		SourceHttpMessageConverter<Source> sourceConverter = new SourceHttpMessageConverter<Source>();
+		sourceConverter.setSupportedMediaTypes(singletonList(APPLICATION_ATOM_XML));
 
 		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
 		messageConverters.add(jsonConverter);
-		messageConverters.add(atomConverter);
+		messageConverters.add(sourceConverter);
 		return messageConverters;
 	}
 	
