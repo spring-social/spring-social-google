@@ -44,4 +44,9 @@ public class ContactTemplate extends AbstractGoogleOperations implements Contact
 		return extractEntry(url, new ContactGroupExtractor());
 	}
 
+	@Override
+	public List<Contact> getGroupContacts(String groupId) {
+		return extractFeedEntries(CONTACTS_FEED + "?max-results=999999&group=" + groupId, new ContactExtractor());
+	}
+
 }

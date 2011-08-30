@@ -15,7 +15,8 @@
  */
 package org.springframework.social.quickstart;
 
-import java.io.IOException;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +25,10 @@ import org.springframework.social.google.api.ContactGroup;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.GoogleProfile;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
-/**
- * Simple little @Controller that invokes Facebook and renders the result.
- * The injected {@link Facebook} reference is configured with the required authorization credentials for the current user behind the scenes.
- * @author Keith Donald
- */
 @Controller
 public class HomeController {
 
@@ -43,18 +39,28 @@ public class HomeController {
 		this.google = google;
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) throws IOException {
+	@RequestMapping(value="/", method=GET)
+	public ModelAndView home() {
 		
 		GoogleProfile profile = google.userOperations().getUserProfile();
-		List<Contact> contacts = google.contactOperations().getContactList();
+		
+		return new ModelAndView("profile", "profile", profile);
+	}
+	
+	@RequestMapping(value="/contacts", method=GET)
+	public ModelAndView contacts(@RequestParam(value="group", required=false) String groupId) {
+		
 		List<ContactGroup> groups = google.contactOperations().getContactGroupList();
+		List<Contact> contacts;
+		if(groupId == null) {
+			contacts = google.contactOperations().getContactList();
+		} else {
+			contacts = google.contactOperations().getGroupContacts(groupId);
+		}
 		
-		model.addAttribute("profile", profile);
-		model.addAttribute("contacts", contacts);
-		model.addAttribute("groups", groups);
-		
-		return "home";
+		return new ModelAndView("contacts")
+			.addObject("groups", groups)
+			.addObject("contacts", contacts);
 	}
 
 }

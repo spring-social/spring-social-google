@@ -5,6 +5,8 @@ import java.util.List;
 public interface ContactOperations {
 
 	List<Contact> getContactList();
+	
+	List<Contact> getGroupContacts(String groupId);
 
 	List<ContactGroup> getContactGroupList();
 
