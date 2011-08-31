@@ -20,11 +20,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.ExpiredAuthorizationException;
 import org.springframework.social.google.api.Contact;
 import org.springframework.social.google.api.ContactGroup;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.GoogleProfile;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,6 +39,11 @@ public class HomeController {
 	@Autowired
 	public HomeController(Google google) {
 		this.google = google;
+	}
+	
+	@ExceptionHandler(ExpiredAuthorizationException.class)
+	public String handleExpiredToken() {
+		return "redirect:/signout";
 	}
 
 	@RequestMapping(value="/", method=GET)
