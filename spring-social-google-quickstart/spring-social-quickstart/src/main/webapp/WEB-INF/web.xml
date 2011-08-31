@@ -16,9 +16,9 @@
 	</context-param>
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
-	<listener>
+	<!--listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
+	</listener-->
 
 	<!-- Ensure UTF-8 character encoding is used -->
 	<filter>
@@ -72,7 +72,11 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value></param-value>
+			<param-value>/WEB-INF/spring-config.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>contextInitializerClasses</param-name>
+			<param-value>org.springframework.social.quickstart.config.EnvironmentInitializer</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

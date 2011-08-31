@@ -21,7 +21,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseFactory;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -36,7 +35,6 @@ import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
  */
 @Configuration
 @ComponentScan(basePackages = "org.springframework.social.quickstart", excludeFilters = { @Filter(Configuration.class) })
-@PropertySource("classpath:org/springframework/social/quickstart/config/application.properties")
 public class MainConfig {
 
 	@Bean(destroyMethod = "shutdown")
@@ -55,4 +53,5 @@ public class MainConfig {
 		populator.addScript(new ClassPathResource("JdbcUsersConnectionRepository.sql", JdbcUsersConnectionRepository.class));
 		return populator;
 	}
+	
 }

@@ -77,6 +77,11 @@
 			<artifactId>spring-social-google</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.cloudfoundry</groupId>
+			<artifactId>cloudfoundry-runtime</artifactId>
+			<version>0.6.0</version>
+		</dependency>
 	</dependencies>
 	<repositories>
 		<repository>
