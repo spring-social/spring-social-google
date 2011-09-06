@@ -4,7 +4,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <dependent-module archiveName="spring-social-google-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/spring-social-google/spring-social-google">
+        <dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/spring-social-google/spring-social-google">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="spring-social-quickstart"/>
