@@ -14,6 +14,10 @@ public class EntryBuilder {
 		return this;
 	}
 	
+	public EntryBuilder setId(String id) {
+		return addAtomElement("id", id);
+	}
+	
 	public EntryBuilder setTitle(String title) {
 		return addAtomElement("title", title);
 	}

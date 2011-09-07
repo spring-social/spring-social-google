@@ -49,4 +49,22 @@ public class ContactTemplate extends AbstractGoogleOperations implements Contact
 		return extractFeedEntries(CONTACTS_FEED + "?max-results=999999&group=" + groupId, new ContactExtractor());
 	}
 
+	@Override
+	public ContactGroup updateContactGroup(ContactGroup contactGroup) {
+		Element entry = new EntryBuilder()
+			.setTitle(contactGroup.getName())
+			.getEntry();
+		return putEntry(contactGroup.getSelf(), entry, new ContactGroupExtractor());
+	}
+
+	@Override
+	public void deleteContactGroup(String url) {
+		deleteEntry(url);
+	}
+
+	@Override
+	public Contact getContact(String url) {
+		return extractEntry(url, new ContactExtractor());
+	}
+
 }

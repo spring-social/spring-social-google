@@ -37,7 +37,7 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 		ClientHttpRequestInterceptor[] interceptors = restTemplate.getInterceptors();
 		ClientHttpRequestInterceptor[] newInterceptors = new ClientHttpRequestInterceptor[interceptors.length+1];
 		System.arraycopy(interceptors, 0, newInterceptors, 0, interceptors.length);
-		newInterceptors[interceptors.length] = new GDataVersionInterceptor();
+		newInterceptors[interceptors.length] = new GDataInterceptor();
 		restTemplate.setInterceptors(newInterceptors);
 		
 		userOperations = new UserTemplate(getRestTemplate(), isAuthorized());

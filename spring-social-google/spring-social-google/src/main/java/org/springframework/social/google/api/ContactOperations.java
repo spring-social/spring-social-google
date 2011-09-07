@@ -13,4 +13,10 @@ public interface ContactOperations {
 	ContactGroup createContactGroup(String name);
 
 	ContactGroup getContactGroup(String url);
+
+	ContactGroup updateContactGroup(ContactGroup contactGroup);
+
+	void deleteContactGroup(String url);
+
+	Contact getContact(String url);
 }

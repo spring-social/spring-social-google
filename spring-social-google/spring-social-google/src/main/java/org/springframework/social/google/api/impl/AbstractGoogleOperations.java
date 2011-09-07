@@ -2,6 +2,8 @@ package org.springframework.social.google.api.impl;
 
 import static org.apache.commons.io.IOUtils.toInputStream;
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
 import static org.springframework.http.MediaType.APPLICATION_ATOM_XML;
 import static org.springframework.social.google.api.impl.helper.EntryExtractor.NamespaceContext;
 
@@ -90,6 +92,14 @@ public class AbstractGoogleOperations {
 	}
 	
 	protected <E> E postEntry(String url, Element entry, EntryExtractor<E> responseEntryExtractor) {
+		return submitEntry(url, entry, POST, responseEntryExtractor);
+	}
+	
+	protected <E> E putEntry(String url, Element entry, EntryExtractor<E> responseEntryExtractor) {
+		return submitEntry(url, entry, PUT, responseEntryExtractor);
+	}
+		
+	private <E> E submitEntry(String url, Element entry, HttpMethod method, EntryExtractor<E> responseEntryExtractor) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(APPLICATION_ATOM_XML);
 		Source requestSource = new StreamSource(toInputStream(entry.toXML()));
@@ -97,7 +107,7 @@ public class AbstractGoogleOperations {
 		
 		System.out.println(entry.toXML());
 		
-		ResponseEntity<StreamSource> response = restTemplate.exchange(url, HttpMethod.POST, request, StreamSource.class);
+		ResponseEntity<StreamSource> response = restTemplate.exchange(url, method, request, StreamSource.class);
 		InputStream responseSource = response.getBody().getInputStream();
 		Element responseEntry;
 		try {
@@ -106,6 +116,10 @@ public class AbstractGoogleOperations {
 			throw new UncategorizedApiException("Error parsing response XML", e);
 		}
 		return responseEntryExtractor.extractEntry(responseEntry);
+	}
+	
+	protected void deleteEntry(String url) {
+		restTemplate.delete(url);
 	}
 	
 }

@@ -15,9 +15,11 @@
  */
 package org.springframework.social.quickstart;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.ExpiredAuthorizationException;
@@ -25,7 +27,10 @@ import org.springframework.social.google.api.Contact;
 import org.springframework.social.google.api.ContactGroup;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.GoogleProfile;
+import org.springframework.social.quickstart.contact.ContactForm;
+import org.springframework.social.quickstart.contact.ContactGroupForm;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,6 +73,51 @@ public class HomeController {
 		return new ModelAndView("contacts")
 			.addObject("groups", groups)
 			.addObject("contacts", contacts);
+	}
+	
+	@RequestMapping(value="/group", method=GET)
+	public ModelAndView addContactGroup() {
+		return new ModelAndView("group", "command", new ContactGroupForm());
+	}
+	
+	@RequestMapping(value="/group", method=GET, params="url")
+	public ModelAndView editContactGroup(@RequestParam(required=false) String url) {
+		ContactGroup group = google.contactOperations().getContactGroup(url);
+		ContactGroupForm command = new ContactGroupForm(group.getId(), group.getName(), group.getSelf());
+		return new ModelAndView("group", "command", command);
+	}
+		
+	@RequestMapping(value="/group", method=POST)
+	public ModelAndView saveContactGroup(@Valid ContactGroupForm command, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return new ModelAndView("group", "command", command);
+		}
+		
+		if(command.getUrl() == null) {
+			google.contactOperations().createContactGroup(command.getName());
+		} else {
+			google.contactOperations().updateContactGroup(new ContactGroup(command.getId(), command.getName(), command.getUrl()));
+		}
+		return new ModelAndView("redirect:/contacts");
+	}
+	
+	@RequestMapping(value="/group", method=POST, params="delete")
+	public String deleteContactGroup(@RequestParam String url) {
+		google.contactOperations().deleteContactGroup(url);
+		return "redirect:/contacts";
+	}
+	
+	@RequestMapping(value="/contact", method=GET)
+	public ModelAndView addContact() {
+		return new ModelAndView("contact", "command", new ContactForm());
+	}
+	
+	@RequestMapping(value="/contact", method=GET, params="url")
+	public ModelAndView editContact(@RequestParam String url) {
+		Contact contact = google.contactOperations().getContact(url);
+		ContactForm command = new ContactForm(contact.getId(), contact.getSelf(), contact.getNamePrefix(), contact.getFirstName(), contact.getMiddleName(), contact.getLastName(), contact.getNameSuffix(), contact.getPictureUrl());
+		return new ModelAndView("contact", "command", command);
 	}
 
 }

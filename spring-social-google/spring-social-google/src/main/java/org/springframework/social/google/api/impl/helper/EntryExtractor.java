@@ -1,6 +1,10 @@
 package org.springframework.social.google.api.impl.helper;
 
 import static org.springframework.social.google.api.impl.helper.Namespaces.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import nu.xom.Element;
 import nu.xom.Nodes;
 import nu.xom.XPathContext;
@@ -60,5 +64,19 @@ public abstract class EntryExtractor<T> {
 	
 	protected String getTitle(Element element) {
 		return getAtomElement(element, "title");
+	}
+	
+	protected List<Element> getGDataElements(Element element, String elementName) {
+		Nodes nodes = element.query("gd:" + elementName, NamespaceContext);
+		List<Element> elements = new ArrayList<Element>();
+		for(int i = 0; i < nodes.size(); i++) {
+			elements.add((Element)nodes.get(i));
+		}
+		return elements;
+	}
+	
+	protected String getNestedGDataValue(Element element, String elementName, String nestedElementName) {
+		Nodes nodes = element.query("gd:" + elementName + "/gd:" + nestedElementName, NamespaceContext);
+		return nodes.size() == 0 ? null : nodes.get(0).getValue();
 	}
 }
