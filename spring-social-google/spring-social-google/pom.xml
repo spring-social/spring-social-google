@@ -7,7 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
-		<spring.social.version>1.0.0.RC3</spring.social.version>
+		<spring.social.version>1.0.0.RELEASE</spring.social.version>
 	</properties>
 
 	<description>Spring Social extension with connection support and an API binding for Google</description>
