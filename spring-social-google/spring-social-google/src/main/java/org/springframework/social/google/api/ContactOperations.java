@@ -19,4 +19,7 @@ public interface ContactOperations {
 	void deleteContactGroup(String url);
 
 	Contact getContact(String url);
+	
+	Contact saveContact(Contact contact);
+	
 }

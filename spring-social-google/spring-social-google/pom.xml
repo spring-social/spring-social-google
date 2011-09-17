@@ -39,15 +39,6 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-
-		<repository>
-			<id>google-api-services</id>
-			<url>http://mavenrepo.google-api-java-client.googlecode.com/hg</url>
-		</repository>
-		<repository>
-			<id>eclipse</id>
-			<url>http://mirror.upm.edu.my/eclipse/rt/eclipselink/maven.repo</url>
-		</repository>
 	</repositories>
 
 	<dependencies>

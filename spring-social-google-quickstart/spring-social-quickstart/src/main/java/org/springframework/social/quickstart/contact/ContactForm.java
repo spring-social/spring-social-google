@@ -1,5 +1,10 @@
 package org.springframework.social.quickstart.contact;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.collections.functors.InstantiateFactory;
+import org.apache.commons.collections.list.LazyList;
 
 public class ContactForm {
 
@@ -11,6 +16,14 @@ public class ContactForm {
 	private String lastName;
 	private String nameSuffix;
 	private String pictureUrl;
+	
+	@SuppressWarnings("unchecked")
+	private List<EmailForm> emails = 
+		LazyList.decorate(new ArrayList<EmailForm>(), new InstantiateFactory(EmailForm.class));
+	
+	@SuppressWarnings("unchecked")
+	private List<PhoneForm> phones =
+		LazyList.decorate(new ArrayList<PhoneForm>(), new InstantiateFactory(PhoneForm.class));
 	
 	public ContactForm() {
 	}
@@ -90,6 +103,22 @@ public class ContactForm {
 
 	public void setPictureUrl(String pictureUrl) {
 		this.pictureUrl = pictureUrl;
+	}
+
+	public List<EmailForm> getEmails() {
+		return emails;
+	}
+	
+	public void setEmails(List<EmailForm> emails) {
+		this.emails = emails;
+	}
+
+	public List<PhoneForm> getPhones() {
+		return phones;
+	}
+
+	public void setPhones(List<PhoneForm> phones) {
+		this.phones = phones;
 	}
 	
 }

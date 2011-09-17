@@ -15,8 +15,10 @@
  */
 package org.springframework.social.quickstart;
 
+import static org.springframework.util.StringUtils.hasText;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -25,10 +27,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.ExpiredAuthorizationException;
 import org.springframework.social.google.api.Contact;
 import org.springframework.social.google.api.ContactGroup;
+import org.springframework.social.google.api.Email;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.GoogleProfile;
+import org.springframework.social.google.api.Phone;
 import org.springframework.social.quickstart.contact.ContactForm;
 import org.springframework.social.quickstart.contact.ContactGroupForm;
+import org.springframework.social.quickstart.contact.EmailForm;
+import org.springframework.social.quickstart.contact.PhoneForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -116,8 +122,46 @@ public class HomeController {
 	@RequestMapping(value="/contact", method=GET, params="url")
 	public ModelAndView editContact(@RequestParam String url) {
 		Contact contact = google.contactOperations().getContact(url);
-		ContactForm command = new ContactForm(contact.getId(), contact.getSelf(), contact.getNamePrefix(), contact.getFirstName(), contact.getMiddleName(), contact.getLastName(), contact.getNameSuffix(), contact.getPictureUrl());
+		ContactForm command = new ContactForm(
+			contact.getId(), contact.getSelf(), contact.getNamePrefix(),
+			contact.getFirstName(), contact.getMiddleName(), contact.getLastName(), 
+			contact.getNameSuffix(), contact.getPictureUrl());
+		
+		for(Email email : contact.getEmails()) {
+			command.getEmails().add(new EmailForm(email.getRel(), email.getLabel(), email.getAddress(), email.isPrimary()));
+		}
+		
+		for(Phone phone : contact.getPhones()) {
+			command.getPhones().add(new PhoneForm(phone.getRel(), phone.getLabel(), phone.getNumber(), phone.isPrimary()));
+		}
+		
 		return new ModelAndView("contact", "command", command);
+	}
+	
+	@RequestMapping(value="/contact", method=POST)
+	public ModelAndView saveContact(@Valid ContactForm command, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return new ModelAndView("contact", "command", command);
+		}
+		
+		List<Email> emails = new ArrayList<Email>();
+		for(EmailForm e : command.getEmails()) {
+			if(hasText(e.getAddress()) && hasText(e.getRel()) || hasText(e.getLabel())) {
+				emails.add(new Email(e.getRel(), e.getLabel(), e.getAddress(), e.isPrimary()));
+			}
+		}
+		
+		List<Phone> phones = new ArrayList<Phone>();
+		for(PhoneForm p : command.getPhones()) {
+			if(hasText(p.getNumber()) && hasText(p.getRel()) || hasText(p.getLabel())) {
+				phones.add(new Phone(p.getRel(), p.getLabel(), p.getNumber(), p.isPrimary()));
+			}
+		}
+		
+		Contact contact = new Contact(command.getId(), command.getUrl(), command.getNamePrefix(), command.getFirstName(), command.getMiddleName(), command.getLastName(), command.getNameSuffix(), command.getPictureUrl(), emails, phones);
+		google.contactOperations().saveContact(contact);
+		return new ModelAndView("redirect:/contacts");
 	}
 
 }
