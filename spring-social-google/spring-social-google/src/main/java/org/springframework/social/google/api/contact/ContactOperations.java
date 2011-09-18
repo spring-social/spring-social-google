@@ -10,11 +10,9 @@ public interface ContactOperations {
 
 	List<ContactGroup> getContactGroupList();
 
-	ContactGroup createContactGroup(String name);
+	ContactGroup saveContactGroup(ContactGroup contactGroup);
 
 	ContactGroup getContactGroup(String url);
-
-	ContactGroup updateContactGroup(ContactGroup contactGroup);
 
 	void deleteContactGroup(String url);
 

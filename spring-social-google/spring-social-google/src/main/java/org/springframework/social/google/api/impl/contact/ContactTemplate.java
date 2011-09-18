@@ -36,11 +36,15 @@ public class ContactTemplate extends AbstractGoogleOperations implements Contact
 	}
 	
 	@Override
-	public ContactGroup createContactGroup(String name) {
-		Element requestEntry = newAtomEntryBuilder()
-			.setTitle(name)
+	public ContactGroup saveContactGroup(ContactGroup contactGroup) {
+		Element entry = newAtomEntryBuilder()
+			.setTitle(contactGroup.getName())
 			.getElement();
-		return postEntry(GROUPS_FEED, requestEntry, new ContactGroupExtractor());
+		if(contactGroup.getSelf() == null) {
+			return postEntry(GROUPS_FEED, entry, new ContactGroupExtractor());
+		} else {
+			return putEntry(contactGroup.getSelf(), entry, new ContactGroupExtractor());
+		}
 	}
 	
 	@Override
@@ -51,14 +55,6 @@ public class ContactTemplate extends AbstractGoogleOperations implements Contact
 	@Override
 	public List<Contact> getGroupContacts(String groupId) {
 		return extractFeedEntries(CONTACTS_FEED + "?max-results=999999&group=" + groupId, new ContactExtractor());
-	}
-
-	@Override
-	public ContactGroup updateContactGroup(ContactGroup contactGroup) {
-		Element entry = newAtomEntryBuilder()
-			.setTitle(contactGroup.getName())
-			.getElement();
-		return putEntry(contactGroup.getSelf(), entry, new ContactGroupExtractor());
 	}
 
 	@Override
@@ -109,7 +105,7 @@ public class ContactTemplate extends AbstractGoogleOperations implements Contact
 		if(contact.getSelf() != null) {
 			return putEntry(contact.getSelf(), builder.getElement(), new ContactExtractor());
 		} else {
-			return postEntry(contact.getSelf(), builder.getElement(), new ContactExtractor());
+			return postEntry(CONTACTS_FEED, builder.getElement(), new ContactExtractor());
 		}
 	}
 

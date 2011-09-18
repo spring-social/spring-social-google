@@ -109,11 +109,9 @@ public class HomeController {
 			return new ModelAndView("group", "command", command);
 		}
 		
-		if(command.getUrl() == null) {
-			google.contactOperations().createContactGroup(command.getName());
-		} else {
-			google.contactOperations().updateContactGroup(new ContactGroup(command.getId(), command.getName(), command.getUrl()));
-		}
+		ContactGroup group = new ContactGroup(command.getId(), command.getName(), command.getUrl());
+		google.contactOperations().saveContactGroup(group);
+
 		return new ModelAndView("redirect:/contacts");
 	}
 	
@@ -125,11 +123,16 @@ public class HomeController {
 	
 	@RequestMapping(value="/contact", method=GET)
 	public ModelAndView addContact() {
-		return new ModelAndView("contact", "command", new ContactForm());
+		
+		List<ContactGroup> allGroups = google.contactOperations().getContactGroupList();
+		
+		return new ModelAndView("contact", "command", new ContactForm())
+			.addObject("allGroups", allGroups);
 	}
 	
 	@RequestMapping(value="/contact", method=GET, params="url")
 	public ModelAndView editContact(@RequestParam String url) {
+		
 		Contact contact = google.contactOperations().getContact(url);
 		ContactForm command = new ContactForm(
 			contact.getId(), contact.getSelf(), contact.getNamePrefix(),
