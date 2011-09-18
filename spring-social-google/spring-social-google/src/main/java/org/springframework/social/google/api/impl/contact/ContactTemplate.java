@@ -1,5 +1,6 @@
 package org.springframework.social.google.api.impl.contact;
 
+import static org.springframework.social.google.api.impl.helper.Namespaces.ContactNamespace;
 import static org.springframework.social.google.api.impl.helper.ElementBuilder.*;
 import java.util.List;
 
@@ -76,13 +77,18 @@ public class ContactTemplate extends AbstractGoogleOperations implements Contact
 		//TODO: validate id + self
 
 		ElementBuilder builder = newAtomEntryBuilder()
-			.setId(contact.getId())
 			.addElement(newGDataElementBuilder("name")
 				.addGDataElement("namePrefix", contact.getNamePrefix())
 				.addGDataElement("givenName", contact.getFirstName())
 				.addGDataElement("additionalName", contact.getMiddleName())
 				.addGDataElement("familyName", contact.getLastName())
 				.addGDataElement("nameSuffix", contact.getNameSuffix()));
+		
+		for(String groupId : contact.getGroupIds()) {
+			builder.addElement(
+				new ElementBuilder("gContact:groupMembershipInfo", ContactNamespace)
+					.setHref(groupId));
+		}
 		
 		for(Email email : contact.getEmails()) {
 			builder.addElement(newGDataElementBuilder("email")

@@ -134,7 +134,7 @@ public class HomeController {
 		ContactForm command = new ContactForm(
 			contact.getId(), contact.getSelf(), contact.getNamePrefix(),
 			contact.getFirstName(), contact.getMiddleName(), contact.getLastName(), 
-			contact.getNameSuffix(), contact.getPictureUrl());
+			contact.getNameSuffix(), contact.getPictureUrl(), contact.getGroupIds());
 		
 		for(Email email : contact.getEmails()) {
 			command.getEmails().add(new EmailForm(email.getRel(), email.getLabel(), email.getAddress(), email.isPrimary()));

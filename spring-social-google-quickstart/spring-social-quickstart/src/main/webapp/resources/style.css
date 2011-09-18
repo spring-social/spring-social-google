@@ -13,3 +13,22 @@ body {
 .clear {
 	clear: both;
 }
+
+.checkboxes span {
+	display: block;
+	clear: both;
+	height: 2em;
+}
+
+.checkboxes input {
+	float:left;
+	margin-right: 5px;
+}
+
+.checkboxes label {
+	float: left;
+	text-align: left;
+	padding-top: 0;
+	line-height: 1em;
+	width: auto;
+}

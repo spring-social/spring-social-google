@@ -75,6 +75,12 @@
 					</div>
 					<div class="clear"></div>
 					<div class="clearfix">
+						<label>Group Memberships</label>
+						<div class="input checkboxes">
+							<form:checkboxes items="${allGroups}" path="groupIds" itemValue="id" itemLabel="name"/>
+						</div>
+					</div>
+					<div class="clearfix">
 						<label for="addEmailButton">E-mail</label>
 						<div class="input">
 							<table>
@@ -113,12 +119,6 @@
 							</table>
 							<div class="help-inline">Entries without an address and either a type or a label will be discarded</div>
 							<input type="button" id="addEmailButton" class="btn" value="Add E-mail" onclick="addEmail()"/>
-						</div>
-					</div>
-					<div class="clearfix">
-						<label>Group Memberships</label>
-						<div class="input">
-							<form:checkboxes items="${allGroups}" path="groupIds" itemValue="id" itemLabel="name"/>
 						</div>
 					</div>
 					<div class="clearfix">

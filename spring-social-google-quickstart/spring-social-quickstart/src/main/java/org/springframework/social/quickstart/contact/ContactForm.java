@@ -31,7 +31,7 @@ public class ContactForm {
 	
 	public ContactForm(String id, String url, String namePrefix,
 			String firstName, String middleName, String lastName,
-			String nameSuffix, String pictureUrl) {
+			String nameSuffix, String pictureUrl, List<String> groupIds) {
 		this.id = id;
 		this.url = url;
 		this.namePrefix = namePrefix;
@@ -40,6 +40,7 @@ public class ContactForm {
 		this.lastName = lastName;
 		this.nameSuffix = nameSuffix;
 		this.pictureUrl = pictureUrl;
+		this.groupIds = groupIds;
 	}
 
 	public String getId() {
@@ -107,7 +108,7 @@ public class ContactForm {
 	}
 	
 	public List<String> getGroupIds() {
-		return groupIds;
+		return groupIds == null ? new ArrayList<String>() : groupIds;
 	}
 
 	public void setGroupIds(List<String> groupIds) {

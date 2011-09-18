@@ -65,16 +65,16 @@ public class ElementBuilder {
 		return this;
 	}
 
-	public ElementBuilder setId(String id) {
-		return addSimpleAtomElement("id", id);
-	}
-
 	public ElementBuilder setTitle(String title) {
 		return addSimpleAtomElement("title", title);
 	}
 	
 	public ElementBuilder setRel(String rel) {
 		return addAttribute("rel", rel);
+	}
+	
+	public ElementBuilder setHref(String href) {
+		return addAttribute("href", href);
 	}
 
 	public ElementBuilder setValue(String value) {
