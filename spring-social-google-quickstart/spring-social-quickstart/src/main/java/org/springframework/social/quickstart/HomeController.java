@@ -15,15 +15,22 @@
  */
 package org.springframework.social.quickstart;
 
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.MediaType.IMAGE_JPEG;
 import static org.springframework.util.StringUtils.hasText;
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.social.ExpiredAuthorizationException;
 import org.springframework.social.google.api.Contact;
 import org.springframework.social.google.api.ContactGroup;
@@ -38,8 +45,10 @@ import org.springframework.social.quickstart.contact.PhoneForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -164,4 +173,23 @@ public class HomeController {
 		return new ModelAndView("redirect:/contacts");
 	}
 
+	@RequestMapping(value="/contactpicture", method=GET)
+	public ResponseEntity<byte[]> getProfilePicture(@RequestParam String url) {
+		byte[] body = google.contactOperations().getProfilePicture(url);
+		if(body != null) {
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(IMAGE_JPEG);
+			headers.setCacheControl("no-cache");
+			return new ResponseEntity<byte[]>(body, headers, OK);
+		}
+		return new ResponseEntity<byte[]>(NOT_FOUND);
+	}
+	
+	@RequestMapping(value="/contactpicture", method=POST)
+	public String uploadProfilePicture(
+			@RequestHeader String referer, @RequestParam String pictureUrl, 
+			@RequestParam MultipartFile file) throws IOException {
+		google.contactOperations().uploadProfilePicture(pictureUrl, file.getBytes(), file.getContentType());
+		return "redirect:" + referer;
+	}
 }

@@ -11,6 +11,7 @@ import javax.xml.transform.Source;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.http.converter.xml.SourceHttpMessageConverter;
@@ -59,6 +60,7 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
 		messageConverters.add(jsonConverter);
 		messageConverters.add(sourceConverter);
+		messageConverters.add(new ByteArrayHttpMessageConverter());
 		return messageConverters;
 	}
 	

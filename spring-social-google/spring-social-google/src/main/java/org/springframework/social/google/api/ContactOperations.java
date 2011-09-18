@@ -22,4 +22,7 @@ public interface ContactOperations {
 	
 	Contact saveContact(Contact contact);
 	
+	byte[] getProfilePicture(String url);
+	
+	void uploadProfilePicture(String url, byte[] content, String contentType);
 }

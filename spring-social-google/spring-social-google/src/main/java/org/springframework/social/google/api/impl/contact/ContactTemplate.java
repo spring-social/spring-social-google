@@ -107,5 +107,15 @@ public class ContactTemplate extends AbstractGoogleOperations implements Contact
 		}
 	}
 
+	@Override
+	public byte[] getProfilePicture(String url) {
+		return getBinaryContent(url);
+	}
+
+	@Override
+	public void uploadProfilePicture(String url, byte[] content, String contentType) {
+		putBinaryContent(url, content, "image/*");
+	}
+
 
 }

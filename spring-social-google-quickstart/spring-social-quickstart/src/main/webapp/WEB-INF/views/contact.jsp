@@ -27,39 +27,53 @@
 		<div class="row">
 
 			<div class="span16 columns">
+			
+				<c:if test="${param.url != null}">
+					<div class="right">
+						<img src="contactpicture?url=${command.pictureUrl}"/>
+						<form action="contactpicture" method="post" enctype="multipart/form-data">
+							<input type="hidden" name="pictureUrl" value="${command.pictureUrl}"/>
+							<input type="file" name="file"/>
+							<input type="submit" class="btn" value="Upload Photo"/>
+						</form>
+					</div>
+				</c:if>
 
 				<form:form>
-					<form:hidden path="id" />
-					<div class="clearfix">
-						<label for="name">Name Prefix</label>
-						<div class="input">
-							<form:input path="namePrefix" cssClass="xlarge" />
+					<div class="left">
+						<form:hidden path="id" />
+						<div class="clearfix">
+							<label for="name">Name Prefix</label>
+							<div class="input">
+								<form:input path="namePrefix" cssClass="xlarge" />
+							</div>
+						</div>
+						<div class="clearfix">
+							<label for="name">First Name</label>
+							<div class="input">
+								<form:input path="firstName" cssClass="xlarge" />
+							</div>
+						</div>
+						<div class="clearfix">
+							<label for="name">Middle Name</label>
+							<div class="input">
+								<form:input path="middleName" cssClass="xlarge" />
+							</div>
+						</div>
+						<div class="clearfix">
+							<label for="name">Last Name</label>
+							<div class="input">
+								<form:input path="lastName" cssClass="xlarge" />
+							</div>
+						</div>
+						<div class="clearfix">
+							<label for="name">Name Suffix</label>
+							<div class="input">
+								<form:input path="nameSuffix" cssClass="xlarge" />
+							</div>
 						</div>
 					</div>
-					<div class="clearfix">
-						<label for="name">First Name</label>
-						<div class="input">
-							<form:input path="firstName" cssClass="xlarge" />
-						</div>
-					</div>
-					<div class="clearfix">
-						<label for="name">Middle Name</label>
-						<div class="input">
-							<form:input path="middleName" cssClass="xlarge" />
-						</div>
-					</div>
-					<div class="clearfix">
-						<label for="name">Last Name</label>
-						<div class="input">
-							<form:input path="lastName" cssClass="xlarge" />
-						</div>
-					</div>
-					<div class="clearfix">
-						<label for="name">Name Suffix</label>
-						<div class="input">
-							<form:input path="nameSuffix" cssClass="xlarge" />
-						</div>
-					</div>
+					<div class="clear"></div>
 					<div class="clearfix">
 						<label for="addEmailButton">E-mail</label>
 						<div class="input">
@@ -162,8 +176,10 @@
 					<div class="actions">
 						<input type="submit" class="btn primary" value="Save" />
 						<a href="contacts" class="btn">Cancel</a>
-						<input name="delete" type="submit" class="btn danger secondary-action" value="Delete" 
-							onclick="return confirm('Are you sure you want to delete this group?')" />
+						<c:if test="${param.url != null}">
+							<input name="delete" type="submit" class="btn danger secondary-action" value="Delete" 
+								onclick="return confirm('Are you sure you want to delete this contact?')" />
+						</c:if>
 					</div>
 					<spring:hasBindErrors name="contactForm">
 						<div class="error">

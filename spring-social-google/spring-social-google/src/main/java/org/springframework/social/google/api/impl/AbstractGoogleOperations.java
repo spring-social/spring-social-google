@@ -1,5 +1,6 @@
 package org.springframework.social.google.api.impl;
 
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.apache.commons.io.IOUtils.toInputStream;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
@@ -28,6 +29,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.UncategorizedApiException;
 import org.springframework.social.google.api.impl.helper.EntryExtractor;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 public class AbstractGoogleOperations {
@@ -122,4 +124,21 @@ public class AbstractGoogleOperations {
 		restTemplate.delete(url);
 	}
 	
+	protected byte[] getBinaryContent(String url) {
+		try {
+			return restTemplate.getForObject(url, byte[].class);
+		} catch(HttpClientErrorException e) {
+			if(e.getStatusCode() == NOT_FOUND) {
+				return null;
+			}
+			throw e;
+		}
+	}
+	
+	protected void putBinaryContent(String url, byte[] content, String contentType) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Content-type", contentType);
+		HttpEntity<byte[]> entity = new HttpEntity<byte[]>(content, headers);
+		restTemplate.exchange(url, PUT, entity, null);
+	}
 }
