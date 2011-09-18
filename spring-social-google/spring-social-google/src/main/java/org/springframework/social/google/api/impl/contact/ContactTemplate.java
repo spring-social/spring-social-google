@@ -113,8 +113,15 @@ public class ContactTemplate extends AbstractGoogleOperations implements Contact
 	}
 
 	@Override
-	public void uploadProfilePicture(String url, byte[] content, String contentType) {
-		putBinaryContent(url, content, "image/*");
+	public void uploadProfilePicture(String url, byte[] content) {
+		
+		// Service returns 403 on POST/PUT to photo URL, so we work around this by 
+		// replacing the email part of the URL with "default"
+		int index = url.lastIndexOf('/') + 1;
+		String idSuffix = url.substring(index);
+		String fixedUrl = "https://www.google.com/m8/feeds/photos/media/default/" + idSuffix;
+		
+		putBinaryContent(fixedUrl, content, "image/*");
 	}
 
 

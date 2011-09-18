@@ -24,5 +24,5 @@ public interface ContactOperations {
 	
 	byte[] getProfilePicture(String url);
 	
-	void uploadProfilePicture(String url, byte[] content, String contentType);
+	void uploadProfilePicture(String url, byte[] content);
 }

@@ -189,7 +189,7 @@ public class HomeController {
 	public String uploadProfilePicture(
 			@RequestHeader String referer, @RequestParam String pictureUrl, 
 			@RequestParam MultipartFile file) throws IOException {
-		google.contactOperations().uploadProfilePicture(pictureUrl, file.getBytes(), file.getContentType());
+		google.contactOperations().uploadProfilePicture(pictureUrl, file.getBytes());
 		return "redirect:" + referer;
 	}
 }
