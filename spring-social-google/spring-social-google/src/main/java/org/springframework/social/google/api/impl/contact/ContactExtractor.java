@@ -5,9 +5,9 @@ import java.util.List;
 
 import nu.xom.Element;
 
-import org.springframework.social.google.api.Contact;
-import org.springframework.social.google.api.Email;
-import org.springframework.social.google.api.Phone;
+import org.springframework.social.google.api.contact.Contact;
+import org.springframework.social.google.api.contact.Email;
+import org.springframework.social.google.api.contact.Phone;
 import org.springframework.social.google.api.impl.helper.EntryExtractor;
 
 public class ContactExtractor extends EntryExtractor<Contact> {
@@ -23,6 +23,8 @@ public class ContactExtractor extends EntryExtractor<Contact> {
 		String middleName = getNestedGDataValue(element, "name", "additionalName");
 		String lastName = getNestedGDataValue(element, "name", "familyName");
 		String nameSuffix = getNestedGDataValue(element, "name", "nameSuffix");
+		
+		List<String> groupIds = getValues(element, "gContact:groupMembershipInfo", "deleted", "false", "href");
 		
 		List<Element> emailElements = getGDataElements(element, "email");
 		List<Email> emails = new ArrayList<Email>();
@@ -44,7 +46,7 @@ public class ContactExtractor extends EntryExtractor<Contact> {
 			phones.add(new Phone(rel, label, number, primary));
 		}
 		
-		return new Contact(id, self, namePrefix, firstName, middleName, lastName, nameSuffix, pictureUrl, emails, phones);
+		return new Contact(id, self, namePrefix, firstName, middleName, lastName, nameSuffix, pictureUrl, groupIds, emails, phones);
 	}
 
 }

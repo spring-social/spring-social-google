@@ -1,12 +1,12 @@
 package org.springframework.social.google.api.impl;
 
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.apache.commons.io.IOUtils.toInputStream;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpMethod.PUT;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.MediaType.APPLICATION_ATOM_XML;
-import static org.springframework.social.google.api.impl.helper.EntryExtractor.NamespaceContext;
+import static org.springframework.social.google.api.impl.helper.Namespaces.NamespaceContext;
 
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;

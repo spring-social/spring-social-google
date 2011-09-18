@@ -1,4 +1,4 @@
-package org.springframework.social.google.api;
+package org.springframework.social.google.api.contact;
 
 import java.util.List;
 
@@ -12,12 +12,13 @@ public class Contact {
 	private final String lastName;
 	private final String nameSuffix;
 	private final String pictureUrl;
+	private final List<String> groupIds;
 	private final List<Email> emails;	
 	private final List<Phone> phones;
 	
 	public Contact(String id, String self, String namePrefix, String firstName,
 			String middleName, String lastName, String nameSuffix,
-			String pictureUrl, List<Email> emails, List<Phone> phones) {
+			String pictureUrl, List<String> groupIds, List<Email> emails, List<Phone> phones) {
 		this.id = id;
 		this.self = self;
 		this.namePrefix = namePrefix;
@@ -26,6 +27,7 @@ public class Contact {
 		this.lastName = lastName;
 		this.nameSuffix = nameSuffix;
 		this.pictureUrl = pictureUrl;
+		this.groupIds = groupIds;
 		this.emails = emails;
 		this.phones = phones;
 	}
@@ -93,6 +95,10 @@ public class Contact {
 		return pictureUrl;
 	}
 	
+	public List<String> getGroupIds() {
+		return groupIds;
+	}
+
 	public List<Email> getEmails() {
 		return emails;
 	}

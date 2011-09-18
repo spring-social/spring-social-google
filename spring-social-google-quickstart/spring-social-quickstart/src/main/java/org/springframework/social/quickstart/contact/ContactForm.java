@@ -16,6 +16,7 @@ public class ContactForm {
 	private String lastName;
 	private String nameSuffix;
 	private String pictureUrl;
+	private List<String> groupIds;
 	
 	@SuppressWarnings("unchecked")
 	private List<EmailForm> emails = 
@@ -103,6 +104,14 @@ public class ContactForm {
 
 	public void setPictureUrl(String pictureUrl) {
 		this.pictureUrl = pictureUrl;
+	}
+	
+	public List<String> getGroupIds() {
+		return groupIds;
+	}
+
+	public void setGroupIds(List<String> groupIds) {
+		this.groupIds = groupIds;
 	}
 
 	public List<EmailForm> getEmails() {

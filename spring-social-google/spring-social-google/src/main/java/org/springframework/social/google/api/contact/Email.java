@@ -1,4 +1,4 @@
-package org.springframework.social.google.api;
+package org.springframework.social.google.api.contact;
 
 public class Email {
 

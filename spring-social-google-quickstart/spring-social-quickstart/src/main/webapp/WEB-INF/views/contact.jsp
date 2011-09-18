@@ -116,6 +116,12 @@
 						</div>
 					</div>
 					<div class="clearfix">
+						<label>Group Memberships</label>
+						<div class="input">
+							<form:checkboxes items="${allGroups}" path="groupIds" itemValue="id" itemLabel="name"/>
+						</div>
+					</div>
+					<div class="clearfix">
 						<label for="addPhoneButton">Phone</label>
 						<div class="input">
 							<table>

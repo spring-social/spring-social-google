@@ -32,12 +32,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.ExpiredAuthorizationException;
-import org.springframework.social.google.api.Contact;
-import org.springframework.social.google.api.ContactGroup;
-import org.springframework.social.google.api.Email;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.GoogleProfile;
-import org.springframework.social.google.api.Phone;
+import org.springframework.social.google.api.contact.Contact;
+import org.springframework.social.google.api.contact.ContactGroup;
+import org.springframework.social.google.api.contact.Email;
+import org.springframework.social.google.api.contact.Phone;
 import org.springframework.social.quickstart.contact.ContactForm;
 import org.springframework.social.quickstart.contact.ContactGroupForm;
 import org.springframework.social.quickstart.contact.EmailForm;
@@ -144,7 +144,10 @@ public class HomeController {
 			command.getPhones().add(new PhoneForm(phone.getRel(), phone.getLabel(), phone.getNumber(), phone.isPrimary()));
 		}
 		
-		return new ModelAndView("contact", "command", command);
+		List<ContactGroup> allGroups = google.contactOperations().getContactGroupList();
+		
+		return new ModelAndView("contact", "command", command)
+			.addObject("allGroups", allGroups);
 	}
 	
 	@RequestMapping(value="/contact", method=POST)
@@ -168,7 +171,9 @@ public class HomeController {
 			}
 		}
 		
-		Contact contact = new Contact(command.getId(), command.getUrl(), command.getNamePrefix(), command.getFirstName(), command.getMiddleName(), command.getLastName(), command.getNameSuffix(), command.getPictureUrl(), emails, phones);
+		Contact contact = new Contact(command.getId(), command.getUrl(), command.getNamePrefix(), 
+				command.getFirstName(), command.getMiddleName(), command.getLastName(), 
+				command.getNameSuffix(), command.getPictureUrl(), command.getGroupIds(), emails, phones);
 		google.contactOperations().saveContact(contact);
 		return new ModelAndView("redirect:/contacts");
 	}

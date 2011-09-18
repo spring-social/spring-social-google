@@ -1,24 +1,15 @@
 package org.springframework.social.google.api.impl.helper;
 
-import static org.springframework.social.google.api.impl.helper.Namespaces.*;
+import static org.springframework.social.google.api.impl.helper.Namespaces.NamespaceContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import nu.xom.Element;
 import nu.xom.Nodes;
-import nu.xom.XPathContext;
 
 public abstract class EntryExtractor<T> {
 
-	public static final XPathContext NamespaceContext;
-	
-	static {
-		NamespaceContext = new XPathContext();
-		NamespaceContext.addNamespace("atom", AtomNamespace);
-		NamespaceContext.addNamespace("gd", GdataNamespace);
-	}
-	
 	public abstract T extractEntry(Element entry);
 	
 	protected String find(Element element, String namespacePrefix, String elementName, String filterAttributeName, 
@@ -78,5 +69,17 @@ public abstract class EntryExtractor<T> {
 	protected String getNestedGDataValue(Element element, String elementName, String nestedElementName) {
 		Nodes nodes = element.query("gd:" + elementName + "/gd:" + nestedElementName, NamespaceContext);
 		return nodes.size() == 0 ? null : nodes.get(0).getValue();
+	}
+	
+	protected List<String> getValues(Element element, String prefixedElementName, 
+			String filterAttributeName, String filterAttributeValue, String attrributeToFetch) {
+		Nodes nodes = element.query(
+			prefixedElementName + "[@" + filterAttributeName + "='" + filterAttributeValue + "']/@" + attrributeToFetch, 
+			NamespaceContext);
+		List<String> values = new ArrayList<String>();
+		for(int i = 0; i < nodes.size(); i++) {
+			values.add(nodes.get(i).getValue());
+		}
+		return values;
 	}
 }

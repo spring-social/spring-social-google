@@ -2,7 +2,7 @@ package org.springframework.social.google.api.impl.contact;
 
 import nu.xom.Element;
 
-import org.springframework.social.google.api.ContactGroup;
+import org.springframework.social.google.api.contact.ContactGroup;
 import org.springframework.social.google.api.impl.helper.EntryExtractor;
 
 public class ContactGroupExtractor extends EntryExtractor<ContactGroup> {

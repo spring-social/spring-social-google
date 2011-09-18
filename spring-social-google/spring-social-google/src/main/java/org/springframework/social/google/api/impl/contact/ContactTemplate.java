@@ -5,11 +5,11 @@ import java.util.List;
 
 import nu.xom.Element;
 
-import org.springframework.social.google.api.Contact;
-import org.springframework.social.google.api.ContactGroup;
-import org.springframework.social.google.api.ContactOperations;
-import org.springframework.social.google.api.Email;
-import org.springframework.social.google.api.Phone;
+import org.springframework.social.google.api.contact.Contact;
+import org.springframework.social.google.api.contact.ContactGroup;
+import org.springframework.social.google.api.contact.ContactOperations;
+import org.springframework.social.google.api.contact.Email;
+import org.springframework.social.google.api.contact.Phone;
 import org.springframework.social.google.api.impl.AbstractGoogleOperations;
 import org.springframework.social.google.api.impl.helper.ElementBuilder;
 import org.springframework.web.client.RestTemplate;
