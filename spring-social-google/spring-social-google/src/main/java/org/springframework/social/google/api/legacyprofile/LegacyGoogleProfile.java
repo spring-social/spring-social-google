@@ -1,11 +1,11 @@
-package org.springframework.social.google.api;
+package org.springframework.social.google.api.legacyprofile;
 
 import java.io.Serializable;
 
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class GoogleProfile implements Serializable {
+public class LegacyGoogleProfile implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -20,7 +20,7 @@ public class GoogleProfile implements Serializable {
 	private final String locale;
 
 	@JsonCreator
-	public GoogleProfile(@JsonProperty("id") String id,
+	public LegacyGoogleProfile(@JsonProperty("id") String id,
 			@JsonProperty("email") String email,
 			@JsonProperty("name") String name,
 			@JsonProperty("given_name") String firstName,

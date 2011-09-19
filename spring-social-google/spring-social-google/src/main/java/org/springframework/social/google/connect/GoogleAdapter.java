@@ -5,7 +5,7 @@ import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.UserProfileBuilder;
 import org.springframework.social.google.api.Google;
-import org.springframework.social.google.api.GoogleProfile;
+import org.springframework.social.google.api.legacyprofile.LegacyGoogleProfile;
 
 public class GoogleAdapter implements ApiAdapter<Google> {
 
@@ -14,7 +14,7 @@ public class GoogleAdapter implements ApiAdapter<Google> {
 	}
 
 	public void setConnectionValues(Google google, ConnectionValues values) {
-		GoogleProfile profile = google.userOperations().getUserProfile();
+		LegacyGoogleProfile profile = google.userOperations().getUserProfile();
 		values.setProviderUserId(profile.getId());
 		values.setDisplayName(profile.getName());
 		values.setProfileUrl(profile.getLink());
@@ -22,7 +22,7 @@ public class GoogleAdapter implements ApiAdapter<Google> {
 	}
 
 	public UserProfile fetchUserProfile(Google google) {
-		GoogleProfile profile = google.userOperations().getUserProfile();
+		LegacyGoogleProfile profile = google.userOperations().getUserProfile();
 		return new UserProfileBuilder()
 			.setUsername(profile.getEmail())
 			.setEmail(profile.getEmail())

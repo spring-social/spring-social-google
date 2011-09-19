@@ -16,16 +16,17 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.http.converter.xml.SourceHttpMessageConverter;
 import org.springframework.social.google.api.Google;
-import org.springframework.social.google.api.UserOperations;
 import org.springframework.social.google.api.contact.ContactOperations;
 import org.springframework.social.google.api.impl.contact.ContactTemplate;
+import org.springframework.social.google.api.impl.legacyprofile.UserTemplate;
+import org.springframework.social.google.api.legacyprofile.LegacyProfileOperations;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
 import org.springframework.web.client.RestTemplate;
 
 public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 
-	private final UserOperations userOperations;
+	private final LegacyProfileOperations userOperations;
 	private final ContactOperations contactOperations;
 	
 	public GoogleTemplate(String accessToken) {
@@ -70,7 +71,7 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	}
 
 	@Override
-	public UserOperations userOperations() {
+	public LegacyProfileOperations userOperations() {
 		return userOperations;
 	}
 

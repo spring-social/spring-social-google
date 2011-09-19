@@ -33,11 +33,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.ExpiredAuthorizationException;
 import org.springframework.social.google.api.Google;
-import org.springframework.social.google.api.GoogleProfile;
 import org.springframework.social.google.api.contact.Contact;
 import org.springframework.social.google.api.contact.ContactGroup;
 import org.springframework.social.google.api.contact.Email;
 import org.springframework.social.google.api.contact.Phone;
+import org.springframework.social.google.api.legacyprofile.LegacyGoogleProfile;
 import org.springframework.social.quickstart.contact.ContactForm;
 import org.springframework.social.quickstart.contact.ContactGroupForm;
 import org.springframework.social.quickstart.contact.EmailForm;
@@ -69,7 +69,7 @@ public class HomeController {
 	@RequestMapping(value="/", method=GET)
 	public ModelAndView home() {
 		
-		GoogleProfile profile = google.userOperations().getUserProfile();
+		LegacyGoogleProfile profile = google.userOperations().getUserProfile();
 		
 		return new ModelAndView("profile", "profile", profile);
 	}
