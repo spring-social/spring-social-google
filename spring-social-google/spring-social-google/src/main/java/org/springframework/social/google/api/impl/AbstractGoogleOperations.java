@@ -141,4 +141,8 @@ public class AbstractGoogleOperations {
 		HttpEntity<byte[]> entity = new HttpEntity<byte[]>(content, headers);
 		restTemplate.exchange(url, PUT, entity, null);
 	}
+	
+	protected <T> T getEntity(String url, Class<T> type) {
+		return restTemplate.getForObject(url, type);
+	}
 }

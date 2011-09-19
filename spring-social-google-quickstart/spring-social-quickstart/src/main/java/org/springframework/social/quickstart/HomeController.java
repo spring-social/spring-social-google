@@ -28,16 +28,20 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.codehaus.jackson.map.DeserializationConfig.Feature;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.ExpiredAuthorizationException;
 import org.springframework.social.google.api.Google;
+import org.springframework.social.google.api.activity.ActivitiesFeed;
 import org.springframework.social.google.api.contact.Contact;
 import org.springframework.social.google.api.contact.ContactGroup;
 import org.springframework.social.google.api.contact.Email;
 import org.springframework.social.google.api.contact.Phone;
 import org.springframework.social.google.api.legacyprofile.LegacyGoogleProfile;
+import org.springframework.social.google.api.profile.GoogleProfile;
 import org.springframework.social.quickstart.contact.ContactForm;
 import org.springframework.social.quickstart.contact.ContactGroupForm;
 import org.springframework.social.quickstart.contact.EmailForm;
@@ -200,4 +204,28 @@ public class HomeController {
 		google.contactOperations().uploadProfilePicture(pictureUrl, file.getBytes());
 		return "redirect:" + referer;
 	}
+	
+	@RequestMapping(value="/plus", method=GET)
+	public ModelAndView plus(@RequestParam(required=false) String id, 
+			@RequestParam(required=false) String activities) {
+		ModelAndView mv = new ModelAndView("plus");
+		if(hasText(id)) {
+			if(hasText(activities)) {
+				
+				ObjectMapper mapper = new ObjectMapper();
+				mapper.getDeserializationConfig().set(Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				try {
+					ActivitiesFeed activitiesFeed = google.activityOperations().getActivitiesFeed(id);
+					mv.addObject("activitiesFeed", activitiesFeed);
+				} catch (Exception e) {
+				}
+				
+			} else {
+				GoogleProfile profile = google.profileOperations().getGoogleProfile(id);
+				mv.addObject("profile", profile);
+			}
+		}
+		return mv;
+	}
+	
 }

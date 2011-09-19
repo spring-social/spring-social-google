@@ -32,3 +32,13 @@ body {
 	line-height: 1em;
 	width: auto;
 }
+
+.leftMargin {
+	margin-left: 10px;
+}
+
+.text {
+	margin-left: 1em;
+    text-align: left;
+    width: auto;
+}

@@ -1,14 +1,17 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <div class="topbar">
 	<div class="fill">
 		<div class="container">
 			<h3>
-				<a href="">Spring Social Google</a>
+				<a href="./">Spring Social Google</a>
 			</h3>
 
 			<ul>
-				<li class="${selected == 'profile' ? 'active' : ''}"><a href="">Profile</a></li>
+				<li class="${selected == 'profile' ? 'active' : ''}"><a href="./">Profile</a></li>
+				<li class="${selected == 'plus' ? 'active' : ''}"><a href="plus">Google+</a></li>
 				<li class="${selected == 'contacts' ? 'active' : ''}"><a href="contacts">Contacts</a></li>
 			</ul>
 			
@@ -18,3 +21,5 @@
 		</div>
 	</div>
 </div>
+
+</jsp:root>

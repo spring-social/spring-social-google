@@ -16,10 +16,14 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.http.converter.xml.SourceHttpMessageConverter;
 import org.springframework.social.google.api.Google;
+import org.springframework.social.google.api.activity.ActivityOperations;
 import org.springframework.social.google.api.contact.ContactOperations;
+import org.springframework.social.google.api.impl.activity.ActivityTemplate;
 import org.springframework.social.google.api.impl.contact.ContactTemplate;
 import org.springframework.social.google.api.impl.legacyprofile.UserTemplate;
+import org.springframework.social.google.api.impl.profile.ProfileTemplate;
 import org.springframework.social.google.api.legacyprofile.LegacyProfileOperations;
+import org.springframework.social.google.api.profile.ProfileOperations;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
 import org.springframework.web.client.RestTemplate;
@@ -28,6 +32,8 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 
 	private final LegacyProfileOperations userOperations;
 	private final ContactOperations contactOperations;
+	private final ProfileOperations profileOperations;
+	private final ActivityOperations activityOperations;
 	
 	public GoogleTemplate(String accessToken) {
 		super(accessToken);
@@ -44,7 +50,8 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 		
 		userOperations = new UserTemplate(getRestTemplate(), isAuthorized());
 		contactOperations = new ContactTemplate(getRestTemplate(), isAuthorized());
-		
+		profileOperations = new ProfileTemplate(getRestTemplate(), isAuthorized());
+		activityOperations = new ActivityTemplate(getRestTemplate(), isAuthorized());
 	}
 	
 	@Override
@@ -78,6 +85,16 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	@Override
 	public ContactOperations contactOperations() {
 		return contactOperations;
+	}
+
+	@Override
+	public ProfileOperations profileOperations() {
+		return profileOperations;
+	}
+
+	@Override
+	public ActivityOperations activityOperations() {
+		return activityOperations;
 	}
 	
 }

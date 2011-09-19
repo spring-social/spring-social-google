@@ -10,12 +10,12 @@ public class BasicProfile {
 	private final String profileUrl;
 	private final String imageUrl;
 	
-	static class Image {
+	public static class Image {
 		
 		private final String url;
 		
 		@JsonCreator
-		Image(@JsonProperty("url") String url) {
+		public Image(@JsonProperty("url") String url) {
 			this.url = url;
 		}
 	}	

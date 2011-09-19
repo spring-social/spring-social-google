@@ -14,8 +14,6 @@ public class GoogleProfile extends BasicProfile {
 	private final List<Organization> organizations;
 	private final List<PlaceLived> placesLived;
 	
-	
-	
 	@JsonCreator
 	public GoogleProfile(
 			@JsonProperty("id") String id, 
