@@ -69,17 +69,69 @@
 					<div>Profile Picture</div>
 					<img src="${profile.imageUrl}" />
 				</div>
+				<div class="clear"></div>
+				<div>
+					<h5>URLs</h5>
+					<ul>
+						<c:forEach items="${profile.urls}" var="url">
+							<li><a href="${url.value}">${url.value}</a> ${url.type}</li>
+						</c:forEach>
+					</ul>
+				</div>
+				<div>
+					<h5>Organizations</h5>
+					<ul>
+						<c:forEach items="${profile.organizations}" var="organization">
+							<li>${organization}</li>
+						</c:forEach>
+					</ul>
+				</div>
+				<div>
+					<h5>Places Lived</h5>
+					<ul>
+						<c:forEach items="${profile.placesLived}" var="place">
+							<li>${place}</li>
+						</c:forEach>
+					</ul>
+				</div>
 			</c:if>
 			
 			<c:if test="${activitiesFeed != null}">
 				<c:forEach items="${activitiesFeed.activities}" var="activity">
-					<div>
+					<div class="activity">
 						<a href="${activity.url}" target="_blank">
 							<b>${activity.title}</b> <br/> published: ${activity.published} , updated: ${activity.updated}
 						</a>
-						<br/>
 						<a href="${activity.actor.profileUrl}" target="_blank">${activity.actor.displayName}</a>
-						<br/><br/>
+						<br/>
+						<br/>
+						${activity.content}
+						<br/>
+						<c:forEach items="${activity.attachments}" var="attachment">
+							<br/>
+							<c:if test="${attachment.url != null}">
+								<a href="${attachment.url}" target="_blank">
+									<b>${attachment.displayName}</b>
+								</a>
+							</c:if>
+							<c:if test="${attachment.url == null}">
+								<b>${attachment.displayName}</b>
+							</c:if>
+							<br/>
+							${attachment.content}
+							<br/>
+							<c:if test="${attachment.previewImageUrl != null}">
+								<c:if test="${attachment.url != null}">
+									<a href="${attachment.url}" target="_blank">
+										<img src="${attachment.previewImageUrl}" alt="${attachment.displayName}" />
+									</a>
+								</c:if>
+								<c:if test="${attachment.url == null}">
+									<img src="${attachment.previewImageUrl}" alt="${attachment.displayName}" />
+								</c:if>
+							</c:if>
+							<br/>
+						</c:forEach>
 					</div>
 				</c:forEach>
 			</c:if>

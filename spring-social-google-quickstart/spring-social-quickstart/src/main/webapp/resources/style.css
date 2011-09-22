@@ -42,3 +42,14 @@ body {
     text-align: left;
     width: auto;
 }
+
+.activity {
+	background-color: #F5FAFF;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.activity a {
+	color: darkblue;
+}
