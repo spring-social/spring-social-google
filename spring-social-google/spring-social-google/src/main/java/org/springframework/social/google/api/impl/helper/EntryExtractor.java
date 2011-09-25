@@ -1,21 +1,35 @@
 package org.springframework.social.google.api.impl.helper;
 
+import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang.time.DateUtils.parseDate;
 import static org.springframework.social.google.api.impl.helper.Namespaces.NamespaceContext;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import nu.xom.Element;
 import nu.xom.Nodes;
 
+import org.springframework.social.UncategorizedApiException;
+
 public abstract class EntryExtractor<T> {
 
+	private static final String[] datePattern = {"yyyy-MM-dd'T'hh:mm:ss.SSS'Z'"};
+	
 	public abstract T extractEntry(Element entry);
 	
 	protected String find(Element element, String namespacePrefix, String elementName, String filterAttributeName, 
 			String filterAttributeValue, String attributeToFetch) {
 		
-		StringBuilder sb = new StringBuilder(namespacePrefix).append(':').append(elementName);
+		StringBuilder sb = new StringBuilder();
+		
+		if(namespacePrefix != null) {
+			sb.append(namespacePrefix).append(':');
+		}
+		
+		sb.append(elementName);
 		
 		if(filterAttributeName != null) {
 			sb.append("[@").append(filterAttributeName).append("='").append(filterAttributeValue).append("']");
@@ -30,6 +44,10 @@ public abstract class EntryExtractor<T> {
 			return null;
 		}
 		return nodes.get(0).getValue();
+	}
+	
+	protected String getElementValue(Element element, String namespacePrefix, String elementName) {
+		return find(element, namespacePrefix, elementName, null, null, null);
 	}
 	
 	protected String findGdataAttribute(Element element, String elementName, String filterAttributeName, 
@@ -81,5 +99,30 @@ public abstract class EntryExtractor<T> {
 			values.add(nodes.get(i).getValue());
 		}
 		return values;
+	}
+	
+	protected Date getDateValue(Element element, String elementName) {
+		String stringValue = getAtomElement(element, elementName);
+		if(isBlank(stringValue)) {
+			return null;
+		}
+		try {
+			return parseDate(stringValue, datePattern);
+		} catch (ParseException e) {
+			throw new UncategorizedApiException("Invalid date format ", e);
+		}
+	}
+	
+	protected Date getPublished(Element element) {
+		return getDateValue(element, "published");
+	}
+	
+	protected Date getUpdated(Element element) {
+		return getDateValue(element, "updated");
+	}
+	
+	@SuppressWarnings("hiding")
+	protected <T extends Enum<T>> T parseEnum(Class<T> enumType, String value) {
+		return Enum.valueOf(enumType, value.toUpperCase());
 	}
 }

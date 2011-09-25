@@ -4,6 +4,7 @@ import org.springframework.social.ApiBinding;
 import org.springframework.social.google.api.activity.ActivityOperations;
 import org.springframework.social.google.api.contact.ContactOperations;
 import org.springframework.social.google.api.legacyprofile.LegacyProfileOperations;
+import org.springframework.social.google.api.picasa.PicasaOperations;
 import org.springframework.social.google.api.profile.ProfileOperations;
 
 public interface Google extends ApiBinding {
@@ -12,4 +13,5 @@ public interface Google extends ApiBinding {
 	ContactOperations contactOperations();
 	ProfileOperations profileOperations();
 	ActivityOperations activityOperations();
+	PicasaOperations picasaOperations();
 }

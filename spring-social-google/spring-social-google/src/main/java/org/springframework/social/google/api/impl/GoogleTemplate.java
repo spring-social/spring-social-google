@@ -21,8 +21,10 @@ import org.springframework.social.google.api.contact.ContactOperations;
 import org.springframework.social.google.api.impl.activity.ActivityTemplate;
 import org.springframework.social.google.api.impl.contact.ContactTemplate;
 import org.springframework.social.google.api.impl.legacyprofile.UserTemplate;
+import org.springframework.social.google.api.impl.picasa.PicasaTemplate;
 import org.springframework.social.google.api.impl.profile.ProfileTemplate;
 import org.springframework.social.google.api.legacyprofile.LegacyProfileOperations;
+import org.springframework.social.google.api.picasa.PicasaOperations;
 import org.springframework.social.google.api.profile.ProfileOperations;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
@@ -34,6 +36,7 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	private final ContactOperations contactOperations;
 	private final ProfileOperations profileOperations;
 	private final ActivityOperations activityOperations;
+	private final PicasaOperations picasaOperations;
 	
 	public GoogleTemplate(String accessToken) {
 		super(accessToken);
@@ -52,6 +55,7 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 		contactOperations = new ContactTemplate(getRestTemplate(), isAuthorized());
 		profileOperations = new ProfileTemplate(getRestTemplate(), isAuthorized());
 		activityOperations = new ActivityTemplate(getRestTemplate(), isAuthorized());
+		picasaOperations = new PicasaTemplate(getRestTemplate(), isAuthorized());
 	}
 	
 	@Override
@@ -95,6 +99,11 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	@Override
 	public ActivityOperations activityOperations() {
 		return activityOperations;
+	}
+
+	@Override
+	public PicasaOperations picasaOperations() {
+		return picasaOperations;
 	}
 	
 }
