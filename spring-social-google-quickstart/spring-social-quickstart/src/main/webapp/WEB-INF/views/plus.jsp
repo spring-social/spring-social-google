@@ -44,26 +44,28 @@
 					<div class="clearfix">
 						<a href="${profile.profileUrl}" target="_blank">Google Profile Page</a>
 					</div>
-					<div class="clearfix">
-						<label>Profile ID:</label>
-						<label class="text">${profile.id}</label>
-					</div>
-					<div class="clearfix">
-						<label>Display Name:</label>
-						<label class="text">${profile.displayName}</label>
-					</div>
-					<div class="clearfix">
-						<label>Gender:</label>
-						<label class="text">${profile.gender}</label>
-					</div>
-					<div class="clearfix">
-						<label>About Me:</label>
-						<label class="text">${profile.aboutMe}</label>
-					</div>
-					<div class="clearfix">
-						<label>Relationship Status:</label>
-						<label class="text">${profile.relationshipStatus}</label>
-					</div>
+					<form>
+						<div class="clearfix">
+							<label>Profile ID:</label>
+							<label class="text">${profile.id}</label>
+						</div>
+						<div class="clearfix">
+							<label>Display Name:</label>
+							<label class="text">${profile.displayName}</label>
+						</div>
+						<div class="clearfix">
+							<label>Gender:</label>
+							<label class="text">${profile.gender}</label>
+						</div>
+						<div class="clearfix">
+							<label>About Me:</label>
+							<label class="text">${profile.aboutMe}</label>
+						</div>
+						<div class="clearfix">
+							<label>Relationship Status:</label>
+							<label class="text">${profile.relationshipStatus}</label>
+						</div>
+					</form>
 				</div>
 				<div class="span4 columns">
 					<div>Profile Picture</div>

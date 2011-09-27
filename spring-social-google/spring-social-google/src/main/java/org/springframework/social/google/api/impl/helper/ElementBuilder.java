@@ -46,6 +46,15 @@ public class ElementBuilder {
 	public ElementBuilder addAttribute(String name, boolean value) {
 		return addAttribute(name, Boolean.toString(value));
 	}
+	
+	public ElementBuilder addElement(String namespace, String name, Enum<?> value) {
+		if(value != null) {
+			Element child = new Element(name, namespace);
+			child.appendChild(value.name().toLowerCase());
+			element.appendChild(child);
+		}
+		return this;
+	}
 
 	public ElementBuilder addSimpleAtomElement(String name, String value) {
 		if(hasText(value)) {
@@ -79,6 +88,14 @@ public class ElementBuilder {
 
 	public ElementBuilder setValue(String value) {
 		element.appendChild(value);
+		return this;
+	}
+	
+	public ElementBuilder setCategoryKind(String term) {
+		Element category = new Element("category", AtomNamespace);
+		category.addAttribute(new Attribute("scheme", "http://schemas.google.com/g/2005#kind"));
+		category.addAttribute(new Attribute("term", term));
+		element.appendChild(category);
 		return this;
 	}
 }

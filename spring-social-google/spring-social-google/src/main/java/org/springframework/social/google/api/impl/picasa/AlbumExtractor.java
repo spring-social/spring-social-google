@@ -22,12 +22,13 @@ public class AlbumExtractor extends EntryExtractor<Album> {
 		String authorId = getPicasaElement(element, "user");
 		String authorName = getPicasaElement(element, "nickname");
 		int numberOfPhotos = Integer.valueOf(getPicasaElement(element, "numphotos"));
+		String thumbnailUrl = find(element, "media:group/media:thumbnail", null, null, "url");
 		
-		return new Album(id, published, updated, title, summary, visibility, authorId, authorName, numberOfPhotos);
+		return new Album(id, published, updated, title, summary, visibility, authorId, authorName, numberOfPhotos, thumbnailUrl);
 	}
 
 	private String getPicasaElement(Element element, String elementName) {
-		return getElementValue(element, "gphoto", elementName);
+		return getElementValue(element, "gphoto:" + elementName);
 	}
-	
+			
 }

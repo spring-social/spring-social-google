@@ -13,6 +13,6 @@
 <![endif]-->
 
 <!-- Le styles -->
-<link href="resources/bootstrap-1.1.1.min.css" rel="stylesheet"/>
+<link href="resources/bootstrap-1.3.0.min.css" rel="stylesheet"/>
 <link href="resources/style.css" rel="stylesheet"/>
 </jsp:root>

@@ -20,16 +20,10 @@ public abstract class EntryExtractor<T> {
 	
 	public abstract T extractEntry(Element entry);
 	
-	protected String find(Element element, String namespacePrefix, String elementName, String filterAttributeName, 
+	protected String find(Element element, String prefixedElementName, String filterAttributeName, 
 			String filterAttributeValue, String attributeToFetch) {
 		
-		StringBuilder sb = new StringBuilder();
-		
-		if(namespacePrefix != null) {
-			sb.append(namespacePrefix).append(':');
-		}
-		
-		sb.append(elementName);
+		StringBuilder sb = new StringBuilder(prefixedElementName);
 		
 		if(filterAttributeName != null) {
 			sb.append("[@").append(filterAttributeName).append("='").append(filterAttributeValue).append("']");
@@ -46,21 +40,21 @@ public abstract class EntryExtractor<T> {
 		return nodes.get(0).getValue();
 	}
 	
-	protected String getElementValue(Element element, String namespacePrefix, String elementName) {
-		return find(element, namespacePrefix, elementName, null, null, null);
+	protected String getElementValue(Element element, String prefixedElementName) {
+		return find(element, prefixedElementName, null, null, null);
 	}
 	
 	protected String findGdataAttribute(Element element, String elementName, String filterAttributeName, 
 			String filterAttributeValue, String attributeToFetch) {
-		return find(element, "gd", elementName, filterAttributeName, filterAttributeValue, attributeToFetch);
+		return find(element, "gd:" + elementName, filterAttributeName, filterAttributeValue, attributeToFetch);
 	}
 	
 	protected String getAtomElement(Element element, String elementName) {
-		return find(element, "atom", elementName, null, null, null);
+		return find(element, "atom:" + elementName, null, null, null);
 	}
 	
 	protected String getLinkHref(Element element, String rel) {
-		return find(element, "atom", "link", "rel", rel, "href");
+		return find(element, "atom:link", "rel", rel, "href");
 	}
 	
 	protected String getSelf(Element element) {

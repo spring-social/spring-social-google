@@ -41,11 +41,13 @@ import org.springframework.social.google.api.contact.ContactGroup;
 import org.springframework.social.google.api.contact.Email;
 import org.springframework.social.google.api.contact.Phone;
 import org.springframework.social.google.api.legacyprofile.LegacyGoogleProfile;
+import org.springframework.social.google.api.picasa.Album;
 import org.springframework.social.google.api.profile.GoogleProfile;
 import org.springframework.social.quickstart.contact.ContactForm;
 import org.springframework.social.quickstart.contact.ContactGroupForm;
 import org.springframework.social.quickstart.contact.EmailForm;
 import org.springframework.social.quickstart.contact.PhoneForm;
+import org.springframework.social.quickstart.picasa.AlbumForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -226,6 +228,36 @@ public class HomeController {
 			}
 		}
 		return mv;
+	}
+	
+	@RequestMapping(value="/albums", method=GET)
+	public ModelAndView albums() {
+		List<Album> albums = google.picasaOperations().getAlbums();
+		return new ModelAndView("albums", "albums", albums);
+	}
+	
+	@RequestMapping(value="/album", method=GET)
+	public ModelAndView newAlbum() {
+		return new ModelAndView("album", "album", new AlbumForm());
+	}
+	
+	@RequestMapping(value="/album", method=GET)
+	public ModelAndView album(@RequestParam String id) {
+		
+		Album album = google.picasaOperations().getAlbum(id);
+		AlbumForm command = new AlbumForm(album.getId(), album.getTitle(), album.getSummary());
+		
+		return new ModelAndView("album", "album", album)
+			.addObject("command", command);
+	}
+	
+	@RequestMapping(value="album", method=POST)
+	public ModelAndView saveAlbum(@Valid AlbumForm command, BindingResult result) {
+		
+		if(result.hasErrors()) {
+//			return album
+		}
+		return null;
 	}
 	
 }

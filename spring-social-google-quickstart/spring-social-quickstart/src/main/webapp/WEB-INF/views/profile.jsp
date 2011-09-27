@@ -26,48 +26,50 @@
 				<div class="clearfix">
 					<a href="${profile.link}" target="_blank">Google Profile Page</a>
 				</div>
-				<div class="clearfix">
-					<label>Profile ID:</label>
-					<div class="input">
-						<span class="uneditable-input">${profile.id}</span>
+				<form>
+					<div class="clearfix">
+						<label>Profile ID:</label>
+						<div class="input">
+							<span class="uneditable-input">${profile.id}</span>
+						</div>
 					</div>
-				</div>
-				<div class="clearfix">
-					<label>E-mail:</label>
-					<div class="input">
-						<span class="uneditable-input">${profile.email}</span>
+					<div class="clearfix">
+						<label>E-mail:</label>
+						<div class="input">
+							<span class="uneditable-input">${profile.email}</span>
+						</div>
 					</div>
-				</div>
-				<div class="clearfix">
-					<label>Display Name:</label>
-					<div class="input">
-						<span class="uneditable-input">${profile.name}</span>
+					<div class="clearfix">
+						<label>Display Name:</label>
+						<div class="input">
+							<span class="uneditable-input">${profile.name}</span>
+						</div>
 					</div>
-				</div>
-				<div class="clearfix">
-					<label>First Name:</label>
-					<div class="input">
-						<span class="uneditable-input">${profile.firstName}</span>
+					<div class="clearfix">
+						<label>First Name:</label>
+						<div class="input">
+							<span class="uneditable-input">${profile.firstName}</span>
+						</div>
 					</div>
-				</div>
-				<div class="clearfix">
-					<label>Last Name:</label>
-					<div class="input">
-						<span class="uneditable-input">${profile.lastName}</span>
+					<div class="clearfix">
+						<label>Last Name:</label>
+						<div class="input">
+							<span class="uneditable-input">${profile.lastName}</span>
+						</div>
 					</div>
-				</div>
-				<div class="clearfix">
-					<label>Gender:</label>
-					<div class="input">
-						<span class="uneditable-input">${profile.gender}</span>
+					<div class="clearfix">
+						<label>Gender:</label>
+						<div class="input">
+							<span class="uneditable-input">${profile.gender}</span>
+						</div>
 					</div>
-				</div>
-				<div class="clearfix">
-					<label>Locale:</label>
-					<div class="input">
-						<span class="uneditable-input">${profile.locale}</span>
+					<div class="clearfix">
+						<label>Locale:</label>
+						<div class="input">
+							<span class="uneditable-input">${profile.locale}</span>
+						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 			<div class="span8 columns">
 				<div>Profile Picture</div>

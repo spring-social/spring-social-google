@@ -107,6 +107,7 @@ public class AbstractGoogleOperations {
 		Source requestSource = new StreamSource(toInputStream(entry.toXML()));
 		HttpEntity<Source> request = new HttpEntity<Source>(requestSource, headers);
 		
+		System.out.println(method + " " + url);
 		System.out.println(entry.toXML());
 		
 		ResponseEntity<StreamSource> response = restTemplate.exchange(url, method, request, StreamSource.class);
@@ -121,6 +122,7 @@ public class AbstractGoogleOperations {
 	}
 	
 	protected void deleteEntry(String url) {
+		System.out.println(url);
 		restTemplate.delete(url);
 	}
 	

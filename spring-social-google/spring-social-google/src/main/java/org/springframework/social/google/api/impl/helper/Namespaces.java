@@ -8,6 +8,7 @@ public abstract class Namespaces {
 	public static final String GdataNamespace = "http://schemas.google.com/g/2005";
 	public static final String ContactNamespace = "http://schemas.google.com/contact/2008";
 	public static final String PicasaNamespace = "http://schemas.google.com/photos/2007";
+	public static final String MediaNamespace = "http://search.yahoo.com/mrss/";
 	
 	public static final XPathContext NamespaceContext;
 	
@@ -17,5 +18,6 @@ public abstract class Namespaces {
 		NamespaceContext.addNamespace("gd", GdataNamespace);
 		NamespaceContext.addNamespace("gContact", ContactNamespace);
 		NamespaceContext.addNamespace("gphoto", PicasaNamespace);
+		NamespaceContext.addNamespace("media", MediaNamespace);
 	}
 }

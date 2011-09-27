@@ -13,10 +13,11 @@ public class Album {
 	private final String authorName;
 	private final String authorId;
 	private final int numberOfPhotos;
+	private final String thumbnailUrl;
 	
 	public Album(String id, Date published, Date updated, String title,
 			String summary, Visibility visibility, String authorId,
-			String authorName, int numberOfPhotos) {
+			String authorName, int numberOfPhotos, String thumbnailUrl) {
 		this.id = id;
 		this.published = published;
 		this.updated = updated;
@@ -26,6 +27,7 @@ public class Album {
 		this.authorId = authorId;
 		this.authorName = authorName;
 		this.numberOfPhotos = numberOfPhotos;
+		this.thumbnailUrl = thumbnailUrl;
 	}
 	
 	public String getId() {
@@ -62,6 +64,10 @@ public class Album {
 	
 	public int getNumberOfPhotos() {
 		return numberOfPhotos;
+	}
+
+	public String getThumbnailUrl() {
+		return thumbnailUrl;
 	}
 
 }
