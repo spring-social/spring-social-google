@@ -36,15 +36,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.ExpiredAuthorizationException;
 import org.springframework.social.google.api.Google;
-import org.springframework.social.google.api.activity.ActivitiesFeed;
-import org.springframework.social.google.api.contact.Contact;
-import org.springframework.social.google.api.contact.ContactGroup;
-import org.springframework.social.google.api.contact.Email;
-import org.springframework.social.google.api.contact.Phone;
+import org.springframework.social.google.api.gdata.contact.Contact;
+import org.springframework.social.google.api.gdata.contact.ContactGroup;
+import org.springframework.social.google.api.gdata.contact.Email;
+import org.springframework.social.google.api.gdata.contact.Phone;
+import org.springframework.social.google.api.gdata.picasa.Album;
+import org.springframework.social.google.api.gdata.query.GDataPage;
 import org.springframework.social.google.api.legacyprofile.LegacyGoogleProfile;
-import org.springframework.social.google.api.picasa.Album;
-import org.springframework.social.google.api.profile.GoogleProfile;
-import org.springframework.social.google.api.query.Page;
+import org.springframework.social.google.api.plus.activity.ActivitiesFeed;
+import org.springframework.social.google.api.plus.person.Person;
 import org.springframework.social.quickstart.contact.ContactForm;
 import org.springframework.social.quickstart.contact.ContactGroupForm;
 import org.springframework.social.quickstart.contact.ContactSearchForm;
@@ -88,7 +88,7 @@ public class HomeController {
 		
 		List<ContactGroup> groups = google.contactOperations().getContactGroupList();
 		
-		Page<Contact> contacts = google.contactOperations().contactQuery()
+		GDataPage<Contact> contacts = google.contactOperations().contactQuery()
 			.searchFor(command.getText())
 			.startingFromIndex(command.getStartIndex())
 			.maxResultsNumber(command.getMaxResults())
@@ -106,7 +106,7 @@ public class HomeController {
 	@RequestMapping(value="/groups", method=GET)
 	public ModelAndView groups(SearchForm command) {
 		
-		Page<ContactGroup> groups = google.contactOperations().contactGroupQuery()
+		GDataPage<ContactGroup> groups = google.contactOperations().contactGroupQuery()
 			.startingFromIndex(command.getStartIndex())
 			.maxResultsNumber(command.getMaxResults())
 			.updatedFrom(command.getUpdatedMin())
@@ -245,7 +245,7 @@ public class HomeController {
 				}
 				
 			} else {
-				GoogleProfile profile = google.profileOperations().getGoogleProfile(id);
+				Person profile = google.profileOperations().getPerson(id);
 				mv.addObject("profile", profile);
 			}
 		}
