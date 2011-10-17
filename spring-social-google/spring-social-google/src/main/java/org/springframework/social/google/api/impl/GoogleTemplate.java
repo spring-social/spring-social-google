@@ -10,7 +10,6 @@ import java.util.List;
 import javax.xml.transform.Source;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
@@ -44,12 +43,7 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 		System.out.println(accessToken);
 		
 		RestTemplate restTemplate = getRestTemplate();
-		
-		ClientHttpRequestInterceptor[] interceptors = restTemplate.getInterceptors();
-		ClientHttpRequestInterceptor[] newInterceptors = new ClientHttpRequestInterceptor[interceptors.length+1];
-		System.arraycopy(interceptors, 0, newInterceptors, 0, interceptors.length);
-		newInterceptors[interceptors.length] = new GDataInterceptor();
-		restTemplate.setInterceptors(newInterceptors);
+		restTemplate.getInterceptors().add(new GDataInterceptor());
 		
 		userOperations = new UserTemplate(getRestTemplate(), isAuthorized());
 		contactOperations = new ContactTemplate(getRestTemplate(), isAuthorized());
