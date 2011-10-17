@@ -6,7 +6,7 @@ public interface ContactOperations {
 
 	List<Contact> getContactList();
 	
-	List<Contact> getGroupContacts(String groupId);
+	List<Contact> getGroupContacts(ContactGroup group);
 
 	List<ContactGroup> getContactGroupList();
 
@@ -23,4 +23,8 @@ public interface ContactOperations {
 	byte[] getProfilePicture(String url);
 	
 	void uploadProfilePicture(String url, byte[] content);
+	
+	ContactQueryBuilder contactQuery();
+	
+	ContactGroupQueryBuilder contactGroupQuery();
 }

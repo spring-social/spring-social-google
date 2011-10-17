@@ -2,12 +2,17 @@ body {
 	margin-top: 70px;
 }
 
-.left {
-	float: left;
+.side-menu {
+	background-color: #F5F5F5;
+    border-radius: 6px 6px 6px 6px;
+    padding: 10px;
+    position: fixed;
+    width: 200px;
 }
 
-.right {
-	float: right;
+.side-menu li a {
+	font-size: 20px;
+	line-height: 30px;
 }
 
 .clear {

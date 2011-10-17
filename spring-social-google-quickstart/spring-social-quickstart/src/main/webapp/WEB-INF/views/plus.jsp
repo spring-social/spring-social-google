@@ -11,7 +11,6 @@
 <head>
 <title>Spring Social Google - Google+</title>
 <jsp:directive.include file="header.jspf" />
-<jsp:directive.include file="jquery.jspf" />
 </head>
 
 <body>

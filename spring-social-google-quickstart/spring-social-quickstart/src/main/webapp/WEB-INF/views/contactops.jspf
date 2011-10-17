@@ -3,5 +3,13 @@
 	<jsp:directive.page language="java"
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"><![CDATA[<!--  -->]]></script>
+	<div class="sidebar">
+		<div class="side-menu">
+			<ul class="unstyled">
+				<li><a href="contacts">My Contacts</a></li>
+				<li><a href="groups">My Contact Groups</a></li>
+			</ul>	
+		</div>
+	</div>
+	
 </jsp:root>

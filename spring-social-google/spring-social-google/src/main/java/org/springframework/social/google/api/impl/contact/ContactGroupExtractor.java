@@ -1,5 +1,7 @@
 package org.springframework.social.google.api.impl.contact;
 
+import java.util.Date;
+
 import nu.xom.Element;
 
 import org.springframework.social.google.api.contact.ContactGroup;
@@ -12,7 +14,8 @@ public class ContactGroupExtractor extends EntryExtractor<ContactGroup> {
 		String id = getId(element);
 		String name = getTitle(element);
 		String self = getSelf(element);
-		return new ContactGroup(id, name, self);
+		Date updated = getUpdated(element);
+		return new ContactGroup(id, name, self, updated);
 	}
 
 }

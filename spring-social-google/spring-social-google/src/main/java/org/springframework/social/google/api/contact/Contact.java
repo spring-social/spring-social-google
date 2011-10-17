@@ -1,11 +1,13 @@
 package org.springframework.social.google.api.contact;
 
+import java.util.Date;
 import java.util.List;
 
 public class Contact {
 
 	private final String id;
 	private final String self;
+	private final Date updated;
 	private final String namePrefix;
 	private final String firstName;
 	private final String middleName;
@@ -16,11 +18,12 @@ public class Contact {
 	private final List<Email> emails;	
 	private final List<Phone> phones;
 	
-	public Contact(String id, String self, String namePrefix, String firstName,
+	public Contact(String id, String self, Date updated, String namePrefix, String firstName,
 			String middleName, String lastName, String nameSuffix,
 			String pictureUrl, List<String> groupIds, List<Email> emails, List<Phone> phones) {
 		this.id = id;
 		this.self = self;
+		this.updated = updated;
 		this.namePrefix = namePrefix;
 		this.firstName = firstName;
 		this.middleName = middleName;
@@ -69,6 +72,10 @@ public class Contact {
 	
 	public String getSelf() {
 		return self;
+	}
+	
+	public Date getUpdated() {
+		return updated;
 	}
 	
 	public String getNamePrefix() {

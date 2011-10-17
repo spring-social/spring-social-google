@@ -29,6 +29,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.UncategorizedApiException;
 import org.springframework.social.google.api.impl.helper.EntryExtractor;
+import org.springframework.social.google.api.query.Page;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -55,8 +56,21 @@ public class AbstractGoogleOperations {
 		return extractor.extractEntry(entry);
 	}
 	
-	protected <E> List<E> extractFeedEntries(String url, EntryExtractor<E> extractor) {
+	public <E> List<E> extractFeedEntries(String url, EntryExtractor<E> extractor) {
 		Document document = getDocument(url);
+		return getResultList(extractor, document);
+	}
+
+	public <E> Page<E> extractFeedEntriesPage(String url, EntryExtractor<E> extractor) {
+		Document document = getDocument(url);
+		List<E> items = getResultList(extractor, document);
+		int offset = Integer.valueOf(document.query("/atom:feed/openSearch:startIndex", NamespaceContext).get(0).getValue());
+		int total = Integer.valueOf(document.query("/atom:feed/openSearch:totalResults", NamespaceContext).get(0).getValue());
+		return new Page<E>(items, offset, total);
+	}
+	
+	private <E> List<E> getResultList(EntryExtractor<E> extractor,
+			Document document) {
 		Nodes entries = document.query("/atom:feed/atom:entry", NamespaceContext);
 		List<E> list = new ArrayList<E>();
 		for(int i = 0; i < entries.size(); i++) {

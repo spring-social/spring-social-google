@@ -10,9 +10,8 @@
 	</jsp:text>
 	<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
-<title>Spring Social Google - Contact</title>
+<title>Spring Social Google - Contact Details</title>
 <jsp:directive.include file="header.jspf" />
-<jsp:directive.include file="jquery.jspf" />
 <script src="resources/contact.js"><![CDATA[<!--  -->]]></script>
 </head>
 
@@ -20,16 +19,17 @@
 	<c:set var="selected" value="contacts" />
 	<jsp:directive.include file="bar.jspf" />
 
-	<div class="container">
+	<div class="container-fluid">
 
-		<h1>Contact Details</h1>
+		<jsp:directive.include file="contactops.jspf" />
+		<div class="content">
 
-		<div class="row">
+			<h1>Contact Details</h1>
 
-			<div class="span16 columns">
-			
+			<div class="content">
+
 				<c:if test="${param.url != null}">
-					<div class="right">
+					<div class="pull-right">
 						<img src="contactpicture?url=${command.pictureUrl}"/>
 						<form action="contactpicture" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="pictureUrl" value="${command.pictureUrl}"/>
@@ -40,34 +40,34 @@
 				</c:if>
 
 				<form:form>
-					<div class="left">
+					<div class="pull-left">
 						<form:hidden path="id" />
 						<div class="clearfix">
-							<label for="name">Name Prefix</label>
+							<label for="name">Name Prefix:</label>
 							<div class="input">
 								<form:input path="namePrefix" cssClass="xlarge" />
 							</div>
 						</div>
 						<div class="clearfix">
-							<label for="name">First Name</label>
+							<label for="name">First Name:</label>
 							<div class="input">
 								<form:input path="firstName" cssClass="xlarge" />
 							</div>
 						</div>
 						<div class="clearfix">
-							<label for="name">Middle Name</label>
+							<label for="name">Middle Name:</label>
 							<div class="input">
 								<form:input path="middleName" cssClass="xlarge" />
 							</div>
 						</div>
 						<div class="clearfix">
-							<label for="name">Last Name</label>
+							<label for="name">Last Name:</label>
 							<div class="input">
 								<form:input path="lastName" cssClass="xlarge" />
 							</div>
 						</div>
 						<div class="clearfix">
-							<label for="name">Name Suffix</label>
+							<label for="name">Name Suffix:</label>
 							<div class="input">
 								<form:input path="nameSuffix" cssClass="xlarge" />
 							</div>
@@ -75,13 +75,13 @@
 					</div>
 					<div class="clear"></div>
 					<div class="clearfix">
-						<label>Group Memberships</label>
+						<label>Group Memberships:</label>
 						<div class="input checkboxes">
 							<form:checkboxes items="${allGroups}" path="groupIds" itemValue="id" itemLabel="name"/>
 						</div>
 					</div>
 					<div class="clearfix">
-						<label for="addEmailButton">E-mail</label>
+						<label for="addEmailButton">E-mail:</label>
 						<div class="input">
 							<table>
 								<thead>
@@ -122,7 +122,7 @@
 						</div>
 					</div>
 					<div class="clearfix">
-						<label for="addPhoneButton">Phone</label>
+						<label for="addPhoneButton">Phone:</label>
 						<div class="input">
 							<table>
 								<thead>
@@ -181,7 +181,7 @@
 					</div>
 					<div class="actions">
 						<input type="submit" class="btn primary" value="Save" />
-						<a href="contacts" class="btn">Cancel</a>
+						<a href="contacts" class="btn leftMargin">Cancel</a>
 						<c:if test="${param.url != null}">
 							<input name="delete" type="submit" class="btn danger secondary-action" value="Delete" 
 								onclick="return confirm('Are you sure you want to delete this contact?')" />
@@ -199,5 +199,5 @@
 		</div>
 	</div>
 </body>
-	</html>
+</html>
 </jsp:root>

@@ -36,7 +36,7 @@
 					</div>
 					<div class="actions">
 						<input type="submit" class="btn primary" value="Save" />
-						<a href="contacts" class="btn">Cancel</a>
+						<a href="groups" class="btn leftMargin">Cancel</a>
 						<c:if test="${param.url != null}">
 							<input name="delete" type="submit" class="btn danger secondary-action" value="Delete" 
 								onclick="return confirm('Are you sure you want to delete this group?')" />

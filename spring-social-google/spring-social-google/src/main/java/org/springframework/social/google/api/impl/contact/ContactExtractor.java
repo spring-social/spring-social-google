@@ -1,6 +1,7 @@
 package org.springframework.social.google.api.impl.contact;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import nu.xom.Element;
@@ -17,6 +18,7 @@ public class ContactExtractor extends EntryExtractor<Contact> {
 		String id = getId(element);
 		String pictureUrl = getLinkHref(element, "http://schemas.google.com/contacts/2008/rel#photo");
 		String self = getSelf(element);
+		Date updated = getUpdated(element);
 		
 		String namePrefix = getNestedGDataValue(element, "name", "namePrefix");
 		String firstName = getNestedGDataValue(element, "name", "givenName");
@@ -46,7 +48,7 @@ public class ContactExtractor extends EntryExtractor<Contact> {
 			phones.add(new Phone(rel, label, number, primary));
 		}
 		
-		return new Contact(id, self, namePrefix, firstName, middleName, lastName, nameSuffix, pictureUrl, groupIds, emails, phones);
+		return new Contact(id, self, updated, namePrefix, firstName, middleName, lastName, nameSuffix, pictureUrl, groupIds, emails, phones);
 	}
 
 }

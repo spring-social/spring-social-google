@@ -1,16 +1,20 @@
 package org.springframework.social.google.api.contact;
 
+import java.util.Date;
+
 public class ContactGroup {
 
 	private final String id;
 	private final String name;
 	private final String self;
+	private final Date updated;
 	
-	public ContactGroup(String id, String name, String self) {
+	public ContactGroup(String id, String name, String self, Date updated) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.self = self;
+		this.updated = updated;
 	}
 	
 	@Override
@@ -30,4 +34,7 @@ public class ContactGroup {
 		return self;
 	}
 	
+	public Date getUpdated() {
+		return updated;
+	}
 }

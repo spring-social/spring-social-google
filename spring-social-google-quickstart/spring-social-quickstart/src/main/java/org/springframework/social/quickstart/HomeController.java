@@ -15,6 +15,7 @@
  */
 package org.springframework.social.quickstart;
 
+import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.IMAGE_JPEG;
@@ -43,8 +44,10 @@ import org.springframework.social.google.api.contact.Phone;
 import org.springframework.social.google.api.legacyprofile.LegacyGoogleProfile;
 import org.springframework.social.google.api.picasa.Album;
 import org.springframework.social.google.api.profile.GoogleProfile;
+import org.springframework.social.google.api.query.Page;
 import org.springframework.social.quickstart.contact.ContactForm;
 import org.springframework.social.quickstart.contact.ContactGroupForm;
+import org.springframework.social.quickstart.contact.ContactSearchForm;
 import org.springframework.social.quickstart.contact.EmailForm;
 import org.springframework.social.quickstart.contact.PhoneForm;
 import org.springframework.social.quickstart.picasa.AlbumForm;
@@ -81,19 +84,38 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/contacts", method=GET)
-	public ModelAndView contacts(@RequestParam(value="group", required=false) String groupId) {
+	public ModelAndView contacts(ContactSearchForm command) {
 		
 		List<ContactGroup> groups = google.contactOperations().getContactGroupList();
-		List<Contact> contacts;
-		if(groupId == null) {
-			contacts = google.contactOperations().getContactList();
-		} else {
-			contacts = google.contactOperations().getGroupContacts(groupId);
-		}
+		
+		Page<Contact> contacts = google.contactOperations().contactQuery()
+			.searchFor(command.getText())
+			.startingFromIndex(command.getStartIndex())
+			.maxResultsNumber(command.getMaxResults())
+			.updatedFrom(command.getUpdatedMin())
+			.updatedUntil(command.getUpdatedMax())
+			.onGroup(isNotBlank(command.getGroupId()) ?new ContactGroup(command.getGroupId(), null, null, null) : null)
+			.getPage();
 		
 		return new ModelAndView("contacts")
 			.addObject("groups", groups)
-			.addObject("contacts", contacts);
+			.addObject("contacts", contacts)
+			.addObject("command", command);
+	}
+	
+	@RequestMapping(value="/groups", method=GET)
+	public ModelAndView groups(SearchForm command) {
+		
+		Page<ContactGroup> groups = google.contactOperations().contactGroupQuery()
+			.startingFromIndex(command.getStartIndex())
+			.maxResultsNumber(command.getMaxResults())
+			.updatedFrom(command.getUpdatedMin())
+			.updatedUntil(command.getUpdatedMax())
+			.getPage();
+		
+		return new ModelAndView("groups")
+			.addObject("groups", groups)
+			.addObject("command", command);
 	}
 	
 	@RequestMapping(value="/group", method=GET)
@@ -115,7 +137,7 @@ public class HomeController {
 			return new ModelAndView("group", "command", command);
 		}
 		
-		ContactGroup group = new ContactGroup(command.getId(), command.getName(), command.getUrl());
+		ContactGroup group = new ContactGroup(command.getId(), command.getName(), command.getUrl(), null);
 		google.contactOperations().saveContactGroup(group);
 
 		return new ModelAndView("redirect:/contacts");
@@ -180,7 +202,7 @@ public class HomeController {
 			}
 		}
 		
-		Contact contact = new Contact(command.getId(), command.getUrl(), command.getNamePrefix(), 
+		Contact contact = new Contact(command.getId(), command.getUrl(), null, command.getNamePrefix(), 
 				command.getFirstName(), command.getMiddleName(), command.getLastName(), 
 				command.getNameSuffix(), command.getPictureUrl(), command.getGroupIds(), emails, phones);
 		google.contactOperations().saveContact(contact);
@@ -241,7 +263,7 @@ public class HomeController {
 		return new ModelAndView("album", "album", new AlbumForm());
 	}
 	
-	@RequestMapping(value="/album", method=GET)
+	@RequestMapping(value="/album", method=GET, params="id")
 	public ModelAndView album(@RequestParam String id) {
 		
 		Album album = google.picasaOperations().getAlbum(id);
@@ -251,7 +273,7 @@ public class HomeController {
 			.addObject("command", command);
 	}
 	
-	@RequestMapping(value="album", method=POST)
+	@RequestMapping(value="/album", method=POST)
 	public ModelAndView saveAlbum(@Valid AlbumForm command, BindingResult result) {
 		
 		if(result.hasErrors()) {

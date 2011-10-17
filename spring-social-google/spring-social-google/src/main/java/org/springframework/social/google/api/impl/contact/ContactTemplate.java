@@ -1,14 +1,18 @@
 package org.springframework.social.google.api.impl.contact;
 
+import static org.springframework.social.google.api.impl.helper.ElementBuilder.newAtomEntryBuilder;
+import static org.springframework.social.google.api.impl.helper.ElementBuilder.newGDataElementBuilder;
 import static org.springframework.social.google.api.impl.helper.Namespaces.ContactNamespace;
-import static org.springframework.social.google.api.impl.helper.ElementBuilder.*;
+
 import java.util.List;
 
 import nu.xom.Element;
 
 import org.springframework.social.google.api.contact.Contact;
 import org.springframework.social.google.api.contact.ContactGroup;
+import org.springframework.social.google.api.contact.ContactGroupQueryBuilder;
 import org.springframework.social.google.api.contact.ContactOperations;
+import org.springframework.social.google.api.contact.ContactQueryBuilder;
 import org.springframework.social.google.api.contact.Email;
 import org.springframework.social.google.api.contact.Phone;
 import org.springframework.social.google.api.impl.AbstractGoogleOperations;
@@ -27,12 +31,12 @@ public class ContactTemplate extends AbstractGoogleOperations implements Contact
 
 	@Override
 	public List<Contact> getContactList() {
-		return extractFeedEntries(CONTACTS_FEED + "?max-results=999999", new ContactExtractor());
+		return contactQuery().maxResultsNumber(Integer.MAX_VALUE).getList();
 	}
 
 	@Override
 	public List<ContactGroup> getContactGroupList() {
-		return extractFeedEntries(GROUPS_FEED, new ContactGroupExtractor());
+		return contactGroupQuery().maxResultsNumber(Integer.MAX_VALUE).getList();
 	}
 	
 	@Override
@@ -53,8 +57,8 @@ public class ContactTemplate extends AbstractGoogleOperations implements Contact
 	}
 
 	@Override
-	public List<Contact> getGroupContacts(String groupId) {
-		return extractFeedEntries(CONTACTS_FEED + "?max-results=999999&group=" + groupId, new ContactExtractor());
+	public List<Contact> getGroupContacts(ContactGroup group) {
+		return contactQuery().onGroup(group).maxResultsNumber(Integer.MAX_VALUE).getList();
 	}
 
 	@Override
@@ -124,6 +128,16 @@ public class ContactTemplate extends AbstractGoogleOperations implements Contact
 		String fixedUrl = "https://www.google.com/m8/feeds/photos/media/default/" + idSuffix;
 		
 		putBinaryContent(fixedUrl, content, "image/*");
+	}
+
+	@Override
+	public ContactQueryBuilder contactQuery() {
+		return new ContactQueryBuilderImpl(CONTACTS_FEED, this);
+	}
+
+	@Override
+	public ContactGroupQueryBuilder contactGroupQuery() {
+		return new ContactGroupQueryBuilderImpl(GROUPS_FEED, this);
 	}
 
 
