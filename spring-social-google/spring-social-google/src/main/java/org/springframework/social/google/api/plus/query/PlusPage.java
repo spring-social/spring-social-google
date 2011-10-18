@@ -2,12 +2,17 @@ package org.springframework.social.google.api.plus.query;
 
 import java.util.List;
 
-public class PlusPage<T> {
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.springframework.social.google.api.plus.GooglePlusEntity;
+
+public class PlusPage<T extends GooglePlusEntity> {
 
 	private final List<T> items;
 	private final String nextPageToken;
 	
-	public PlusPage(List<T> items, String nextPageToken) {
+	@JsonCreator
+	public PlusPage(@JsonProperty("items") List<T> items, @JsonProperty("nextPageToken") String nextPageToken) {
 		this.items = items;
 		this.nextPageToken = nextPageToken;
 	}

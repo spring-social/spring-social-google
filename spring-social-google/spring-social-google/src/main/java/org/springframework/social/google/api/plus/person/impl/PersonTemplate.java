@@ -3,11 +3,12 @@ package org.springframework.social.google.api.plus.person.impl;
 import org.springframework.social.google.api.plus.impl.AbstractGooglePlusOperations;
 import org.springframework.social.google.api.plus.person.Person;
 import org.springframework.social.google.api.plus.person.PersonOperations;
+import org.springframework.social.google.api.plus.person.PersonQueryBuilder;
 import org.springframework.web.client.RestTemplate;
 
 public class PersonTemplate extends AbstractGooglePlusOperations implements PersonOperations {
 
-	private static final String PEOPLE_URL = "https://www.googleapis.com/plus/v1/people/";
+	static final String PEOPLE_URL = "https://www.googleapis.com/plus/v1/people/";
 	
 	public PersonTemplate(RestTemplate restTemplate, boolean isAuthorized) {
 		super(restTemplate, isAuthorized);
@@ -21,6 +22,11 @@ public class PersonTemplate extends AbstractGooglePlusOperations implements Pers
 	@Override
 	public Person getGoogleProfile() {
 		return getPerson("me");
+	}
+
+	@Override
+	public PersonQueryBuilder personQuery() {
+		return new PersonQueryBuilderImpl(this);
 	}
 
 }

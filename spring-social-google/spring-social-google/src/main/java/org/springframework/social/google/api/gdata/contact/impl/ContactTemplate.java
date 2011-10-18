@@ -22,8 +22,8 @@ import org.springframework.web.client.RestTemplate;
 public class ContactTemplate extends AbstractGDataOperations implements ContactOperations {
 
 	private static final String FEED_PREFIX = "https://www.google.com/m8/feeds/";
-	private static final String CONTACTS_FEED = FEED_PREFIX + "contacts/default/full";
-	private static final String GROUPS_FEED = FEED_PREFIX + "groups/default/full";
+	static final String CONTACTS_FEED = FEED_PREFIX + "contacts/default/full";
+	static final String GROUPS_FEED = FEED_PREFIX + "groups/default/full";
 	
 	public ContactTemplate(RestTemplate restTemplate, boolean isAuthorized) {
 		super(restTemplate, isAuthorized);

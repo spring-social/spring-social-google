@@ -98,7 +98,7 @@
 			</c:if>
 			
 			<c:if test="${activitiesFeed != null}">
-				<c:forEach items="${activitiesFeed.activities}" var="activity">
+				<c:forEach items="${activitiesFeed.items}" var="activity">
 					<div class="activity">
 						<a href="${activity.url}" target="_blank">
 							<b>${activity.title}</b> <br/> published: ${activity.published} , updated: ${activity.updated}

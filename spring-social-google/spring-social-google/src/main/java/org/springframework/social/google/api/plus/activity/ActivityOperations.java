@@ -1,8 +1,9 @@
 package org.springframework.social.google.api.plus.activity;
 
+
 public interface ActivityOperations {
 
-	ActivitiesFeed getActivitiesFeed(String userId, String pageToken);
-
-	ActivitiesFeed getActivitiesFeed(String userId);
+	ActivitiesPage getActivitiesPage(String userId, String pageToken);
+	ActivitiesPage getActivitiesPage(String userId);
+	ActivityQueryBuilder activityQuery();
 }

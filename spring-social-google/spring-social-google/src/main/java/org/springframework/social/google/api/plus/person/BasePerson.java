@@ -2,10 +2,12 @@ package org.springframework.social.google.api.plus.person;
 
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonTypeName;
+import org.springframework.social.google.api.plus.GooglePlusEntity;
 
-public class BasePerson {
+//@JsonTypeName("plus#person")
+public class BasePerson extends GooglePlusEntity {
 
-	private final String id;
 	private final String displayName;
 	private final String profileUrl;
 	private final String imageUrl;
@@ -26,7 +28,7 @@ public class BasePerson {
 			@JsonProperty("displayName") String displayName, 
 			@JsonProperty("url") String profileUrl,
 			@JsonProperty("image") Image image) {
-		this.id = id;
+		super(id);
 		this.displayName = displayName;
 		this.profileUrl = profileUrl;
 		this.imageUrl = image.url;
@@ -35,10 +37,6 @@ public class BasePerson {
 	@Override
 	public String toString() {
 		return displayName;
-	}
-	
-	public String getId() {
-		return id;
 	}
 	
 	public String getDisplayName() {

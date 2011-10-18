@@ -4,10 +4,10 @@ import static org.apache.commons.lang.StringUtils.isNotBlank;
 
 import org.springframework.social.google.api.gdata.impl.AbstractGDataOperations;
 import org.springframework.social.google.api.gdata.impl.EntryExtractor;
-import org.springframework.social.google.api.gdata.query.QueryBuilder;
+import org.springframework.social.google.api.gdata.query.GDataQueryBuilder;
 import org.springframework.social.google.api.gdata.query.TextQueryBuilder;
 
-public abstract class TextQueryBuilderImpl<Q extends QueryBuilder<?, T>, T> extends QueryBuilderImpl<Q, T> implements TextQueryBuilder<Q, T> {
+public abstract class TextQueryBuilderImpl<Q extends GDataQueryBuilder<?, T>, T> extends GDataQueryBuilderImpl<Q, T> implements TextQueryBuilder<Q, T> {
 
 	private String text;
 	

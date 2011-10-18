@@ -5,9 +5,9 @@ import java.util.Date;
 import org.springframework.social.google.api.gdata.impl.AbstractGDataOperations;
 import org.springframework.social.google.api.gdata.impl.EntryExtractor;
 import org.springframework.social.google.api.gdata.query.PublishTextQueryBuilder;
-import org.springframework.social.google.api.gdata.query.QueryBuilder;
+import org.springframework.social.google.api.gdata.query.GDataQueryBuilder;
 
-public abstract class PublishTextQueryBuilderImpl<Q extends QueryBuilder<?, T>, T> extends TextQueryBuilderImpl<Q, T> implements PublishTextQueryBuilder<Q, T> {
+public abstract class PublishTextQueryBuilderImpl<Q extends GDataQueryBuilder<?, T>, T> extends TextQueryBuilderImpl<Q, T> implements PublishTextQueryBuilder<Q, T> {
 
 	private Date publishedMin;
 	private Date publishedMax;

@@ -1,7 +1,8 @@
 package org.springframework.social.google.api.plus.activity.impl;
 
-import org.springframework.social.google.api.plus.activity.ActivitiesFeed;
+import org.springframework.social.google.api.plus.activity.ActivitiesPage;
 import org.springframework.social.google.api.plus.activity.ActivityOperations;
+import org.springframework.social.google.api.plus.activity.ActivityQueryBuilder;
 import org.springframework.social.google.api.plus.impl.AbstractGooglePlusOperations;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,17 +16,22 @@ public class ActivityTemplate extends AbstractGooglePlusOperations implements Ac
 	}
 
 	@Override
-	public ActivitiesFeed getActivitiesFeed(String userId, String pageToken) {
+	public ActivitiesPage getActivitiesPage(String userId, String pageToken) {
 		StringBuilder sb = new StringBuilder(ACTIVITY_URL).append(userId).append(ACTIVITIES_PUBLIC);
 		if(pageToken != null) {
 			sb.append("?pageToken=").append(pageToken);
 		}
-		return getEntity(sb.toString(), ActivitiesFeed.class);
+		return getPage(sb.toString(), ActivitiesPage.class);
 	}
 
 	@Override
-	public ActivitiesFeed getActivitiesFeed(String userId) {
-		return getActivitiesFeed(userId, null);
+	public ActivitiesPage getActivitiesPage(String userId) {
+		return getActivitiesPage(userId, null);
+	}
+
+	@Override
+	public ActivityQueryBuilder activityQuery() {
+		return new ActivityQueryBuilderImpl(this);
 	}
 
 }

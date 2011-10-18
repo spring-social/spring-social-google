@@ -6,9 +6,12 @@ import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonTypeName;
+import org.springframework.social.google.api.plus.GooglePlusEntity;
 import org.springframework.social.google.api.plus.person.BasePerson;
 
-public class Activity {
+@JsonTypeName("plus#activity")
+public class Activity extends GooglePlusEntity {
 	
 	public static class ActivityObject {
 		
@@ -24,7 +27,6 @@ public class Activity {
 		
 	}
 
-	private final String id;
 	private final String title;
 	private final Date published;
 	private final Date updated;
@@ -41,17 +43,13 @@ public class Activity {
 			@JsonProperty("url") String url,
 			@JsonProperty("actor") BasePerson actor,
 			@JsonProperty("object") ActivityObject object) {
-		this.id = id;
+		super(id);
 		this.title = title;
 		this.published = published;
 		this.updated = updated;
 		this.url = url;
 		this.actor = actor;
 		this.object = object;
-	}
-
-	public String getId() {
-		return id;
 	}
 
 	public String getTitle() {

@@ -1,7 +1,7 @@
 package org.springframework.social.google.api.gdata.contact;
 
-import org.springframework.social.google.api.gdata.query.QueryBuilder;
+import org.springframework.social.google.api.gdata.query.GDataQueryBuilder;
 
-public interface ContactGroupQueryBuilder extends QueryBuilder<ContactGroupQueryBuilder, ContactGroup> {
+public interface ContactGroupQueryBuilder extends GDataQueryBuilder<ContactGroupQueryBuilder, ContactGroup> {
 
 }

@@ -43,8 +43,9 @@ import org.springframework.social.google.api.gdata.contact.Phone;
 import org.springframework.social.google.api.gdata.picasa.Album;
 import org.springframework.social.google.api.gdata.query.GDataPage;
 import org.springframework.social.google.api.legacyprofile.LegacyGoogleProfile;
-import org.springframework.social.google.api.plus.activity.ActivitiesFeed;
+import org.springframework.social.google.api.plus.activity.Activity;
 import org.springframework.social.google.api.plus.person.Person;
+import org.springframework.social.google.api.plus.query.PlusPage;
 import org.springframework.social.quickstart.contact.ContactForm;
 import org.springframework.social.quickstart.contact.ContactGroupForm;
 import org.springframework.social.quickstart.contact.ContactSearchForm;
@@ -235,15 +236,8 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("plus");
 		if(hasText(id)) {
 			if(hasText(activities)) {
-				
-				ObjectMapper mapper = new ObjectMapper();
-				mapper.getDeserializationConfig().set(Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-				try {
-					ActivitiesFeed activitiesFeed = google.activityOperations().getActivitiesFeed(id);
-					mv.addObject("activitiesFeed", activitiesFeed);
-				} catch (Exception e) {
-				}
-				
+				PlusPage<Activity> activitiesFeed = google.activityOperations().getActivitiesPage(id);
+				mv.addObject("activitiesFeed", activitiesFeed);
 			} else {
 				Person profile = google.profileOperations().getPerson(id);
 				mv.addObject("profile", profile);
