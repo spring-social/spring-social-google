@@ -1,6 +1,6 @@
 package org.springframework.social.google.api.gdata.query.impl;
 
-import static org.apache.commons.lang.StringUtils.isNotBlank;
+import static org.springframework.util.StringUtils.hasText;
 
 import org.springframework.social.google.api.gdata.impl.AbstractGDataOperations;
 import org.springframework.social.google.api.gdata.impl.EntryExtractor;
@@ -25,7 +25,7 @@ public abstract class TextQueryBuilderImpl<Q extends GDataQueryBuilder<?, T>, T>
 	@Override
 	protected StringBuilder build() {
 		StringBuilder sb = super.build();
-		if(isNotBlank(text)) {
+		if(hasText(text)) {
 			appendQueryParam(sb, "q", text.trim());
 		}
 		return sb;

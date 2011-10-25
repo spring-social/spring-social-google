@@ -1,10 +1,11 @@
 package org.springframework.social.google.api.gdata.impl;
 
-import static org.apache.commons.lang.StringUtils.isBlank;
-import static org.apache.commons.lang.time.DateUtils.parseDate;
 import static org.springframework.social.google.api.gdata.impl.Namespaces.NamespaceContext;
+import static org.springframework.util.StringUtils.hasText;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,7 @@ import org.springframework.social.UncategorizedApiException;
 
 public abstract class EntryExtractor<T> {
 
-	private static final String[] datePattern = {"yyyy-MM-dd'T'hh:mm:ss.SSS'Z'"};
+	private static final DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS'Z'");
 	
 	public abstract T extractEntry(Element entry);
 	
@@ -97,11 +98,11 @@ public abstract class EntryExtractor<T> {
 	
 	protected Date getDateValue(Element element, String elementName) {
 		String stringValue = getAtomElement(element, elementName);
-		if(isBlank(stringValue)) {
+		if(!hasText(stringValue)) {
 			return null;
 		}
 		try {
-			return parseDate(stringValue, datePattern);
+			return dateFormatter.parse(stringValue);
 		} catch (ParseException e) {
 			throw new UncategorizedApiException("Invalid date format ", e);
 		}

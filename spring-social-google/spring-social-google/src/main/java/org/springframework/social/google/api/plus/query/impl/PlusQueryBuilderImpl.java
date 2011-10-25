@@ -1,6 +1,7 @@
 package org.springframework.social.google.api.plus.query.impl;
 
-import static org.apache.commons.lang.StringUtils.isNotBlank;
+import static org.springframework.util.StringUtils.hasText;
+
 import org.springframework.social.google.api.plus.impl.AbstractGooglePlusOperations;
 import org.springframework.social.google.api.plus.query.PlusPage;
 import org.springframework.social.google.api.plus.query.PlusQueryBuilder;
@@ -37,11 +38,11 @@ public class PlusQueryBuilderImpl<Q extends PlusQueryBuilder<?, T>, T extends Pl
 		
 		StringBuilder sb = super.build();
 		
-		if(isNotBlank(text)) {
+		if(hasText(text)) {
 			appendQueryParam(sb, "query", text);
 		}
 		
-		if(isNotBlank(pageToken)) {
+		if(hasText(pageToken)) {
 			appendQueryParam(sb, "pageToken", pageToken);
 		}
 		

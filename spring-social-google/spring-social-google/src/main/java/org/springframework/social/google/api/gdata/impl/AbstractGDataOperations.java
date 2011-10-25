@@ -1,6 +1,5 @@
 package org.springframework.social.google.api.gdata.impl;
 
-import static org.apache.commons.io.IOUtils.toInputStream;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpMethod.PUT;
@@ -8,6 +7,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.MediaType.APPLICATION_ATOM_XML;
 import static org.springframework.social.google.api.gdata.impl.Namespaces.NamespaceContext;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -107,7 +107,7 @@ public class AbstractGDataOperations extends AbstractGoogleOperations {
 	private <E> E submitEntry(String url, Element entry, HttpMethod method, EntryExtractor<E> responseEntryExtractor) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(APPLICATION_ATOM_XML);
-		Source requestSource = new StreamSource(toInputStream(entry.toXML()));
+		Source requestSource = new StreamSource(new ByteArrayInputStream(entry.toXML().getBytes()));
 		HttpEntity<Source> request = new HttpEntity<Source>(requestSource, headers);
 		
 		System.out.println(method + " " + url);

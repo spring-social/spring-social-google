@@ -15,7 +15,6 @@
  */
 package org.springframework.social.quickstart;
 
-import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.IMAGE_JPEG;
@@ -94,7 +93,7 @@ public class HomeController {
 			.maxResultsNumber(command.getMaxResults())
 			.updatedFrom(command.getUpdatedMin())
 			.updatedUntil(command.getUpdatedMax())
-			.onGroup(isNotBlank(command.getGroupId()) ?new ContactGroup(command.getGroupId(), null, null, null) : null)
+			.onGroup(hasText(command.getGroupId()) ?new ContactGroup(command.getGroupId(), null, null, null) : null)
 			.getPage();
 		
 		return new ModelAndView("contacts")

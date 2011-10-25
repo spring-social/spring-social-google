@@ -1,13 +1,15 @@
 package org.springframework.social.google.api.query.impl;
 
-import static org.apache.commons.lang.time.DateFormatUtils.ISO_DATETIME_FORMAT;
-
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.social.google.api.query.QueryBuilder;
 
 public abstract class QueryBuilderImpl<Q extends QueryBuilder<?, T>, T> implements QueryBuilder<Q, T> {
 
+	private static final Format dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS'Z'");
+	
 	private final String feedUrl;
 	private int maxResults;
 	
@@ -27,7 +29,7 @@ public abstract class QueryBuilderImpl<Q extends QueryBuilder<?, T>, T> implemen
 	}
 	
 	protected void appendQueryParam(StringBuilder sb, String name, Date value) {
-		appendQueryParam(sb, name, ISO_DATETIME_FORMAT.format(value));
+		appendQueryParam(sb, name, dateFormatter.format(value));
 	}
 	
 	protected void appendQueryParam(StringBuilder sb, String name, Object value) {
