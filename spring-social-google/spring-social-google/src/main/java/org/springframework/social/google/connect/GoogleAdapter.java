@@ -7,6 +7,11 @@ import org.springframework.social.connect.UserProfileBuilder;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.legacyprofile.LegacyGoogleProfile;
 
+/**
+ * Google ApiAdapter implementation.
+ * @author Gabriel Axel
+ *
+ */
 public class GoogleAdapter implements ApiAdapter<Google> {
 
 	public boolean test(Google google) {

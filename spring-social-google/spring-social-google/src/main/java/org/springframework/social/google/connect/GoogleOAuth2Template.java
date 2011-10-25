@@ -11,6 +11,11 @@ import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.OAuth2Template;
 import org.springframework.util.MultiValueMap;
 
+/**
+ * Google-specific extension to OAuth2Template.
+ * @author Gabriel Axel
+ *
+ */
 public class GoogleOAuth2Template extends OAuth2Template {
 	
 	public GoogleOAuth2Template(String clientId, String clientSecret) {
