@@ -11,7 +11,7 @@
 
 			<ul>
 				<li class="${selected == 'profile' ? 'active' : ''}"><a href="./">Profile</a></li>
-				<li class="${selected == 'plus' ? 'active' : ''}"><a href="plus">Google+</a></li>
+				<li class="${selected == 'plus' ? 'active' : ''}"><a href="people">Google+</a></li>
 				<li class="${selected == 'contacts' ? 'active' : ''}"><a href="contacts">Contacts</a></li>
 				<li class="${selected == 'picasa' ? 'active' : ''}"><a href="albums">Picasa</a></li>
 			</ul>

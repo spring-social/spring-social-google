@@ -5,7 +5,7 @@
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 
 	<div>
-		<form action="person" class="pull-left">
+		<form action="activities" class="pull-left">
 			<div class="clearfix">
 				<label for="id">Profile ID or "me":</label>
 				<div class="input">
@@ -14,11 +14,11 @@
 			</div>
 			<div class="clearfix">
 				<div class="input">
-					<input type="submit" class="btn" value="Show Profile"/>
+					<input type="submit" class="btn" value="Get Activities"/>
 				</div>
 			</div>
 		</form>
-		<form action="people" class="pull-left">
+		<form action="activities" class="pull-left">
 			<div class="clearfix">
 				<label for="text">Search for:</label>
 				<div class="input">
@@ -27,10 +27,11 @@
 			</div>
 			<div class="clearfix">
 				<div class="input">
-					<input type="submit" class="btn" value="Search People"/>
+					<input type="submit" class="btn" value="Search Activities"/>
 				</div>
 			</div>
 		</form>
 	</div>
+	<div class="clear"></div>
 	
 </jsp:root>

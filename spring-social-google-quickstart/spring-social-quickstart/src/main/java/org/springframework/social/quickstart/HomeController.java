@@ -29,8 +29,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.codehaus.jackson.map.DeserializationConfig.Feature;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -43,9 +41,10 @@ import org.springframework.social.google.api.gdata.contact.Phone;
 import org.springframework.social.google.api.gdata.picasa.Album;
 import org.springframework.social.google.api.gdata.query.GDataPage;
 import org.springframework.social.google.api.legacyprofile.LegacyGoogleProfile;
-import org.springframework.social.google.api.plus.activity.Activity;
+import org.springframework.social.google.api.plus.activity.ActivitiesPage;
+import org.springframework.social.google.api.plus.person.BasePerson;
+import org.springframework.social.google.api.plus.person.PeoplePage;
 import org.springframework.social.google.api.plus.person.Person;
-import org.springframework.social.google.api.plus.query.PlusPage;
 import org.springframework.social.quickstart.contact.ContactForm;
 import org.springframework.social.quickstart.contact.ContactGroupForm;
 import org.springframework.social.quickstart.contact.ContactSearchForm;
@@ -230,20 +229,50 @@ public class HomeController {
 		return "redirect:" + referer;
 	}
 	
-	@RequestMapping(value="/plus", method=GET)
-	public ModelAndView plus(@RequestParam(required=false) String id, 
-			@RequestParam(required=false) String activities) {
-		ModelAndView mv = new ModelAndView("plus");
+	@RequestMapping(value="/person", method=GET)
+	public ModelAndView person(@RequestParam(required=false) String id) {
 		if(hasText(id)) {
-			if(hasText(activities)) {
-				PlusPage<Activity> activitiesFeed = google.activityOperations().getActivitiesPage(id);
-				mv.addObject("activitiesFeed", activitiesFeed);
-			} else {
-				Person profile = google.profileOperations().getPerson(id);
-				mv.addObject("profile", profile);
-			}
+			Person person = google.personOperations().getPerson(id);
+			return new ModelAndView("person")
+				.addObject("command", new SearchForm())
+				.addObject("person", person);
 		}
-		return mv;
+		return new ModelAndView("redirect:/people");
+	}
+	
+	@RequestMapping(value="/people", method=GET)
+	public ModelAndView people(String text, String pageToken) {
+		
+		PeoplePage people;
+		if(hasText(text)) {
+			people = google.personOperations().personQuery()
+				.searchFor(text)
+				.fromPage(pageToken)
+				.getPage();
+		} else {
+			people = new PeoplePage(new ArrayList<BasePerson>(), null);
+		}
+		
+		return new ModelAndView("people", "people", people);
+	}
+	
+	@RequestMapping(value="activities", method=GET, params="!text")
+	public ModelAndView listActivities(@RequestParam(defaultValue="me") String person, String pageToken) {
+		
+		ActivitiesPage activities = google.activityOperations().getActivitiesPage(person, pageToken);
+		
+		return new ModelAndView("activities", "activities", activities);
+	}
+	
+	@RequestMapping(value="activities", method=GET, params="text")
+	public ModelAndView searchActivities(String text, String pageToken) {
+		
+		ActivitiesPage activities = google.activityOperations().activityQuery()
+			.searchFor(text)
+			.fromPage(pageToken)
+			.getPage();
+		
+		return new ModelAndView("activities", "activities", activities);
 	}
 	
 	@RequestMapping(value="/albums", method=GET)

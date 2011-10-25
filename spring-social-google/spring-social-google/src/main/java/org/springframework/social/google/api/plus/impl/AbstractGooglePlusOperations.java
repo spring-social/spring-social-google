@@ -17,6 +17,7 @@ public abstract class AbstractGooglePlusOperations extends AbstractGoogleOperati
 	}
 	
 	public <T extends PlusPage<?>> T getPage(String url, Class<T> type) {
+		System.out.println(url);
 		return restTemplate.getForObject(url, type);
 	}
 

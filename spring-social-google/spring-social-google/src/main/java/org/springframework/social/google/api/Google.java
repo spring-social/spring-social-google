@@ -11,7 +11,7 @@ public interface Google extends ApiBinding {
 
 	LegacyProfileOperations userOperations();
 	ContactOperations contactOperations();
-	PersonOperations profileOperations();
-	ActivityOperations activityOperations();
+	PersonOperations personOperations();
 	PicasaOperations picasaOperations();
+	ActivityOperations activityOperations();
 }

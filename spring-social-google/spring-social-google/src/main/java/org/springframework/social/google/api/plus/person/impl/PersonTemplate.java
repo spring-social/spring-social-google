@@ -8,7 +8,8 @@ import org.springframework.web.client.RestTemplate;
 
 public class PersonTemplate extends AbstractGooglePlusOperations implements PersonOperations {
 
-	static final String PEOPLE_URL = "https://www.googleapis.com/plus/v1/people/";
+	static final String PEOPLE_SEARCH_URL = "https://www.googleapis.com/plus/v1/people";
+	static final String PEOPLE_URL = PEOPLE_SEARCH_URL + '/';
 	
 	public PersonTemplate(RestTemplate restTemplate, boolean isAuthorized) {
 		super(restTemplate, isAuthorized);

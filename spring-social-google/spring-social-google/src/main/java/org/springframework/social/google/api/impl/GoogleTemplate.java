@@ -86,7 +86,7 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	}
 
 	@Override
-	public PersonOperations profileOperations() {
+	public PersonOperations personOperations() {
 		return profileOperations;
 	}
 
