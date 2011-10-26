@@ -112,6 +112,11 @@ public class ContactTemplate extends AbstractGDataOperations implements ContactO
 			return postEntry(CONTACTS_FEED, builder.getElement(), new ContactExtractor());
 		}
 	}
+	
+	@Override
+	public void deleteContact(String url) {
+		deleteEntry(url);
+	}
 
 	@Override
 	public byte[] getProfilePicture(String url) {
@@ -139,6 +144,5 @@ public class ContactTemplate extends AbstractGDataOperations implements ContactO
 	public ContactGroupQueryBuilder contactGroupQuery() {
 		return new ContactGroupQueryBuilderImpl(GROUPS_FEED, this);
 	}
-
 
 }

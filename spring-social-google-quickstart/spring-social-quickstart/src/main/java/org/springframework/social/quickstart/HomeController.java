@@ -139,12 +139,18 @@ public class HomeController {
 		ContactGroup group = new ContactGroup(command.getId(), command.getName(), command.getUrl(), null);
 		google.contactOperations().saveContactGroup(group);
 
-		return new ModelAndView("redirect:/contacts");
+		return new ModelAndView("redirect:/groups");
 	}
 	
 	@RequestMapping(value="/group", method=POST, params="delete")
 	public String deleteContactGroup(@RequestParam String url) {
 		google.contactOperations().deleteContactGroup(url);
+		return "redirect:/groups";
+	}
+	
+	@RequestMapping(value="/contact", method=POST, params="delete")
+	public String deleteContact(String url) {
+		google.contactOperations().deleteContact(url);
 		return "redirect:/contacts";
 	}
 	
