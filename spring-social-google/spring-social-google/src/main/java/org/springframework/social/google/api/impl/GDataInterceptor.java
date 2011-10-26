@@ -9,6 +9,10 @@ import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.social.support.HttpRequestDecorator;
 
+/**
+ * {@link ClientHttpRequestInterceptor} implementation that sets GData-specific headers.
+ * @author Gabriel Axel
+ */
 public class GDataInterceptor implements ClientHttpRequestInterceptor {
 
 	@Override
