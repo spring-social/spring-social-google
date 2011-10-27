@@ -1,13 +1,31 @@
+/*
+ * Copyright 2011 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.springframework.social.google.api.plus.person;
 
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonTypeName;
-import org.springframework.social.google.api.plus.GooglePlusEntity;
 
-//@JsonTypeName("plus#person")
-public class BasePerson extends GooglePlusEntity {
+/**
+ * Model class representing basic person details (for a list of people or when 
+ * a person is embedded in another entity).
+ * @author Gabriel Axel
+ */
+public class BasePerson {
 
+	private final String id;
 	private final String displayName;
 	private final String profileUrl;
 	private final String imageUrl;
@@ -28,7 +46,7 @@ public class BasePerson extends GooglePlusEntity {
 			@JsonProperty("displayName") String displayName, 
 			@JsonProperty("url") String profileUrl,
 			@JsonProperty("image") Image image) {
-		super(id);
+		this.id = id;
 		this.displayName = displayName;
 		this.profileUrl = profileUrl;
 		this.imageUrl = image.url;
@@ -37,6 +55,10 @@ public class BasePerson extends GooglePlusEntity {
 	@Override
 	public String toString() {
 		return displayName;
+	}
+	
+	public String getId() {
+		return id;
 	}
 	
 	public String getDisplayName() {

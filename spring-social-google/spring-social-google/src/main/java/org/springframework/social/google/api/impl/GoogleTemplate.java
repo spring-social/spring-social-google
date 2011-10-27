@@ -1,3 +1,18 @@
+/*
+ * Copyright 2011 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.springframework.social.google.api.impl;
 
 import static java.util.Collections.singletonList;
@@ -29,27 +44,55 @@ import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * <p>
+ * The central class for interacting with Google APIs.
+ * </p>
+ * <p>
+ * Most of the APIs, specifically all GData APIs and Google+ usage of "me", require OAuth2 authentication.
+ * To use methods that require OAuth2 authentication, {@link GoogleTemplate} must be constructed with
+ * an access token which is authorized for the appropriate scope.
+ * For using Google+ without authenticating, {@link GoogleTemplate} default constructor can be used.
+ * </p>
+ * @author Gabriel Axel
+ */
 public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 
-	private final LegacyProfileOperations userOperations;
-	private final ContactOperations contactOperations;
-	private final PersonOperations profileOperations;
-	private final ActivityOperations activityOperations;
-	private final PicasaOperations picasaOperations;
+	private LegacyProfileOperations userOperations;
+	private ContactOperations contactOperations;
+	private PersonOperations profileOperations;
+	private ActivityOperations activityOperations;
+	private PicasaOperations picasaOperations;
 	
+	/**
+	 * Creates a new instance of GoogleTemplate.
+	 * This constructor creates a new GoogleTemplate able to perform unauthenticated operations against Google+.
+	 */
+	public GoogleTemplate() {
+		initialize();
+	}
+	
+	/**
+	 * Creates a new instance of GoogleTemplate.
+	 * This constructor creates the FacebookTemplate using a given access token.
+	 * @param accessToken an access token granted by Google after OAuth2 authentication
+	 */
 	public GoogleTemplate(String accessToken) {
 		super(accessToken);
+		initialize();
+	}
 
-		System.out.println(accessToken);
-		
-		RestTemplate restTemplate = getRestTemplate();
-		restTemplate.getInterceptors().add(new GDataInterceptor());
-		
+	private void initialize() {
 		userOperations = new UserTemplate(getRestTemplate(), isAuthorized());
 		contactOperations = new ContactTemplate(getRestTemplate(), isAuthorized());
 		profileOperations = new PersonTemplate(getRestTemplate(), isAuthorized());
 		activityOperations = new ActivityTemplate(getRestTemplate(), isAuthorized());
 		picasaOperations = new PicasaTemplate(getRestTemplate(), isAuthorized());
+	}
+	
+	@Override
+	protected void configureRestTemplate(RestTemplate restTemplate) {		
+		restTemplate.getInterceptors().add(new GDataInterceptor());
 	}
 	
 	@Override

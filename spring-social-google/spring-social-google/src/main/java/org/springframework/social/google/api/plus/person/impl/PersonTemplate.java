@@ -6,6 +6,10 @@ import org.springframework.social.google.api.plus.person.PersonOperations;
 import org.springframework.social.google.api.plus.person.PersonQueryBuilder;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * {@link PersonOperations} implementation.
+ * @author Gabriel Axel
+ */
 public class PersonTemplate extends AbstractGooglePlusOperations implements PersonOperations {
 
 	static final String PEOPLE_SEARCH_URL = "https://www.googleapis.com/plus/v1/people";
