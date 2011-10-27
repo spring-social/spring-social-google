@@ -1,4 +1,4 @@
 /**
- * Spring Social's Service API for Google
+ * Spring Social's Service APIs for Google
  */
 package org.springframework.social.google.api;
