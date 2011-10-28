@@ -245,7 +245,7 @@ public class HomeController {
 		return new ModelAndView("redirect:/people");
 	}
 	
-	@RequestMapping(value="/people", method=GET)
+	@RequestMapping(value="/people", method=GET, params={"!plusoners","!resharers"})
 	public ModelAndView people(String text, String pageToken) {
 		
 		PeoplePage people;
@@ -258,6 +258,20 @@ public class HomeController {
 			people = new PeoplePage(new ArrayList<BasePerson>(), null);
 		}
 		
+		return new ModelAndView("people", "people", people);
+	}
+	
+	@RequestMapping(value="/people", method=GET, params="plusoners")
+	public ModelAndView plusOners(String plusoners, String pageToken) {
+		
+		PeoplePage people = google.personOperations().getActivityPlusOners(plusoners, pageToken);
+		return new ModelAndView("people", "people", people);
+	}
+	
+	@RequestMapping(value="/people", method=GET, params="resharers")
+	public ModelAndView resharers(String resharers, String pageToken) {
+		
+		PeoplePage people = google.personOperations().getActivityPlusOners(resharers, pageToken);
 		return new ModelAndView("people", "people", people);
 	}
 	

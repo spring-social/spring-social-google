@@ -64,6 +64,12 @@
 							</c:if>
 							<br/>
 						</c:forEach>
+						<c:if test="${activity.plusOners gt 0}">
+							<div><a href="people?plusoners=${activity.id}">+1 by ${activity.plusOners} ${activity.plusOners eq 1 ? 'person' : 'people'}</a></div>
+						</c:if>
+						<c:if test="${activity.resharers gt 0}">
+							<div><a href="people?resharers=${activity.id}">Reshared by ${activity.resharers} ${activity.resharers eq 1 ? 'person' : 'people'}</a></div>
+						</c:if>
 					</div>
 				</c:forEach>				
 

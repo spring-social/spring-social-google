@@ -32,7 +32,7 @@
 					<thead>
 						<th>Name</th>
 						<th></th>
-						<td></td>
+						<th></th>
 					</thead>
 					<tbody>
 						<c:forEach items="${people.items}" var="person">

@@ -31,17 +31,34 @@ public class Activity {
 	
 	public static class ActivityObject {
 		
-		private final String content;
-		private final List<Attachment> attachments;
-
-		@JsonCreator
-		protected ActivityObject(@JsonProperty("content") String content,
-				@JsonProperty("attachments") List<Attachment> attachments) {
-			this.content = content;
-			this.attachments = attachments;
+		public static class TotalItemsWrapper {
+			
+			private final int totalItems;
+			
+			@JsonCreator
+			public TotalItemsWrapper(@JsonProperty("totalItems") int totalItems) {
+				this.totalItems = totalItems;
+			}
 		}
 		
+		private final String content;
+		private final List<Attachment> attachments;
+		private final int plusOners;
+		private final int resharers;
+
+		@JsonCreator
+		public ActivityObject(@JsonProperty("content") String content,
+				@JsonProperty("attachments") List<Attachment> attachments,
+				@JsonProperty("plusoners") TotalItemsWrapper plusOnersWrapper,
+				@JsonProperty("resharers") TotalItemsWrapper resharersWrapper) {
+			this.content = content;
+			this.attachments = attachments;
+			this.plusOners = plusOnersWrapper.totalItems;
+			this.resharers = resharersWrapper.totalItems;
+		}
 	}
+	
+	
 
 	private final String id;
 	private final String title;
@@ -50,6 +67,7 @@ public class Activity {
 	private final String url;
 	private final BasePerson actor;
 	private final ActivityObject object;
+	
 		
 	@JsonCreator
 	public Activity(
@@ -100,4 +118,13 @@ public class Activity {
 	public List<Attachment> getAttachments() {
 		return object.attachments == null ? new ArrayList<Attachment>() : object.attachments;
 	}
+
+	public int getPlusOners() {
+		return object.plusOners;
+	}
+
+	public int getResharers() {
+		return object.resharers;
+	}
+	
 }

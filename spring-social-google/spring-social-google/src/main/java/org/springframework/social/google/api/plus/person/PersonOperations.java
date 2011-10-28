@@ -36,6 +36,30 @@ public interface PersonOperations {
 	Person getGoogleProfile();
 	
 	/**
+	 * Retrieves people that match the query text.
+	 * @param query text to search by
+	 * @param pageToken page to retrieve or null for the first page
+	 * @return {@link PeoplePage} with the matching results
+	 */
+	PeoplePage searchPeople(String query, String pageToken);
+	
+	/**
+	 * Retrieves people who have +1'd an activity.
+	 * @param activityId activity ID
+	 * @param pageToken page to retrieve or null for the first page
+	 * @return {@link PeoplePage} of +1'ers
+	 */
+	PeoplePage getActivityPlusOners(String activityId, String pageToken);
+	
+	/**
+	 * Retrieves people who have reshared an activity.
+	 * @param activityId activity ID
+	 * @param pageToken page to retrieve or null for the first page
+	 * @return {@link PeoplePage} of resharers
+	 */
+	PeoplePage getActivityResharers(String activityId, String pageToken);
+	
+	/**
 	 * Creates a {@link PersonQueryBuilder}.
 	 * @return a new {@link PersonQueryBuilder}
 	 */
