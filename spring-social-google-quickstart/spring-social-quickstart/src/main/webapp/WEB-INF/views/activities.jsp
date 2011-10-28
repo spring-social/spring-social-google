@@ -31,45 +31,9 @@
 
 				<c:forEach items="${activities.items}" var="activity">
 					<div class="activity">
-						<a href="${activity.url}" target="_blank">
-							<b>${activity.title}</b> <br/> published: ${activity.published} , updated: ${activity.updated}
-						</a>
-						<a href="${activity.actor.profileUrl}" target="_blank">${activity.actor.displayName}</a>
+						<jsp:directive.include file="activitycontent.jspf"/>
 						<br/>
-						<br/>
-						${activity.content}
-						<br/>
-						<c:forEach items="${activity.attachments}" var="attachment">
-							<br/>
-							<c:if test="${attachment.url != null}">
-								<a href="${attachment.url}" target="_blank">
-									<b>${attachment.displayName}</b>
-								</a>
-							</c:if>
-							<c:if test="${attachment.url == null}">
-								<b>${attachment.displayName}</b>
-							</c:if>
-							<br/>
-							${attachment.content}
-							<br/>
-							<c:if test="${attachment.previewImageUrl != null}">
-								<c:if test="${attachment.url != null}">
-									<a href="${attachment.url}" target="_blank">
-										<img src="${attachment.previewImageUrl}" alt="${attachment.displayName}" />
-									</a>
-								</c:if>
-								<c:if test="${attachment.url == null}">
-									<img src="${attachment.previewImageUrl}" alt="${attachment.displayName}" />
-								</c:if>
-							</c:if>
-							<br/>
-						</c:forEach>
-						<c:if test="${activity.plusOners gt 0}">
-							<div><a href="people?plusoners=${activity.id}">+1 by ${activity.plusOners} ${activity.plusOners eq 1 ? 'person' : 'people'}</a></div>
-						</c:if>
-						<c:if test="${activity.resharers gt 0}">
-							<div><a href="people?resharers=${activity.id}">Reshared by ${activity.resharers} ${activity.resharers eq 1 ? 'person' : 'people'}</a></div>
-						</c:if>
+						<a href="activity?id=${activity.id}">Show activity by itself</a>
 					</div>
 				</c:forEach>				
 

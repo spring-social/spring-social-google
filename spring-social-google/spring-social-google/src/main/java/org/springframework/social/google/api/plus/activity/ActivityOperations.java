@@ -23,6 +23,13 @@ package org.springframework.social.google.api.plus.activity;
 public interface ActivityOperations {
 
 	/**
+	 * Retrieves an activity by its ID.
+	 * @param id activity ID
+	 * @return the retrieved {@link Activity}
+	 */
+	Activity getActivity(String id);
+	
+	/**
 	 * Retrieves a user's activities.
 	 * @param userId user ID or "me"
 	 * @param pageToken page token, or null for first page

@@ -41,6 +41,7 @@ import org.springframework.social.google.api.gdata.picasa.Album;
 import org.springframework.social.google.api.gdata.query.GDataPage;
 import org.springframework.social.google.api.legacyprofile.LegacyGoogleProfile;
 import org.springframework.social.google.api.plus.activity.ActivitiesPage;
+import org.springframework.social.google.api.plus.activity.Activity;
 import org.springframework.social.google.api.plus.person.BasePerson;
 import org.springframework.social.google.api.plus.person.PeoplePage;
 import org.springframework.social.google.api.plus.person.Person;
@@ -82,7 +83,7 @@ public class HomeController {
 		return new ModelAndView("profile", "profile", profile);
 	}
 	
-	@RequestMapping(value="/contacts", method=GET)
+	@RequestMapping(value="contacts", method=GET)
 	public ModelAndView contacts(ContactSearchForm command) {
 		
 		List<ContactGroup> groups = google.contactOperations().getContactGroupList();
@@ -102,7 +103,7 @@ public class HomeController {
 			.addObject("command", command);
 	}
 	
-	@RequestMapping(value="/groups", method=GET)
+	@RequestMapping(value="groups", method=GET)
 	public ModelAndView groups(SearchForm command) {
 		
 		GDataPage<ContactGroup> groups = google.contactOperations().contactGroupQuery()
@@ -117,19 +118,19 @@ public class HomeController {
 			.addObject("command", command);
 	}
 	
-	@RequestMapping(value="/group", method=GET)
+	@RequestMapping(value="group", method=GET)
 	public ModelAndView addContactGroup() {
 		return new ModelAndView("group", "command", new ContactGroupForm());
 	}
 	
-	@RequestMapping(value="/group", method=GET, params="url")
+	@RequestMapping(value="group", method=GET, params="url")
 	public ModelAndView editContactGroup(@RequestParam(required=false) String url) {
 		ContactGroup group = google.contactOperations().getContactGroup(url);
 		ContactGroupForm command = new ContactGroupForm(group.getId(), group.getName(), group.getSelf());
 		return new ModelAndView("group", "command", command);
 	}
 		
-	@RequestMapping(value="/group", method=POST)
+	@RequestMapping(value="group", method=POST)
 	public ModelAndView saveContactGroup(@Valid ContactGroupForm command, BindingResult result) {
 		
 		if(result.hasErrors()) {
@@ -142,19 +143,19 @@ public class HomeController {
 		return new ModelAndView("redirect:/groups");
 	}
 	
-	@RequestMapping(value="/group", method=POST, params="delete")
+	@RequestMapping(value="group", method=POST, params="delete")
 	public String deleteContactGroup(@RequestParam String url) {
 		google.contactOperations().deleteContactGroup(url);
 		return "redirect:/groups";
 	}
 	
-	@RequestMapping(value="/contact", method=POST, params="delete")
+	@RequestMapping(value="contact", method=POST, params="delete")
 	public String deleteContact(String url) {
 		google.contactOperations().deleteContact(url);
 		return "redirect:/contacts";
 	}
 	
-	@RequestMapping(value="/contact", method=GET)
+	@RequestMapping(value="contact", method=GET)
 	public ModelAndView addContact() {
 		
 		List<ContactGroup> allGroups = google.contactOperations().getContactGroupList();
@@ -163,7 +164,7 @@ public class HomeController {
 			.addObject("allGroups", allGroups);
 	}
 	
-	@RequestMapping(value="/contact", method=GET, params="url")
+	@RequestMapping(value="contact", method=GET, params="url")
 	public ModelAndView editContact(@RequestParam String url) {
 		
 		Contact contact = google.contactOperations().getContact(url);
@@ -186,7 +187,7 @@ public class HomeController {
 			.addObject("allGroups", allGroups);
 	}
 	
-	@RequestMapping(value="/contact", method=POST)
+	@RequestMapping(value="contact", method=POST)
 	public ModelAndView saveContact(@Valid ContactForm command, BindingResult result) {
 		
 		if(result.hasErrors()) {
@@ -214,7 +215,7 @@ public class HomeController {
 		return new ModelAndView("redirect:/contacts");
 	}
 
-	@RequestMapping(value="/contactpicture", method=GET)
+	@RequestMapping(value="contactpicture", method=GET)
 	public ResponseEntity<byte[]> getProfilePicture(@RequestParam String url) {
 		byte[] body = google.contactOperations().getProfilePicture(url);
 		if(body != null) {
@@ -226,7 +227,7 @@ public class HomeController {
 		return new ResponseEntity<byte[]>(NOT_FOUND);
 	}
 	
-	@RequestMapping(value="/contactpicture", method=POST)
+	@RequestMapping(value="contactpicture", method=POST)
 	public String uploadProfilePicture(
 			@RequestHeader String referer, @RequestParam String pictureUrl, 
 			@RequestParam MultipartFile file) throws IOException {
@@ -234,7 +235,7 @@ public class HomeController {
 		return "redirect:" + referer;
 	}
 	
-	@RequestMapping(value="/person", method=GET)
+	@RequestMapping(value="person", method=GET)
 	public ModelAndView person(@RequestParam(required=false) String id) {
 		if(hasText(id)) {
 			Person person = google.personOperations().getPerson(id);
@@ -245,7 +246,7 @@ public class HomeController {
 		return new ModelAndView("redirect:/people");
 	}
 	
-	@RequestMapping(value="/people", method=GET, params={"!plusoners","!resharers"})
+	@RequestMapping(value="people", method=GET, params={"!plusoners","!resharers"})
 	public ModelAndView people(String text, String pageToken) {
 		
 		PeoplePage people;
@@ -261,18 +262,25 @@ public class HomeController {
 		return new ModelAndView("people", "people", people);
 	}
 	
-	@RequestMapping(value="/people", method=GET, params="plusoners")
+	@RequestMapping(value="people", method=GET, params="plusoners")
 	public ModelAndView plusOners(String plusoners, String pageToken) {
 		
 		PeoplePage people = google.personOperations().getActivityPlusOners(plusoners, pageToken);
 		return new ModelAndView("people", "people", people);
 	}
 	
-	@RequestMapping(value="/people", method=GET, params="resharers")
+	@RequestMapping(value="people", method=GET, params="resharers")
 	public ModelAndView resharers(String resharers, String pageToken) {
 		
 		PeoplePage people = google.personOperations().getActivityPlusOners(resharers, pageToken);
 		return new ModelAndView("people", "people", people);
+	}
+	
+	@RequestMapping(value="activity", method=GET)
+	public ModelAndView activity(String id) {
+		
+		Activity activity = google.activityOperations().getActivity(id);
+		return new ModelAndView("activity", "activity", activity);
 	}
 	
 	@RequestMapping(value="activities", method=GET, params="!text")
@@ -294,18 +302,18 @@ public class HomeController {
 		return new ModelAndView("activities", "activities", activities);
 	}
 	
-	@RequestMapping(value="/albums", method=GET)
+	@RequestMapping(value="albums", method=GET)
 	public ModelAndView albums() {
 		List<Album> albums = google.picasaOperations().getAlbums();
 		return new ModelAndView("albums", "albums", albums);
 	}
 	
-	@RequestMapping(value="/album", method=GET)
+	@RequestMapping(value="album", method=GET)
 	public ModelAndView newAlbum() {
 		return new ModelAndView("album", "album", new AlbumForm());
 	}
 	
-	@RequestMapping(value="/album", method=GET, params="id")
+	@RequestMapping(value="album", method=GET, params="id")
 	public ModelAndView album(@RequestParam String id) {
 		
 		Album album = google.picasaOperations().getAlbum(id);
@@ -315,7 +323,7 @@ public class HomeController {
 			.addObject("command", command);
 	}
 	
-	@RequestMapping(value="/album", method=POST)
+	@RequestMapping(value="album", method=POST)
 	public ModelAndView saveAlbum(@Valid AlbumForm command, BindingResult result) {
 		
 		if(result.hasErrors()) {
