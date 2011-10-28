@@ -42,6 +42,8 @@ import org.springframework.social.google.api.gdata.query.GDataPage;
 import org.springframework.social.google.api.legacyprofile.LegacyGoogleProfile;
 import org.springframework.social.google.api.plus.activity.ActivitiesPage;
 import org.springframework.social.google.api.plus.activity.Activity;
+import org.springframework.social.google.api.plus.comment.Comment;
+import org.springframework.social.google.api.plus.comment.CommentsPage;
 import org.springframework.social.google.api.plus.person.BasePerson;
 import org.springframework.social.google.api.plus.person.PeoplePage;
 import org.springframework.social.google.api.plus.person.Person;
@@ -330,6 +332,20 @@ public class HomeController {
 //			return album
 		}
 		return null;
+	}
+	
+	@RequestMapping(value="comments", method=GET)
+	public ModelAndView comments(String activity, String pageToken) {
+		
+		CommentsPage comments = google.commentOperations().getComments(activity, pageToken);
+		return new ModelAndView("comments", "comments", comments);
+	}
+	
+	@RequestMapping(value="comment", method=GET)
+	public ModelAndView comment(String id) {
+		
+		Comment comment = google.commentOperations().getComment(id);
+		return new ModelAndView("comment", "comment", comment);
 	}
 	
 }

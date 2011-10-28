@@ -45,16 +45,19 @@ public class Activity {
 		private final List<Attachment> attachments;
 		private final int plusOners;
 		private final int resharers;
+		private final int replies;
 
 		@JsonCreator
 		public ActivityObject(@JsonProperty("content") String content,
 				@JsonProperty("attachments") List<Attachment> attachments,
 				@JsonProperty("plusoners") TotalItemsWrapper plusOnersWrapper,
-				@JsonProperty("resharers") TotalItemsWrapper resharersWrapper) {
+				@JsonProperty("resharers") TotalItemsWrapper resharersWrapper,
+				@JsonProperty("replies") TotalItemsWrapper repliesWrapper) {
 			this.content = content;
 			this.attachments = attachments;
 			this.plusOners = plusOnersWrapper.totalItems;
 			this.resharers = resharersWrapper.totalItems;
+			this.replies = repliesWrapper.totalItems;
 		}
 	}
 	
@@ -127,4 +130,7 @@ public class Activity {
 		return object.resharers;
 	}
 	
+	public int getReplies() {
+		return object.replies;
+	}
 }

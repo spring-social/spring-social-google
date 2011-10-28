@@ -21,6 +21,7 @@ import org.springframework.social.google.api.gdata.picasa.PicasaOperations;
 import org.springframework.social.google.api.impl.GoogleTemplate;
 import org.springframework.social.google.api.legacyprofile.LegacyProfileOperations;
 import org.springframework.social.google.api.plus.activity.ActivityOperations;
+import org.springframework.social.google.api.plus.comment.CommentOperations;
 import org.springframework.social.google.api.plus.person.PersonOperations;
 
 /**
@@ -64,4 +65,11 @@ public interface Google extends ApiBinding {
 	 * @return {@link ActivityOperations} for the authenticated user if authenticated
 	 */
 	ActivityOperations activityOperations();
+	
+	/**
+	 * Retrieves {@link CommentOperations}, used for interacting with Google+ Comments API.
+	 * Optionally uses OAuth2 scope https://www.googleapis.com/auth/plus.me
+	 * @return {@link ActivityOperations} for the authenticated user if authenticated
+	 */
+	CommentOperations commentOperations();
 }

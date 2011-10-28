@@ -9,7 +9,7 @@
 	</jsp:text>
 	<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
-<title>Spring Social Google - Activity</title>
+<title>Spring Social Google - Comment</title>
 <jsp:directive.include file="header.jspf" />
 </head>
 
@@ -23,9 +23,9 @@
 		
 		<div class="content">
 
-			<h1>Activity</h1>
+			<h1>Comment</h1>
 			
-			<jsp:directive.include file="activitycontent.jspf"/>
+			<jsp:directive.include file="commentcontent.jspf"/>
 		</div>
 	</div>
 </body>

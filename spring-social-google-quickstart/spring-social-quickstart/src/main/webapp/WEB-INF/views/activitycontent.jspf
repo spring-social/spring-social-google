@@ -42,5 +42,8 @@
 	<c:if test="${activity.resharers gt 0}">
 		<div><a href="people?resharers=${activity.id}">Reshared by ${activity.resharers} ${activity.resharers eq 1 ? 'person' : 'people'}</a></div>
 	</c:if>
+	<c:if test="${activity.replies gt 0}">
+		<div><a href="comments?activity=${activity.id}">${activity.replies} ${activity.replies eq 1 ? 'comment' : 'comments'}</a></div>
+	</c:if>
 	
 </jsp:root>
