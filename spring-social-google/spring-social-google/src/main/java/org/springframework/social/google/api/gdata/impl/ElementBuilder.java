@@ -74,23 +74,26 @@ public class ElementBuilder {
 		}
 		return this;
 	}
-
-	public ElementBuilder addSimpleAtomElement(String name, String value) {
+	
+	public ElementBuilder addElement(String namespace, String name, String value) {
 		if(hasText(value)) {
-			Element child = new Element(name, AtomNamespace);
+			Element child = new Element(name, namespace);
 			child.appendChild(value);
 			element.appendChild(child);
 		}
 		return this;
 	}
+
+	public ElementBuilder addSimpleAtomElement(String name, String value) {
+		return addElement(AtomNamespace, name, value);
+	}
+	
+	public ElementBuilder addSimpleAtomElement(String name, Enum<?> value) {
+		return addSimpleAtomElement(name, value.toString().toLowerCase());
+	}
 	
 	public ElementBuilder addGDataElement(String name, String value) {
-		if(hasText(value)) {
-			Element child = new Element("gd:" + name, GdataNamespace);
-			child.appendChild(value);
-			element.appendChild(child);
-		}
-		return this;
+		return addElement(GdataNamespace, "gd:" + name, value);
 	}
 
 	public ElementBuilder setTitle(String title) {

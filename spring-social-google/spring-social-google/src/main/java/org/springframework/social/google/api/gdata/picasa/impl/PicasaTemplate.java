@@ -23,7 +23,6 @@ import java.util.List;
 
 import nu.xom.Element;
 
-
 import org.springframework.social.google.api.gdata.impl.AbstractGDataOperations;
 import org.springframework.social.google.api.gdata.picasa.Album;
 import org.springframework.social.google.api.gdata.picasa.PicasaOperations;
@@ -68,17 +67,19 @@ public class PicasaTemplate extends AbstractGDataOperations implements PicasaOpe
 	@Override
 	public Album saveAlbum(Album album) {
 		
-		Element entry = newAtomEntryBuilder()
+		Element element = newAtomEntryBuilder()
 			.setTitle(album.getTitle())
 			.addSimpleAtomElement("summary", album.getSummary())
+			.addSimpleAtomElement("rights", album.getVisibility())
 			.addElement(PicasaNamespace, "gphoto:access", album.getVisibility())
 			.setCategoryKind("http://schemas.google.com/photos/2007#album")
+			.addElement(PicasaNamespace, "gphoto:id", album.getId())
 			.getElement();
 		
 		if(hasText(album.getId())) {
-			return putEntry(PICASA_ENTRY + DEFAULT_USER + ALBUM_ID + album.getId(), entry, new AlbumExtractor());
+			return putEntry(PICASA_ENTRY + DEFAULT_USER + ALBUM_ID + album.getId(), element, new AlbumExtractor());
 		} else {
-			return postEntry(PICASA_FEED + DEFAULT_USER, entry, new AlbumExtractor());
+			return postEntry(PICASA_FEED + DEFAULT_USER, element, new AlbumExtractor());
 		}
 	}
 

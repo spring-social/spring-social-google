@@ -5,13 +5,15 @@ public class AlbumForm {
 	private String id;
 	private String title;
 	private String summary;
+	private String visibility;
 	
 	public AlbumForm() {}
 
-	public AlbumForm(String id, String title, String summary) {
+	public AlbumForm(String id, String title, String summary, String visibility) {
 		this.id = id;
 		this.title = title;
 		this.summary = summary;
+		this.visibility = visibility;
 	}
 	
 	public String getId() {
@@ -36,6 +38,14 @@ public class AlbumForm {
 
 	public void setSummary(String summary) {
 		this.summary = summary;
+	}
+
+	public String getVisibility() {
+		return visibility;
+	}
+
+	public void setVisibility(String visibility) {
+		this.visibility = visibility;
 	}
 	
 }

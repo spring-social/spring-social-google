@@ -38,6 +38,7 @@ import org.springframework.social.google.api.gdata.contact.ContactGroup;
 import org.springframework.social.google.api.gdata.contact.Email;
 import org.springframework.social.google.api.gdata.contact.Phone;
 import org.springframework.social.google.api.gdata.picasa.Album;
+import org.springframework.social.google.api.gdata.picasa.Visibility;
 import org.springframework.social.google.api.gdata.query.GDataPage;
 import org.springframework.social.google.api.legacyprofile.LegacyGoogleProfile;
 import org.springframework.social.google.api.plus.activity.ActivitiesPage;
@@ -319,7 +320,7 @@ public class HomeController {
 	public ModelAndView album(@RequestParam String id) {
 		
 		Album album = google.picasaOperations().getAlbum(id);
-		AlbumForm command = new AlbumForm(album.getId(), album.getTitle(), album.getSummary());
+		AlbumForm command = new AlbumForm(album.getId(), album.getTitle(), album.getSummary(), album.getVisibility().toString());
 		
 		return new ModelAndView("album", "album", album)
 			.addObject("command", command);
@@ -329,9 +330,14 @@ public class HomeController {
 	public ModelAndView saveAlbum(@Valid AlbumForm command, BindingResult result) {
 		
 		if(result.hasErrors()) {
-//			return album
+			return new ModelAndView("album", "command", command);
 		}
-		return null;
+		
+		Album album = new Album(command.getId(), null, null, command.getTitle(), 
+			command.getSummary(), Visibility.valueOf(command.getVisibility()), null, null, 0, null);
+		google.picasaOperations().saveAlbum(album);
+		
+		return new ModelAndView("redirect:/albums");
 	}
 	
 	@RequestMapping(value="comments", method=GET)

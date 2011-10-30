@@ -26,18 +26,28 @@
 
 			<div class="span10 columns">
 
-				<form:form>
+				<form:form action="album">
 					<form:hidden path="id" />
 					<div class="clearfix">
-						<label for="title">Title</label>
+						<label for="title">Title:</label>
 						<div class="input">
 							<form:input path="title" cssClass="xlarge" />
 						</div>
 					</div>
 					<div class="clearfix">
-						<label for="summary">Summary</label>
+						<label for="summary">Summary:</label>
 						<div class="input">
 							<form:input path="summary" cssClass="xlarge" />
+						</div>
+					</div>
+					<div class="clearfix">
+						<label for="visibility">Visibility:</label>
+						<div class="input">
+							<form:select path="visibility">
+								<form:option value="PRIVATE">Private</form:option>
+								<form:option value="PROTECTED">Protected</form:option>
+								<form:option value="PUBLIC">Public</form:option>
+							</form:select>
 						</div>
 					</div>
 					<div class="actions">

@@ -37,7 +37,7 @@ public class AlbumExtractor extends EntryExtractor<Album> {
 		Date updated = getUpdated(element);
 		String title = getTitle(element);
 		String summary = getAtomElement(element, "summary");
-		Visibility visibility = parseEnum(Visibility.class, getPicasaElement(element, "access"));
+		Visibility visibility = parseEnum(Visibility.class, getAtomElement(element, "rights"));
 		String authorId = getPicasaElement(element, "user");
 		String authorName = getPicasaElement(element, "nickname");
 		int numberOfPhotos = Integer.valueOf(getPicasaElement(element, "numphotos"));
