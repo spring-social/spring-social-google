@@ -50,9 +50,28 @@
 							</form:select>
 						</div>
 					</div>
+					<c:if test="${album != null}">
+						<div class="clearfix">
+							<label>Author:</label>
+							<div class="input">
+								<a href="https://picasaweb.google.com/${album.authorId}" target="_blank">${album.authorName}</a>
+							</div>
+						</div>
+						<div class="clearfix">
+							<label>Photos:</label>
+							<div class="input">
+								<c:if test="${album.numberOfPhotos eq 0}">
+									<span>No photos in album</span>
+								</c:if>
+								<c:if test="${album.numberOfPhotos gt 0}">
+									<a href="photos?album=${album.id}">${album.numberOfPhotos} ${album.numberOfPhotos eq 1 ? 'Photo' : 'Photos'}</a>
+								</c:if>
+							</div>
+						</div>
+					</c:if>
 					<div class="actions">
 						<input type="submit" class="btn primary" value="Save" />
-						<a href="albums" class="btn">Cancel</a>
+						<a href="albums" class="btn leftMargin">Cancel</a>
 						<c:if test="${param.id != null}">
 							<input name="delete" type="submit" class="btn danger secondary-action" value="Delete" 
 								onclick="return confirm('Are you sure you want to delete this album?')" />

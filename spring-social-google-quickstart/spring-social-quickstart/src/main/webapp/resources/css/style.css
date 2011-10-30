@@ -58,3 +58,7 @@ body {
 .activity a {
 	color: darkblue;
 }
+
+form .input a, form .input span {
+	line-height: 30px;
+}

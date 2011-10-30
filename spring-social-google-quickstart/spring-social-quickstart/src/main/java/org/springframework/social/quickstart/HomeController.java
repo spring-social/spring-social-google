@@ -313,7 +313,7 @@ public class HomeController {
 	
 	@RequestMapping(value="album", method=GET)
 	public ModelAndView newAlbum() {
-		return new ModelAndView("album", "album", new AlbumForm());
+		return new ModelAndView("album", "command", new AlbumForm());
 	}
 	
 	@RequestMapping(value="album", method=GET, params="id")
@@ -322,7 +322,8 @@ public class HomeController {
 		Album album = google.picasaOperations().getAlbum(id);
 		AlbumForm command = new AlbumForm(album.getId(), album.getTitle(), album.getSummary(), album.getVisibility().toString());
 		
-		return new ModelAndView("album", "album", album)
+		return new ModelAndView("album")
+			.addObject("album", album)
 			.addObject("command", command);
 	}
 	
