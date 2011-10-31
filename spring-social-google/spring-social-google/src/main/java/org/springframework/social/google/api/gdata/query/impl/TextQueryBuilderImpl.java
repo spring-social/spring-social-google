@@ -47,9 +47,7 @@ public abstract class TextQueryBuilderImpl<Q extends GDataQueryBuilder<?, T>, T>
 	@Override
 	protected StringBuilder build() {
 		StringBuilder sb = super.build();
-		if(hasText(text)) {
-			appendQueryParam(sb, "q", text.trim());
-		}
+		appendQueryParam(sb, "q", text);
 		return sb;
 	}
 }

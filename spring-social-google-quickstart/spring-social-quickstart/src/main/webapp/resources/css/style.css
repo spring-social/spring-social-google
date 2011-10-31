@@ -59,6 +59,6 @@ body {
 	color: darkblue;
 }
 
-form .input a, form .input span {
+.form-link {
 	line-height: 30px;
 }

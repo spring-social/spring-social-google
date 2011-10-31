@@ -52,18 +52,11 @@ public abstract class PublishTextQueryBuilderImpl<Q extends GDataQueryBuilder<?,
 	}
 	
 	@Override
-	public StringBuilder build() {
+	protected StringBuilder build() {
 		
 		StringBuilder sb = super.build();
-		
-		if(publishedMin != null) {
-			appendQueryParam(sb, "published-min", publishedMin);
-		}
-		
-		if(publishedMax != null) {
-			appendQueryParam(sb, "published-max", publishedMax);
-		}
-		
+		appendQueryParam(sb, "published-min", publishedMin);
+		appendQueryParam(sb, "published-max", publishedMax);
 		return sb;
 	}
 }

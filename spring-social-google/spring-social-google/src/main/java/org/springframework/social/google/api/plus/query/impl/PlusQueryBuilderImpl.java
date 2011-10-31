@@ -15,8 +15,6 @@
  */
 package org.springframework.social.google.api.plus.query.impl;
 
-import static org.springframework.util.StringUtils.hasText;
-
 import org.springframework.social.google.api.plus.impl.AbstractGooglePlusOperations;
 import org.springframework.social.google.api.plus.query.PlusPage;
 import org.springframework.social.google.api.plus.query.PlusQueryBuilder;
@@ -59,15 +57,8 @@ public class PlusQueryBuilderImpl<Q extends PlusQueryBuilder<?, T>, T extends Pl
 	protected StringBuilder build() {
 		
 		StringBuilder sb = super.build();
-		
-		if(hasText(text)) {
-			appendQueryParam(sb, "query", text);
-		}
-		
-		if(hasText(pageToken)) {
-			appendQueryParam(sb, "pageToken", pageToken);
-		}
-		
+		appendQueryParam(sb, "query", text);
+		appendQueryParam(sb, "pageToken", pageToken);
 		return sb;
 	}
 

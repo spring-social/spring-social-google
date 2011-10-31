@@ -54,17 +54,17 @@
 						<div class="clearfix">
 							<label>Author:</label>
 							<div class="input">
-								<a href="https://picasaweb.google.com/${album.authorId}" target="_blank">${album.authorName}</a>
+								<a href="https://picasaweb.google.com/${album.authorId}" target="_blank" class="form-link">${album.authorName}</a>
 							</div>
 						</div>
 						<div class="clearfix">
 							<label>Photos:</label>
 							<div class="input">
 								<c:if test="${album.numberOfPhotos eq 0}">
-									<span>No photos in album</span>
+									<span class="form-link">No photos in album</span>
 								</c:if>
 								<c:if test="${album.numberOfPhotos gt 0}">
-									<a href="photos?album=${album.id}">${album.numberOfPhotos} ${album.numberOfPhotos eq 1 ? 'Photo' : 'Photos'}</a>
+									<a href="photos?album=${album.id}" class="form-link">${album.numberOfPhotos} ${album.numberOfPhotos eq 1 ? 'Photo' : 'Photos'}</a>
 								</c:if>
 							</div>
 						</div>

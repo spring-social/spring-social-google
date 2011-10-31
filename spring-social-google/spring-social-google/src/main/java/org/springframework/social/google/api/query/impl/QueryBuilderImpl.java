@@ -15,6 +15,8 @@
  */
 package org.springframework.social.google.api.query.impl;
 
+import static org.springframework.util.StringUtils.hasText;
+
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -50,21 +52,33 @@ public abstract class QueryBuilderImpl<Q extends QueryBuilder<?, T>, T> implemen
 	}
 	
 	protected void appendQueryParam(StringBuilder sb, String name, Date value) {
-		appendQueryParam(sb, name, dateFormatter.format(value));
+		if(value != null) {
+			appendQueryParam(sb, name, dateFormatter.format(value));
+		}
+	}
+	
+	protected void appendQueryParam(StringBuilder sb, String name, int value) {
+		if(value > 0) {
+			appendQueryParam(sb, name, String.valueOf(value));
+		}
 	}
 	
 	protected void appendQueryParam(StringBuilder sb, String name, Object value) {
-		sb.append(name).append('=').append(value).append('&');
+		if(value != null) {
+			appendQueryParam(sb, name, value.toString());
+		}
+	}
+	
+	protected void appendQueryParam(StringBuilder sb, String name, String value) {
+		if(hasText(value)) {
+			sb.append(name).append('=').append(value.trim()).append('&');
+		}
 	}
 	
 	protected StringBuilder build() {
 		
 		StringBuilder sb = new StringBuilder(feedUrl).append('?');
-		
-		if(maxResults > 0) {
-			appendQueryParam(sb, "max-results", maxResults);
-		}
-		
+		appendQueryParam(sb, "max-results", maxResults);
 		return sb;
 	}
 }

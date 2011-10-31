@@ -43,11 +43,7 @@ public class ActivityQueryBuilderImpl extends PlusQueryBuilderImpl<ActivityQuery
 	protected StringBuilder build() {
 		
 		StringBuilder sb = super.build();
-		
-		if(order != null) {
-			appendQueryParam(sb, "orderBy", order.toString());
-		}
-		
+		appendQueryParam(sb, "orderBy", order.toString());
 		return sb;
 	}
 }
