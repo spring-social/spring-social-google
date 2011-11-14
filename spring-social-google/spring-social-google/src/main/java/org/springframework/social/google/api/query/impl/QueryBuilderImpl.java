@@ -69,6 +69,12 @@ public abstract class QueryBuilderImpl<Q extends QueryBuilder<?, T>, T> implemen
 		}
 	}
 	
+	protected void appendQueryParam(StringBuilder sb, String name, Enum<?> value) {
+		if(value != null) {
+			appendQueryParam(sb, name, value.name().toLowerCase());
+		}
+	}
+	
 	protected void appendQueryParam(StringBuilder sb, String name, String value) {
 		if(hasText(value)) {
 			sb.append(name).append('=').append(value.trim()).append('&');
@@ -77,7 +83,12 @@ public abstract class QueryBuilderImpl<Q extends QueryBuilder<?, T>, T> implemen
 	
 	protected StringBuilder build() {
 		
-		StringBuilder sb = new StringBuilder(feedUrl).append('?');
+		StringBuilder sb = new StringBuilder(feedUrl);
+		if(feedUrl.indexOf('?') < 0) {
+			sb.append('?');
+		} else {
+			sb.append('&');
+		}
 		appendQueryParam(sb, "max-results", maxResults);
 		return sb;
 	}

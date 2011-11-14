@@ -63,4 +63,16 @@ public interface PicasaOperations {
 	 * @param albumId album ID
 	 */
 	void deleteAlbum(String albumId);
+
+	/**
+	 * Creates an {@link AlbumQueryBuilder}
+	 * @return a new {@link AlbumQueryBuilder}
+	 */
+	AlbumQueryBuilder albumQuery();
+
+	/**
+	 * Creates a {@link PhotoQueryBuilder}
+	 * @return a new {@link PhotoQueryBuilder}
+	 */
+	PhotoQueryBuilder photoQuery();
 }

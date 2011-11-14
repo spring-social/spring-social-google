@@ -53,7 +53,7 @@ public class GoogleOAuth2Template extends OAuth2Template {
 		String accessToken = (String) result.get("access_token");
 		String scope = (String) result.get("scope");
 		String refreshToken = (String) result.get("refresh_token");
-		System.out.println(refreshToken);
+		System.out.println(accessToken);
 		Integer expiresIn = (Integer) result.get("expires_in");
 		return createAccessGrant(accessToken, scope, refreshToken, expiresIn, result);
 	}

@@ -25,6 +25,8 @@ import nu.xom.Element;
 
 import org.springframework.social.google.api.gdata.impl.AbstractGDataOperations;
 import org.springframework.social.google.api.gdata.picasa.Album;
+import org.springframework.social.google.api.gdata.picasa.AlbumQueryBuilder;
+import org.springframework.social.google.api.gdata.picasa.PhotoQueryBuilder;
 import org.springframework.social.google.api.gdata.picasa.PicasaOperations;
 import org.springframework.web.client.RestTemplate;
 
@@ -88,4 +90,13 @@ public class PicasaTemplate extends AbstractGDataOperations implements PicasaOpe
 		deleteEntry(PICASA_ENTRY + DEFAULT_USER + ALBUM_ID + albumId);
 	}
 
+	@Override
+	public AlbumQueryBuilder albumQuery() {
+		return new AlbumQueryBuilderImpl(this);
+	}
+
+	@Override
+	public PhotoQueryBuilder photoQuery() {
+		return new PhotoQueryBuilderImpl(this);
+	}
 }

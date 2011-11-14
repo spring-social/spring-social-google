@@ -37,7 +37,10 @@ import org.springframework.social.google.api.gdata.contact.Contact;
 import org.springframework.social.google.api.gdata.contact.ContactGroup;
 import org.springframework.social.google.api.gdata.contact.Email;
 import org.springframework.social.google.api.gdata.contact.Phone;
+import org.springframework.social.google.api.gdata.picasa.AccessFilter;
 import org.springframework.social.google.api.gdata.picasa.Album;
+import org.springframework.social.google.api.gdata.picasa.BoundingBox;
+import org.springframework.social.google.api.gdata.picasa.Photo;
 import org.springframework.social.google.api.gdata.picasa.Visibility;
 import org.springframework.social.google.api.gdata.query.GDataPage;
 import org.springframework.social.google.api.legacyprofile.LegacyGoogleProfile;
@@ -54,6 +57,8 @@ import org.springframework.social.quickstart.contact.ContactSearchForm;
 import org.springframework.social.quickstart.contact.EmailForm;
 import org.springframework.social.quickstart.contact.PhoneForm;
 import org.springframework.social.quickstart.picasa.AlbumForm;
+import org.springframework.social.quickstart.picasa.AlbumSearchForm;
+import org.springframework.social.quickstart.picasa.PhotoSearchForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -306,9 +311,19 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="albums", method=GET)
-	public ModelAndView albums() {
-		List<Album> albums = google.picasaOperations().getAlbums();
-		return new ModelAndView("albums", "albums", albums);
+	public ModelAndView searchAlbums(AlbumSearchForm command) {
+		
+		AccessFilter accessFilter = hasText(command.getAccess()) ? AccessFilter.valueOf(command.getAccess()) : null;
+		
+		GDataPage<Album> albums = google.picasaOperations().albumQuery()
+				.startingFromIndex(command.getStartIndex())
+				.withAccess(accessFilter)
+				.getPage();
+		
+		
+		return new ModelAndView()
+			.addObject("command", command)
+			.addObject("albums", albums);
 	}
 	
 	@RequestMapping(value="album", method=GET)
@@ -353,6 +368,33 @@ public class HomeController {
 		
 		Comment comment = google.commentOperations().getComment(id);
 		return new ModelAndView("comment", "comment", comment);
+	}
+	
+	@RequestMapping(value="photos", method=GET)
+	public ModelAndView photos(PhotoSearchForm command) {
+		
+		AccessFilter accessFilter = hasText(command.getAccess()) ? AccessFilter.valueOf(command.getAccess()) : null;
+		BoundingBox boundingBox = command.hasCoordinates() ? 
+				new BoundingBox(command.getWest(), command.getSouth(), command.getEast(), command.getNorth()) : null;
+		
+		GDataPage<Photo> photos = google.picasaOperations().photoQuery()
+				.searchFor(command.getText())
+				.startingFromIndex(command.getStartIndex())
+				.maxResultsNumber(command.getMaxResults())
+				.fromLocation(command.getLocation())
+				.withAccess(accessFilter)
+				.betweenCoordinates(boundingBox)
+				.updatedFrom(command.getUpdatedMin())
+				.updatedUntil(command.getUpdatedMax())
+				.publishedFrom(command.getPublishedMin())
+				.publishedUntil(command.getPublishedMax())
+				.withMaximumSize(command.getMaxSize() != null ? command.getMaxResults() : 0)
+				.withThumbnailSize(command.getThumbSize() != null ? command.getThumbSize() : 0)
+				.getPage();
+		
+		return new ModelAndView("photos")
+			.addObject("command", command)
+			.addObject("photos", photos);
 	}
 	
 }

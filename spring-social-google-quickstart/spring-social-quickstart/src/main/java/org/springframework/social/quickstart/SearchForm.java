@@ -18,6 +18,12 @@ public class SearchForm {
 	@DateTimeFormat(iso=DATE)
 	private Date updatedMax;
 	
+	@DateTimeFormat(iso=DATE)
+	private Date publishedMin;
+	
+	@DateTimeFormat(iso=DATE)
+	private Date publishedMax;
+	
 	public String getText() {
 		return text;
 	}
@@ -56,6 +62,22 @@ public class SearchForm {
 	
 	public void setUpdatedMax(Date updatedMax) {
 		this.updatedMax = updatedMax;
+	}
+
+	public Date getPublishedMin() {
+		return publishedMin;
+	}
+
+	public void setPublishedMin(Date publishedMin) {
+		this.publishedMin = publishedMin;
+	}
+
+	public Date getPublishedMax() {
+		return publishedMax;
+	}
+
+	public void setPublishedMax(Date publishedMax) {
+		this.publishedMax = publishedMax;
 	}
 	
 }

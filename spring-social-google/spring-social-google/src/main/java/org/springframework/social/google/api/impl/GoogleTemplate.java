@@ -96,7 +96,7 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	
 	@Override
 	protected void configureRestTemplate(RestTemplate restTemplate) {		
-		restTemplate.getInterceptors().add(new GDataInterceptor());
+		restTemplate.getInterceptors().add(new GoogleInterceptor());
 	}
 	
 	@Override
