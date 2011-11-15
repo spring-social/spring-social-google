@@ -18,7 +18,7 @@ public class PhotoQueryBuilderImpl extends PublishTextQueryBuilderImpl<PhotoQuer
 	private AccessFilter accessFilter;
 	private BoundingBox boundingBox;
 	private int maxImageSize;
-	private int thumbnailSize;
+	private int thumbnailSize = 288;
 	private String location;
 	
 	@Override

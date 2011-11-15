@@ -71,7 +71,11 @@ public abstract class EntryExtractor<T> {
 	}
 	
 	protected String getAtomElement(Element element, String elementName) {
-		return find(element, "atom:" + elementName, null, null, null);
+		return getAtomAttribute(element, elementName, null);
+	}
+	
+	protected String getAtomAttribute(Element element, String elementName, String attribute) {
+		return find(element, "atom:" + elementName, attribute, null, null);
 	}
 	
 	protected String getLinkHref(Element element, String rel) {
