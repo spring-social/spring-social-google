@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.google.api.plus.query;
+package org.springframework.social.google.api.query;
 
 import java.util.List;
 
@@ -25,13 +25,13 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * @author Gabriel Axel
  * @param <T> item type
  */
-public class PlusPage<T> {
+public class ApiPage<T> {
 
 	private final List<T> items;
 	private final String nextPageToken;
 	
 	@JsonCreator
-	public PlusPage(@JsonProperty("items") List<T> items, @JsonProperty("nextPageToken") String nextPageToken) {
+	public ApiPage(@JsonProperty("items") List<T> items, @JsonProperty("nextPageToken") String nextPageToken) {
 		this.items = items;
 		this.nextPageToken = nextPageToken;
 	}

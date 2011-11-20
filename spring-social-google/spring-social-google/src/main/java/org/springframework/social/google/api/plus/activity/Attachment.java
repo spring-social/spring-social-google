@@ -28,7 +28,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo.Id;
  * @author Gabriel Axel
  */
 @JsonTypeInfo(property="objectType", include=As.PROPERTY, use=Id.NAME)
-@JsonSubTypes({@Type(Article.class), @Type(Photo.class), @Type(Video.class)})
+@JsonSubTypes({@Type(Article.class), @Type(Photo.class), @Type(Video.class), @Type(Album.class)})
 public abstract class Attachment {
 
 	public static class PreviewImage {

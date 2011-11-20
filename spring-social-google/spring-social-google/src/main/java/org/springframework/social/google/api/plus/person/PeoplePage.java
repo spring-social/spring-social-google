@@ -18,13 +18,13 @@ package org.springframework.social.google.api.plus.person;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.springframework.social.google.api.plus.query.PlusPage;
+import org.springframework.social.google.api.query.ApiPage;
 
 /**
- * {@link PlusPage} of {@link BasePerson}.
+ * {@link ApiPage} of {@link BasePerson}.
  * @author Gabriel Axel
  */
-public class PeoplePage extends PlusPage<BasePerson> {
+public class PeoplePage extends ApiPage<BasePerson> {
 
 	public PeoplePage(@JsonProperty("items") List<BasePerson> items, @JsonProperty("nextPageToken") String nextPageToken) {
 		super(items, nextPageToken);

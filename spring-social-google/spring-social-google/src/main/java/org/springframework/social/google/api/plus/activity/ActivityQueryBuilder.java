@@ -15,14 +15,14 @@
  */
 package org.springframework.social.google.api.plus.activity;
 
-import org.springframework.social.google.api.plus.query.PlusQueryBuilder;
+import org.springframework.social.google.api.query.ApiQueryBuilder;
 import org.springframework.social.google.api.query.QueryBuilder;
 
 /**
  * A {@link QueryBuilder} for {@link Activity}
  * @author Gabriel Axel
  */
-public interface ActivityQueryBuilder extends PlusQueryBuilder<ActivityQueryBuilder, ActivitiesPage> {
+public interface ActivityQueryBuilder extends ApiQueryBuilder<ActivityQueryBuilder, ActivitiesPage> {
 
 	ActivityQueryBuilder orderBy(ActivitiesOrder order);
 

@@ -15,18 +15,18 @@
  */
 package org.springframework.social.google.api.plus.activity.impl;
 
+import org.springframework.social.google.api.impl.AbstractGoogleApiOperations;
 import org.springframework.social.google.api.plus.activity.ActivitiesPage;
 import org.springframework.social.google.api.plus.activity.Activity;
 import org.springframework.social.google.api.plus.activity.ActivityOperations;
 import org.springframework.social.google.api.plus.activity.ActivityQueryBuilder;
-import org.springframework.social.google.api.plus.impl.AbstractGooglePlusOperations;
 import org.springframework.web.client.RestTemplate;
 
 /**
  * {@link ActivityOperations} implementation.
  * @author Gabriel Axel
  */
-public class ActivityTemplate extends AbstractGooglePlusOperations implements ActivityOperations {
+public class ActivityTemplate extends AbstractGoogleApiOperations implements ActivityOperations {
 
 	private static final String PEOPLE_URL = "https://www.googleapis.com/plus/v1/people/";
 	private static final String ACTIVITIES_PUBLIC = "/activities/public";

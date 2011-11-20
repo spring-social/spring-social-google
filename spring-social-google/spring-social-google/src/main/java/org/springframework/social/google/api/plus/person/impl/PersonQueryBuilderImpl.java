@@ -17,18 +17,18 @@ package org.springframework.social.google.api.plus.person.impl;
 
 import static org.springframework.social.google.api.plus.person.impl.PersonTemplate.PEOPLE_SEARCH_URL;
 
-import org.springframework.social.google.api.plus.impl.AbstractGooglePlusOperations;
+import org.springframework.social.google.api.impl.AbstractGoogleApiOperations;
 import org.springframework.social.google.api.plus.person.PeoplePage;
 import org.springframework.social.google.api.plus.person.PersonQueryBuilder;
-import org.springframework.social.google.api.plus.query.impl.PlusQueryBuilderImpl;
+import org.springframework.social.google.api.query.impl.ApiQueryBuilderImpl;
 
 /**
  * {@link PersonQueryBuilder} implementation.
  * @author Gabriel Axel
  */
-public class PersonQueryBuilderImpl extends PlusQueryBuilderImpl<PersonQueryBuilder, PeoplePage> implements PersonQueryBuilder {
+public class PersonQueryBuilderImpl extends ApiQueryBuilderImpl<PersonQueryBuilder, PeoplePage> implements PersonQueryBuilder {
 
-	public PersonQueryBuilderImpl(AbstractGooglePlusOperations operations) {
+	public PersonQueryBuilderImpl(AbstractGoogleApiOperations operations) {
 		super(PEOPLE_SEARCH_URL, PeoplePage.class, operations);
 	}
 

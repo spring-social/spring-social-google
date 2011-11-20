@@ -15,13 +15,13 @@
  */
 package org.springframework.social.google.api.plus.person;
 
-import org.springframework.social.google.api.plus.query.PlusQueryBuilder;
+import org.springframework.social.google.api.query.ApiQueryBuilder;
 import org.springframework.social.google.api.query.QueryBuilder;
 
 /**
  * {@link QueryBuilder} for {@link Person}.
  * @author Gabriel Axel
  */
-public interface PersonQueryBuilder extends PlusQueryBuilder<PersonQueryBuilder, PeoplePage> {
+public interface PersonQueryBuilder extends ApiQueryBuilder<PersonQueryBuilder, PeoplePage> {
 
 }

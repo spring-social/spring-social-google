@@ -13,19 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.google.api.plus.impl;
+package org.springframework.social.google.api.impl;
 
-import org.springframework.social.google.api.impl.AbstractGoogleOperations;
-import org.springframework.social.google.api.plus.query.PlusPage;
+import org.springframework.social.google.api.query.ApiPage;
 import org.springframework.web.client.RestTemplate;
 
 /**
  * Abstract superclass for implementations that work with Google+ APIs.
  * @author Gabriel Axel
  */
-public abstract class AbstractGooglePlusOperations extends AbstractGoogleOperations {
+public abstract class AbstractGoogleApiOperations extends AbstractGoogleOperations {
 
-	protected AbstractGooglePlusOperations(RestTemplate restTemplate,
+	protected AbstractGoogleApiOperations(RestTemplate restTemplate,
 			boolean isAuthorized) {
 		super(restTemplate, isAuthorized);
 	}
@@ -34,7 +33,7 @@ public abstract class AbstractGooglePlusOperations extends AbstractGoogleOperati
 		return restTemplate.getForObject(url, type);
 	}
 	
-	public <T extends PlusPage<?>> T getPage(String url, Class<T> type) {
+	public <T extends ApiPage<?>> T getPage(String url, Class<T> type) {
 		System.out.println(url);
 		return restTemplate.getForObject(url, type);
 	}

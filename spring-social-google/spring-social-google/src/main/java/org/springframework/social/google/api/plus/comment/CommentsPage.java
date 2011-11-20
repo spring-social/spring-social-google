@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.springframework.social.google.api.plus.query.PlusPage;
+import org.springframework.social.google.api.query.ApiPage;
 
 /**
- * {@link PlusPage} for {@link Comment} pagination result.
+ * {@link ApiPage} for {@link Comment} pagination result.
  * @author Gabriel Axel
  */
-public class CommentsPage extends PlusPage<Comment> {
+public class CommentsPage extends ApiPage<Comment> {
 
 	@JsonCreator
 	public CommentsPage(@JsonProperty("items") List<Comment> items,

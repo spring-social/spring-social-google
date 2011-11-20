@@ -1,12 +1,12 @@
 package org.springframework.social.google.api.plus.comment.impl;
 
+import org.springframework.social.google.api.impl.AbstractGoogleApiOperations;
 import org.springframework.social.google.api.plus.comment.Comment;
 import org.springframework.social.google.api.plus.comment.CommentOperations;
 import org.springframework.social.google.api.plus.comment.CommentsPage;
-import org.springframework.social.google.api.plus.impl.AbstractGooglePlusOperations;
 import org.springframework.web.client.RestTemplate;
 
-public class CommentTemplate extends AbstractGooglePlusOperations implements
+public class CommentTemplate extends AbstractGoogleApiOperations implements
 		CommentOperations {
 
 	private static final String COMMENTS_URL = "https://www.googleapis.com/plus/v1/comments/";

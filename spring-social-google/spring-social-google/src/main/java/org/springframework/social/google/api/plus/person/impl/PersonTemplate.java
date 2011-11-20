@@ -1,6 +1,6 @@
 package org.springframework.social.google.api.plus.person.impl;
 
-import org.springframework.social.google.api.plus.impl.AbstractGooglePlusOperations;
+import org.springframework.social.google.api.impl.AbstractGoogleApiOperations;
 import org.springframework.social.google.api.plus.person.PeoplePage;
 import org.springframework.social.google.api.plus.person.Person;
 import org.springframework.social.google.api.plus.person.PersonOperations;
@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
  * {@link PersonOperations} implementation.
  * @author Gabriel Axel
  */
-public class PersonTemplate extends AbstractGooglePlusOperations implements PersonOperations {
+public class PersonTemplate extends AbstractGoogleApiOperations implements PersonOperations {
 
 	static final String PEOPLE_SEARCH_URL = "https://www.googleapis.com/plus/v1/people";
 	static final String PEOPLE_URL = PEOPLE_SEARCH_URL + '/';
