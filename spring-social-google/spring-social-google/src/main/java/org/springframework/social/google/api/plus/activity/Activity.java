@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.springframework.social.google.api.plus.person.BasePerson;
 
@@ -33,62 +32,37 @@ public class Activity {
 		
 		public static class TotalItemsWrapper {
 			
-			private final int totalItems;
-			
-			@JsonCreator
-			public TotalItemsWrapper(@JsonProperty("totalItems") int totalItems) {
-				this.totalItems = totalItems;
-			}
+			@JsonProperty
+			private int totalItems;
 		}
 		
-		private final String content;
-		private final List<Attachment> attachments;
-		private final int plusOners;
-		private final int resharers;
-		private final int replies;
-
-		@JsonCreator
-		public ActivityObject(@JsonProperty("content") String content,
-				@JsonProperty("attachments") List<Attachment> attachments,
-				@JsonProperty("plusoners") TotalItemsWrapper plusOnersWrapper,
-				@JsonProperty("resharers") TotalItemsWrapper resharersWrapper,
-				@JsonProperty("replies") TotalItemsWrapper repliesWrapper) {
-			this.content = content;
-			this.attachments = attachments;
-			this.plusOners = plusOnersWrapper.totalItems;
-			this.resharers = resharersWrapper.totalItems;
-			this.replies = repliesWrapper.totalItems;
-		}
-	}
-	
-	
-
-	private final String id;
-	private final String title;
-	private final Date published;
-	private final Date updated;
-	private final String url;
-	private final BasePerson actor;
-	private final ActivityObject object;
-	
+		private String content;
 		
-	@JsonCreator
-	public Activity(
-			@JsonProperty("id") String id, 
-			@JsonProperty("title") String title, 
-			@JsonProperty("published") Date published, 
-			@JsonProperty("updated") Date updated,
-			@JsonProperty("url") String url,
-			@JsonProperty("actor") BasePerson actor,
-			@JsonProperty("object") ActivityObject object) {
-		this.id = id;
-		this.title = title;
-		this.published = published;
-		this.updated = updated;
-		this.url = url;
-		this.actor = actor;
-		this.object = object;
+		@JsonProperty
+		private List<Attachment> attachments;
+		
+		@JsonProperty
+		private TotalItemsWrapper plusoners;
+		
+		@JsonProperty
+		private TotalItemsWrapper resharers;
+		
+		@JsonProperty
+		private TotalItemsWrapper replies;
+
 	}
+	
+	private String id;
+	private String title;
+	private Date published;
+	private Date updated;
+	private String url;
+	
+	@JsonProperty
+	private BasePerson actor;
+	
+	@JsonProperty
+	private ActivityObject object;
 	
 	public String getId() {
 		return id;
@@ -123,14 +97,14 @@ public class Activity {
 	}
 
 	public int getPlusOners() {
-		return object.plusOners;
+		return object.plusoners.totalItems;
 	}
 
 	public int getResharers() {
-		return object.resharers;
+		return object.resharers.totalItems;
 	}
 	
 	public int getReplies() {
-		return object.replies;
+		return object.replies.totalItems;
 	}
 }

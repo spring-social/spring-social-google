@@ -15,11 +15,10 @@
  */
 package org.springframework.social.google.api.plus.activity;
 
-import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonSubTypes;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.annotate.JsonSubTypes.Type;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.annotate.JsonTypeInfo.As;
 import org.codehaus.jackson.annotate.JsonTypeInfo.Id;
 
@@ -33,30 +32,26 @@ public abstract class Attachment {
 
 	public static class PreviewImage {
 		
-		protected final String url;
-		protected final String contentType;
+		@JsonProperty
+		protected String url;
 		
-		@JsonCreator
-		public PreviewImage(@JsonProperty("url") String url, @JsonProperty("type") String contentType) {
-			this.url = url;
-			this.contentType = contentType;
-		}
+		@JsonProperty
+		protected String type;
 		
+		@JsonProperty
+		protected int height;
+		
+		@JsonProperty
+		protected int width;
 	}
 	
-	private final String url;
-	private final String displayName;
-	private final String content;
-	private final PreviewImage previewImage;
+	private String url;
+	private String displayName;
+	private String content;
 	
-	protected Attachment(@JsonProperty("type") String url, @JsonProperty("displayName") String displayName,
-			@JsonProperty("content") String content, @JsonProperty("image") PreviewImage previewImage) {
-		this.url = url;
-		this.displayName = displayName;
-		this.content = content;
-		this.previewImage = previewImage;
-	}
-
+	@JsonProperty
+	private PreviewImage image;
+	
 	public String getUrl() {
 		return url;
 	}
@@ -70,10 +65,10 @@ public abstract class Attachment {
 	}
 	
 	public String getPreviewImageUrl() {
-		return previewImage == null ? null : previewImage.url;
+		return image == null ? null : image.url;
 	}
 	
 	public String getPreviewImageContentType() {
-		return previewImage == null ? null : previewImage.contentType;
+		return image == null ? null : image.type;
 	}
 }

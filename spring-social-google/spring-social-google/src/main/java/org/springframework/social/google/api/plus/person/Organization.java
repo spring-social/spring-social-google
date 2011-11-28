@@ -15,25 +15,15 @@
  */
 package org.springframework.social.google.api.plus.person;
 
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonProperty;
-
 /**
  * Model class representing a person's organization.
  * @author Gabriel Axel
  */
 public class Organization {
 
-	private final String name;
-	private final String title;
-	private final String type;
-	
-	@JsonCreator
-	public Organization(@JsonProperty("name") String name, @JsonProperty("title") String title, @JsonProperty("type") String type) {
-		this.name = name;
-		this.title = title;
-		this.type = type;
-	}
+	private String name;
+	private String title;
+	private String type;
 	
 	@Override
 	public String toString() {

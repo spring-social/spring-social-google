@@ -30,7 +30,7 @@
 			<c:if test="${not empty person}">
 				<div class="span12 columns">
 					<div class="clearfix">
-						<a href="${person.profileUrl}" target="_blank">Google Profile Page</a>
+						<a href="${person.url}" target="_blank">Google Profile Page</a>
 					</div>
 					<form>
 						<div class="clearfix">
