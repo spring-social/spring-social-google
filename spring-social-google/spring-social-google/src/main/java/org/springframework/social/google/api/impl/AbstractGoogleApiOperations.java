@@ -15,6 +15,14 @@
  */
 package org.springframework.social.google.api.impl;
 
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
+import static org.springframework.util.StringUtils.hasText;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.social.google.api.ApiEntity;
 import org.springframework.social.google.api.query.ApiPage;
 import org.springframework.web.client.RestTemplate;
 
@@ -34,8 +42,30 @@ public abstract class AbstractGoogleApiOperations extends AbstractGoogleOperatio
 	}
 	
 	public <T extends ApiPage<?>> T getPage(String url, Class<T> type) {
-		System.out.println(url);
 		return restTemplate.getForObject(url, type);
 	}
+	
+	protected <T extends ApiEntity> T saveEntity(String baseUrl, T entity) {
+		
+		String url;
+		HttpMethod method;
+		
+		if(hasText(entity.getId())) {
+			url = baseUrl + '/' + entity.getId();
+			method = PUT;
+		} else {
+			url = baseUrl;
+			method = POST;
+		}
+		
+		@SuppressWarnings("unchecked")
+		ResponseEntity<T> response = 
+			restTemplate.exchange(url, method, new HttpEntity<T>(entity), (Class<T>)entity.getClass());
+		
+		return response.getBody();
+	}
 
+	protected void deleteEntity(String baseUrl, ApiEntity entity) {
+		restTemplate.delete(baseUrl + '/' + entity.getId());
+	}
 }

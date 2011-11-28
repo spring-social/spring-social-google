@@ -17,9 +17,6 @@ package org.springframework.social.google.api.query;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonProperty;
-
 /**
  * Google+ query pagination result.
  * @author Gabriel Axel
@@ -27,21 +24,15 @@ import org.codehaus.jackson.annotate.JsonProperty;
  */
 public class ApiPage<T> {
 
-	private final List<T> items;
-	private final String nextPageToken;
-	
-	@JsonCreator
-	public ApiPage(@JsonProperty("items") List<T> items, @JsonProperty("nextPageToken") String nextPageToken) {
-		this.items = items;
-		this.nextPageToken = nextPageToken;
-	}
+	private List<T> items;
+	private String nextPageToken;
 	
 	public List<T> getItems() {
 		return items;
 	}
-	
+		
 	public String getNextPageToken() {
 		return nextPageToken;
 	}
-	
+
 }

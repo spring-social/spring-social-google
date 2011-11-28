@@ -15,8 +15,6 @@
  */
 package org.springframework.social.google.api.gdata.query.impl;
 
-import static org.springframework.util.StringUtils.hasText;
-
 import org.springframework.social.google.api.gdata.impl.AbstractGDataOperations;
 import org.springframework.social.google.api.gdata.impl.EntryExtractor;
 import org.springframework.social.google.api.gdata.query.GDataQueryBuilder;

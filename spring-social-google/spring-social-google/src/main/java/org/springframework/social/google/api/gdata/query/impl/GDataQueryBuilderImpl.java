@@ -68,6 +68,7 @@ public abstract class GDataQueryBuilderImpl<Q extends GDataQueryBuilder<?, T>, T
 	protected StringBuilder build() {
 		
 		StringBuilder sb = super.build();
+		appendQueryParam(sb, "max-results", maxResults);
 		appendQueryParam(sb, "start-index", startIndex);
 		appendQueryParam(sb, "updated-min", updatedMin);
 		appendQueryParam(sb, "updated-max", updatedMax);

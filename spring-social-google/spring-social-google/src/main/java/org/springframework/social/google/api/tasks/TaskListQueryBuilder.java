@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.google.api.plus.activity;
+package org.springframework.social.google.api.tasks;
 
-import org.springframework.social.google.api.query.ApiPage;
+import org.springframework.social.google.api.query.ApiQueryBuilder;
+import org.springframework.social.google.api.query.QueryBuilder;
 
 /**
- * {@link ApiPage} for {@link Activity}s pagination result.
+ * {@link QueryBuilder} for {@link TaskList}
  * @author Gabriel Axel
  */
-public class ActivitiesPage extends ApiPage<Activity> {
+public interface TaskListQueryBuilder extends ApiQueryBuilder<TaskListQueryBuilder, TaskListsPage> {
 
 }

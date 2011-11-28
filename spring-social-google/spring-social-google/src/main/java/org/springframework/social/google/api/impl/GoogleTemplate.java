@@ -17,6 +17,8 @@ package org.springframework.social.google.api.impl;
 
 import static java.util.Collections.singletonList;
 import static org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES;
+import static org.codehaus.jackson.map.SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS;
+import static org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion.NON_NULL;
 import static org.springframework.http.MediaType.APPLICATION_ATOM_XML;
 
 import java.util.ArrayList;
@@ -42,6 +44,8 @@ import org.springframework.social.google.api.plus.comment.CommentOperations;
 import org.springframework.social.google.api.plus.comment.impl.CommentTemplate;
 import org.springframework.social.google.api.plus.person.PersonOperations;
 import org.springframework.social.google.api.plus.person.impl.PersonTemplate;
+import org.springframework.social.google.api.tasks.TaskOperations;
+import org.springframework.social.google.api.tasks.impl.TaskTemplate;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
 import org.springframework.web.client.RestTemplate;
@@ -66,6 +70,7 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	private ActivityOperations activityOperations;
 	private PicasaOperations picasaOperations;
 	private CommentOperations commentOperations;
+	private TaskOperations taskOperations;
 	
 	/**
 	 * Creates a new instance of GoogleTemplate.
@@ -92,6 +97,7 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 		activityOperations = new ActivityTemplate(getRestTemplate(), isAuthorized());
 		picasaOperations = new PicasaTemplate(getRestTemplate(), isAuthorized());
 		commentOperations = new CommentTemplate(getRestTemplate(), isAuthorized());
+		taskOperations = new TaskTemplate(getRestTemplate(), isAuthorized());
 	}
 	
 	@Override
@@ -105,6 +111,8 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 		MappingJacksonHttpMessageConverter jsonConverter = new MappingJacksonHttpMessageConverter();
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
+		objectMapper.configure(WRITE_DATES_AS_TIMESTAMPS, false);
+		objectMapper.setSerializationInclusion(NON_NULL);
 		jsonConverter.setObjectMapper(objectMapper);
 		
 		SourceHttpMessageConverter<Source> sourceConverter = new SourceHttpMessageConverter<Source>();
@@ -150,6 +158,11 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	@Override
 	public CommentOperations commentOperations() {
 		return commentOperations;
+	}
+
+	@Override
+	public TaskOperations taskOperations() {
+		return taskOperations;
 	}
 	
 }

@@ -62,3 +62,7 @@ body {
 .form-link {
 	line-height: 30px;
 }
+
+.inline {
+	display: inline;
+}

@@ -13,14 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.google.api.plus.activity;
+package org.springframework.social.google.api.tasks;
 
-import org.springframework.social.google.api.query.ApiPage;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.springframework.social.google.api.impl.ApiEnumSerializer;
+import org.springframework.social.google.api.tasks.impl.TaskStatusDeserializer;
 
 /**
- * {@link ApiPage} for {@link Activity}s pagination result.
+ * Enum representing a task status (whether it is completed)
  * @author Gabriel Axel
  */
-public class ActivitiesPage extends ApiPage<Activity> {
+@JsonSerialize(using=ApiEnumSerializer.class)
+@JsonDeserialize(using=TaskStatusDeserializer.class)
+public enum TaskStatus {
 
+	NEEDS_ACTION, COMPLETED
 }

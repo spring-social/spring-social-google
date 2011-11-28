@@ -13,14 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.google.api.plus.activity;
+package org.springframework.social.google.api;
 
-import org.springframework.social.google.api.query.ApiPage;
+import static org.springframework.util.StringUtils.hasText;
 
 /**
- * {@link ApiPage} for {@link Activity}s pagination result.
+ * Abstract superclass for API-specific entities
  * @author Gabriel Axel
  */
-public class ActivitiesPage extends ApiPage<Activity> {
+public abstract class ApiEntity {
 
+	private String id;
+
+	protected ApiEntity() {
+	}
+	
+	protected ApiEntity(String id) {
+		this.id = hasText(id) ? id : null;
+	}
+
+	public String getId() {
+		return id;
+	}
+	
 }

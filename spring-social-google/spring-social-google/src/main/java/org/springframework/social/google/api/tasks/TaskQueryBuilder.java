@@ -13,15 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.google.api.plus.person;
+package org.springframework.social.google.api.tasks;
+
+import java.util.Date;
 
 import org.springframework.social.google.api.query.ApiQueryBuilder;
 import org.springframework.social.google.api.query.QueryBuilder;
 
 /**
- * {@link QueryBuilder} for {@link Person}.
+ * {@link QueryBuilder} for {@link Task}
  * @author Gabriel Axel
  */
-public interface PersonQueryBuilder extends ApiQueryBuilder<PersonQueryBuilder, PeoplePage> {
-	PersonQueryBuilder searchFor(String text);
+public interface TaskQueryBuilder extends ApiQueryBuilder<TaskQueryBuilder, TasksPage> {
+
+	TaskQueryBuilder fromTaskList(String taskListId);
+	TaskQueryBuilder completedFrom(Date completedMin);
+	TaskQueryBuilder completedUntil(Date completedMax);
+	TaskQueryBuilder dueFrom(Date dueMin);
+	TaskQueryBuilder dueUntil(Date dueMax);
+	TaskQueryBuilder updatedFrom(Date updatedMin);
+	TaskQueryBuilder includeCompleted(boolean includeCompleted);
+	TaskQueryBuilder includeDeleted(boolean includeDeleted);
+	TaskQueryBuilder includeHidden(boolean includeHidden);
 }

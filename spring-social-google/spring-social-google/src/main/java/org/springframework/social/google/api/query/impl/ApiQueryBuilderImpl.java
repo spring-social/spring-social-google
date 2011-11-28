@@ -31,19 +31,17 @@ public class ApiQueryBuilderImpl<Q extends ApiQueryBuilder<?, T>, T extends ApiP
 	private final Class<T> type;
 	private final AbstractGoogleApiOperations operations;
 
-	private String text;
 	private String pageToken;
-		
-	public ApiQueryBuilderImpl(String feedUrl, Class<T> type, AbstractGoogleApiOperations operations) {
-		super(feedUrl);
+	
+	public ApiQueryBuilderImpl(Class<T> type, AbstractGoogleApiOperations operations) {
 		this.type = type;
 		this.operations = operations;
 	}
 	
-	@Override
-	public Q searchFor(String text) {
-		this.text = text;
-		return castThis();
+	public ApiQueryBuilderImpl(String feedUrl, Class<T> type, AbstractGoogleApiOperations operations) {
+		super(feedUrl);
+		this.type = type;
+		this.operations = operations;
 	}
 	
 	@Override
@@ -56,7 +54,7 @@ public class ApiQueryBuilderImpl<Q extends ApiQueryBuilder<?, T>, T extends ApiP
 	protected StringBuilder build() {
 		
 		StringBuilder sb = super.build();
-		appendQueryParam(sb, "query", text);
+		appendQueryParam(sb, "maxResults", maxResults);
 		appendQueryParam(sb, "pageToken", pageToken);
 		return sb;
 	}

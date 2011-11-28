@@ -23,6 +23,7 @@ import org.springframework.social.google.api.legacyprofile.LegacyProfileOperatio
 import org.springframework.social.google.api.plus.activity.ActivityOperations;
 import org.springframework.social.google.api.plus.comment.CommentOperations;
 import org.springframework.social.google.api.plus.person.PersonOperations;
+import org.springframework.social.google.api.tasks.TaskOperations;
 
 /**
 * Interface specifying a basic set of operations for interacting with Google APIs.
@@ -72,4 +73,12 @@ public interface Google extends ApiBinding {
 	 * @return {@link ActivityOperations} for the authenticated user if authenticated
 	 */
 	CommentOperations commentOperations();
+	
+	/**
+	 * Retrieves {@link TaskOperations}, used for interacting with Google Tasks API.
+	 * Requires OAuth scope https://www.googleapis.com/auth/tasks or 
+	 * https://www.googleapis.com/auth/tasks.readonly
+	 * @return {@link TaskOperations} for the authenticated user
+	 */
+	TaskOperations taskOperations();
 }

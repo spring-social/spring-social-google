@@ -27,10 +27,17 @@ import org.springframework.social.google.api.query.impl.ApiQueryBuilderImpl;
  */
 public class ActivityQueryBuilderImpl extends ApiQueryBuilderImpl<ActivityQueryBuilder, ActivitiesPage> implements ActivityQueryBuilder {
 	
+	private String text;
 	private ActivitiesOrder order;
 	
 	public ActivityQueryBuilderImpl(AbstractGoogleApiOperations operations) {
 		super("https://www.googleapis.com/plus/v1/activities", ActivitiesPage.class, operations);
+	}
+	
+	@Override
+	public ActivityQueryBuilder searchFor(String text) {
+		this.text = text;
+		return this;
 	}
 	
 	@Override
@@ -43,7 +50,8 @@ public class ActivityQueryBuilderImpl extends ApiQueryBuilderImpl<ActivityQueryB
 	protected StringBuilder build() {
 		
 		StringBuilder sb = super.build();
-		appendQueryParam(sb, "orderBy", order.toString());
+		appendQueryParam(sb, "query", text);
+		appendQueryParam(sb, "orderBy", order);
 		return sb;
 	}
 }

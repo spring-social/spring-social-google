@@ -13,14 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.google.api.plus.activity;
+package org.springframework.social.google.api.tasks.impl;
 
-import org.springframework.social.google.api.query.ApiPage;
+import org.codehaus.jackson.map.annotate.JsonCachable;
+import org.springframework.social.google.api.impl.ApiEnumDeserializer;
+import org.springframework.social.google.api.tasks.TaskStatus;
 
 /**
- * {@link ApiPage} for {@link Activity}s pagination result.
+ * {@link ApiEnumDeserializer} for {@link TaskStatus}
  * @author Gabriel Axel
  */
-public class ActivitiesPage extends ApiPage<Activity> {
+@JsonCachable
+public class TaskStatusDeserializer extends ApiEnumDeserializer<TaskStatus> {
+
+	public TaskStatusDeserializer() {
+		super(TaskStatus.class);
+	}
 
 }

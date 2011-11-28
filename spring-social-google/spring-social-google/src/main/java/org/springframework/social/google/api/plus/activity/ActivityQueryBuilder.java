@@ -23,7 +23,7 @@ import org.springframework.social.google.api.query.QueryBuilder;
  * @author Gabriel Axel
  */
 public interface ActivityQueryBuilder extends ApiQueryBuilder<ActivityQueryBuilder, ActivitiesPage> {
-
+	ActivityQueryBuilder searchFor(String text);
 	ActivityQueryBuilder orderBy(ActivitiesOrder order);
 
 }

@@ -28,8 +28,23 @@ import org.springframework.social.google.api.query.impl.ApiQueryBuilderImpl;
  */
 public class PersonQueryBuilderImpl extends ApiQueryBuilderImpl<PersonQueryBuilder, PeoplePage> implements PersonQueryBuilder {
 
+	private String text;
+
 	public PersonQueryBuilderImpl(AbstractGoogleApiOperations operations) {
 		super(PEOPLE_SEARCH_URL, PeoplePage.class, operations);
+	}
+	
+	@Override
+	public PersonQueryBuilder searchFor(String text) {
+		this.text = text;
+		return this;
+	}
+	
+	@Override
+	protected StringBuilder build() {
+		StringBuilder sb = super.build();
+		appendQueryParam(sb, "query", text);
+		return sb;
 	}
 
 }

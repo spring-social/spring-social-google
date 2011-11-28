@@ -13,7 +13,7 @@
 				<li class="${selected == 'profile' ? 'active' : ''}"><a href="./">Profile</a></li>
 				<li class="${selected == 'plus' ? 'active' : ''}"><a href="people">Google+</a></li>
 				<li class="${selected == 'contacts' ? 'active' : ''}"><a href="contacts">Contacts</a></li>
-				<li class="${selected == 'picasa' ? 'active' : ''}"><a href="albums">Picasa</a></li>
+				<li class="${selected == 'tasks' ? 'active' : ''}"><a href="tasklists">Tasks</a></li>
 			</ul>
 			
 			<ul class="secondary-nav">

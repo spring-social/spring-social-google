@@ -33,8 +33,11 @@ public abstract class QueryBuilderImpl<Q extends QueryBuilder<?, T>, T> implemen
 
 	private static final Format dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS'Z'");
 	
-	private final String feedUrl;
-	private int maxResults;
+	protected String feedUrl;
+	protected int maxResults;
+	
+	protected QueryBuilderImpl() {
+	}
 	
 	protected QueryBuilderImpl(String feedUrl) {
 		this.feedUrl = feedUrl;
@@ -89,7 +92,7 @@ public abstract class QueryBuilderImpl<Q extends QueryBuilder<?, T>, T> implemen
 		} else {
 			sb.append('&');
 		}
-		appendQueryParam(sb, "max-results", maxResults);
+		
 		return sb;
 	}
 }
