@@ -17,7 +17,6 @@ package org.springframework.social.google.api;
 
 import org.springframework.social.ApiBinding;
 import org.springframework.social.google.api.gdata.contact.ContactOperations;
-import org.springframework.social.google.api.gdata.picasa.PicasaOperations;
 import org.springframework.social.google.api.impl.GoogleTemplate;
 import org.springframework.social.google.api.legacyprofile.LegacyProfileOperations;
 import org.springframework.social.google.api.plus.activity.ActivityOperations;
@@ -52,13 +51,6 @@ public interface Google extends ApiBinding {
 	 * @return {@link PersonOperations} for the authenticated user if authenticated
 	 */
 	PersonOperations personOperations();
-	
-	/**
-	 * Retrieves {@link PicasaOperations}, used for interacting with Picasa Web Albums API.
-	 * Requires OAuth2 scope https://picasaweb.google.com/data/
-	 * @return {@link PicasaOperations} for the authenticated user
-	 */
-	PicasaOperations picasaOperations();
 	
 	/**
 	 * Retrieves {@link ActivityOperations}, used for interacting with Google+ Activities API.

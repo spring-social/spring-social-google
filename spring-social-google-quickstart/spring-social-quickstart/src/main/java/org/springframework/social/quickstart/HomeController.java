@@ -37,11 +37,6 @@ import org.springframework.social.google.api.gdata.contact.Contact;
 import org.springframework.social.google.api.gdata.contact.ContactGroup;
 import org.springframework.social.google.api.gdata.contact.Email;
 import org.springframework.social.google.api.gdata.contact.Phone;
-import org.springframework.social.google.api.gdata.picasa.AccessFilter;
-import org.springframework.social.google.api.gdata.picasa.Album;
-import org.springframework.social.google.api.gdata.picasa.BoundingBox;
-import org.springframework.social.google.api.gdata.picasa.Photo;
-import org.springframework.social.google.api.gdata.picasa.Visibility;
 import org.springframework.social.google.api.gdata.query.GDataPage;
 import org.springframework.social.google.api.legacyprofile.LegacyGoogleProfile;
 import org.springframework.social.google.api.plus.activity.ActivitiesPage;
@@ -59,9 +54,6 @@ import org.springframework.social.quickstart.contact.ContactGroupForm;
 import org.springframework.social.quickstart.contact.ContactSearchForm;
 import org.springframework.social.quickstart.contact.EmailForm;
 import org.springframework.social.quickstart.contact.PhoneForm;
-import org.springframework.social.quickstart.picasa.AlbumForm;
-import org.springframework.social.quickstart.picasa.AlbumSearchForm;
-import org.springframework.social.quickstart.picasa.PhotoSearchForm;
 import org.springframework.social.quickstart.tasks.TaskForm;
 import org.springframework.social.quickstart.tasks.TaskListForm;
 import org.springframework.social.quickstart.tasks.TaskSearchForm;
@@ -316,52 +308,6 @@ public class HomeController {
 		return new ModelAndView("activities", "activities", activities);
 	}
 	
-	@RequestMapping(value="albums", method=GET)
-	public ModelAndView searchAlbums(AlbumSearchForm command) {
-		
-		AccessFilter accessFilter = hasText(command.getAccess()) ? AccessFilter.valueOf(command.getAccess()) : null;
-		
-		GDataPage<Album> albums = google.picasaOperations().albumQuery()
-				.startingFromIndex(command.getStartIndex())
-				.withAccess(accessFilter)
-				.getPage();
-		
-		
-		return new ModelAndView()
-			.addObject("command", command)
-			.addObject("albums", albums);
-	}
-	
-	@RequestMapping(value="album", method=GET)
-	public ModelAndView newAlbum() {
-		return new ModelAndView("album", "command", new AlbumForm());
-	}
-	
-	@RequestMapping(value="album", method=GET, params="id")
-	public ModelAndView album(@RequestParam String id) {
-		
-		Album album = google.picasaOperations().getAlbum(id);
-		AlbumForm command = new AlbumForm(album.getId(), album.getTitle(), album.getSummary(), album.getVisibility().toString());
-		
-		return new ModelAndView("album")
-			.addObject("album", album)
-			.addObject("command", command);
-	}
-	
-	@RequestMapping(value="album", method=POST)
-	public ModelAndView saveAlbum(@Valid AlbumForm command, BindingResult result) {
-		
-		if(result.hasErrors()) {
-			return new ModelAndView("album", "command", command);
-		}
-		
-		Album album = new Album(command.getId(), null, null, command.getTitle(), 
-			command.getSummary(), Visibility.valueOf(command.getVisibility()), null, null, 0, null);
-		google.picasaOperations().saveAlbum(album);
-		
-		return new ModelAndView("redirect:/albums");
-	}
-	
 	@RequestMapping(value="comments", method=GET)
 	public ModelAndView comments(String activity, String pageToken) {
 		
@@ -374,33 +320,6 @@ public class HomeController {
 		
 		Comment comment = google.commentOperations().getComment(id);
 		return new ModelAndView("comment", "comment", comment);
-	}
-	
-	@RequestMapping(value="photos", method=GET)
-	public ModelAndView photos(PhotoSearchForm command) {
-		
-		AccessFilter accessFilter = hasText(command.getAccess()) ? AccessFilter.valueOf(command.getAccess()) : null;
-		BoundingBox boundingBox = command.hasCoordinates() ? 
-				new BoundingBox(command.getWest(), command.getSouth(), command.getEast(), command.getNorth()) : null;
-		
-		GDataPage<Photo> photos = google.picasaOperations().photoQuery()
-				.searchFor(command.getText())
-				.startingFromIndex(command.getStartIndex())
-				.maxResultsNumber(command.getMaxResults())
-				.fromLocation(command.getLocation())
-				.withAccess(accessFilter)
-				.betweenCoordinates(boundingBox)
-				.updatedFrom(command.getUpdatedMin())
-				.updatedUntil(command.getUpdatedMax())
-				.publishedFrom(command.getPublishedMin())
-				.publishedUntil(command.getPublishedMax())
-				.withMaximumSize(command.getMaxSize() != null ? command.getMaxResults() : 0)
-				.withThumbnailSize(command.getThumbSize() != null ? command.getThumbSize() : 0)
-				.getPage();
-		
-		return new ModelAndView("photos")
-			.addObject("command", command)
-			.addObject("photos", photos);
 	}
 	
 	@RequestMapping(value="tasklists", method=GET)
