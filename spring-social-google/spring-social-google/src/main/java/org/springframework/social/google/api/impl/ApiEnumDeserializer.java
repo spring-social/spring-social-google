@@ -53,8 +53,8 @@ public abstract class ApiEnumDeserializer<T extends Enum<?>> extends JsonDeseria
 			}
 		}
 		
-		@SuppressWarnings({ "rawtypes" })
-		T value = Enum.valueOf((Class)type, sb.toString());
+		@SuppressWarnings({ "rawtypes", "unchecked" })
+		T value = (T)Enum.valueOf((Class)type, sb.toString());
 		
 		return value;
 	}
