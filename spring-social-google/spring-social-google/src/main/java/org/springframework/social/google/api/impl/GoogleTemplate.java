@@ -123,7 +123,7 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	
 	@Override
 	protected OAuth2Version getOAuth2Version() {
-		return OAuth2Version.DRAFT_10;
+		return OAuth2Version.BEARER;
 	}
 
 	@Override

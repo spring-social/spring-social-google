@@ -10,7 +10,7 @@
 		<java-version>1.6</java-version>
 		<spring.framework.version>3.1.0.RC1</spring.framework.version>
 		<org.springframework.security.crypto-version>3.1.0.RC2.crypto</org.springframework.security.crypto-version>
-		<spring.social.version>1.0.0.RELEASE</spring.social.version>
+		<spring.social.version>1.0.2.RELEASE</spring.social.version>
 	</properties>
 	
 	<name>Spring Social Google Quickstart</name>

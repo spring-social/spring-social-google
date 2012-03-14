@@ -7,7 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
-		<spring.social.version>1.0.0.RELEASE</spring.social.version>
+		<spring.social.version>1.0.2.RELEASE</spring.social.version>
 		<spring.framework.version>3.1.0.RC1</spring.framework.version>
 	</properties>
 

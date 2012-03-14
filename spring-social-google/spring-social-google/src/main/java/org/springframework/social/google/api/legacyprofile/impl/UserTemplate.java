@@ -33,7 +33,7 @@ public class UserTemplate extends AbstractGDataOperations implements LegacyProfi
 
 	public LegacyGoogleProfile getUserProfile() {
 		requireAuthorization();
-		return restTemplate.getForObject("https://www.googleapis.com/oauth2/v1/userinfo", LegacyGoogleProfile.class);
+		return restTemplate.getForObject("https://www.googleapis.com/oauth2/v2/userinfo", LegacyGoogleProfile.class);
 	}
 
 }
