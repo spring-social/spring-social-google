@@ -15,11 +15,11 @@
  */
 package org.springframework.social.google.api.plus.activity.impl;
 
-import org.springframework.social.google.api.impl.AbstractGoogleApiOperations;
 import org.springframework.social.google.api.plus.activity.ActivitiesOrder;
 import org.springframework.social.google.api.plus.activity.ActivitiesPage;
 import org.springframework.social.google.api.plus.activity.ActivityQueryBuilder;
 import org.springframework.social.google.api.query.impl.ApiQueryBuilderImpl;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * {@link ActivityQueryBuilder} implementation.
@@ -30,8 +30,8 @@ public class ActivityQueryBuilderImpl extends ApiQueryBuilderImpl<ActivityQueryB
 	private String text;
 	private ActivitiesOrder order;
 	
-	public ActivityQueryBuilderImpl(AbstractGoogleApiOperations operations) {
-		super("https://www.googleapis.com/plus/v1/activities", ActivitiesPage.class, operations);
+	public ActivityQueryBuilderImpl(RestTemplate restTemplate) {
+		super("https://www.googleapis.com/plus/v1/activities", ActivitiesPage.class, restTemplate);
 	}
 	
 	@Override

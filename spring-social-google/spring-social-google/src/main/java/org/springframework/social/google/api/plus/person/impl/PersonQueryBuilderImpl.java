@@ -17,10 +17,10 @@ package org.springframework.social.google.api.plus.person.impl;
 
 import static org.springframework.social.google.api.plus.person.impl.PersonTemplate.PEOPLE_SEARCH_URL;
 
-import org.springframework.social.google.api.impl.AbstractGoogleApiOperations;
 import org.springframework.social.google.api.plus.person.PeoplePage;
 import org.springframework.social.google.api.plus.person.PersonQueryBuilder;
 import org.springframework.social.google.api.query.impl.ApiQueryBuilderImpl;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * {@link PersonQueryBuilder} implementation.
@@ -30,8 +30,8 @@ public class PersonQueryBuilderImpl extends ApiQueryBuilderImpl<PersonQueryBuild
 
 	private String text;
 
-	public PersonQueryBuilderImpl(AbstractGoogleApiOperations operations) {
-		super(PEOPLE_SEARCH_URL, PeoplePage.class, operations);
+	public PersonQueryBuilderImpl(RestTemplate restTemplate) {
+		super(PEOPLE_SEARCH_URL, PeoplePage.class, restTemplate);
 	}
 	
 	@Override

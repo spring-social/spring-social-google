@@ -15,7 +15,7 @@
  */
 package org.springframework.social.google.api.legacyprofile.impl;
 
-import org.springframework.social.google.api.impl.AbstractGoogleOperations;
+import org.springframework.social.google.api.impl.AbstractGoogleApiOperations;
 import org.springframework.social.google.api.legacyprofile.LegacyGoogleProfile;
 import org.springframework.social.google.api.legacyprofile.LegacyProfileOperations;
 import org.springframework.web.client.RestTemplate;
@@ -25,7 +25,7 @@ import org.springframework.web.client.RestTemplate;
  * @author Gabriel Axel
  *
  */
-public class UserTemplate extends AbstractGoogleOperations implements LegacyProfileOperations {
+public class UserTemplate extends AbstractGoogleApiOperations implements LegacyProfileOperations {
 
 	public UserTemplate(RestTemplate restTemplate, boolean authorized) {
 		super(restTemplate, authorized);

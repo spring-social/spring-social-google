@@ -17,8 +17,9 @@ package org.springframework.social.google.api.plus.person;
 
 
 /**
- * Defines operations for reading Google+ people.
+ * Defines operations for reading Google+ people and Portable Contacts.
  * To use "me" as user ID, requires OAuth2 scope https://www.googleapis.com/auth/plus.me
+ * To access Portable Contacts, requires OAuth2 scope https://www-opensocial.googleusercontent.com/api/people
  * @author Gabriel Axel
  */
 public interface PersonOperations {
@@ -30,6 +31,11 @@ public interface PersonOperations {
 	 */
 	Person getPerson(String id);
 	
+	/**
+	 * Retrieves a portable contact
+	 * @param id the ID of the contact
+	 * @return the retrieved {@link Person}
+	 */
 	Person getContact(String id);
 	
 	/**
@@ -68,5 +74,9 @@ public interface PersonOperations {
 	 */
 	PersonQueryBuilder personQuery();
 	
+	/**
+	 * Creates a {@link ContactQueryBuilder}.
+	 * @return a new {@link ContactQueryBuilder}
+	 */
 	ContactQueryBuilder contactQuery();
 }

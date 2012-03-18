@@ -22,22 +22,31 @@ import static org.springframework.util.StringUtils.hasText;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.google.api.ApiEntity;
-import org.springframework.social.google.api.query.ApiPage;
 import org.springframework.web.client.RestTemplate;
 
 /**
  * Abstract superclass for implementations that work with Google+ APIs.
  * @author Gabriel Axel
  */
-public abstract class AbstractGoogleApiOperations extends AbstractGoogleOperations {
+public abstract class AbstractGoogleApiOperations {
+	
+	protected final RestTemplate restTemplate;
+	protected final boolean isAuthorized;
 
-	protected AbstractGoogleApiOperations(RestTemplate restTemplate,
-			boolean isAuthorized) {
-		super(restTemplate, isAuthorized);
+	protected AbstractGoogleApiOperations(RestTemplate restTemplate, boolean isAuthorized) {
+		this.restTemplate = restTemplate;
+		this.isAuthorized = isAuthorized;
+	}
+
+	protected void requireAuthorization() {
+		if (!isAuthorized) {
+			throw new MissingAuthorizationException();
+		}
 	}
 	
-	public <T extends ApiPage<?>> T getPage(String url, Class<T> type) {
+	protected <T> T getEntity(String url, Class<T> type) {
 		return restTemplate.getForObject(url, type);
 	}
 	

@@ -69,7 +69,7 @@ public class TaskTemplate extends AbstractGoogleApiOperations implements
 
 	@Override
 	public TaskListQueryBuilder taskListQuery() {
-		return new TaskListQueryBuilderImpl(this);
+		return new TaskListQueryBuilderImpl(restTemplate);
 	}
 
 	@Override
@@ -138,7 +138,7 @@ public class TaskTemplate extends AbstractGoogleApiOperations implements
 
 	@Override
 	public TaskQueryBuilder taskQuery() {
-		return new TaskQueryBuilderImpl(this);
+		return new TaskQueryBuilderImpl(restTemplate);
 	}
 
 	private static String defaultIfBlank(String value, String defaultValue) {

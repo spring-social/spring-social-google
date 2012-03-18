@@ -21,10 +21,10 @@ import static org.springframework.social.google.api.tasks.impl.TaskTemplate.TASK
 
 import java.util.Date;
 
-import org.springframework.social.google.api.impl.AbstractGoogleApiOperations;
 import org.springframework.social.google.api.query.impl.ApiQueryBuilderImpl;
 import org.springframework.social.google.api.tasks.TaskQueryBuilder;
 import org.springframework.social.google.api.tasks.TasksPage;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * {@link TaskQueryBuilder} implementation.
@@ -43,8 +43,8 @@ class TaskQueryBuilderImpl extends
 	private boolean includeDeleted;
 	private boolean includeHidden;
 	
-	TaskQueryBuilderImpl(AbstractGoogleApiOperations operations) {
-		super(TasksPage.class, operations);
+	TaskQueryBuilderImpl(RestTemplate restTemplate) {
+		super(TasksPage.class, restTemplate);
 	}
 	
 	@Override

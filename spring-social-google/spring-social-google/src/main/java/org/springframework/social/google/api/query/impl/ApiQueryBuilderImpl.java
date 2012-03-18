@@ -15,10 +15,10 @@
  */
 package org.springframework.social.google.api.query.impl;
 
-import org.springframework.social.google.api.impl.AbstractGoogleApiOperations;
 import org.springframework.social.google.api.query.ApiPage;
 import org.springframework.social.google.api.query.ApiQueryBuilder;
 import org.springframework.social.google.api.query.QueryBuilder;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * Abstract superclass for {@link QueryBuilder} implementations that query Google+.
@@ -29,19 +29,19 @@ import org.springframework.social.google.api.query.QueryBuilder;
 public class ApiQueryBuilderImpl<Q extends ApiQueryBuilder<?, T>, T extends ApiPage<?>> extends QueryBuilderImpl<Q, T> implements ApiQueryBuilder<Q, T> {
 
 	private final Class<T> type;
-	private final AbstractGoogleApiOperations operations;
+	private final RestTemplate restTemplate;
 
 	private String pageToken;
 	
-	public ApiQueryBuilderImpl(Class<T> type, AbstractGoogleApiOperations operations) {
+	public ApiQueryBuilderImpl(Class<T> type, RestTemplate restTemplate) {
 		this.type = type;
-		this.operations = operations;
+		this.restTemplate = restTemplate;
 	}
 	
-	public ApiQueryBuilderImpl(String feedUrl, Class<T> type, AbstractGoogleApiOperations operations) {
+	public ApiQueryBuilderImpl(String feedUrl, Class<T> type, RestTemplate restTemplate) {
 		super(feedUrl);
 		this.type = type;
-		this.operations = operations;
+		this.restTemplate = restTemplate;
 	}
 	
 	@Override
@@ -61,7 +61,7 @@ public class ApiQueryBuilderImpl<Q extends ApiQueryBuilder<?, T>, T extends ApiP
 
 	@Override
 	public T getPage() {
-		return operations.getPage(build().toString(), type);
+		return restTemplate.getForObject(build().toString(), type);
 	}
 
 }

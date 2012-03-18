@@ -47,7 +47,7 @@ public class ActivityTemplate extends AbstractGoogleApiOperations implements Act
 		if(pageToken != null) {
 			sb.append("?pageToken=").append(pageToken);
 		}
-		return getPage(sb.toString(), ActivitiesPage.class);
+		return getEntity(sb.toString(), ActivitiesPage.class);
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class ActivityTemplate extends AbstractGoogleApiOperations implements Act
 
 	@Override
 	public ActivityQueryBuilder activityQuery() {
-		return new ActivityQueryBuilderImpl(this);
+		return new ActivityQueryBuilderImpl(restTemplate);
 	}
 
 }
