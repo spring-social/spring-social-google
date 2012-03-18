@@ -15,47 +15,31 @@
  */
 package org.springframework.social.google.api.plus.person;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
-
 /**
- * Model class representing basic person details (for a list of people or when 
- * a person is embedded in another entity).
+ * Model class representing a contact's e-mail.
  * @author Gabriel Axel
  */
-public class BasePerson {
+public class Email {
 
-	public static class Image {
-		@JsonProperty
-		private String url;
-	}
-	
-	private String id;
-	private String displayName;
-	private String url;
-	
-	@JsonProperty
-	private Image image;
+	private String type;
+	private String value;
+	private boolean primary;
 	
 	@Override
 	public String toString() {
-		return displayName;
+		return value;
 	}
 	
-	public String getId() {
-		return id;
+	public String getType() {
+		return type;
 	}
 	
-	public String getDisplayName() {
-		return displayName;
+	public String getValue() {
+		return value;
 	}
 	
-	public String getUrl() {
-		return url;
+	public boolean isPrimary() {
+		return primary;
 	}
 	
-	public String getImageUrl() {
-		return image.url;
-	}
-
 }

@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.springframework.social.google.api.plus.person.BasePerson;
+import org.springframework.social.google.api.plus.person.Person;
 
 /**
  * Model class representing a comment.
@@ -27,14 +27,14 @@ public class Comment {
 	private final Date published;
 	private final Date updated;
 	private final String content;
-	private final BasePerson actor;
+	private final Person actor;
 
 	@JsonCreator
 	public Comment(@JsonProperty("id") String id,
 			@JsonProperty("published") Date published,
 			@JsonProperty("updated") Date updated,
 			@JsonProperty("object") CommentObject object,
-			@JsonProperty("actor") BasePerson actor) {
+			@JsonProperty("actor") Person actor) {
 		this.id = id;
 		this.published = published;
 		this.updated = updated;
@@ -58,7 +58,7 @@ public class Comment {
 		return content;
 	}
 
-	public BasePerson getActor() {
+	public Person getActor() {
 		return actor;
 	}
 

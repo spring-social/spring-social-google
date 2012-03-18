@@ -29,9 +29,6 @@
 			
 			<c:if test="${not empty person}">
 				<div class="span12 columns">
-					<div class="clearfix">
-						<a href="${person.url}" target="_blank">Google Profile Page</a>
-					</div>
 					<form>
 						<div class="clearfix">
 							<label>Profile ID:</label>
@@ -81,6 +78,22 @@
 					<ul>
 						<c:forEach items="${person.placesLived}" var="place">
 							<li>${place}</li>
+						</c:forEach>
+					</ul>
+				</div>
+				<div>
+					<h5>E-mails</h5>
+					<ul>
+						<c:forEach items="${person.emails}" var="email">
+							<li>${email.value}</li>
+						</c:forEach>
+					</ul>
+				</div>
+				<div>
+					<h5>Phones</h5>
+					<ul>
+						<c:forEach items="${person.phoneNumbers}" var="phone">
+							<li>${phone}</li>
 						</c:forEach>
 					</ul>
 				</div>

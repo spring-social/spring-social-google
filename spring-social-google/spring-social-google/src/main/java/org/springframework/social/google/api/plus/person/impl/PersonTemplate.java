@@ -1,6 +1,7 @@
 package org.springframework.social.google.api.plus.person.impl;
 
 import org.springframework.social.google.api.impl.AbstractGoogleApiOperations;
+import org.springframework.social.google.api.plus.person.ContactQueryBuilder;
 import org.springframework.social.google.api.plus.person.PeoplePage;
 import org.springframework.social.google.api.plus.person.Person;
 import org.springframework.social.google.api.plus.person.PersonOperations;
@@ -19,6 +20,9 @@ public class PersonTemplate extends AbstractGoogleApiOperations implements Perso
 	private static final String PLUSONERS = "/people/plusoners";
 	private static final String RESHARERS = "/people/resharers";
 	
+	static final String FEED_PREFIX = "https://www-opensocial.googleusercontent.com/api/people/@me/";
+	static final String CONTACTS_FEED = FEED_PREFIX + "@all/";
+	
 	public PersonTemplate(RestTemplate restTemplate, boolean isAuthorized) {
 		super(restTemplate, isAuthorized);
 	}
@@ -26,6 +30,11 @@ public class PersonTemplate extends AbstractGoogleApiOperations implements Perso
 	@Override
 	public Person getPerson(String id) {
 		return getEntity(PEOPLE_URL + id, Person.class);
+	}
+	
+	@Override
+	public Person getContact(String id) {
+		return getEntity(CONTACTS_FEED + id + "?fields=@all", ContactEntryWrapper.class).getEntry();
 	}
 
 	@Override
@@ -51,6 +60,11 @@ public class PersonTemplate extends AbstractGoogleApiOperations implements Perso
 	@Override
 	public PeoplePage getActivityResharers(String activityId, String pageToken) {
 		return getEntity(ACTIVITIES_URL + activityId + RESHARERS, PeoplePage.class);
+	}
+
+	@Override
+	public ContactQueryBuilder contactQuery() {
+		return new ContactQueryBuilderImpl(restTemplate);
 	}
 
 }

@@ -32,8 +32,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.http.converter.xml.SourceHttpMessageConverter;
 import org.springframework.social.google.api.Google;
-import org.springframework.social.google.api.gdata.contact.ContactOperations;
-import org.springframework.social.google.api.gdata.contact.impl.ContactTemplate;
 import org.springframework.social.google.api.legacyprofile.LegacyProfileOperations;
 import org.springframework.social.google.api.legacyprofile.impl.UserTemplate;
 import org.springframework.social.google.api.plus.activity.ActivityOperations;
@@ -46,7 +44,6 @@ import org.springframework.social.google.api.tasks.TaskOperations;
 import org.springframework.social.google.api.tasks.impl.TaskTemplate;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * <p>
@@ -63,7 +60,6 @@ import org.springframework.web.client.RestTemplate;
 public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 
 	private LegacyProfileOperations userOperations;
-	private ContactOperations contactOperations;
 	private PersonOperations profileOperations;
 	private ActivityOperations activityOperations;
 	private CommentOperations commentOperations;
@@ -89,16 +85,10 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 
 	private void initialize() {
 		userOperations = new UserTemplate(getRestTemplate(), isAuthorized());
-		contactOperations = new ContactTemplate(getRestTemplate(), isAuthorized());
 		profileOperations = new PersonTemplate(getRestTemplate(), isAuthorized());
 		activityOperations = new ActivityTemplate(getRestTemplate(), isAuthorized());
 		commentOperations = new CommentTemplate(getRestTemplate(), isAuthorized());
 		taskOperations = new TaskTemplate(getRestTemplate(), isAuthorized());
-	}
-	
-	@Override
-	protected void configureRestTemplate(RestTemplate restTemplate) {		
-		restTemplate.getInterceptors().add(new GoogleInterceptor());
 	}
 	
 	@Override
@@ -129,11 +119,6 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	@Override
 	public LegacyProfileOperations userOperations() {
 		return userOperations;
-	}
-
-	@Override
-	public ContactOperations contactOperations() {
-		return contactOperations;
 	}
 
 	@Override

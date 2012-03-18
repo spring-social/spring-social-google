@@ -6,7 +6,7 @@
 	<a href="${activity.url}" target="_blank">
 		<b>${activity.title}</b> <br/> published: ${activity.published} , updated: ${activity.updated}
 	</a>
-	<a href="${activity.actor.url}" target="_blank">${activity.actor.displayName}</a>
+	<a href="person?id=${activity.actor.id}">${activity.actor.displayName}</a>
 	<br/>
 	<br/>
 	${activity.content}

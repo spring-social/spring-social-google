@@ -37,5 +37,9 @@ public abstract class AbstractGoogleOperations {
 			throw new MissingAuthorizationException();
 		}
 	}
+	
+	protected <T> T getEntity(String url, Class<T> type) {
+		return restTemplate.getForObject(url, type);
+	}
 
 }

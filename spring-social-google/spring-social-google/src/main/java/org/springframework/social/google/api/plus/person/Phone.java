@@ -13,45 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.google.api.gdata.contact;
+package org.springframework.social.google.api.plus.person;
 
 /**
- * Model class representing a contact's e-mail.
- * @author Gabriel Axel
+ * Model class representing a contact's phone.
+ * @author gabi
  */
-public class Email {
+public class Phone {
 
-	private final String rel;
-	private final String label;
-	private final String address;
-	private final boolean primary;
-	
-	public Email(String rel, String label, String address, boolean primary) {
-		this.rel = rel;
-		this.label = label;
-		this.address = address;
-		this.primary = primary;
-	}
+	private String type;
+	private String value;
 	
 	@Override
 	public String toString() {
-		return address;
+		return value;
 	}
 	
-	public String getRel() {
-		return rel;
+	public String getType() {
+		return type;
 	}
 	
-	public String getLabel() {
-		return label;
-	}
-	
-	public String getAddress() {
-		return address;
-	}
-	
-	public boolean isPrimary() {
-		return primary;
+	public String getValue() {
+		return value;
 	}
 	
 }

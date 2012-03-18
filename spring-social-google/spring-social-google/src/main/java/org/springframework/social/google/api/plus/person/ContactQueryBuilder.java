@@ -13,15 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.google.api.gdata.contact;
+package org.springframework.social.google.api.plus.person;
 
-import org.springframework.social.google.api.gdata.query.GDataQueryBuilder;
+import org.springframework.social.google.api.query.ApiQueryBuilder;
 import org.springframework.social.google.api.query.QueryBuilder;
 
 /**
- * A {@link QueryBuilder} for contact groups.
+ * A {@link QueryBuilder} for contacts.
  * @author Gabriel Axel
  */
-public interface ContactGroupQueryBuilder extends GDataQueryBuilder<ContactGroupQueryBuilder, ContactGroup> {
+public interface ContactQueryBuilder extends ApiQueryBuilder<ContactQueryBuilder, PeoplePage> {
 
+	ContactQueryBuilder fromGroup(String group);
+
+	
 }

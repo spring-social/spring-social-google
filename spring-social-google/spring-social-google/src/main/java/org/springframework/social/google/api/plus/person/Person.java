@@ -17,19 +17,98 @@ package org.springframework.social.google.api.plus.person;
 
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 /**
  * Model class representing a full Google profile
  * @author Gabriel Axel
  */
-public class Person extends BasePerson {
+public class Person {
+	
+	private static class Name {
+		@JsonProperty String givenName;
+		@JsonProperty String familyName;
+	}
 
+	public static class Image {
+		@JsonProperty
+		private String url;
+	}
+	
+	@JsonProperty
+	private String kind;
+	
+	private String id;
+	
+	@JsonProperty
+	private Name name;
+	
+	private String displayName;
+	
+	@JsonProperty
+	private Image image;
+	
+	@JsonProperty
+	private String thumbnailUrl;
+	
 	private String gender;
 	private String aboutMe;
 	private String relationshipStatus;
 	private List<ProfileURL> urls;
 	private List<Organization> organizations;
 	private List<PlaceLived> placesLived;
+	private List<Email> emails;
+	private List<Phone> phoneNumbers;
 	
+	@Override
+	public String toString() {
+		return displayName;
+	}
+	
+	public boolean isGooglePlusProfile() {
+		if(kind != null) {
+			return true;
+		}
+		if(urls != null) {
+			for(ProfileURL url : urls) {
+				if("profile".equals(url.getType())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean isContactWithProfile() {
+		return kind == null && isGooglePlusProfile();
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
+	public String getGivenName() {
+		return name == null ? null : name.givenName;
+	}
+	
+	public String getFamilyName() {
+		return name == null ? null : name.familyName;
+	}
+	
+	public String getDisplayName() {
+		return displayName;
+	}
+	
+	public String getImageUrl() {
+		if(thumbnailUrl != null) {
+			return thumbnailUrl;
+		}
+		if(image != null) {
+			return image.url;
+		}
+		return null;
+	}
+
 	public String getGender() {
 		return gender;
 	}
@@ -53,5 +132,13 @@ public class Person extends BasePerson {
 	public List<PlaceLived> getPlacesLived() {
 		return placesLived;
 	}
-	
+
+	public List<Email> getEmails() {
+		return emails;
+	}
+
+	public List<Phone> getPhoneNumbers() {
+		return phoneNumbers;
+	}
+
 }

@@ -15,12 +15,19 @@
  */
 package org.springframework.social.google.api.plus.person;
 
+import java.util.List;
+
 import org.springframework.social.google.api.query.ApiPage;
 
 /**
  * {@link ApiPage} of {@link BasePerson}.
  * @author Gabriel Axel
  */
-public class PeoplePage extends ApiPage<BasePerson> {
+public class PeoplePage extends ApiPage<Person> {
 
+	public PeoplePage() {}
+	
+	public PeoplePage(List<? extends Person> items, String nextPageToken) {
+		super(items, nextPageToken);
+	}
 }

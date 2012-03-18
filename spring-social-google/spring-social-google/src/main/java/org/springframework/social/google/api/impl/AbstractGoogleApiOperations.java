@@ -37,10 +37,6 @@ public abstract class AbstractGoogleApiOperations extends AbstractGoogleOperatio
 		super(restTemplate, isAuthorized);
 	}
 	
-	protected <T> T getEntity(String url, Class<T> type) {
-		return restTemplate.getForObject(url, type);
-	}
-	
 	public <T extends ApiPage<?>> T getPage(String url, Class<T> type) {
 		return restTemplate.getForObject(url, type);
 	}

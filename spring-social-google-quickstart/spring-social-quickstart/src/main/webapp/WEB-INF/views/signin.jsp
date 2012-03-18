@@ -20,7 +20,7 @@
 				<h5>Sources: <a href="https://github.com/guznik/spring-social-google/">https://github.com/GabiAxel/spring-social-google/</a></h5>
 				<form action="signin/google" method="POST">
 				    <button type="submit" class="btn large primary">Sign in with Google</button>
-				    <input type="hidden" name="scope" value="https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo#email https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/tasks https://www.google.com/m8/feeds" />		    
+				    <input type="hidden" name="scope" value="https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo#email https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/tasks https://www-opensocial.googleusercontent.com/api/people" />		    
 				</form>
 			</div>
 		</div>

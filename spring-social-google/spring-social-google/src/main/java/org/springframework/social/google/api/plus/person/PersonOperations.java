@@ -15,6 +15,7 @@
  */
 package org.springframework.social.google.api.plus.person;
 
+
 /**
  * Defines operations for reading Google+ people.
  * To use "me" as user ID, requires OAuth2 scope https://www.googleapis.com/auth/plus.me
@@ -28,6 +29,8 @@ public interface PersonOperations {
 	 * @return the retrieved {@link Person}
 	 */
 	Person getPerson(String id);
+	
+	Person getContact(String id);
 	
 	/**
 	 * Retrieves the authenticated user's Google profile.
@@ -64,4 +67,6 @@ public interface PersonOperations {
 	 * @return a new {@link PersonQueryBuilder}
 	 */
 	PersonQueryBuilder personQuery();
+	
+	ContactQueryBuilder contactQuery();
 }

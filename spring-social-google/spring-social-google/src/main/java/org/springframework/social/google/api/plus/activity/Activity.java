@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.springframework.social.google.api.plus.person.BasePerson;
+import org.springframework.social.google.api.plus.person.Person;
 
 /**
  * Model class representing a Google+ activity
@@ -59,7 +59,7 @@ public class Activity {
 	private String url;
 	
 	@JsonProperty
-	private BasePerson actor;
+	private Person actor;
 	
 	@JsonProperty
 	private ActivityObject object;
@@ -84,7 +84,7 @@ public class Activity {
 		return url;
 	}
 
-	public BasePerson getActor() {
+	public Person getActor() {
 		return actor;
 	}
 	

@@ -16,7 +16,6 @@
 package org.springframework.social.google.api;
 
 import org.springframework.social.ApiBinding;
-import org.springframework.social.google.api.gdata.contact.ContactOperations;
 import org.springframework.social.google.api.impl.GoogleTemplate;
 import org.springframework.social.google.api.legacyprofile.LegacyProfileOperations;
 import org.springframework.social.google.api.plus.activity.ActivityOperations;
@@ -37,13 +36,6 @@ public interface Google extends ApiBinding {
 	 * @return {@link LegacyProfileOperations} for the authenticated user
 	 */
 	LegacyProfileOperations userOperations();
-	
-	/**
-	 * Retrieves {@link ContactOperations}, used for interacting with GData Contacts API.
-	 * Requires OAuth2 scope https://www.google.com/m8/feeds
-	 * @return {@link ContactOperations} for the authenticated user
-	 */
-	ContactOperations contactOperations();
 	
 	/**
 	 * Retrieves {@link PersonOperations}, used for interacting with Google+ People API.

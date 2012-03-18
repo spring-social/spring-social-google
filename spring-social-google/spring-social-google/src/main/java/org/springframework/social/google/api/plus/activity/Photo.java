@@ -17,7 +17,6 @@ package org.springframework.social.google.api.plus.activity;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeName;
-import org.springframework.social.google.api.plus.person.BasePerson.Image;
 
 /**
  * Model class representing a photo from a Google+ activity.

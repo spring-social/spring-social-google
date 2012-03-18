@@ -24,10 +24,17 @@ import java.util.List;
  */
 public class ApiPage<T> {
 
-	private List<T> items;
+	private List<? extends T> items;
 	private String nextPageToken;
 	
-	public List<T> getItems() {
+	protected ApiPage() {}
+	
+	protected ApiPage(List<? extends T> items, String nextPageToken) {
+		this.items = items;
+		this.nextPageToken = nextPageToken;
+	}
+	
+	public List<? extends T> getItems() {
 		return items;
 	}
 		

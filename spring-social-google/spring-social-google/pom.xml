@@ -8,7 +8,7 @@
 
 	<properties>
 		<spring.social.version>1.0.2.RELEASE</spring.social.version>
-		<spring.framework.version>3.1.0.RC1</spring.framework.version>
+		<spring.framework.version>3.1.1.RELEASE</spring.framework.version>
 	</properties>
 
 	<description>Spring Social extension with connection support and an API binding for Google</description>
@@ -62,17 +62,7 @@
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.2</version>
-		</dependency>
-		<dependency>
-			<groupId>xom</groupId>
-			<artifactId>xom</artifactId>
-			<version>1.2.5</version>
-		</dependency>
-		<dependency>
-			<groupId>jaxen</groupId>
-			<artifactId>jaxen</artifactId>
-			<version>1.1.1</version>
+			<version>1.9.5</version>
 		</dependency>
 	</dependencies>
 	
