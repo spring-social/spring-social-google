@@ -23,46 +23,77 @@ import org.springframework.social.google.api.plus.comment.CommentOperations;
 import org.springframework.social.google.api.plus.person.PersonOperations;
 import org.springframework.social.google.api.tasks.TaskOperations;
 
+import com.google.gdata.client.GoogleService;
+
 /**
-* Interface specifying a basic set of operations for interacting with Google APIs.
-* Implemented by {@link GoogleTemplate}.
-* @author Gabriel Axel
-*/
+ * Interface specifying a basic set of operations for interacting with Google
+ * APIs. Implemented by {@link GoogleTemplate}.
+ * 
+ * @author Gabriel Axel
+ */
 public interface Google extends ApiBinding {
 
 	/**
-	 * Retrieves {@link LegacyProfileOperations}, used for fetching user profile (predates Google+).
-	 * Requires OAuth2 scopes https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo#email
+	 * Retrieves {@link LegacyProfileOperations}, used for fetching user profile
+	 * (predates Google+). Requires OAuth2 scopes
+	 * https://www.googleapis.com/auth/userinfo.profile
+	 * https://www.googleapis.com/auth/userinfo#email
+	 * 
 	 * @return {@link LegacyProfileOperations} for the authenticated user
 	 */
 	LegacyProfileOperations userOperations();
-	
+
 	/**
-	 * Retrieves {@link PersonOperations}, used for interacting with Google+ People API.
-	 * Some methods require OAuth2 scope https://www.googleapis.com/auth/plus.me
-	 * @return {@link PersonOperations} for the authenticated user if authenticated
+	 * Retrieves {@link PersonOperations}, used for interacting with Google+
+	 * People API. Some methods require OAuth2 scope
+	 * https://www.googleapis.com/auth/plus.me
+	 * 
+	 * @return {@link PersonOperations} for the authenticated user if
+	 *         authenticated
 	 */
 	PersonOperations personOperations();
-	
+
 	/**
-	 * Retrieves {@link ActivityOperations}, used for interacting with Google+ Activities API.
-	 * Some methods require OAuth2 scope https://www.googleapis.com/auth/plus.me
-	 * @return {@link ActivityOperations} for the authenticated user if authenticated
+	 * Retrieves {@link ActivityOperations}, used for interacting with Google+
+	 * Activities API. Some methods require OAuth2 scope
+	 * https://www.googleapis.com/auth/plus.me
+	 * 
+	 * @return {@link ActivityOperations} for the authenticated user if
+	 *         authenticated
 	 */
 	ActivityOperations activityOperations();
-	
+
 	/**
-	 * Retrieves {@link CommentOperations}, used for interacting with Google+ Comments API.
-	 * Optionally uses OAuth2 scope https://www.googleapis.com/auth/plus.me
-	 * @return {@link ActivityOperations} for the authenticated user if authenticated
+	 * Retrieves {@link CommentOperations}, used for interacting with Google+
+	 * Comments API. Optionally uses OAuth2 scope
+	 * https://www.googleapis.com/auth/plus.me
+	 * 
+	 * @return {@link ActivityOperations} for the authenticated user if
+	 *         authenticated
 	 */
 	CommentOperations commentOperations();
-	
+
 	/**
-	 * Retrieves {@link TaskOperations}, used for interacting with Google Tasks API.
-	 * Requires OAuth scope https://www.googleapis.com/auth/tasks or 
+	 * Retrieves {@link TaskOperations}, used for interacting with Google Tasks
+	 * API. Requires OAuth scope https://www.googleapis.com/auth/tasks or
 	 * https://www.googleapis.com/auth/tasks.readonly
+	 * 
 	 * @return {@link TaskOperations} for the authenticated user
 	 */
 	TaskOperations taskOperations();
+
+	/**
+	 * Applies OAuth2 authentication to an existing GData client implementation
+	 * by adding "Authorization" header. Use this method if you want to use
+	 * Spring Social Google with existing GData client code, or if you want to
+	 * work with APIs which are not yet implemented in the library.
+	 * 
+	 * @see <a href="http://code.google.com/p/gdata-java-client/">GData Java Client</a>
+	 * 
+	 * @param client
+	 *            subclass of externally instantiated {@link GoogleService} to
+	 *            which OAuth2 authentication will be applied
+	 *            http://code.google.com/p/gdata-java-client/
+	 */
+	void applyAuthentication(GoogleService client);
 }

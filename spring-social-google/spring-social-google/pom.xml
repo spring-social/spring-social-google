@@ -17,6 +17,7 @@
 		<developer>
 			<name>Gabriel Axel</name>
 			<email>guznik@gmail.com</email>
+			<url>http://www.gabiaxel.com</url>
 		</developer>
 	</developers>
 
@@ -39,6 +40,11 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
+		</repository>
+		<repository>
+			<id>mandubian-mvn</id>
+			<name>Mandubian Maven Google Repository</name>
+			<url>http://mandubian-mvn.googlecode.com/svn/trunk/mandubian-mvn/repository</url>
 		</repository>
 	</repositories>
 
@@ -63,6 +69,13 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gdata</groupId>
+			<artifactId>gdata-core-1.0</artifactId>
+			<version>1.41.5</version>
+			<scope>provided</scope>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 	

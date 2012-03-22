@@ -45,6 +45,8 @@ import org.springframework.social.google.api.tasks.impl.TaskTemplate;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
 
+import com.google.gdata.client.GoogleService;
+
 /**
  * <p>
  * The central class for interacting with Google APIs.
@@ -58,6 +60,8 @@ import org.springframework.social.oauth2.OAuth2Version;
  * @author Gabriel Axel
  */
 public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
+	
+	private String accessToken;
 
 	private LegacyProfileOperations userOperations;
 	private PersonOperations profileOperations;
@@ -80,6 +84,7 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	 */
 	public GoogleTemplate(String accessToken) {
 		super(accessToken);
+		this.accessToken = accessToken;
 		initialize();
 	}
 
@@ -141,4 +146,8 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 		return taskOperations;
 	}
 	
+	@Override
+	public void applyAuthentication(GoogleService client) {
+		client.setHeader("Authorization", getOAuth2Version().getAuthorizationHeaderValue(accessToken));
+	}
 }
