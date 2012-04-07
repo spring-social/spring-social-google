@@ -20,7 +20,10 @@ import static org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNK
 import static org.codehaus.jackson.map.SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS;
 import static org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion.NON_NULL;
 import static org.springframework.http.MediaType.APPLICATION_ATOM_XML;
+import static org.springframework.util.ReflectionUtils.findMethod;
+import static org.springframework.util.ReflectionUtils.invokeMethod;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,8 +47,6 @@ import org.springframework.social.google.api.tasks.TaskOperations;
 import org.springframework.social.google.api.tasks.impl.TaskTemplate;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
-
-import com.google.gdata.client.GoogleService;
 
 /**
  * <p>
@@ -147,7 +148,9 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	}
 	
 	@Override
-	public void applyAuthentication(GoogleService client) {
-		client.setHeader("Authorization", getOAuth2Version().getAuthorizationHeaderValue(accessToken));
+	public void applyAuthentication(Object client) {
+		Method setHeaders = findMethod(client.getClass(), "setHeader", String.class, String.class);
+		invokeMethod(setHeaders, client, 
+			"Authorization", getOAuth2Version().getAuthorizationHeaderValue(accessToken));
 	}
 }

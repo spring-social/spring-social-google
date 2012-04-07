@@ -23,8 +23,6 @@ import org.springframework.social.google.api.plus.comment.CommentOperations;
 import org.springframework.social.google.api.plus.person.PersonOperations;
 import org.springframework.social.google.api.tasks.TaskOperations;
 
-import com.google.gdata.client.GoogleService;
-
 /**
  * Interface specifying a basic set of operations for interacting with Google
  * APIs. Implemented by {@link GoogleTemplate}.
@@ -95,5 +93,5 @@ public interface Google extends ApiBinding {
 	 *            which OAuth2 authentication will be applied
 	 *            http://code.google.com/p/gdata-java-client/
 	 */
-	void applyAuthentication(GoogleService client);
+	void applyAuthentication(Object client);
 }
