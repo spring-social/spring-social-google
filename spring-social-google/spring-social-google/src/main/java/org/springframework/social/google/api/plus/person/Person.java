@@ -15,6 +15,7 @@
  */
 package org.springframework.social.google.api.plus.person;
 
+import java.util.Date;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -51,6 +52,7 @@ public class Person {
 	@JsonProperty
 	private String thumbnailUrl;
 	
+	private Date birthday;
 	private String gender;
 	private String aboutMe;
 	private String relationshipStatus;
@@ -59,6 +61,7 @@ public class Person {
 	private List<PlaceLived> placesLived;
 	private List<Email> emails;
 	private List<Phone> phoneNumbers;
+	private List<Address> addresses;
 	
 	@Override
 	public String toString() {
@@ -109,6 +112,10 @@ public class Person {
 		return null;
 	}
 
+	public Date getBirthday() {
+		return birthday;
+	}
+	
 	public String getGender() {
 		return gender;
 	}
@@ -139,6 +146,10 @@ public class Person {
 
 	public List<Phone> getPhoneNumbers() {
 		return phoneNumbers;
+	}
+	
+	public List<Address> getAddresses() {
+		return addresses;
 	}
 
 }
