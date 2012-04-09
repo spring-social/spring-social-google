@@ -17,47 +17,23 @@ package org.springframework.social.google.api.legacyprofile;
 
 import java.io.Serializable;
 
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonProperty;
-
 /**
  * Model class representing a legacy Google profile (predates Google+).
  * @author Gabriel Axel
  */
 public class LegacyGoogleProfile implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-
-	private final String id;
-	private final String email;
-	private final String name;
-	private final String firstName;
-	private final String lastName;
-	private final String link;
-	private final String profilePictureUrl;
-	private final String gender;
-	private final String locale;
-
-	@JsonCreator
-	public LegacyGoogleProfile(@JsonProperty("id") String id,
-			@JsonProperty("email") String email,
-			@JsonProperty("name") String name,
-			@JsonProperty("given_name") String firstName,
-			@JsonProperty("family_name") String lastName,
-			@JsonProperty("link") String link,
-			@JsonProperty("picture") String profilePictureUrl,
-			@JsonProperty("gender") String gender,
-			@JsonProperty("locale") String locale) {
-		this.id = id;
-		this.email = email;
-		this.name = name;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.link = link;
-		this.profilePictureUrl = profilePictureUrl;
-		this.gender = gender;
-		this.locale = locale;
-	}
+	private static final long serialVersionUID = -634483399121748105L;
+	
+	private String id;
+	private String email;
+	private String name;
+	private String firstName;
+	private String lastName;
+	private String link;
+	private String profilePictureUrl;
+	private String gender;
+	private String locale;
 
 	public String getId() {
 		return id;
