@@ -15,8 +15,10 @@
  */
 package org.springframework.social.google.connect;
 
+import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.support.OAuth2ConnectionFactory;
 import org.springframework.social.google.api.Google;
+import org.springframework.social.oauth2.AccessGrant;
 
 /**
  * Google ConnectionFactory implementation.
@@ -29,4 +31,10 @@ public class GoogleConnectionFactory extends OAuth2ConnectionFactory<Google> {
 				new GoogleAdapter());
 	}
 
+	@Override
+	protected String extractProviderUserId(AccessGrant accessGrant) {
+		Google api = ((GoogleServiceProvider)getServiceProvider()).getApi(accessGrant.getAccessToken());
+	    UserProfile userProfile = getApiAdapter().fetchUserProfile(api);
+	    return userProfile.getUsername();
+	}
 }
