@@ -1,8 +1,0 @@
-Spring Social Google
-=====================
-
-spring-social-google - Library sources
-spring-social-google-quickstart - Example application
-
-[Reference Manual]: https://github.com/GabiAxel/spring-social-google/wiki/Spring-Social-Google-Reference-Manual
-[Live Example]: http://googleapis.cloudfoundry.com/
