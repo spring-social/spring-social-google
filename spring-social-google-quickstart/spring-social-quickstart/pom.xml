@@ -90,7 +90,7 @@
 		<dependency>
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-google</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.0.0.M1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.cloudfoundry</groupId>
@@ -140,6 +140,11 @@
 			<name>Spring Maven Milestone Repository</name>
 			<url>http://maven.springframework.org/milestone</url>
 			<snapshots><enabled>false</enabled></snapshots>
+		</repository>
+		<repository>
+			<id>spring.social.google</id>
+			<name>Spring Social Google</name>
+			<url>https://github.com/GabiAxel/maven/raw/master/</url>
 		</repository>
 	</repositories>
 	
