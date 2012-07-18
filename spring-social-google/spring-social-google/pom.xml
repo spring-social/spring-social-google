@@ -8,7 +8,7 @@
 
 	<properties>
 		<spring.social.version>1.0.2.RELEASE</spring.social.version>
-		<spring.framework.version>3.1.1.RELEASE</spring.framework.version>
+		<spring.framework.version>3.1.2.RELEASE</spring.framework.version>
 	</properties>
 
 	<description>Spring Social extension with connection support and an API binding for Google</description>

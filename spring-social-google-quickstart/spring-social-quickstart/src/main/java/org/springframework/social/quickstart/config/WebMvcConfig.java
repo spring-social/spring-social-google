@@ -42,10 +42,10 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		return new UserInterceptor(usersConnectionRepository);
 	}
 	
-	@Bean
-	public MultipartResolver multipartResolver() {
-		return new CommonsMultipartResolver();
-	}
+//	@Bean
+//	public MultipartResolver multipartResolver() {
+//		return new CommonsMultipartResolver();
+//	}
 		
 //	@Override
 //	public void addInterceptors(InterceptorRegistry registry) {
