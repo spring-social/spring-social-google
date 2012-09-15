@@ -15,7 +15,7 @@
 	
 	<name>Spring Social Google Quickstart</name>
 	<description>Example application that fetches the user email, profile details and contacts from Google.</description>
-	<url>https://github.com/guznik/spring-social-google/tree/master/spring-social-google-quickstart</url>
+	<url>https://github.com/GabiAxel/spring-social-google/tree/master/spring-social-google-quickstart</url>
 	<developers>
 		<developer>
 			<name>Gabriel Axel</name>
