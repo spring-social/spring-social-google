@@ -41,6 +41,7 @@ public class LegacyGoogleProfile implements Serializable {
 	
 	private String link;
 	
+	@JsonProperty("picture")
 	private String profilePictureUrl;
 	
 	private String gender;
