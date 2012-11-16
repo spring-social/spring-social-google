@@ -17,6 +17,8 @@ package org.springframework.social.google.api.legacyprofile;
 
 import java.io.Serializable;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 /**
  * Model class representing a legacy Google profile (predates Google+).
  * @author Gabriel Axel
@@ -26,13 +28,23 @@ public class LegacyGoogleProfile implements Serializable {
 	private static final long serialVersionUID = -634483399121748105L;
 	
 	private String id;
+	
 	private String email;
+	
 	private String name;
+	
+	@JsonProperty("given_name")
 	private String firstName;
+	
+	@JsonProperty("family_name")
 	private String lastName;
+	
 	private String link;
+	
 	private String profilePictureUrl;
+	
 	private String gender;
+	
 	private String locale;
 
 	public String getId() {
