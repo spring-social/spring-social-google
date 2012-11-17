@@ -24,6 +24,8 @@ import static org.springframework.util.StringUtils.hasText;
 public abstract class ApiEntity {
 
 	private String id;
+	
+	private String etag;
 
 	protected ApiEntity() {
 	}
@@ -34,6 +36,10 @@ public abstract class ApiEntity {
 
 	public String getId() {
 		return id;
+	}
+	
+	public String getEtag() {
+		return etag;
 	}
 	
 }

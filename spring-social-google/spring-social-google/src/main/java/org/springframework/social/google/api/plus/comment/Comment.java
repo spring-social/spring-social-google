@@ -2,8 +2,8 @@ package org.springframework.social.google.api.plus.comment;
 
 import java.util.Date;
 
-import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.springframework.social.google.api.ApiEntity;
 import org.springframework.social.google.api.plus.person.Person;
 
 /**
@@ -11,40 +11,22 @@ import org.springframework.social.google.api.plus.person.Person;
  * 
  * @author Gabriel Axel
  */
-public class Comment {
+public class Comment extends ApiEntity {
 
 	public static class CommentObject {
 
-		private final String content;
-
-		@JsonCreator
-		public CommentObject(@JsonProperty("content") String content) {
-			this.content = content;
-		}
+		@JsonProperty
+		private String content;
 	}
 
-	private final String id;
-	private final Date published;
-	private final Date updated;
-	private final String content;
-	private final Person actor;
-
-	@JsonCreator
-	public Comment(@JsonProperty("id") String id,
-			@JsonProperty("published") Date published,
-			@JsonProperty("updated") Date updated,
-			@JsonProperty("object") CommentObject object,
-			@JsonProperty("actor") Person actor) {
-		this.id = id;
-		this.published = published;
-		this.updated = updated;
-		this.content = object.content;
-		this.actor = actor;
-	}
-
-	public String getId() {
-		return id;
-	}
+	private Date published;
+	
+	private Date updated;
+	
+	@JsonProperty
+	private CommentObject object;
+	
+	private Person actor;
 
 	public Date getPublished() {
 		return published;
@@ -55,7 +37,7 @@ public class Comment {
 	}
 
 	public String getContent() {
-		return content;
+		return object != null ? object.content : null;
 	}
 
 	public Person getActor() {

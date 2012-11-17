@@ -25,9 +25,13 @@ import java.util.List;
 public class ApiPage<T> {
 
 	private List<? extends T> items;
+	
 	private String nextPageToken;
 	
-	protected ApiPage() {}
+	private String etag;
+	
+	protected ApiPage() {
+	}
 	
 	protected ApiPage(List<? extends T> items, String nextPageToken) {
 		this.items = items;
@@ -42,4 +46,7 @@ public class ApiPage<T> {
 		return nextPageToken;
 	}
 
+	public String getEtag() {
+		return etag;
+	}
 }

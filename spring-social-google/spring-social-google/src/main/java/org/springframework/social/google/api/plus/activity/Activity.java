@@ -20,13 +20,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.springframework.social.google.api.ApiEntity;
 import org.springframework.social.google.api.plus.person.Person;
 
 /**
  * Model class representing a Google+ activity
  * @author Gabriel Axel
  */
-public class Activity {
+public class Activity extends ApiEntity {
 	
 	public static class ActivityObject {
 		
@@ -52,10 +53,12 @@ public class Activity {
 
 	}
 	
-	private String id;
 	private String title;
+	
 	private Date published;
+	
 	private Date updated;
+	
 	private String url;
 	
 	@JsonProperty
@@ -64,10 +67,6 @@ public class Activity {
 	@JsonProperty
 	private ActivityObject object;
 	
-	public String getId() {
-		return id;
-	}
-
 	public String getTitle() {
 		return title;
 	}

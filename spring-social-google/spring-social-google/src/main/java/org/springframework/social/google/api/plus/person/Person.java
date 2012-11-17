@@ -19,28 +19,31 @@ import java.util.Date;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.springframework.social.google.api.ApiEntity;
 
 /**
  * Model class representing a full Google profile
  * @author Gabriel Axel
  */
-public class Person {
+public class Person extends ApiEntity {
 	
 	private static class Name {
-		@JsonProperty String givenName;
-		@JsonProperty String familyName;
+		
+		@JsonProperty
+		private String givenName;
+		
+		@JsonProperty
+		private String familyName;
 	}
 
 	public static class Image {
+
 		@JsonProperty
 		private String url;
 	}
 	
-	@JsonProperty
 	private String kind;
-	
-	private String id;
-	
+
 	@JsonProperty
 	private Name name;
 	
@@ -49,18 +52,26 @@ public class Person {
 	@JsonProperty
 	private Image image;
 	
-	@JsonProperty
 	private String thumbnailUrl;
 	
 	private Date birthday;
+	
 	private String gender;
+	
 	private String aboutMe;
+	
 	private String relationshipStatus;
+	
 	private List<ProfileURL> urls;
+	
 	private List<Organization> organizations;
+	
 	private List<PlaceLived> placesLived;
+	
 	private List<Email> emails;
+	
 	private List<Phone> phoneNumbers;
+	
 	private List<Address> addresses;
 	
 	@Override
@@ -84,10 +95,6 @@ public class Person {
 	
 	public boolean isContactWithProfile() {
 		return kind == null && isGooglePlusProfile();
-	}
-	
-	public String getId() {
-		return id;
 	}
 	
 	public String getGivenName() {
