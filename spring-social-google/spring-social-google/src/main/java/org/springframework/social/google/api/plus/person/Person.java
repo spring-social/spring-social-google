@@ -42,6 +42,7 @@ public class Person extends ApiEntity {
 		private String url;
 	}
 	
+	@JsonProperty
 	private String kind;
 
 	@JsonProperty
@@ -80,21 +81,11 @@ public class Person extends ApiEntity {
 	}
 	
 	public boolean isGooglePlusProfile() {
-		if(kind != null) {
-			return true;
-		}
-		if(urls != null) {
-			for(ProfileURL url : urls) {
-				if("profile".equals(url.getType())) {
-					return true;
-				}
-			}
-		}
-		return false;
+		return kind != null;
 	}
 	
 	public boolean isContactWithProfile() {
-		return kind == null && isGooglePlusProfile();
+		return kind == null;
 	}
 	
 	public String getGivenName() {
