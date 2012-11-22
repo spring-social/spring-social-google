@@ -15,6 +15,9 @@
  */
 package org.springframework.social.google.api.query.impl;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import org.springframework.social.google.api.query.ApiPage;
 import org.springframework.social.google.api.query.ApiQueryBuilder;
 import org.springframework.social.google.api.query.QueryBuilder;
@@ -61,7 +64,11 @@ public class ApiQueryBuilderImpl<Q extends ApiQueryBuilder<?, T>, T extends ApiP
 
 	@Override
 	public T getPage() {
-		return restTemplate.getForObject(build().toString(), type);
+		try {
+			return restTemplate.getForObject(new URI(build().toString()), type);
+		} catch (URISyntaxException e) {
+			throw new IllegalStateException(e);
+		}
 	}
 
 }
