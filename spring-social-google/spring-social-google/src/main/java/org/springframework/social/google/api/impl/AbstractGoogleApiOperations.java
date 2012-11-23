@@ -15,7 +15,7 @@
  */
 package org.springframework.social.google.api.impl;
 
-import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.*;
 import static org.springframework.http.HttpMethod.PUT;
 import static org.springframework.util.StringUtils.hasText;
 
@@ -72,5 +72,9 @@ public abstract class AbstractGoogleApiOperations {
 
 	protected void deleteEntity(String baseUrl, ApiEntity entity) {
 		restTemplate.delete(baseUrl + '/' + entity.getId());
+	}
+	
+	protected void patch(String url, Object request) {
+		restTemplate.exchange(url, PATCH, new HttpEntity<Object>(request), Void.class);
 	}
 }

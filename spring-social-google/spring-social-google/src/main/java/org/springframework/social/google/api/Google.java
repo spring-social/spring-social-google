@@ -16,6 +16,7 @@
 package org.springframework.social.google.api;
 
 import org.springframework.social.ApiBinding;
+import org.springframework.social.google.api.drive.DriveOperations;
 import org.springframework.social.google.api.impl.GoogleTemplate;
 import org.springframework.social.google.api.legacyprofile.LegacyProfileOperations;
 import org.springframework.social.google.api.plus.activity.ActivityOperations;
@@ -79,6 +80,21 @@ public interface Google extends ApiBinding {
 	 * @return {@link TaskOperations} for the authenticated user
 	 */
 	TaskOperations taskOperations();
+	
+	/**
+	 * Retrieves {@link DriveOperations}, used for interacting with Google Drive API.
+	 * Requires OAuth scope(s) from the following:
+	 * <ul>
+	 * <li>https://www.googleapis.com/auth/drive.file</li>
+	 * <li>https://www.googleapis.com/auth/drive</li>
+	 * <li>https://www.googleapis.com/auth/drive.apps.readonly</li>
+	 * <li>https://www.googleapis.com/auth/drive.readonly</li>
+	 * <li>https://www.googleapis.com/auth/drive.readonly.metadata</li>
+	 * See <a href="https://developers.google.com/drive/scopes">https://developers.google.com/drive/scopes</a>
+	 * for details about the different scopes
+	 * @return {@link DriveOperations} for the authenticated user
+	 */
+	DriveOperations driveOperations();
 
 	/**
 	 * Applies OAuth2 authentication to an existing GData client implementation

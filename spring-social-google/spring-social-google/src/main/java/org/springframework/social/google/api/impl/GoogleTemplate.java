@@ -30,11 +30,14 @@ import java.util.List;
 import javax.xml.transform.Source;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.http.converter.xml.SourceHttpMessageConverter;
 import org.springframework.social.google.api.Google;
+import org.springframework.social.google.api.drive.DriveOperations;
+import org.springframework.social.google.api.drive.impl.DriveTemplate;
 import org.springframework.social.google.api.legacyprofile.LegacyProfileOperations;
 import org.springframework.social.google.api.legacyprofile.impl.UserTemplate;
 import org.springframework.social.google.api.plus.activity.ActivityOperations;
@@ -69,6 +72,7 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	private ActivityOperations activityOperations;
 	private CommentOperations commentOperations;
 	private TaskOperations taskOperations;
+	private DriveOperations driveOperations;
 	
 	/**
 	 * Creates a new instance of GoogleTemplate.
@@ -86,6 +90,11 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	public GoogleTemplate(String accessToken) {
 		super(accessToken);
 		this.accessToken = accessToken;
+		
+		// Using org.springframework.http.client.HttpComponentsClientHttpRequestFactory
+		// NOT org.springframework.http.client.HttpComponentsClientHttpRequestFactory
+		// because the former doesn't support HTTP PATCH method yet (Spring Social 1.0.2)
+		setRequestFactory(new HttpComponentsClientHttpRequestFactory());
 		initialize();
 	}
 
@@ -95,6 +104,7 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 		activityOperations = new ActivityTemplate(getRestTemplate(), isAuthorized());
 		commentOperations = new CommentTemplate(getRestTemplate(), isAuthorized());
 		taskOperations = new TaskTemplate(getRestTemplate(), isAuthorized());
+		driveOperations = new DriveTemplate(getRestTemplate(), isAuthorized());
 	}
 	
 	@Override
@@ -148,9 +158,15 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	}
 	
 	@Override
+	public DriveOperations driveOperations() {
+		return driveOperations;
+	}
+	
+	@Override
 	public void applyAuthentication(Object client) {
 		Method setHeaders = findMethod(client.getClass(), "setHeader", String.class, String.class);
 		invokeMethod(setHeaders, client, 
 			"Authorization", getOAuth2Version().getAuthorizationHeaderValue(accessToken));
 	}
+
 }
