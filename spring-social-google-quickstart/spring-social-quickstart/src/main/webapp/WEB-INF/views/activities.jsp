@@ -15,36 +15,34 @@
 
 <body>
 	<c:set var="selected" value="plus" />
+	<c:set var="subselected" value="activities" />
 	<jsp:directive.include file="bar.jspf" />
 
-	<div class="container-fluid">
+	<div class="container">
 	
 		<jsp:directive.include file="plusops.jspf" />
 		
-		<div class="content">
+		<h1>Activities</h1>
+		
+		<jsp:directive.include file="activitiesform.jspf"/>
+		
+		<c:if test="${not empty activities.items}">
 
-			<h1>Activities</h1>
-			
-			<jsp:directive.include file="activitiesform.jspf"/>
-			
-			<c:if test="${not empty activities.items}">
+			<c:forEach items="${activities.items}" var="activity">
+				<div class="activity">
+					<jsp:directive.include file="activitycontent.jspf"/>
+					<br/>
+					<a href="activity?id=${activity.id}">Show activity by itself</a>
+				</div>
+			</c:forEach>				
 
-				<c:forEach items="${activities.items}" var="activity">
-					<div class="activity">
-						<jsp:directive.include file="activitycontent.jspf"/>
-						<br/>
-						<a href="activity?id=${activity.id}">Show activity by itself</a>
-					</div>
-				</c:forEach>				
-
-				<c:if test="${not empty activities.nextPageToken}">
-					<p class="pull-right"><a href="activities?${not empty param.text ? 'text=' : ''}${param.text}&amp;pageToken=${activities.nextPageToken}"><![CDATA[Next Page &rarr;]]></a></p>
-				</c:if>
+			<c:if test="${not empty activities.nextPageToken}">
+				<p class="pull-right"><a href="activities?${not empty param.text ? 'text=' : ''}${param.text}&amp;pageToken=${activities.nextPageToken}"><![CDATA[Next Page &rarr;]]></a></p>
 			</c:if>
-			<c:if test="${(empty activities.items) and (not empty param.text)}">
-				<div>No activities were found for search criteria</div>
-			</c:if>
-		</div>
+		</c:if>
+		<c:if test="${(empty activities.items) and (not empty param.text)}">
+			<div>No activities were found for search criteria</div>
+		</c:if>
 	</div>
 </body>
 </html>

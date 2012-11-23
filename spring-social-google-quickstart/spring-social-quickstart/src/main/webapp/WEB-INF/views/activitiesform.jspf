@@ -4,34 +4,19 @@
 	<jsp:directive.page language="java"
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 
-	<div>
-		<form action="activities" class="pull-left">
-			<div class="clearfix">
-				<label for="id">Profile ID or "me":</label>
-				<div class="input">
-					<input type="text" id="id" name="id" value="${param.id}"/>
-				</div>
-			</div>
-			<div class="clearfix">
-				<div class="input">
-					<input type="submit" class="btn" value="Get Activities"/>
-				</div>
-			</div>
-		</form>
-		<form action="activities" class="pull-left">
-			<div class="clearfix">
-				<label for="text">Search for:</label>
-				<div class="input">
-					<input type="text" id="text" name="text" value="${param.text}"/>
-				</div>
-			</div>
-			<div class="clearfix">
-				<div class="input">
-					<input type="submit" class="btn" value="Search Activities"/>
-				</div>
-			</div>
-		</form>
-	</div>
-	<div class="clear"></div>
+	<form action="activities" class="form-horizontal">
+		<label for="id" class="control-label">Profile ID or "me":</label>
+		<div class="controls"> 
+			<input type="text" id="id" name="id" value="${param.id}"/> 
+			<input type="submit" class="btn span2" value="Get Activities"/>
+		</div>
+	</form>
+	<form action="activities" class="form-horizontal">
+		<label for="text" class="control-label">Search for:</label>
+		<div class="controls"> 
+			<input type="text" id="text" name="text" value="${param.text}"/> 
+			<input type="submit" class="btn span2" value="Search Activities"/>
+		</div>
+	</form>
 	
 </jsp:root>

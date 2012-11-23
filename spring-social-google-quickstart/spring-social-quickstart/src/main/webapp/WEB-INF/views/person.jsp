@@ -15,93 +15,101 @@
 
 <body>
 	<c:set var="selected" value="plus" />
+	<c:set var="subselected" value="people" />
 	<jsp:directive.include file="bar.jspf" />
 
-	<div class="container-fluid">
+	<div class="container">
 	
 		<jsp:directive.include file="plusops.jspf" />
 		
-		<div class="content">
-
-			<h1>Profile</h1>
-			
-			<jsp:directive.include file="peopleform.jspf"/>
-			
-			<c:if test="${not empty person}">
-				<div class="span12 columns">
-					<form>
-						<div class="clearfix">
-							<label>Profile ID:</label>
-							<label class="text">${person.id}</label>
+		<h1>Profile</h1>
+		
+		<jsp:directive.include file="peopleform.jspf"/>
+		
+		<c:if test="${not empty person}">
+			<div class="span12 columns">
+				<form class="form-horizontal">
+					<div class="control-group">
+						<label class="control-label">Profile ID:</label>
+						<div class="controls">
+							<span class="uneditable-input input-xxlarge">${person.id}</span>
 						</div>
-						<div class="clearfix">
-							<label>Display Name:</label>
-							<label class="text">${person.displayName}</label>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Display Name:</label>
+						<div class="controls">
+							<span class="uneditable-input input-xxlarge">${person.displayName}</span>
 						</div>
-						<div class="clearfix">
-							<label>Gender:</label>
-							<label class="text">${person.gender}</label>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Gender:</label>
+						<div class="controls">
+							<span class="uneditable-input input-xxlarge">${person.gender}</span>
 						</div>
-						<div class="clearfix">
-							<label>About Me:</label>
-							<label class="text">${person.aboutMe}</label>
+					</div>
+					<div class="control-group">
+						<label class="control-label">About Me:</label>
+						<div class="controls">
+							<span class="uneditable-input input-xxlarge">${person.aboutMe}</span>
 						</div>
-						<div class="clearfix">
-							<label>Relationship Status:</label>
-							<label class="text">${person.relationshipStatus}</label>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Relationship Status:</label>
+						<div class="controls">
+							<span class="uneditable-input input-xxlarge">${person.relationshipStatus}</span>
 						</div>
-					</form>
-				</div>
-				<div class="span4 columns">
-					<div>Profile Picture</div>
-					<img src="${person.imageUrl}" />
-				</div>
-				<div class="clear"></div>
-				<div>
-					<h5>URLs</h5>
-					<ul>
-						<c:forEach items="${person.urls}" var="url">
-							<li><a href="${url.value}">${url.value}</a> ${url.type}</li>
-						</c:forEach>
-					</ul>
-				</div>
-				<div>
-					<h5>Organizations</h5>
-					<ul>
-						<c:forEach items="${person.organizations}" var="organization">
-							<li>${organization}</li>
-						</c:forEach>
-					</ul>
-				</div>
-				<div>
-					<h5>Places Lived</h5>
-					<ul>
-						<c:forEach items="${person.placesLived}" var="place">
-							<li>${place}</li>
-						</c:forEach>
-					</ul>
-				</div>
-				<div>
-					<h5>E-mails</h5>
-					<ul>
-						<c:forEach items="${person.emails}" var="email">
-							<li>${email.value}</li>
-						</c:forEach>
-					</ul>
-				</div>
-				<div>
-					<h5>Phones</h5>
-					<ul>
-						<c:forEach items="${person.phoneNumbers}" var="phone">
-							<li>${phone}</li>
-						</c:forEach>
-					</ul>
-				</div>
-			</c:if>
-			<c:if test="${empty person and not empty param.id}">
-				<div>No profile was found for the provided ID</div>
-			</c:if>
-		</div>
+					</div>
+				</form>
+			</div>
+			<div class="span4 columns">
+				<div>Profile Picture</div>
+				<img src="${person.imageUrl}" />
+			</div>
+			<div class="clear"></div>
+			<div>
+				<h5>URLs</h5>
+				<ul>
+					<c:forEach items="${person.urls}" var="url">
+						<li><a href="${url.value}">${url.value}</a> ${url.type}</li>
+					</c:forEach>
+				</ul>
+			</div>
+			<div>
+				<h5>Organizations</h5>
+				<ul>
+					<c:forEach items="${person.organizations}" var="organization">
+						<li>${organization}</li>
+					</c:forEach>
+				</ul>
+			</div>
+			<div>
+				<h5>Places Lived</h5>
+				<ul>
+					<c:forEach items="${person.placesLived}" var="place">
+						<li>${place}</li>
+					</c:forEach>
+				</ul>
+			</div>
+			<div>
+				<h5>E-mails</h5>
+				<ul>
+					<c:forEach items="${person.emails}" var="email">
+						<li>${email.value}</li>
+					</c:forEach>
+				</ul>
+			</div>
+			<div>
+				<h5>Phones</h5>
+				<ul>
+					<c:forEach items="${person.phoneNumbers}" var="phone">
+						<li>${phone}</li>
+					</c:forEach>
+				</ul>
+			</div>
+		</c:if>
+		<c:if test="${empty person and not empty param.id}">
+			<div>No profile was found for the provided ID</div>
+		</c:if>
 	</div>
 </body>
 </html>

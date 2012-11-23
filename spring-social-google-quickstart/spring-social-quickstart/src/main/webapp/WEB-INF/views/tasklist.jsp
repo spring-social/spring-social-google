@@ -16,44 +16,43 @@
 
 <body>
 	<c:set var="selected" value="tasks" />
+	<c:set var="subselected" value="tasklists" />
 	<jsp:directive.include file="bar.jspf" />
 
-	<div class="container-fluid">
+	<div class="container">
 	
 		<jsp:directive.include file="taskops.jspf" />
 		
-		<div class="content">
 
-			<h1>Task List Details</h1>
-	
-			<div class="row">
-	
-				<div class="span10 columns">
-	
-					<form:form>
-						<div class="clearfix">
-							<label for="title">Name</label>
-							<div class="input">
-								<form:input path="title" cssClass="xlarge" />
-							</div>
+		<h1>Task List Details</h1>
+
+		<div class="row">
+
+			<div class="span10 columns">
+
+				<form:form>
+					<div class="clearfix">
+						<label for="title">Name</label>
+						<div class="input">
+							<form:input path="title" cssClass="xlarge" />
 						</div>
-						<div class="actions">
-							<input type="submit" class="btn primary" value="Save" />
-							<a href="tasklists" class="btn leftMargin">Cancel</a>
-							<c:if test="${param.id != null}">
-								<input name="delete" type="submit" class="btn danger secondary-action" value="Delete" 
-									onclick="return confirm('Are you sure you want to delete this task list?')" />
-							</c:if>
+					</div>
+					<div class="actions">
+						<input type="submit" class="btn btn-primary" value="Save" />
+						<a href="tasklists" class="btn leftMargin">Cancel</a>
+						<c:if test="${param.id != null}">
+							<input name="delete" type="submit" class="btn btn-danger leftMargin" value="Delete" 
+								onclick="return confirm('Are you sure you want to delete this task list?')" />
+						</c:if>
+					</div>
+					<spring:hasBindErrors name="taskListForm">
+						<div class="error">
+							<c:forEach items="${errors.allErrors}" var="error">
+								<div><span class="help-inline"><spring:message message="${error}" /></span></div>
+							</c:forEach>
 						</div>
-						<spring:hasBindErrors name="taskListForm">
-							<div class="error">
-								<c:forEach items="${errors.allErrors}" var="error">
-									<div><span class="help-inline"><spring:message message="${error}" /></span></div>
-								</c:forEach>
-							</div>
-						</spring:hasBindErrors>
-					</form:form>
-				</div>
+					</spring:hasBindErrors>
+				</form:form>
 			</div>
 		</div>
 	</div>

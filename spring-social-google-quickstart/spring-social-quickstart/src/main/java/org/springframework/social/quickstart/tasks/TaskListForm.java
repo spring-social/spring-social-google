@@ -1,7 +1,5 @@
 package org.springframework.social.quickstart.tasks;
 
-import java.util.Date;
-
 import org.hibernate.validator.constraints.NotBlank;
 
 public class TaskListForm {
@@ -10,8 +8,6 @@ public class TaskListForm {
 	
 	@NotBlank(message="Task name may not be empty")
 	private String title;
-
-	
 	
 	public TaskListForm() {
 		

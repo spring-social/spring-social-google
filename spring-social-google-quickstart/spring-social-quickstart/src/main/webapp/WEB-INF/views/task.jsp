@@ -16,64 +16,58 @@
 
 <body>
 	<c:set var="selected" value="tasks" />
+	<c:set var="subselected" value="tasks" />
 	<jsp:directive.include file="bar.jspf" />
 
-	<div class="container-fluid">
+	<div class="container">
 	
 		<jsp:directive.include file="taskops.jspf" />
 		
-		<div class="content">
+		<h1>Task Details</h1>
 
-			<h1>Task Details</h1>
-	
-			<div class="row">
-	
-				<div class="span10 columns">
-	
-					<form:form>
-						<div class="clearfix">
-							<label for="title">Name</label>
-							<div class="input">
-								<form:input path="title" cssClass="xlarge" />
-							</div>
-						</div>
-						<div class="clearfix">
-							<label for="notes">Notes</label>
-							<div class="input">
-								<form:textarea path="notes" cssClass="xlarge" />
-							</div>
-						</div>
-						<div class="clearfix">
-							<label for="due">Due</label>
-							<div class="input">
-								<form:input path="due" cssClass="xlarge dateInput" />
-							</div>
-						</div>
-						<div class="clearfix">
-							<label for="completed">Completed</label>
-							<div class="input">
-								<form:input path="completed" cssClass="xlarge dateInput" />
-							</div>
-						</div>
-						<div class="actions">
-							<input type="submit" class="btn primary" value="Save" />
-							<a href="tasks?list=${param.list}" class="btn leftMargin">Cancel</a>
-							<c:if test="${param.id != null}">
-								<input name="delete" type="submit" class="btn danger secondary-action" value="Delete" 
-									onclick="return confirm('Are you sure you want to delete this task?')" />
-							</c:if>
-						</div>
-						<spring:hasBindErrors name="taskListForm">
-							<div class="error">
-								<c:forEach items="${errors.allErrors}" var="error">
-									<div><span class="help-inline"><spring:message message="${error}" /></span></div>
-								</c:forEach>
-							</div>
-						</spring:hasBindErrors>
-					</form:form>
+		<form:form cssClass="form-horizontal">
+			<div class="control-group">
+				<label for="title" class="control-label">Name</label>
+				<div class="controls">
+					<form:input path="title" cssClass="input-xlarge" />
 				</div>
 			</div>
-		</div>
+			<div class="control-group">
+				<label for="notes" class="control-label">Notes</label>
+				<div class="controls">
+					<form:textarea path="notes" cssClass="input-xlarge" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label for="due" class="control-label">Due</label>
+				<div class="controls">
+					<form:input path="due" cssClass="dateInput input-small" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label for="completed" class="control-label">Completed</label>
+				<div class="controls">
+					<form:input path="completed" cssClass="dateInput input-small" />
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<input type="submit" class="btn btn-primary" value="Save" />
+					<a href="tasks?list=${param.list}" class="btn leftMargin">Cancel</a>
+					<c:if test="${param.id != null}">
+						<input name="delete" type="submit" class="btn btn-danger leftMargin" value="Delete" 
+							onclick="return confirm('Are you sure you want to delete this task?')" />
+					</c:if>
+				</div>
+			</div>
+			<spring:hasBindErrors name="taskListForm">
+				<div class="error">
+					<c:forEach items="${errors.allErrors}" var="error">
+						<div><span class="help-inline"><spring:message message="${error}" /></span></div>
+					</c:forEach>
+				</div>
+			</spring:hasBindErrors>
+		</form:form>
 	</div>
 </body>
 	</html>

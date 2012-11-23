@@ -12,12 +12,13 @@
 	<script src="resources/js/html5.js"></script>
 <![endif]-->
 
-<script src="resources/js/jquery-1.7.2.min.js"><![CDATA[<!-- -->]]></script>
-<script src="resources/js/jquery-ui-1.8.16.custom.min.js"><![CDATA[<!-- -->]]></script>
+<script src="resources/js/jquery-1.8.3.min.js"><![CDATA[<!-- -->]]></script>
+<script src="resources/js/jquery-ui-1.9.1.custom.min.js"><![CDATA[<!-- -->]]></script>
+<script src="resources/js/bootstrap.min.js"><![CDATA[<!-- -->]]></script>
 <script src="resources/js/form.js"><![CDATA[<!-- -->]]></script>
 
 <!-- Le styles -->
-<link href="resources/css/bootstrap-1.4.0.min.css" rel="stylesheet"/>
+<link href="resources/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="resources/css/flick/jquery-ui-1.8.16.custom.css" rel="stylesheet"/>
 <link href="resources/css/style.css" rel="stylesheet"/>
 

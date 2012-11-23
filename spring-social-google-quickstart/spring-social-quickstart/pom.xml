@@ -8,13 +8,13 @@
 	<version>1.0.0</version>
 	<properties>
 		<java-version>1.6</java-version>
-		<spring.framework.version>3.1.2.RELEASE</spring.framework.version>
+		<spring.framework.version>3.2.0.RC1</spring.framework.version>
 		<org.springframework.security.crypto-version>3.1.1.RELEASE</org.springframework.security.crypto-version>
 		<spring.social.version>1.0.2.RELEASE</spring.social.version>
 	</properties>
 	
 	<name>Spring Social Google Quickstart</name>
-	<description>Example application that fetches the user email, profile details and contacts from Google.</description>
+	<description>Example application that covers usage of Google APIs.</description>
 	<url>https://github.com/guznik/spring-social-google/tree/master/spring-social-google-quickstart</url>
 	<developers>
 		<developer>
@@ -90,7 +90,7 @@
 		<dependency>
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-google</artifactId>
-			<version>1.0.0.M1</version>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.cloudfoundry</groupId>

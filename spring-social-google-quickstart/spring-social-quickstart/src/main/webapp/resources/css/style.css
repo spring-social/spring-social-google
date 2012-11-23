@@ -66,3 +66,15 @@ body {
 .inline {
 	display: inline;
 }
+
+.unviewed {
+	font-weight: bold;
+}
+
+.trashed {
+	text-decoration: line-through;
+}
+
+.name-cell {
+	width: 100%;
+}

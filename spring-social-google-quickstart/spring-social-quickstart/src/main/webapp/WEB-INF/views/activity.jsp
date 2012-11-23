@@ -15,18 +15,13 @@
 
 <body>
 	<c:set var="selected" value="plus" />
+	<c:set var="subselected" value="activities" />
 	<jsp:directive.include file="bar.jspf" />
 
-	<div class="container-fluid">
-	
+	<div class="container">
 		<jsp:directive.include file="plusops.jspf" />
-		
-		<div class="content">
-
-			<h1>Activity</h1>
-			
-			<jsp:directive.include file="activitycontent.jspf"/>
-		</div>
+		<h1>Activity</h1>
+		<jsp:directive.include file="activitycontent.jspf"/>
 	</div>
 </body>
 </html>

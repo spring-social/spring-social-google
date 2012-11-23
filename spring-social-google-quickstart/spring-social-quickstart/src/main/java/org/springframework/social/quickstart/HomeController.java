@@ -19,11 +19,18 @@ import static org.springframework.util.StringUtils.hasText;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.ExpiredAuthorizationException;
 import org.springframework.social.google.api.Google;
+import org.springframework.social.google.api.drive.DriveFileQueryBuilder;
+import org.springframework.social.google.api.drive.DriveFilesPage;
+import org.springframework.social.google.api.drive.DriveOperations;
 import org.springframework.social.google.api.legacyprofile.LegacyGoogleProfile;
 import org.springframework.social.google.api.plus.activity.ActivitiesPage;
 import org.springframework.social.google.api.plus.activity.Activity;
@@ -35,6 +42,9 @@ import org.springframework.social.google.api.tasks.Task;
 import org.springframework.social.google.api.tasks.TaskList;
 import org.springframework.social.google.api.tasks.TaskListsPage;
 import org.springframework.social.google.api.tasks.TasksPage;
+import org.springframework.social.quickstart.drive.DateOperators;
+import org.springframework.social.quickstart.drive.DriveSearchForm;
+import org.springframework.social.quickstart.drive.OptionalBoolean;
 import org.springframework.social.quickstart.tasks.TaskForm;
 import org.springframework.social.quickstart.tasks.TaskListForm;
 import org.springframework.social.quickstart.tasks.TaskSearchForm;
@@ -43,6 +53,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -58,6 +69,11 @@ public class HomeController {
 	@ExceptionHandler(ExpiredAuthorizationException.class)
 	public String handleExpiredToken() {
 		return "redirect:/signout";
+	}
+	
+	@ExceptionHandler(Exception.class)
+	public void handleException(Exception e) {
+		e.printStackTrace();
 	}
 
 	@RequestMapping(value="/", method=GET)
@@ -285,5 +301,154 @@ public class HomeController {
 		}
 		google.taskOperations().clearCompletedTasks(new TaskList(list, null));
 		return new ModelAndView("redirect:/tasks", "list", list);
+	}
+	
+	@RequestMapping(value="drivefiles", method=GET)
+	public ModelAndView getDriveFiles(DriveSearchForm command) {
+
+		DriveFileQueryBuilder queryBuilder = google.driveOperations().driveFileQuery()
+				.fromPage(command.getPageToken());
+
+		if(command.isNegate()) {
+			queryBuilder.not();
+		}
+		
+		if(hasText(command.getTitleIs())) {
+			queryBuilder.titleIs(command.getTitleIs());
+		}
+		
+		if(hasText(command.getTitleContains())) {
+			queryBuilder.titleContains(command.getTitleContains());
+		}
+		
+		if(hasText(command.getFullTextContains())) {
+			queryBuilder.fullTextContains(command.getFullTextContains());
+		}
+		
+		if(hasText(command.getMimeTypeIs())) {
+			queryBuilder.mimeTypeIs(command.getMimeTypeIs());
+		}
+		
+		if(command.getModifiedValue() != null) {
+			Date date = command.getModifiedValue();
+			switch(command.getModifiedOperator()) {
+			case BEFORE:
+				queryBuilder.modifiedDateBefore(date);
+				break;
+			case IS_OR_BEFORE:
+				queryBuilder.modifiedDateIsOrBefore(date);
+				break;
+			case IS:
+				queryBuilder.modifiedDateIs(date);
+				break;
+			case IS_OR_AFTER:
+				queryBuilder.modifiedDateIsOrAfter(date);
+				break;
+			case AFTER:
+				queryBuilder.modifiedDateAfter(date);
+				break;
+			}
+		}
+		
+		if(command.getLastViewedValue() != null) {
+			Date date = command.getLastViewedValue();
+			switch(command.getLastViewedOperator()) {
+			case BEFORE:
+				queryBuilder.lastViewedByMeBefore(date);
+				break;
+			case IS_OR_BEFORE:
+				queryBuilder.lastViewedByMeIsOrBefore(date);
+				break;
+			case IS:
+				queryBuilder.lastViewedByMeIs(date);
+				break;
+			case IS_OR_AFTER:
+				queryBuilder.lastViewedByMeIsOrAfter(date);
+				break;
+			case AFTER:
+				queryBuilder.lastViewedByMeAfter(date);
+				break;
+			}
+		}
+		
+		if(command.getTrashed() != null && command.getTrashed().getValue() != null) {
+			queryBuilder.trashed(command.getTrashed().getValue());
+		}
+		
+		if(command.getStarred() != null && command.getStarred().getValue() != null) {
+			queryBuilder.starred(command.getStarred().getValue());
+		}
+		
+		if(command.getHidden() != null && command.getHidden().getValue() != null) {
+			queryBuilder.hidden(command.getHidden().getValue());
+		}
+		
+		if(hasText(command.getParentId())) {
+			queryBuilder.parentIs(command.getParentId());
+		} else {
+			queryBuilder.parentIs("root");
+		}
+		
+		if(hasText(command.getOwner())) {
+			queryBuilder.ownerIs(command.getOwner());
+		}
+		
+		if(hasText(command.getWriter())) {
+			queryBuilder.writerIs(command.getWriter());
+		}
+		
+		if(hasText(command.getReader())) {
+			queryBuilder.readerIs(command.getReader());
+		}
+		
+		if(command.isSharedWithMe()) {
+			queryBuilder.sharedWithMe();
+		}
+		
+		DriveFilesPage files = queryBuilder.getPage();
+
+		Map<DateOperators, String> dateOperators = new LinkedHashMap<DateOperators, String>();
+		for(DateOperators operator : DateOperators.values()) {
+			dateOperators.put(operator, operator.toString());
+		}
+		
+		Map<OptionalBoolean, String> booleanOperators = new LinkedHashMap<OptionalBoolean, String>();
+		for(OptionalBoolean operator : OptionalBoolean.values()) {
+			booleanOperators.put(operator, operator.toString());
+		}
+		
+		return new ModelAndView("drivefiles")
+			.addObject("dateOperators", dateOperators)
+			.addObject("booleanOperators", booleanOperators)
+			.addObject("command", command)
+			.addObject("files", files);
+	}
+	
+	@RequestMapping(value="starfile", method=POST)
+	@ResponseBody
+	public void starFile(String fileId, boolean star) {
+		DriveOperations drive = google.driveOperations();
+		if(star) {
+			drive.star(fileId);
+		} else {
+			drive.unstar(fileId);
+		}
+	}
+	
+	@RequestMapping(value="trashfile", method=POST)
+	@ResponseBody
+	public void trashFile(String fileId, boolean trash) {
+		DriveOperations drive = google.driveOperations();
+		if(trash) {
+			drive.trash(fileId);
+		} else {
+			drive.untrash(fileId);
+		}
+	}
+	
+	@RequestMapping(value="deletefile", method=POST)
+	@ResponseBody
+	public void deleteFile(String fileId) {
+		google.driveOperations().delete(fileId);
 	}
 }

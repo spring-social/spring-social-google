@@ -2,13 +2,9 @@
 	<jsp:directive.page language="java"
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 
-	<div class="sidebar">
-		<div class="side-menu">
-			<ul class="unstyled">
-				<li><a href="people">People</a></li>
-				<li><a href="activities">Activities</a></li>
-			</ul>	
-		</div>
-	</div>
+	<ul class="nav nav-pills">
+		<li class="${subselected == 'people' ? 'active' : ''}"><a href="people">People</a></li>
+		<li class="${subselected == 'activities' ? 'active' : ''}"><a href="activities">Activities</a></li>
+	</ul>	
 	
 </jsp:root>

@@ -4,8 +4,8 @@
 	<jsp:directive.page language="java"
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 
-	<div>
-		<form action="person" class="pull-left">
+	<div class="row">
+		<form action="person" class="span3">
 			<div class="clearfix">
 				<label for="id">Profile ID or "me":</label>
 				<div class="input">
@@ -18,7 +18,7 @@
 				</div>
 			</div>
 		</form>
-		<form action="people" class="pull-left">
+		<form action="people" class="span3">
 			<div class="clearfix">
 				<label for="text">Search for:</label>
 				<div class="input">
@@ -31,7 +31,7 @@
 				</div>
 			</div>
 		</form>
-		<form action="people" class="pull-left">
+		<form action="people" class="span3">
 			<div class="clearfix">
 				<label for="group">From Group:</label>
 				<div class="input">
