@@ -17,6 +17,20 @@ package org.springframework.social.google.api.drive;
 
 import org.springframework.core.io.Resource;
 
+/**
+ * Defines operations for integrating with Google Drive.
+ * Requires OAuth scope(s) from the following:
+ * <ul>
+ * <li>https://www.googleapis.com/auth/drive.file</li>
+ * <li>https://www.googleapis.com/auth/drive</li>
+ * <li>https://www.googleapis.com/auth/drive.apps.readonly</li>
+ * <li>https://www.googleapis.com/auth/drive.readonly</li>
+ * <li>https://www.googleapis.com/auth/drive.readonly.metadata</li>
+ * See <a href="https://developers.google.com/drive/scopes">https://developers.google.com/drive/scopes</a>
+ * for details about the different scopes
+ * @author Gabriel Axel
+ *
+ */
 public interface DriveOperations {
 
 	/**
@@ -32,25 +46,76 @@ public interface DriveOperations {
 	 */
 	DriveFileQueryBuilder driveFileQuery();
 	
+	/**
+	 * Returns files and folders under the root folder
+	 * @param pageToken
+	 * @return {@link DriveFilesPage}
+	 */
 	DriveFilesPage getRootFiles(String pageToken);
 	
+	/**
+	 * Returns the files and folders under a specified folder
+	 * @param parent folder ID or "root"
+	 * @param pageToken
+	 * @return {@link DriveFilesPage}
+	 */
 	DriveFilesPage getFiles(String parent, String pageToken);
 	
+	/**
+	 * Returns trashed files and folders
+	 * @param pageToken
+	 * @return {@link DriveFilesPage}
+	 */
 	DriveFilesPage getTrashedFiles(String pageToken);
 	
+	/**
+	 * Moves a file to trash
+	 * @param id The ID of the file to trash
+	 */
 	void trash(String id);
 	
+	/**
+	 * Restores a file from trash
+	 * @param id The ID of the file to untrash
+	 */
 	void untrash(String id);
 	
+	/**
+	 * Stars a file
+	 * @param id The ID of the file to star
+	 */
 	void star(String id);
 	
+	/**
+	 * Remove the star from a file
+	 * @param id The ID of the file to unstar
+	 */
 	void unstar(String id);
 	
+	/**
+	 * Hides a file
+	 * @param id The ID of the file to hide
+	 */
 	void hide(String id);
 	
+	/**
+	 * Unhides a file
+	 * @param id The ID of the file to unhide
+	 */
 	void unhide(String id);
 	
+	/**
+	 * Permanently deletes a file
+	 * @param id The ID of the file to delete
+	 */
 	void delete(String id);
 
+	/**
+	 * Uploads a file using multipart
+	 * @param resource Reference to the file's content
+	 * @param metadata The file's metadata
+	 * @param parameters Parameters for uploading and processing the file
+	 * @return The file resource that was created
+	 */
 	DriveFile upload(Resource resource, DriveFile metadata, UploadParameters parameters);
 }
