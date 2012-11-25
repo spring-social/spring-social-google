@@ -15,12 +15,22 @@
  */
 package org.springframework.social.google.api.drive.impl;
 
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.MediaType.MULTIPART_FORM_DATA;
+
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.social.google.api.drive.DriveFile;
 import org.springframework.social.google.api.drive.DriveFileQueryBuilder;
 import org.springframework.social.google.api.drive.DriveFilesPage;
 import org.springframework.social.google.api.drive.DriveOperations;
+import org.springframework.social.google.api.drive.UploadParameters;
 import org.springframework.social.google.api.impl.AbstractGoogleApiOperations;
 import org.springframework.social.google.api.impl.PatchBuilder;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -31,6 +41,8 @@ public class DriveTemplate extends AbstractGoogleApiOperations implements
 		DriveOperations {
 	
 	static final String DRIVE_FILES_URL = "https://www.googleapis.com/drive/v2/files/";
+	private static final String MULTIPART_UPLOAD_URL = 
+		"https://www.googleapis.com/upload/drive/v2/files?uploadType=multipart"; 
 	
 	public DriveTemplate(RestTemplate restTemplate, boolean isAuthorized) {
 		super(restTemplate, isAuthorized);
@@ -103,4 +115,20 @@ public class DriveTemplate extends AbstractGoogleApiOperations implements
 		restTemplate.delete(DRIVE_FILES_URL + id);
 	}
 
+	@Override
+	public DriveFile upload(Resource resource, DriveFile metadata, UploadParameters parameters) {
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MULTIPART_FORM_DATA);
+		
+		MultiValueMap<String, Object> body = new LinkedMultiValueMap<String, Object>();
+		body.add("metadata", metadata);
+		body.add("file", resource);
+		
+		HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<MultiValueMap<String,Object>>(body, headers);
+		
+		ResponseEntity<DriveFile> response = restTemplate.exchange(MULTIPART_UPLOAD_URL + parameters, POST, entity, DriveFile.class);
+
+		return response.getBody();
+	}
 }

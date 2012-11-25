@@ -15,6 +15,8 @@
  */
 package org.springframework.social.google.api.drive;
 
+import org.springframework.core.io.Resource;
+
 public interface DriveOperations {
 
 	/**
@@ -49,4 +51,6 @@ public interface DriveOperations {
 	void unhide(String id);
 	
 	void delete(String id);
+
+	DriveFile upload(Resource resource, DriveFile metadata, UploadParameters parameters);
 }

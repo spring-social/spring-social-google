@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +48,7 @@ public class DriveFile extends ApiEntity {
 		private Date lastViewedByMeDate;
 		private String mimeType;
 		private Date modifiedDate;
-		private Collection<String> parentIds;
+		private Collection<String> parentIds = new HashSet<String>();
 		
 		public Builder setTitle(String title) {
 			this.title = title;

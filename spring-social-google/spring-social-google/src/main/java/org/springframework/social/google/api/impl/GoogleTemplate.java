@@ -17,6 +17,7 @@ package org.springframework.social.google.api.impl;
 
 import static java.util.Collections.singletonList;
 import static org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES;
+import static org.codehaus.jackson.map.SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS;
 import static org.codehaus.jackson.map.SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS;
 import static org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion.NON_NULL;
 import static org.springframework.http.MediaType.APPLICATION_ATOM_XML;
@@ -32,6 +33,7 @@ import javax.xml.transform.Source;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
+import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.http.converter.xml.SourceHttpMessageConverter;
@@ -114,16 +116,21 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
 		objectMapper.configure(WRITE_DATES_AS_TIMESTAMPS, false);
+		objectMapper.configure(FAIL_ON_EMPTY_BEANS, false);
 		objectMapper.setSerializationInclusion(NON_NULL);
 		jsonConverter.setObjectMapper(objectMapper);
 		
 		SourceHttpMessageConverter<Source> sourceConverter = new SourceHttpMessageConverter<Source>();
 		sourceConverter.setSupportedMediaTypes(singletonList(APPLICATION_ATOM_XML));
 
+		FormHttpMessageConverter formHttpMessageConverter = new FormHttpMessageConverter();
+		formHttpMessageConverter.addPartConverter(jsonConverter);
+		
 		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
 		messageConverters.add(jsonConverter);
 		messageConverters.add(sourceConverter);
 		messageConverters.add(new ByteArrayHttpMessageConverter());
+		messageConverters.add(formHttpMessageConverter);
 		return messageConverters;
 	}
 	
