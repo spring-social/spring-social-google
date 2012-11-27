@@ -31,7 +31,6 @@ import java.util.List;
 import javax.xml.transform.Source;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -92,11 +91,6 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	public GoogleTemplate(String accessToken) {
 		super(accessToken);
 		this.accessToken = accessToken;
-		
-		// Using org.springframework.http.client.HttpComponentsClientHttpRequestFactory
-		// NOT org.springframework.http.client.HttpComponentsClientHttpRequestFactory
-		// because the former doesn't support HTTP PATCH method yet (Spring Social 1.0.2)
-		setRequestFactory(new HttpComponentsClientHttpRequestFactory());
 		initialize();
 	}
 

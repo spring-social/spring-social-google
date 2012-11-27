@@ -8,9 +8,9 @@
 	<version>1.0.0</version>
 	<properties>
 		<java-version>1.6</java-version>
-		<spring.framework.version>3.2.0.RC1</spring.framework.version>
+		<spring.framework.version>3.2.0.RC2</spring.framework.version>
 		<org.springframework.security.crypto-version>3.1.1.RELEASE</org.springframework.security.crypto-version>
-		<spring.social.version>1.0.2.RELEASE</spring.social.version>
+		<spring.social.version>1.1.0.M1</spring.social.version>
 	</properties>
 	
 	<name>Spring Social Google Quickstart</name>
@@ -66,22 +66,28 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet.jsp.jstl</groupId>
-			<artifactId>jstl-api</artifactId>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
 			<version>1.2</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>jstl-impl</artifactId>
 			<version>1.2</version>
-			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>servlet-api</artifactId>
+					<groupId>javax.servlet</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jsp-api</artifactId>
+					<groupId>javax.servlet.jsp</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jstl-api</artifactId>
+					<groupId>javax.servlet.jsp.jstl</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!-- CGLIB, only required and used for @Configuration usage: could be removed in future release of Spring -->
 		<dependency>
