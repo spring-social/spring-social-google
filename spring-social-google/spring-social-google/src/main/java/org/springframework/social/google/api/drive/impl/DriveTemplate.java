@@ -17,6 +17,8 @@ package org.springframework.social.google.api.drive.impl;
 
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA;
+import static org.springframework.social.google.api.drive.DriveFile.FOLDER;
+import static org.springframework.util.StringUtils.hasText;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
@@ -130,5 +132,19 @@ public class DriveTemplate extends AbstractGoogleApiOperations implements
 		ResponseEntity<DriveFile> response = restTemplate.exchange(MULTIPART_UPLOAD_URL + parameters, POST, entity, DriveFile.class);
 
 		return response.getBody();
+	}
+
+	@Override
+	public DriveFile createFileMetadata(DriveFile metadata) {
+		return saveEntity(DRIVE_FILES_URL, metadata);
+	}
+
+	@Override
+	public DriveFile createFolder(String parentId, String name) {
+		return createFileMetadata(new DriveFile.Builder()
+			.setMimeType(FOLDER)
+			.setTitle(name)
+			.setParents(hasText(parentId) ? parentId : "root")
+			.build());
 	}
 }

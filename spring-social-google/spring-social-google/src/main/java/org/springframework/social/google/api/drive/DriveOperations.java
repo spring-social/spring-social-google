@@ -118,4 +118,19 @@ public interface DriveOperations {
 	 * @return The file resource that was created
 	 */
 	DriveFile upload(Resource resource, DriveFile metadata, UploadParameters parameters);
+	
+	/**
+	 * Creates an empty file with metadata
+	 * @param metadata The file's properties
+	 * @return {@link DriveFile} representing the created file
+	 */
+	DriveFile createFileMetadata(DriveFile metadata);
+	
+	/**
+	 * Creates a folder
+	 * @param parentId The parent folder ID or "root"
+	 * @param name The name of the folder to create
+	 * @return {@link DriveFile} representing the created folder
+	 */
+	DriveFile createFolder(String parentId, String name);
 }

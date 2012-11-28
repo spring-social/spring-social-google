@@ -33,7 +33,7 @@ import org.springframework.social.google.api.ApiEntity;
  */
 public class DriveFile extends ApiEntity {
 
-	private static final String FOLDER = "application/vnd.google-apps.folder";
+	public static final String FOLDER = "application/vnd.google-apps.folder";
 	
 	public static class Builder {
 

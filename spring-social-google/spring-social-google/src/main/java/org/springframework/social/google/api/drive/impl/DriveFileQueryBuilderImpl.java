@@ -15,6 +15,7 @@
  */
 package org.springframework.social.google.api.drive.impl;
 
+import static org.springframework.social.google.api.drive.DriveFile.FOLDER;
 import static org.springframework.social.google.api.drive.impl.DriveTemplate.DRIVE_FILES_URL;
 import static org.springframework.util.StringUtils.collectionToDelimitedString;
 
@@ -70,8 +71,6 @@ class DriveFileQueryBuilderImpl extends ApiQueryBuilderImpl<DriveFileQueryBuilde
 	private static final String NOT = "not ";
 	private static final String AND = " and ";
 
-	private static final String FOLDER = "application/vnd.google-apps.folder";
-	
 	private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
 	private boolean negate;
