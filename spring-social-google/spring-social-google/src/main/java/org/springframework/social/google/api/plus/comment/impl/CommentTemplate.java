@@ -1,5 +1,6 @@
 package org.springframework.social.google.api.plus.comment.impl;
 
+import static org.springframework.util.StringUtils.*;
 import org.springframework.social.google.api.impl.AbstractGoogleApiOperations;
 import org.springframework.social.google.api.plus.comment.Comment;
 import org.springframework.social.google.api.plus.comment.CommentOperations;
@@ -24,7 +25,12 @@ public class CommentTemplate extends AbstractGoogleApiOperations implements
 
 	@Override
 	public CommentsPage getComments(String activityId, String pageToken) {
-		return getEntity(ACTIVITIES_URL + activityId + COMMENTS, CommentsPage.class);
+		StringBuilder sb = new StringBuilder(ACTIVITIES_URL)
+			.append(activityId).append(COMMENTS);
+		if(hasText(pageToken)) {
+			sb.append("?pageToken=").append(pageToken);
+		}
+		return getEntity(sb.toString(), CommentsPage.class);
 	}
 
 }
