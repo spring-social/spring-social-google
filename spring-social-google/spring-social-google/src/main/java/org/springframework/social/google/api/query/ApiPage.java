@@ -18,35 +18,24 @@ package org.springframework.social.google.api.query;
 import java.util.List;
 
 /**
- * Google+ query pagination result.
+ * API query pagination result.
  * @author Gabriel Axel
  * @param <T> item type
  */
-public class ApiPage<T> {
+public abstract class ApiPage<T> extends ApiList<T> {
 
-	private List<? extends T> items;
-	
 	private String nextPageToken;
-	
-	private String etag;
 	
 	protected ApiPage() {
 	}
 	
 	protected ApiPage(List<? extends T> items, String nextPageToken) {
-		this.items = items;
+		super(items);
 		this.nextPageToken = nextPageToken;
 	}
 	
-	public List<? extends T> getItems() {
-		return items;
-	}
-		
 	public String getNextPageToken() {
 		return nextPageToken;
 	}
 
-	public String getEtag() {
-		return etag;
-	}
 }

@@ -17,6 +17,7 @@ package org.springframework.social.google.api.drive;
 
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.springframework.social.google.api.ApiEntity;
 
 /**
@@ -37,6 +38,7 @@ public class UserPermission extends ApiEntity {
 	 * This field is write-only
 	 */
 	@SuppressWarnings("unused")
+	@JsonProperty
 	private String value;
 	
 	public UserPermission() {

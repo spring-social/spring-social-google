@@ -74,7 +74,8 @@ public abstract class AbstractGoogleApiOperations {
 		restTemplate.delete(baseUrl + '/' + entity.getId());
 	}
 	
-	protected void patch(String url, Object request) {
-		restTemplate.exchange(url, PATCH, new HttpEntity<Object>(request), Void.class);
+	protected <T> T patch(String url, Object request, Class<T> responseType) {
+		ResponseEntity<T> response = restTemplate.exchange(url, PATCH, new HttpEntity<Object>(request), responseType);
+		return response.getBody();
 	}
 }

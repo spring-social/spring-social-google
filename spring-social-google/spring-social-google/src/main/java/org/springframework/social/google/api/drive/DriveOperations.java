@@ -71,38 +71,44 @@ public interface DriveOperations {
 	/**
 	 * Moves a file to trash
 	 * @param id The ID of the file to trash
+	 * @return The updated {@link DriveFile}
 	 */
-	void trash(String id);
+	DriveFile trash(String id);
 	
 	/**
 	 * Restores a file from trash
 	 * @param id The ID of the file to untrash
+	 * return The updated {@link DriveFile}
 	 */
-	void untrash(String id);
+	DriveFile untrash(String id);
 	
 	/**
 	 * Stars a file
 	 * @param id The ID of the file to star
+	 * @return The updated {@link DriveFile}
 	 */
-	void star(String id);
+	DriveFile star(String id);
 	
 	/**
 	 * Remove the star from a file
 	 * @param id The ID of the file to unstar
+	 * @return The updated {@link DriveFile}
 	 */
-	void unstar(String id);
+	DriveFile unstar(String id);
 	
 	/**
 	 * Hides a file
 	 * @param id The ID of the file to hide
+	 * @return The updated {@link DriveFile}
 	 */
-	void hide(String id);
+	DriveFile hide(String id);
 	
 	/**
 	 * Unhides a file
 	 * @param id The ID of the file to unhide
+	 * @return The updated {@link DriveFile}
 	 */
-	void unhide(String id);
+	DriveFile unhide(String id);
 	
 	/**
 	 * Permanently deletes a file
@@ -133,4 +139,36 @@ public interface DriveOperations {
 	 * @return {@link DriveFile} representing the created folder
 	 */
 	DriveFile createFolder(String parentId, String name);
+	
+	/**
+	 * Returns the permissions of a file
+	 * @param fileId The ID of the file
+	 * @return {@link UserPermissionsList} for the file
+	 */
+	UserPermissionsList getPermissions(String fileId);
+	
+	/**
+	 * Adds a permission to a file
+	 * @param fileId The file ID
+	 * @param permission {@link UserPermission} with the permission settings
+	 * @param sendNotificationEmails Whether to send notification e-mails
+	 * @return the created {@link UserPermission}
+	 */
+	UserPermission addPermission(String fileId, UserPermission permission, boolean sendNotificationEmails);
+
+	/**
+	 * Updates a permission to a file
+	 * @param fileId The file ID
+	 * @param permissionId the permission ID
+	 * @param permission {@link UserPermission} with new role and additional roles
+	 * @return the updated {@link UserPermission}
+	 */
+	UserPermission updatesPermission(String fileId, String permissionId, UserPermission permission);
+	
+	/**
+	 * Removes a permission from a file
+	 * @param fileId The file ID
+	 * @param permissionId The permission ID
+	 */
+	void removePermission(String fileId, String permissionId);
 }

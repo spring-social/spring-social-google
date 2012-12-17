@@ -29,6 +29,8 @@ import org.springframework.social.google.api.drive.DriveFileQueryBuilder;
 import org.springframework.social.google.api.drive.DriveFilesPage;
 import org.springframework.social.google.api.drive.DriveOperations;
 import org.springframework.social.google.api.drive.UploadParameters;
+import org.springframework.social.google.api.drive.UserPermission;
+import org.springframework.social.google.api.drive.UserPermissionsList;
 import org.springframework.social.google.api.impl.AbstractGoogleApiOperations;
 import org.springframework.social.google.api.impl.PatchBuilder;
 import org.springframework.util.LinkedMultiValueMap;
@@ -43,6 +45,8 @@ public class DriveTemplate extends AbstractGoogleApiOperations implements
 		DriveOperations {
 	
 	static final String DRIVE_FILES_URL = "https://www.googleapis.com/drive/v2/files/";
+	private static final String PERMISSIONS = "/permissions/";
+	private static final String SEND_NOTIFICATION = "?sendNotificationEmails=";
 	private static final String MULTIPART_UPLOAD_URL = 
 		"https://www.googleapis.com/upload/drive/v2/files?uploadType=multipart"; 
 	
@@ -83,33 +87,33 @@ public class DriveTemplate extends AbstractGoogleApiOperations implements
 	}
 
 	@Override
-	public void trash(String id) {
-		restTemplate.postForLocation(DRIVE_FILES_URL + id + "/trash", null);
+	public DriveFile trash(String id) {
+		return restTemplate.postForObject(DRIVE_FILES_URL + id + "/trash", null, DriveFile.class);
 	}
 
 	@Override
-	public void untrash(String id) {
-		restTemplate.postForLocation(DRIVE_FILES_URL + id + "/untrash", null);
+	public DriveFile untrash(String id) {
+		return restTemplate.postForObject(DRIVE_FILES_URL + id + "/untrash", null, DriveFile.class);
 	}
 
 	@Override
-	public void star(String id) {
-		patch(DRIVE_FILES_URL + id, new PatchBuilder().set("labels.starred", true).getMap());
+	public DriveFile star(String id) {
+		return patch(DRIVE_FILES_URL + id, new PatchBuilder().set("labels.starred", true).getMap(), DriveFile.class);
 	}
 
 	@Override
-	public void unstar(String id) {
-		patch(DRIVE_FILES_URL + id, new PatchBuilder().set("labels.starred", false).getMap());
+	public DriveFile unstar(String id) {
+		return patch(DRIVE_FILES_URL + id, new PatchBuilder().set("labels.starred", false).getMap(), DriveFile.class);
 	}
 
 	@Override
-	public void hide(String id) {
-		patch(DRIVE_FILES_URL + id, new PatchBuilder().set("labels.hidden", true).getMap());
+	public DriveFile hide(String id) {
+		return patch(DRIVE_FILES_URL + id, new PatchBuilder().set("labels.hidden", true).getMap(), DriveFile.class);
 	}
 
 	@Override
-	public void unhide(String id) {
-		patch(DRIVE_FILES_URL + id, new PatchBuilder().set("labels.hidden", false).getMap());
+	public DriveFile unhide(String id) {
+		return patch(DRIVE_FILES_URL + id, new PatchBuilder().set("labels.hidden", false).getMap(), DriveFile.class);
 	}
 
 	@Override
@@ -146,5 +150,31 @@ public class DriveTemplate extends AbstractGoogleApiOperations implements
 			.setTitle(name)
 			.setParents(hasText(parentId) ? parentId : "root")
 			.build());
+	}
+
+	@Override
+	public UserPermissionsList getPermissions(String fileId) {
+		return getEntity(DRIVE_FILES_URL + fileId + PERMISSIONS, UserPermissionsList.class);
+	}
+
+	@Override
+	public UserPermission addPermission(String fileId,
+			UserPermission permission, boolean sendNotificationEmails) {
+		return saveEntity(DRIVE_FILES_URL + fileId + PERMISSIONS + SEND_NOTIFICATION + sendNotificationEmails, permission);
+	}
+
+	@Override
+	public UserPermission updatesPermission(String fileId, String permissionId,
+			UserPermission permission) {
+		Object patch = new PatchBuilder()
+			.set("role", permission.getRole())
+			.set("additionalRoles", permission.getAdditionalRoles())
+			.getMap();
+		return patch(DRIVE_FILES_URL + fileId + PERMISSIONS + permissionId, patch, UserPermission.class);
+	}
+
+	@Override
+	public void removePermission(String fileId, String permissionId) {
+		restTemplate.delete(DRIVE_FILES_URL + fileId + PERMISSIONS + permissionId);
 	}
 }
