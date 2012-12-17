@@ -4,7 +4,7 @@
 	<groupId>org.springframework.social</groupId>
 	<artifactId>spring-social-google</artifactId>
 	<name>Spring Social Google</name>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0.M2</version>
 
 	<properties>
 		<spring.social.version>1.1.0.M1</spring.social.version>

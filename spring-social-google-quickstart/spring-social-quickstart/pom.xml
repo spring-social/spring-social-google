@@ -98,7 +98,7 @@
 		<dependency>
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-google</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.0.0.M2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.cloudfoundry</groupId>
