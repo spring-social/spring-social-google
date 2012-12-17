@@ -21,7 +21,9 @@ import org.springframework.social.google.api.query.QueryBuilder;
 /**
  * A {@link QueryBuilder} for contacts.
  * @author Gabriel Axel
+ * @deprecated due to deprecation of Portable Contacts API
  */
+@Deprecated
 public interface ContactQueryBuilder extends ApiQueryBuilder<ContactQueryBuilder, PeoplePage> {
 
 	ContactQueryBuilder fromGroup(String group);

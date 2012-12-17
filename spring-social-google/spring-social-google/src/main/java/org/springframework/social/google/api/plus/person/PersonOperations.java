@@ -35,7 +35,9 @@ public interface PersonOperations {
 	 * Retrieves a portable contact
 	 * @param id the ID of the contact
 	 * @return the retrieved {@link Person}
+	 * @deprecated due to deprecation of Portable Contacts API
 	 */
+	@Deprecated
 	Person getContact(String id);
 	
 	/**
@@ -77,6 +79,8 @@ public interface PersonOperations {
 	/**
 	 * Creates a {@link ContactQueryBuilder}.
 	 * @return a new {@link ContactQueryBuilder}
+	 * @deprecated due to deprecation of Portable Contacts API
 	 */
+	@Deprecated
 	ContactQueryBuilder contactQuery();
 }

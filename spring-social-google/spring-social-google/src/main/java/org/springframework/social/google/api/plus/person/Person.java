@@ -43,6 +43,7 @@ public class Person extends ApiEntity {
 	}
 	
 	@JsonProperty
+	@Deprecated
 	private String kind;
 
 	@JsonProperty
@@ -80,10 +81,20 @@ public class Person extends ApiEntity {
 		return displayName;
 	}
 	
+	/**
+	 * @deprecated due to deprecation of Portable Contacts API
+	 * @return true if the instance represents Google+ person
+	 */
+	@Deprecated
 	public boolean isGooglePlusProfile() {
 		return kind != null;
 	}
 	
+	/**
+	 * @deprecated due to deprecation of Portable Contacts API
+	 * @return true if the instance represents a Google contact
+	 */
+	@Deprecated
 	public boolean isContactWithProfile() {
 		return kind == null;
 	}

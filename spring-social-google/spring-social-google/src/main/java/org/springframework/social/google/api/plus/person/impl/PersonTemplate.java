@@ -35,7 +35,10 @@ public class PersonTemplate extends AbstractGoogleApiOperations implements Perso
 	private static final String PLUSONERS = "/people/plusoners";
 	private static final String RESHARERS = "/people/resharers";
 	
+	@Deprecated
 	static final String FEED_PREFIX = "https://www-opensocial.googleusercontent.com/api/people/@me/";
+	
+	@Deprecated
 	static final String CONTACTS_FEED = FEED_PREFIX + "@all/";
 	
 	public PersonTemplate(RestTemplate restTemplate, boolean isAuthorized) {
