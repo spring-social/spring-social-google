@@ -110,4 +110,13 @@ public interface Google extends ApiBinding {
 	 *            http://code.google.com/p/gdata-java-client/
 	 */
 	void applyAuthentication(Object client);
+	
+	/**
+	 * Returns the access token, allowing interoperability with other libraries
+	 * 
+	 * @see <a href="http://code.google.com/p/google-api-java-client/">Google APIs Client Library for Java</a>
+	 * 
+	 * @return The OAuth2 access token
+	 */
+	String getAccessToken();
 }

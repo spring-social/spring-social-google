@@ -170,4 +170,9 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 			"Authorization", getOAuth2Version().getAuthorizationHeaderValue(accessToken));
 	}
 
+	@Override
+	public String getAccessToken() {
+		return accessToken;
+	}
+
 }
