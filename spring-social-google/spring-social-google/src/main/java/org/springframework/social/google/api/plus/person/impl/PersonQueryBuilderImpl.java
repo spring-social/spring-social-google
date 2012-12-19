@@ -43,7 +43,7 @@ public class PersonQueryBuilderImpl extends ApiQueryBuilderImpl<PersonQueryBuild
 	@Override
 	protected StringBuilder build() {
 		StringBuilder sb = super.build();
-		appendQueryParam(sb, "query", text);
+		appendQueryParam(sb, "query", encode(text));
 		return sb;
 	}
 

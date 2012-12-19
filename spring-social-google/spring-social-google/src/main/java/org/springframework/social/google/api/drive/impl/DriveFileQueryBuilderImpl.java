@@ -19,8 +19,6 @@ import static org.springframework.social.google.api.drive.DriveFile.FOLDER;
 import static org.springframework.social.google.api.drive.impl.DriveTemplate.DRIVE_FILES_URL;
 import static org.springframework.util.StringUtils.collectionToDelimitedString;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -52,14 +50,6 @@ class DriveFileQueryBuilderImpl extends ApiQueryBuilderImpl<DriveFileQueryBuilde
 	private static final String READERS = "readers";
 	private static final String SHARED_WITH_ME = "sharedWithMe";
 
-	private static String encode(String text) {
-		try {
-			return URLEncoder.encode(text, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			throw new IllegalStateException(e);
-		}
-	}
-	
 	private static final String CONTAINS = " contains ";
 	private static final String IN = " in ";
 	private static final String EQ = "=";

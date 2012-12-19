@@ -15,8 +15,10 @@
  */
 package org.springframework.social.google.api.query.impl;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLEncoder;
 
 import org.springframework.social.google.api.query.ApiPage;
 import org.springframework.social.google.api.query.ApiQueryBuilder;
@@ -35,6 +37,14 @@ public class ApiQueryBuilderImpl<Q extends ApiQueryBuilder<?, T>, T extends ApiP
 	private final RestTemplate restTemplate;
 
 	private String pageToken;
+	
+	protected static String encode(String text) {
+		try {
+			return URLEncoder.encode(text, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			throw new IllegalStateException(e);
+		}
+	}
 	
 	public ApiQueryBuilderImpl(Class<T> type, RestTemplate restTemplate) {
 		this.type = type;

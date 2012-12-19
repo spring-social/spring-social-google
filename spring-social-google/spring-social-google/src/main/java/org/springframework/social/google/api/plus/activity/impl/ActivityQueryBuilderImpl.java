@@ -50,7 +50,7 @@ public class ActivityQueryBuilderImpl extends ApiQueryBuilderImpl<ActivityQueryB
 	protected StringBuilder build() {
 		
 		StringBuilder sb = super.build();
-		appendQueryParam(sb, "query", text);
+		appendQueryParam(sb, "query", encode(text));
 		appendQueryParam(sb, "orderBy", order);
 		return sb;
 	}
