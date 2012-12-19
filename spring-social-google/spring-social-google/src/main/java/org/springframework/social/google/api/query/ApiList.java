@@ -24,17 +24,17 @@ import java.util.List;
  */
 public abstract class ApiList<T> {
 
-	private List<? extends T> items;
+	private List<T> items;
 	private String etag;
 
 	protected ApiList() {
 	}
 	
-	protected ApiList(List<? extends T> items) {
+	protected ApiList(List<T> items) {
 		this.items = items;
 	}
 
-	public List<? extends T> getItems() {
+	public List<T> getItems() {
 		return items;
 	}
 

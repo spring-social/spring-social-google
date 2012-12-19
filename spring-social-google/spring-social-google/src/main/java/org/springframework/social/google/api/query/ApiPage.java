@@ -29,7 +29,7 @@ public abstract class ApiPage<T> extends ApiList<T> {
 	protected ApiPage() {
 	}
 	
-	protected ApiPage(List<? extends T> items, String nextPageToken) {
+	protected ApiPage(List<T> items, String nextPageToken) {
 		super(items);
 		this.nextPageToken = nextPageToken;
 	}

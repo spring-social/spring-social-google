@@ -27,7 +27,7 @@ public class PeoplePage extends ApiPage<Person> {
 
 	public PeoplePage() {}
 	
-	public PeoplePage(List<? extends Person> items, String nextPageToken) {
+	public PeoplePage(List<Person> items, String nextPageToken) {
 		super(items, nextPageToken);
 	}
 }
