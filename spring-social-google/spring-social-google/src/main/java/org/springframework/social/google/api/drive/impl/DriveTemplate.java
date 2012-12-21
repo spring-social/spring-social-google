@@ -20,17 +20,23 @@ import static org.springframework.http.MediaType.MULTIPART_FORM_DATA;
 import static org.springframework.social.google.api.drive.DriveFile.FOLDER;
 import static org.springframework.util.StringUtils.hasText;
 
+import java.util.List;
+
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.social.google.api.drive.CommentReply;
 import org.springframework.social.google.api.drive.DriveFile;
 import org.springframework.social.google.api.drive.DriveFileQueryBuilder;
 import org.springframework.social.google.api.drive.DriveFilesPage;
 import org.springframework.social.google.api.drive.DriveOperations;
+import org.springframework.social.google.api.drive.FileComment;
+import org.springframework.social.google.api.drive.FileCommentQueryBuilder;
+import org.springframework.social.google.api.drive.FileCommentsPage;
+import org.springframework.social.google.api.drive.FileRevision;
 import org.springframework.social.google.api.drive.UploadParameters;
 import org.springframework.social.google.api.drive.UserPermission;
-import org.springframework.social.google.api.drive.UserPermissionsList;
 import org.springframework.social.google.api.impl.AbstractGoogleApiOperations;
 import org.springframework.social.google.api.impl.PatchBuilder;
 import org.springframework.util.LinkedMultiValueMap;
@@ -45,8 +51,17 @@ public class DriveTemplate extends AbstractGoogleApiOperations implements
 		DriveOperations {
 	
 	static final String DRIVE_FILES_URL = "https://www.googleapis.com/drive/v2/files/";
+	
 	private static final String PERMISSIONS = "/permissions/";
+	
+	private static final String REVISIONS = "/revisions/";
+	
+	private static final String COMMENTS = "/comments/";
+	
+	private static final String REPLIES = "/replies/";
+	
 	private static final String SEND_NOTIFICATION = "?sendNotificationEmails=";
+	
 	private static final String MULTIPART_UPLOAD_URL = 
 		"https://www.googleapis.com/upload/drive/v2/files?uploadType=multipart"; 
 	
@@ -153,8 +168,8 @@ public class DriveTemplate extends AbstractGoogleApiOperations implements
 	}
 
 	@Override
-	public UserPermissionsList getPermissions(String fileId) {
-		return getEntity(DRIVE_FILES_URL + fileId + PERMISSIONS, UserPermissionsList.class);
+	public List<UserPermission> getPermissions(String fileId) {
+		return getEntity(DRIVE_FILES_URL + fileId + PERMISSIONS, UserPermissionsList.class).getItems();
 	}
 
 	@Override
@@ -177,4 +192,74 @@ public class DriveTemplate extends AbstractGoogleApiOperations implements
 	public void removePermission(String fileId, String permissionId) {
 		restTemplate.delete(DRIVE_FILES_URL + fileId + PERMISSIONS + permissionId);
 	}
+
+	@Override
+	public List<FileRevision> getRevisions(String fileId) {
+		return getEntity(DRIVE_FILES_URL + fileId + REVISIONS, FileRevisionsList.class).getItems();
+	}
+
+	@Override
+	public FileRevision updateRevision(String fileId, String revisionId,
+			FileRevision revision) {
+		Object patch = new PatchBuilder()
+			.set("pinned", revision.isPinned())
+			.set("publishAuto", revision.isPublishAuto())
+			.set("published", revision.isPublished())
+			.set("publishedOutsideDomain", revision.isPublishedOutsideDomain())
+			.getMap();
+		return patch(DRIVE_FILES_URL + fileId + REVISIONS + revisionId, patch, FileRevision.class);
+	}
+
+	@Override
+	public FileCommentQueryBuilder fileCommentQueryBuilder(String fileId) {
+		return new FileCommentQueryBuilderImpl(DRIVE_FILES_URL + fileId + COMMENTS, FileCommentsPage.class, restTemplate);
+	}
+
+	@Override
+	public FileCommentsPage getComments(String fileId, String pageToken) {
+		return fileCommentQueryBuilder(fileId)
+				.fromPage(pageToken)
+				.getPage();
+	}
+
+	@Override
+	public FileComment addComment(String fileId, FileComment comment) {
+		return saveEntity(DRIVE_FILES_URL + fileId + COMMENTS, comment);
+	}
+
+	@Override
+	public FileComment updateComment(String fileId, String commentId,
+			FileComment comment) {
+		Object patch = new PatchBuilder()
+			.set("content", comment.getContent())
+			.getMap();
+		return patch(DRIVE_FILES_URL + fileId + COMMENTS + commentId, patch, FileComment.class);
+	}
+
+	@Override
+	public void removeComment(String fileId, String commentId) {
+		restTemplate.delete(DRIVE_FILES_URL + fileId + COMMENTS + commentId);
+	}
+
+	@Override
+	public CommentReply addReply(String fileId, String commentId,
+			CommentReply reply) {
+		return saveEntity(DRIVE_FILES_URL + fileId + COMMENTS + commentId + REPLIES, reply);
+	}
+
+	@Override
+	public CommentReply updateReply(String fileId, String commentId,
+			String replyId, CommentReply reply) {
+		Object patch = new PatchBuilder()
+			.set("content", reply.getContent())
+			.set("verb", reply.getVerb())
+			.getMap();
+		return patch(DRIVE_FILES_URL + fileId + COMMENTS + commentId + REPLIES + replyId, patch, CommentReply.class);
+	}
+
+	@Override
+	public void removeReply(String fileId, String commentId, String replyId) {
+		restTemplate.delete(DRIVE_FILES_URL + fileId + COMMENTS + commentId + REPLIES + replyId);
+	}
+
 }

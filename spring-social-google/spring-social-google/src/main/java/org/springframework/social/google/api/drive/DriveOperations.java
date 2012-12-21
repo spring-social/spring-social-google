@@ -15,160 +15,330 @@
  */
 package org.springframework.social.google.api.drive;
 
+import java.util.List;
+
 import org.springframework.core.io.Resource;
 
 /**
- * Defines operations for integrating with Google Drive.
- * Requires OAuth scope(s) from the following:
+ * Defines operations for integrating with Google Drive. Requires OAuth scope(s)
+ * from the following:
  * <ul>
  * <li>https://www.googleapis.com/auth/drive.file</li>
  * <li>https://www.googleapis.com/auth/drive</li>
  * <li>https://www.googleapis.com/auth/drive.apps.readonly</li>
  * <li>https://www.googleapis.com/auth/drive.readonly</li>
  * <li>https://www.googleapis.com/auth/drive.readonly.metadata</li>
- * See <a href="https://developers.google.com/drive/scopes">https://developers.google.com/drive/scopes</a>
- * for details about the different scopes
+ * See <a
+ * href="https://developers.google.com/drive/scopes">https://developers.google
+ * .com/drive/scopes</a> for details about the different scopes
+ * 
  * @author Gabriel Axel
- *
+ * 
  */
 public interface DriveOperations {
 
 	/**
 	 * Retrieves a file by its ID
-	 * @param id the ID to retrieve by
+	 * 
+	 * @param id
+	 *            the ID to retrieve by
 	 * @return the retrieved {@link DriveFile}
 	 */
 	DriveFile getFile(String id);
-	
+
 	/**
 	 * Creates a {@link DriveFileQueryBuilder}
+	 * 
 	 * @return a new {@link DriveFileQueryBuilder}
 	 */
 	DriveFileQueryBuilder driveFileQuery();
-	
+
 	/**
 	 * Returns files and folders under the root folder
+	 * 
 	 * @param pageToken
 	 * @return {@link DriveFilesPage}
 	 */
 	DriveFilesPage getRootFiles(String pageToken);
-	
+
 	/**
 	 * Returns the files and folders under a specified folder
-	 * @param parent folder ID or "root"
+	 * 
+	 * @param parent
+	 *            folder ID or "root"
 	 * @param pageToken
 	 * @return {@link DriveFilesPage}
 	 */
 	DriveFilesPage getFiles(String parent, String pageToken);
-	
+
 	/**
 	 * Returns trashed files and folders
+	 * 
 	 * @param pageToken
 	 * @return {@link DriveFilesPage}
 	 */
 	DriveFilesPage getTrashedFiles(String pageToken);
-	
+
 	/**
 	 * Moves a file to trash
-	 * @param id The ID of the file to trash
+	 * 
+	 * @param id
+	 *            The ID of the file to trash
 	 * @return The updated {@link DriveFile}
 	 */
 	DriveFile trash(String id);
-	
+
 	/**
 	 * Restores a file from trash
-	 * @param id The ID of the file to untrash
-	 * return The updated {@link DriveFile}
+	 * 
+	 * @param id
+	 *            The ID of the file to untrash return The updated
+	 *            {@link DriveFile}
 	 */
 	DriveFile untrash(String id);
-	
+
 	/**
 	 * Stars a file
-	 * @param id The ID of the file to star
+	 * 
+	 * @param id
+	 *            The ID of the file to star
 	 * @return The updated {@link DriveFile}
 	 */
 	DriveFile star(String id);
-	
+
 	/**
 	 * Remove the star from a file
-	 * @param id The ID of the file to unstar
+	 * 
+	 * @param id
+	 *            The ID of the file to unstar
 	 * @return The updated {@link DriveFile}
 	 */
 	DriveFile unstar(String id);
-	
+
 	/**
 	 * Hides a file
-	 * @param id The ID of the file to hide
+	 * 
+	 * @param id
+	 *            The ID of the file to hide
 	 * @return The updated {@link DriveFile}
 	 */
 	DriveFile hide(String id);
-	
+
 	/**
 	 * Unhides a file
-	 * @param id The ID of the file to unhide
+	 * 
+	 * @param id
+	 *            The ID of the file to unhide
 	 * @return The updated {@link DriveFile}
 	 */
 	DriveFile unhide(String id);
-	
+
 	/**
 	 * Permanently deletes a file
-	 * @param id The ID of the file to delete
+	 * 
+	 * @param id
+	 *            The ID of the file to delete
 	 */
 	void delete(String id);
 
 	/**
 	 * Uploads a file using multipart
-	 * @param resource Reference to the file's content
-	 * @param metadata The file's metadata
-	 * @param parameters Parameters for uploading and processing the file
+	 * 
+	 * @param resource
+	 *            Reference to the file's content
+	 * @param metadata
+	 *            The file's metadata
+	 * @param parameters
+	 *            Parameters for uploading and processing the file
 	 * @return The file resource that was created
 	 */
-	DriveFile upload(Resource resource, DriveFile metadata, UploadParameters parameters);
-	
+	DriveFile upload(Resource resource, DriveFile metadata,
+			UploadParameters parameters);
+
 	/**
 	 * Creates an empty file with metadata
-	 * @param metadata The file's properties
+	 * 
+	 * @param metadata
+	 *            The file's properties
 	 * @return {@link DriveFile} representing the created file
 	 */
 	DriveFile createFileMetadata(DriveFile metadata);
-	
+
 	/**
 	 * Creates a folder
-	 * @param parentId The parent folder ID or "root"
-	 * @param name The name of the folder to create
+	 * 
+	 * @param parentId
+	 *            The parent folder ID or "root"
+	 * @param name
+	 *            The name of the folder to create
 	 * @return {@link DriveFile} representing the created folder
 	 */
 	DriveFile createFolder(String parentId, String name);
-	
+
 	/**
 	 * Returns the permissions of a file
-	 * @param fileId The ID of the file
-	 * @return {@link UserPermissionsList} for the file
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @return List of {@link UserPermissionsList} for the file
 	 */
-	UserPermissionsList getPermissions(String fileId);
-	
+	List<UserPermission> getPermissions(String fileId);
+
 	/**
 	 * Adds a permission to a file
-	 * @param fileId The file ID
-	 * @param permission {@link UserPermission} with the permission settings
-	 * @param sendNotificationEmails Whether to send notification e-mails
-	 * @return the created {@link UserPermission}
+	 * 
+	 * @param fileId
+	 *            The file ID
+	 * @param permission
+	 *            {@link UserPermission} with the permission settings
+	 * @param sendNotificationEmails
+	 *            Whether to send notification e-mails
+	 * @return The created {@link UserPermission}
 	 */
-	UserPermission addPermission(String fileId, UserPermission permission, boolean sendNotificationEmails);
+	UserPermission addPermission(String fileId, UserPermission permission,
+			boolean sendNotificationEmails);
 
 	/**
 	 * Updates a permission to a file
-	 * @param fileId The file ID
-	 * @param permissionId the permission ID
-	 * @param permission {@link UserPermission} with new role and additional roles
-	 * @return the updated {@link UserPermission}
+	 * 
+	 * @param fileId
+	 *            The file ID
+	 * @param permissionId
+	 *            the ID of the permission
+	 * @param permission
+	 *            {@link UserPermission} with new role and additionalRoles
+	 *            properties
+	 * @return The updated {@link UserPermission}
 	 */
-	UserPermission updatesPermission(String fileId, String permissionId, UserPermission permission);
-	
+	UserPermission updatesPermission(String fileId, String permissionId,
+			UserPermission permission);
+
 	/**
 	 * Removes a permission from a file
-	 * @param fileId The file ID
-	 * @param permissionId The permission ID
+	 * 
+	 * @param fileId
+	 *            The file ID
+	 * @param permissionId
+	 *            The ID of the permission
 	 */
 	void removePermission(String fileId, String permissionId);
+
+	/**
+	 * Returns the revisions of a file
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @return List of {@link FileRevision}
+	 */
+	List<FileRevision> getRevisions(String fileId);
+
+	/**
+	 * Updates a file revision
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @param revisionId
+	 *            The ID of the revision
+	 * @param revision
+	 *            {@link FileRevision} with new pinned, publishAuto, published
+	 *            and publishedOutsideDomain properties
+	 * @return The updated {@link FileRevision}
+	 */
+	FileRevision updateRevision(String fileId, String revisionId,
+			FileRevision revision);
+
+	/**
+	 * Returns a {@link FileCommentQueryBuilder} for listing the comments of a
+	 * file
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @return {@link FileCommentQueryBuilder} for the file
+	 */
+	FileCommentQueryBuilder fileCommentQueryBuilder(String fileId);
+
+	/**
+	 * Returns the first default page of comments on a file
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @return Page of comments
+	 */
+	FileCommentsPage getComments(String fileId, String pageToken);
+
+	/**
+	 * Adds a comment to a file
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @param comment
+	 *            The new comment
+	 * @return The created {@link FileComment}
+	 */
+	FileComment addComment(String fileId, FileComment comment);
+
+	/**
+	 * Updates a comment to a file
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @param commentId
+	 *            The ID of the comment
+	 * @param comment
+	 *            Comment with the new content
+	 * @return The updated {@link FileComment}
+	 */
+	FileComment updateComment(String fileId, String commentId,
+			FileComment comment);
+
+	/**
+	 * Removes a comment from a file
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @param commentId
+	 *            The ID of the comment
+	 */
+	void removeComment(String fileId, String commentId);
+
+	/**
+	 * Adds a reply to a file comment
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @param commentId
+	 *            The ID of the comment
+	 * @param reply
+	 *            The new reply
+	 * @return The created {@link CommentReply}
+	 */
+	CommentReply addReply(String fileId, String commentId, CommentReply reply);
+
+	/**
+	 * Updates a reply to a file comment
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @param commentId
+	 *            The ID of the comment
+	 * @param replyId
+	 *            The ID of the reply
+	 * @param reply
+	 *            Reply with new content
+	 * @return The updated {@link CommentReply}
+	 */
+	CommentReply updateReply(String fileId, String commentId, String replyId,
+			CommentReply reply);
+
+	/**
+	 * Removes a reply from a file comment
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @param commentId
+	 *            The ID of the comment
+	 * @param replyId
+	 *            The ID of the reply
+	 */
+	void removeReply(String fileId, String commentId, String replyId);
 }

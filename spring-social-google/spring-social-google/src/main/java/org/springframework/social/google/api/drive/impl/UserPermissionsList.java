@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.google.api.drive;
+package org.springframework.social.google.api.drive.impl;
 
+import org.springframework.social.google.api.drive.UserPermission;
 import org.springframework.social.google.api.query.ApiList;
 
 /**
  * {@link ApiList} of {@link UserPermission}
  * @author Gabriel Axel
  */
-public class UserPermissionsList extends ApiList<UserPermission> {
+class UserPermissionsList extends ApiList<UserPermission> {
 
 }

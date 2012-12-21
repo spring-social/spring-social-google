@@ -194,6 +194,10 @@ public class DriveFile extends ApiEntity {
 	
 	private UserPermission userPermission;
 	
+	private String md5Checksum;
+	
+	private long fileSize;
+	
 	private long quotaBytesUsed;
 	
 	private List<String> ownerNames;
@@ -266,6 +270,14 @@ public class DriveFile extends ApiEntity {
 
 	public UserPermission getUserPermission() {
 		return userPermission;
+	}
+	
+	public String getMd5Checksum() {
+		return md5Checksum;
+	}
+
+	public long getFileSize() {
+		return fileSize;
 	}
 
 	public long getQuotaBytesUsed() {

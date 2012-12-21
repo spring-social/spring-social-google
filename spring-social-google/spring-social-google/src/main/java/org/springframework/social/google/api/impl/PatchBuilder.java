@@ -16,6 +16,7 @@
 package org.springframework.social.google.api.impl;
 
 import static java.lang.System.arraycopy;
+import static org.springframework.social.google.api.impl.ApiEnumSerializer.enumToString;
 import static org.springframework.util.StringUtils.delimitedListToStringArray;
 
 import java.util.HashMap;
@@ -78,6 +79,16 @@ public class PatchBuilder {
 		Map<String, Object> parentNode = getNode(map, parentPathTokens);
 		parentNode.put(pathTokens[pathTokens.length-1], value);
 		return this;
+	}
+	
+	/**
+	 * Adds a property and a value to be set in the PATCH request
+	 * @param path the path representing the property, with "." representing nested properties
+	 * @param value the value to be set for the property
+	 * @return the {@link PatchBuilder} instance
+	 */
+	public PatchBuilder set(String path, Enum<?> value) {
+		return set(path, enumToString(value));
 	}
 	
 	/**
