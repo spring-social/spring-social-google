@@ -23,40 +23,43 @@ import org.codehaus.jackson.annotate.JsonTypeInfo.As;
 import org.codehaus.jackson.annotate.JsonTypeInfo.Id;
 
 /**
- * An abstract superclass for model classes representing Google+ activity attachments.
+ * An abstract superclass for model classes representing Google+ activity
+ * attachments.
+ * 
  * @author Gabriel Axel
  */
-@JsonTypeInfo(property="objectType", include=As.PROPERTY, use=Id.NAME)
-@JsonSubTypes({@Type(Article.class), @Type(Photo.class), @Type(Video.class), 
-	@Type(Album.class), @Type(Event.class)})
+@JsonTypeInfo(property = "objectType", include = As.PROPERTY, use = Id.NAME)
+@JsonSubTypes({ @Type(Article.class), @Type(Photo.class), @Type(Video.class),
+		@Type(Album.class), @Type(Event.class), @Type(Hangout.class),
+		@Type(Place.class) })
 public abstract class Attachment {
 
 	public static class PreviewImage {
-		
+
 		@JsonProperty
 		protected String url;
-		
+
 		@JsonProperty
 		protected String type;
-		
+
 		@JsonProperty
 		protected int height;
-		
+
 		@JsonProperty
 		protected int width;
 	}
-	
+
 	private String url;
 	private String displayName;
 	private String content;
-	
+
 	@JsonProperty
 	private PreviewImage image;
-	
+
 	public String getUrl() {
 		return url;
 	}
-	
+
 	public String getDisplayName() {
 		return displayName;
 	}
@@ -64,11 +67,11 @@ public abstract class Attachment {
 	public String getContent() {
 		return content;
 	}
-	
+
 	public String getPreviewImageUrl() {
 		return image == null ? null : image.url;
 	}
-	
+
 	public String getPreviewImageContentType() {
 		return image == null ? null : image.type;
 	}
