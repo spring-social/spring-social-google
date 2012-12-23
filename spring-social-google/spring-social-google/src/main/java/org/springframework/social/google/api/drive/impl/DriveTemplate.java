@@ -27,6 +27,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.google.api.drive.CommentReply;
+import org.springframework.social.google.api.drive.DriveAbout;
+import org.springframework.social.google.api.drive.DriveApp;
 import org.springframework.social.google.api.drive.DriveFile;
 import org.springframework.social.google.api.drive.DriveFileQueryBuilder;
 import org.springframework.social.google.api.drive.DriveFilesPage;
@@ -50,7 +52,13 @@ import org.springframework.web.client.RestTemplate;
 public class DriveTemplate extends AbstractGoogleApiOperations implements
 		DriveOperations {
 	
-	static final String DRIVE_FILES_URL = "https://www.googleapis.com/drive/v2/files/";
+	private static final String DRIVE_BASE_URL = "https://www.googleapis.com/drive/v2";
+	
+	private static final String DRIVE_ABOUT_URL = DRIVE_BASE_URL + "/about";
+	
+	private static final String DRIVE_APPS_URL = DRIVE_BASE_URL + "/apps/";
+	
+	static final String DRIVE_FILES_URL = DRIVE_BASE_URL + "/files/";
 	
 	private static final String PERMISSIONS = "/permissions/";
 	
@@ -69,6 +77,21 @@ public class DriveTemplate extends AbstractGoogleApiOperations implements
 		super(restTemplate, isAuthorized);
 	}
 
+	@Override
+	public DriveAbout getAbout() {
+		return getEntity(DRIVE_ABOUT_URL, DriveAbout.class);
+	}
+	
+	@Override
+	public List<DriveApp> getApps() {
+		return getEntity(DRIVE_APPS_URL, DriveAppsList.class).getItems();
+	}
+
+	@Override
+	public DriveApp getApp(String id) {
+		return getEntity(DRIVE_APPS_URL + id,  DriveApp.class);
+	}
+	
 	@Override
 	public DriveFile getFile(String id) {
 		return getEntity(DRIVE_FILES_URL + id, DriveFile.class);

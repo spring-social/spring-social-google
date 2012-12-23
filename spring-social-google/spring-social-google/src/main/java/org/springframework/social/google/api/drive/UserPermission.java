@@ -37,7 +37,6 @@ public class UserPermission extends ApiEntity {
 	/**
 	 * This field is write-only
 	 */
-	@SuppressWarnings("unused")
 	@JsonProperty
 	private String value;
 	

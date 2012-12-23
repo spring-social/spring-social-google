@@ -38,11 +38,35 @@ import org.springframework.core.io.Resource;
 public interface DriveOperations {
 
 	/**
+	 * Get general Google Drive details for the current user
+	 * 
+	 * @return {@link DriveAbout} with details for the current user
+	 */
+	DriveAbout getAbout();
+
+	/**
+	 * Returns the applications authorized by the user to access Google Drive
+	 * API
+	 * 
+	 * @return List of {@link DriveApp} for the current user
+	 */
+	List<DriveApp> getApps();
+
+	/**
+	 * Returns an application by its ID
+	 * 
+	 * @param id
+	 *            The ID of the application
+	 * @return {@link DriveApp} matching the ID
+	 */
+	DriveApp getApp(String id);
+
+	/**
 	 * Retrieves a file by its ID
 	 * 
 	 * @param id
 	 *            the ID to retrieve by
-	 * @return the retrieved {@link DriveFile}
+	 * @return {@link DriveFile} matching the ID
 	 */
 	DriveFile getFile(String id);
 
