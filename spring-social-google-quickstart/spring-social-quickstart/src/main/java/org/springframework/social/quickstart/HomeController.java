@@ -31,17 +31,17 @@ import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.drive.DriveFileQueryBuilder;
 import org.springframework.social.google.api.drive.DriveFilesPage;
 import org.springframework.social.google.api.drive.DriveOperations;
-import org.springframework.social.google.api.legacyprofile.LegacyGoogleProfile;
-import org.springframework.social.google.api.plus.activity.ActivitiesPage;
-import org.springframework.social.google.api.plus.activity.Activity;
-import org.springframework.social.google.api.plus.comment.Comment;
-import org.springframework.social.google.api.plus.comment.CommentsPage;
-import org.springframework.social.google.api.plus.person.PeoplePage;
-import org.springframework.social.google.api.plus.person.Person;
+import org.springframework.social.google.api.plus.ActivitiesPage;
+import org.springframework.social.google.api.plus.Activity;
+import org.springframework.social.google.api.plus.ActivityComment;
+import org.springframework.social.google.api.plus.ActivityCommentsPage;
+import org.springframework.social.google.api.plus.PeoplePage;
+import org.springframework.social.google.api.plus.Person;
 import org.springframework.social.google.api.tasks.Task;
 import org.springframework.social.google.api.tasks.TaskList;
 import org.springframework.social.google.api.tasks.TaskListsPage;
 import org.springframework.social.google.api.tasks.TasksPage;
+import org.springframework.social.google.api.userinfo.GoogleUserProfile;
 import org.springframework.social.quickstart.drive.DateOperators;
 import org.springframework.social.quickstart.drive.DriveSearchForm;
 import org.springframework.social.quickstart.drive.OptionalBoolean;
@@ -79,7 +79,7 @@ public class HomeController {
 	@RequestMapping(value="/", method=GET)
 	public ModelAndView home() {
 		
-		LegacyGoogleProfile profile = google.userOperations().getUserProfile();
+		GoogleUserProfile profile = google.userOperations().getUserProfile();
 		
 		return new ModelAndView("profile", "profile", profile);
 	}
@@ -87,29 +87,21 @@ public class HomeController {
 	@RequestMapping(value="person", method=GET)
 	public ModelAndView person(String id, String contact) {
 		if(hasText(id)) {
-			Person person = google.personOperations().getPerson(id);
+			Person person = google.plusOperations().getPerson(id);
 			return new ModelAndView("person")
 				.addObject("command", new SearchForm())
 				.addObject("person", person);
-		} else if(hasText(contact)) {
-			Person person = google.personOperations().getContact(contact);
-			return new ModelAndView("person", "person", person);
 		}
 		return new ModelAndView("redirect:/people");
 	}
 	
 	@RequestMapping(value="people", method=GET, params={"!plusoners","!resharers"})
-	public ModelAndView people(String text, String group, String pageToken) {
+	public ModelAndView people(String text, String pageToken) {
 		
 		PeoplePage people;
 		if(hasText(text)) {
-			people = google.personOperations().personQuery()
+			people = google.plusOperations().personQuery()
 				.searchFor(text)
-				.fromPage(pageToken)
-				.getPage();
-		} else if(hasText(group)) {
-			people = google.personOperations().contactQuery()
-				.fromGroup(group)
 				.fromPage(pageToken)
 				.getPage();
 		} else {
@@ -122,28 +114,28 @@ public class HomeController {
 	@RequestMapping(value="people", method=GET, params="plusoners")
 	public ModelAndView plusOners(String plusoners, String pageToken) {
 		
-		PeoplePage people = google.personOperations().getActivityPlusOners(plusoners, pageToken);
+		PeoplePage people = google.plusOperations().getActivityPlusOners(plusoners, pageToken);
 		return new ModelAndView("people", "people", people);
 	}
 	
 	@RequestMapping(value="people", method=GET, params="resharers")
 	public ModelAndView resharers(String resharers, String pageToken) {
 		
-		PeoplePage people = google.personOperations().getActivityPlusOners(resharers, pageToken);
+		PeoplePage people = google.plusOperations().getActivityPlusOners(resharers, pageToken);
 		return new ModelAndView("people", "people", people);
 	}
 	
 	@RequestMapping(value="activity", method=GET)
 	public ModelAndView activity(String id) {
 		
-		Activity activity = google.activityOperations().getActivity(id);
+		Activity activity = google.plusOperations().getActivity(id);
 		return new ModelAndView("activity", "activity", activity);
 	}
 	
 	@RequestMapping(value="activities", method=GET, params="!text")
 	public ModelAndView listActivities(@RequestParam(defaultValue="me") String person, String pageToken) {
 		
-		ActivitiesPage activities = google.activityOperations().getActivitiesPage(person, pageToken);
+		ActivitiesPage activities = google.plusOperations().getActivitiesPage(person, pageToken);
 		
 		return new ModelAndView("activities", "activities", activities);
 	}
@@ -151,7 +143,7 @@ public class HomeController {
 	@RequestMapping(value="activities", method=GET, params="text")
 	public ModelAndView searchActivities(String text, String pageToken) {
 		
-		ActivitiesPage activities = google.activityOperations().activityQuery()
+		ActivitiesPage activities = google.plusOperations().activityQuery()
 			.searchFor(text)
 			.fromPage(pageToken)
 			.getPage();
@@ -162,14 +154,14 @@ public class HomeController {
 	@RequestMapping(value="comments", method=GET)
 	public ModelAndView comments(String activity, String pageToken) {
 		
-		CommentsPage comments = google.commentOperations().getComments(activity, pageToken);
+		ActivityCommentsPage comments = google.plusOperations().getComments(activity, pageToken);
 		return new ModelAndView("comments", "comments", comments);
 	}
 	
 	@RequestMapping(value="comment", method=GET)
 	public ModelAndView comment(String id) {
 		
-		Comment comment = google.commentOperations().getComment(id);
+		ActivityComment comment = google.plusOperations().getComment(id);
 		return new ModelAndView("comment", "comment", comment);
 	}
 	

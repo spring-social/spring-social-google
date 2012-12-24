@@ -39,16 +39,12 @@ import org.springframework.http.converter.xml.SourceHttpMessageConverter;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.drive.DriveOperations;
 import org.springframework.social.google.api.drive.impl.DriveTemplate;
-import org.springframework.social.google.api.legacyprofile.LegacyProfileOperations;
-import org.springframework.social.google.api.legacyprofile.impl.UserTemplate;
-import org.springframework.social.google.api.plus.activity.ActivityOperations;
-import org.springframework.social.google.api.plus.activity.impl.ActivityTemplate;
-import org.springframework.social.google.api.plus.comment.CommentOperations;
-import org.springframework.social.google.api.plus.comment.impl.CommentTemplate;
-import org.springframework.social.google.api.plus.person.PersonOperations;
-import org.springframework.social.google.api.plus.person.impl.PersonTemplate;
+import org.springframework.social.google.api.plus.PlusOperations;
+import org.springframework.social.google.api.plus.impl.PlusTemplate;
 import org.springframework.social.google.api.tasks.TaskOperations;
 import org.springframework.social.google.api.tasks.impl.TaskTemplate;
+import org.springframework.social.google.api.userinfo.UserInfoOperations;
+import org.springframework.social.google.api.userinfo.impl.UserInfoTemplate;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
 
@@ -68,10 +64,8 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	
 	private String accessToken;
 
-	private LegacyProfileOperations userOperations;
-	private PersonOperations profileOperations;
-	private ActivityOperations activityOperations;
-	private CommentOperations commentOperations;
+	private UserInfoOperations userOperations;
+	private PlusOperations plusOperations;
 	private TaskOperations taskOperations;
 	private DriveOperations driveOperations;
 	
@@ -95,10 +89,8 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	}
 
 	private void initialize() {
-		userOperations = new UserTemplate(getRestTemplate(), isAuthorized());
-		profileOperations = new PersonTemplate(getRestTemplate(), isAuthorized());
-		activityOperations = new ActivityTemplate(getRestTemplate(), isAuthorized());
-		commentOperations = new CommentTemplate(getRestTemplate(), isAuthorized());
+		userOperations = new UserInfoTemplate(getRestTemplate(), isAuthorized());
+		plusOperations = new PlusTemplate(getRestTemplate(), isAuthorized());
 		taskOperations = new TaskTemplate(getRestTemplate(), isAuthorized());
 		driveOperations = new DriveTemplate(getRestTemplate(), isAuthorized());
 	}
@@ -134,23 +126,13 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	}
 
 	@Override
-	public LegacyProfileOperations userOperations() {
+	public UserInfoOperations userOperations() {
 		return userOperations;
 	}
 
 	@Override
-	public PersonOperations personOperations() {
-		return profileOperations;
-	}
-
-	@Override
-	public ActivityOperations activityOperations() {
-		return activityOperations;
-	}
-
-	@Override
-	public CommentOperations commentOperations() {
-		return commentOperations;
+	public PlusOperations plusOperations() {
+		return plusOperations;
 	}
 
 	@Override

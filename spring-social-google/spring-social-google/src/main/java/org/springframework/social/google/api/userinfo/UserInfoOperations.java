@@ -13,22 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.google.api.drive.impl;
-
-import org.codehaus.jackson.map.annotate.JsonCachable;
-import org.springframework.social.google.api.drive.DriveApp.IconCategory;
-import org.springframework.social.google.api.impl.ApiEnumDeserializer;
+package org.springframework.social.google.api.userinfo;
 
 /**
- * {@link ApiEnumDeserializer} for {@link IconCategory}
- * 
+ * Defines a single operation for retrieving the authenticated user profile.
+ * Requires OAuth2 scopes https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo#email
  * @author Gabriel Axel
  */
-@JsonCachable
-public class IconCategoryDeserializer extends ApiEnumDeserializer<IconCategory> {
+public interface UserInfoOperations {
 
-	public IconCategoryDeserializer() {
-		super(IconCategory.class);
-	}
-
+	/**
+	 * Retrieves authenticated user profile.
+	 * @return {@link GoogleUserProfile} for the authenticated user
+	 */
+	GoogleUserProfile getUserProfile();
 }

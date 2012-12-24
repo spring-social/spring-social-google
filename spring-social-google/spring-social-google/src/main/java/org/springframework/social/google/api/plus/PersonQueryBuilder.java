@@ -13,22 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.google.api.drive.impl;
+package org.springframework.social.google.api.plus;
 
-import org.codehaus.jackson.map.annotate.JsonCachable;
-import org.springframework.social.google.api.drive.DriveApp.IconCategory;
-import org.springframework.social.google.api.impl.ApiEnumDeserializer;
+import org.springframework.social.google.api.query.ApiQueryBuilder;
+import org.springframework.social.google.api.query.QueryBuilder;
 
 /**
- * {@link ApiEnumDeserializer} for {@link IconCategory}
- * 
+ * {@link QueryBuilder} for {@link Person}.
  * @author Gabriel Axel
  */
-@JsonCachable
-public class IconCategoryDeserializer extends ApiEnumDeserializer<IconCategory> {
-
-	public IconCategoryDeserializer() {
-		super(IconCategory.class);
-	}
-
+public interface PersonQueryBuilder extends ApiQueryBuilder<PersonQueryBuilder, PeoplePage> {
+	PersonQueryBuilder searchFor(String text);
 }

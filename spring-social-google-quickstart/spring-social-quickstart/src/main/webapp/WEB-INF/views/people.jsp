@@ -32,26 +32,16 @@
 					<th>Name</th>
 					<th></th>
 					<th></th>
-					<th></th>
 				</thead>
 				<tbody>
 					<c:forEach items="${people.items}" var="person">
 						<tr>
 							<td width="100%">${person.displayName}</td>
 							<td>
-								<c:if test="${person.contactWithProfile}">
-									<a href="person?contact=${person.id}">Contact</a>
-								</c:if>
+								<a href="person?id=${person.id}">Profile</a>
 							</td>
 							<td>
-								<c:if test="${person.googlePlusProfile}">
-									<a href="person?id=${person.id}">Profile</a>
-								</c:if>
-							</td>
-							<td>
-								<c:if test="${person.googlePlusProfile}">
-									<a href="activities?person=${person.id}">Activities</a>
-								</c:if>
+								<a href="activities?person=${person.id}">Activities</a>
 							</td>
 						</tr>
 					</c:forEach>

@@ -13,22 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.google.api.drive.impl;
-
-import org.codehaus.jackson.map.annotate.JsonCachable;
-import org.springframework.social.google.api.drive.DriveApp.IconCategory;
-import org.springframework.social.google.api.impl.ApiEnumDeserializer;
+package org.springframework.social.google.api.plus;
 
 /**
- * {@link ApiEnumDeserializer} for {@link IconCategory}
- * 
+ * Enum representing activity order for querying with {@link ActivityQueryBuilder}.
  * @author Gabriel Axel
  */
-@JsonCachable
-public class IconCategoryDeserializer extends ApiEnumDeserializer<IconCategory> {
-
-	public IconCategoryDeserializer() {
-		super(IconCategory.class);
-	}
-
+public enum ActivitiesOrder {
+	BEST, RECENT
 }

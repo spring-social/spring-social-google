@@ -18,7 +18,11 @@ package org.springframework.social.google.api.drive;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.springframework.social.google.api.ApiEntity;
+import org.springframework.social.google.api.drive.impl.IconCategoryDeserializer;
+import org.springframework.social.google.api.impl.ApiEnumSerializer;
 
 /**
  * Model class representing an application that is using Google Drive API
@@ -26,6 +30,12 @@ import org.springframework.social.google.api.ApiEntity;
  * @author Gabriel Axel
  */
 public class DriveApp extends ApiEntity {
+	
+	@JsonSerialize(using = ApiEnumSerializer.class)
+	@JsonDeserialize(using = IconCategoryDeserializer.class)
+	public enum IconCategory {
+		APPLICATION, DOCUMENT, DOCUMENT_SHARED;
+	}
 
 	public static class AppIcon {
 		

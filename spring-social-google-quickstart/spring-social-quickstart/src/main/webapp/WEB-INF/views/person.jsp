@@ -70,7 +70,7 @@
 				<h5>URLs</h5>
 				<ul>
 					<c:forEach items="${person.urls}" var="url">
-						<li><a href="${url.value}">${url.value}</a> ${url.type}</li>
+						<li><a href="${url.key}">${url.key}</a> ${url.value}</li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -86,23 +86,7 @@
 				<h5>Places Lived</h5>
 				<ul>
 					<c:forEach items="${person.placesLived}" var="place">
-						<li>${place}</li>
-					</c:forEach>
-				</ul>
-			</div>
-			<div>
-				<h5>E-mails</h5>
-				<ul>
-					<c:forEach items="${person.emails}" var="email">
-						<li>${email.value}</li>
-					</c:forEach>
-				</ul>
-			</div>
-			<div>
-				<h5>Phones</h5>
-				<ul>
-					<c:forEach items="${person.phoneNumbers}" var="phone">
-						<li>${phone}</li>
+						<li>${place.key}</li>
 					</c:forEach>
 				</ul>
 			</div>

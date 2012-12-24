@@ -18,11 +18,9 @@ package org.springframework.social.google.api;
 import org.springframework.social.ApiBinding;
 import org.springframework.social.google.api.drive.DriveOperations;
 import org.springframework.social.google.api.impl.GoogleTemplate;
-import org.springframework.social.google.api.legacyprofile.LegacyProfileOperations;
-import org.springframework.social.google.api.plus.activity.ActivityOperations;
-import org.springframework.social.google.api.plus.comment.CommentOperations;
-import org.springframework.social.google.api.plus.person.PersonOperations;
+import org.springframework.social.google.api.plus.PlusOperations;
 import org.springframework.social.google.api.tasks.TaskOperations;
+import org.springframework.social.google.api.userinfo.UserInfoOperations;
 
 /**
  * Interface specifying a basic set of operations for interacting with Google
@@ -33,44 +31,23 @@ import org.springframework.social.google.api.tasks.TaskOperations;
 public interface Google extends ApiBinding {
 
 	/**
-	 * Retrieves {@link LegacyProfileOperations}, used for fetching user profile
+	 * Retrieves {@link UserInfoOperations}, used for fetching user profile
 	 * (predates Google+). Requires OAuth2 scopes
 	 * https://www.googleapis.com/auth/userinfo.profile
 	 * https://www.googleapis.com/auth/userinfo#email
 	 * 
-	 * @return {@link LegacyProfileOperations} for the authenticated user
+	 * @return {@link UserInfoOperations} for the authenticated user
 	 */
-	LegacyProfileOperations userOperations();
+	UserInfoOperations userOperations();
 
 	/**
-	 * Retrieves {@link PersonOperations}, used for interacting with Google+
-	 * People API. Some methods require OAuth2 scope
-	 * https://www.googleapis.com/auth/plus.me
+	 * Retrieves {@link PlusOperations}, used for interacting with Google+ API.
+	 * Some methods require OAuth2 scope https://www.googleapis.com/auth/plus.me
 	 * 
-	 * @return {@link PersonOperations} for the authenticated user if
+	 * @return {@link PlusOperations} for the authenticated user if
 	 *         authenticated
 	 */
-	PersonOperations personOperations();
-
-	/**
-	 * Retrieves {@link ActivityOperations}, used for interacting with Google+
-	 * Activities API. Some methods require OAuth2 scope
-	 * https://www.googleapis.com/auth/plus.me
-	 * 
-	 * @return {@link ActivityOperations} for the authenticated user if
-	 *         authenticated
-	 */
-	ActivityOperations activityOperations();
-
-	/**
-	 * Retrieves {@link CommentOperations}, used for interacting with Google+
-	 * Comments API. Optionally uses OAuth2 scope
-	 * https://www.googleapis.com/auth/plus.me
-	 * 
-	 * @return {@link ActivityOperations} for the authenticated user if
-	 *         authenticated
-	 */
-	CommentOperations commentOperations();
+	PlusOperations plusOperations();
 
 	/**
 	 * Retrieves {@link TaskOperations}, used for interacting with Google Tasks
@@ -80,18 +57,20 @@ public interface Google extends ApiBinding {
 	 * @return {@link TaskOperations} for the authenticated user
 	 */
 	TaskOperations taskOperations();
-	
+
 	/**
-	 * Retrieves {@link DriveOperations}, used for interacting with Google Drive API.
-	 * Requires OAuth scope(s) from the following:
+	 * Retrieves {@link DriveOperations}, used for interacting with Google Drive
+	 * API. Requires OAuth scope(s) from the following:
 	 * <ul>
 	 * <li>https://www.googleapis.com/auth/drive.file</li>
 	 * <li>https://www.googleapis.com/auth/drive</li>
 	 * <li>https://www.googleapis.com/auth/drive.apps.readonly</li>
 	 * <li>https://www.googleapis.com/auth/drive.readonly</li>
 	 * <li>https://www.googleapis.com/auth/drive.readonly.metadata</li>
-	 * See <a href="https://developers.google.com/drive/scopes">https://developers.google.com/drive/scopes</a>
-	 * for details about the different scopes
+	 * See <a
+	 * href="https://developers.google.com/drive/scopes">https://developers
+	 * .google.com/drive/scopes</a> for details about the different scopes
+	 * 
 	 * @return {@link DriveOperations} for the authenticated user
 	 */
 	DriveOperations driveOperations();
@@ -102,7 +81,8 @@ public interface Google extends ApiBinding {
 	 * Spring Social Google with existing GData client code, or if you want to
 	 * work with APIs which are not yet implemented in the library.
 	 * 
-	 * @see <a href="http://code.google.com/p/gdata-java-client/">GData Java Client</a>
+	 * @see <a href="http://code.google.com/p/gdata-java-client/">GData Java
+	 *      Client</a>
 	 * 
 	 * @param client
 	 *            subclass of externally instantiated {@link GoogleService} to
@@ -110,11 +90,12 @@ public interface Google extends ApiBinding {
 	 *            http://code.google.com/p/gdata-java-client/
 	 */
 	void applyAuthentication(Object client);
-	
+
 	/**
 	 * Returns the access token, allowing interoperability with other libraries
 	 * 
-	 * @see <a href="http://code.google.com/p/google-api-java-client/">Google APIs Client Library for Java</a>
+	 * @see <a href="http://code.google.com/p/google-api-java-client/">Google
+	 *      APIs Client Library for Java</a>
 	 * 
 	 * @return The OAuth2 access token
 	 */

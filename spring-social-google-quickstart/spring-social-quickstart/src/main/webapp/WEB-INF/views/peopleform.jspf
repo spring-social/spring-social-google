@@ -31,25 +31,6 @@
 				</div>
 			</div>
 		</form>
-		<form action="people" class="span3">
-			<div class="clearfix">
-				<label for="group">From Group:</label>
-				<div class="input">
-					<select name="group">
-						<option value="@all">All</option>
-						<option value="coworkers">Coworkers</option>
-						<option value="family">Family</option>
-						<option value="friends">Friends</option>
-						<option value="mycontacts">My Contacts</option>
-					</select>
-				</div>
-			</div>
-			<div class="clearfix">
-				<div class="input">
-					<input type="submit" class="btn" value="Get Contacts"/>
-				</div>
-			</div>
-		</form>
 	</div>
 	
 </jsp:root>
