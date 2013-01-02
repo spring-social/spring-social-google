@@ -130,7 +130,9 @@ public class DriveFile extends ApiEntity {
 			file.modifiedDate = modifiedDate;
 			file.parents = new ArrayList<DriveFileParent>();
 			for(String parentId : parentIds) {
-				file.parents.add(new DriveFileParent(parentId));
+				if(parentId != null){
+					file.parents.add(new DriveFileParent(parentId));
+				}
 			}
 			return file;
 		}
