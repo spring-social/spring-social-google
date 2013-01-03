@@ -34,6 +34,7 @@ import org.springframework.social.google.api.ApiEntity;
 public class DriveFile extends ApiEntity {
 
 	public static final String FOLDER = "application/vnd.google-apps.folder";
+	public static final String SHORTCUT = "application/vnd.google-apps.drive-sdk";
 	
 	public static class Builder {
 
@@ -218,6 +219,10 @@ public class DriveFile extends ApiEntity {
 
 	public boolean isFolder() {
 		return FOLDER.equals(mimeType);
+	}
+
+	public boolean isShortcut() {
+		return mimeType != null && mimeType.startsWith(SHORTCUT);
 	}
 	
 	public String getTitle() {
