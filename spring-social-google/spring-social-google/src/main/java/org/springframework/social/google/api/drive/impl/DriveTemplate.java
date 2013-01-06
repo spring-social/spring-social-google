@@ -190,7 +190,7 @@ public class DriveTemplate extends AbstractGoogleApiOperations implements
 			@Override
 			public DownloadMetadata extractData(ClientHttpResponse response) throws IOException {
 				int bytes = FileCopyUtils.copy(response.getBody(), out);
-				return new DownloadMetadata(response.getStatusCode(), response.getRawStatusCode(), response.getStatusText(), response.getHeaders(), bytes);
+				return new DownloadMetadata(response.getStatusCode(), response.getStatusText(), response.getHeaders(), bytes);
 			}
 		});
 	}

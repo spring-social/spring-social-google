@@ -7,13 +7,11 @@ public final class DownloadMetadata {
 
 	public final HttpHeaders headers;
 	public final HttpStatus httpStatus;
-	public final int rawStatusCode;
 	public final String statusText;
 	public final int bytes;
 
-	public DownloadMetadata(HttpStatus httpStatus, int rawStatusCode, String statusText, HttpHeaders headers, int bytes) {
+	public DownloadMetadata(HttpStatus httpStatus, String statusText, HttpHeaders headers, int bytes) {
 		this.httpStatus = httpStatus;
-		this.rawStatusCode = rawStatusCode;
 		this.statusText = statusText;
 		this.headers = headers == null ? null : HttpHeaders.readOnlyHttpHeaders(headers);
 		this.bytes = bytes;
@@ -25,10 +23,6 @@ public final class DownloadMetadata {
 
 	public HttpStatus getHttpStatus() {
 		return httpStatus;
-	}
-
-	public int getRawStatusCode() {
-		return rawStatusCode;
 	}
 
 	public String getStatusText() {
