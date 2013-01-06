@@ -23,6 +23,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.oauth2.AccessGrant;
+import org.springframework.social.oauth2.GrantType;
+import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.social.oauth2.OAuth2Template;
 import org.springframework.util.MultiValueMap;
 
@@ -32,11 +34,42 @@ import org.springframework.util.MultiValueMap;
  */
 public class GoogleOAuth2Template extends OAuth2Template {
 	
+	public static final String ACCESS_TYPE_PARAMETER_NAME = "access_type";
+	public static final String ACCESS_TYPE_OFFLINE = "offline";
+	public static final String ACCESS_TYPE_ONLINE = "online";
+
+	private final boolean offline;
+
 	public GoogleOAuth2Template(String clientId, String clientSecret) {
+		this(clientId, clientSecret, false);
+	}
+	
+	/**
+	 * @param clientId
+	 * @param clientSecret
+	 * @param defaultOffline
+	 *				if true, the default access_type for all 
+	 *					authorize urls will be "offline", which
+	 *                  gives us a refresh token for offline use
+	 */
+	public GoogleOAuth2Template(String clientId, String clientSecret, boolean defaultOffline) {
 		super(clientId, clientSecret,
 				"https://accounts.google.com/o/oauth2/auth",
 				"https://accounts.google.com/o/oauth2/token");
 		setUseParametersForClientAuthentication(true);
+		this.offline = defaultOffline;
+	}
+
+	@Override
+	public String buildAuthorizeUrl(GrantType grantType, OAuth2Parameters parameters) {
+		addAccessTypeIfMissing(parameters);
+		return super.buildAuthorizeUrl(grantType, parameters);
+	}
+	
+	protected void addAccessTypeIfMissing(OAuth2Parameters parameters) {
+		if(!parameters.containsKey(ACCESS_TYPE_PARAMETER_NAME)) {
+			parameters.add(ACCESS_TYPE_PARAMETER_NAME, offline ? ACCESS_TYPE_OFFLINE : ACCESS_TYPE_ONLINE);
+		}
 	}
 
 	@Override
