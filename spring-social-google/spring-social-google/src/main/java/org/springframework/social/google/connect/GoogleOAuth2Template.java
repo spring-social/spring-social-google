@@ -62,13 +62,26 @@ public class GoogleOAuth2Template extends OAuth2Template {
 
 	protected void addAccessTypeIfMissing(MultiValueMap<String, String> parameters) {
 		if(!parameters.containsKey(ACCESS_TYPE_PARAMETER_NAME)) {
-			parameters.add(ACCESS_TYPE_PARAMETER_NAME, offline ? ACCESS_TYPE_OFFLINE : ACCESS_TYPE_ONLINE);
+			parameters.set(ACCESS_TYPE_PARAMETER_NAME, offline ? ACCESS_TYPE_OFFLINE : ACCESS_TYPE_ONLINE);
 		}
 	}
 
 	@Override
-	protected AccessGrant postForAccessGrant(String accessTokenUrl, MultiValueMap<String, String> parameters) {
+	public AccessGrant refreshAccess(String refreshToken, String scope, MultiValueMap<String, String> additionalParameters) {
+		addAccessTypeIfMissing(additionalParameters);
+		return super.refreshAccess(refreshToken, scope, additionalParameters);
+	}
+	
+	@Override
+	public String buildAuthenticateUrl(GrantType grantType, OAuth2Parameters parameters) {
 		addAccessTypeIfMissing(parameters);
-		return super.postForAccessGrant(accessTokenUrl, parameters);
+		return super.buildAuthenticateUrl(grantType, parameters);
+	}
+	
+	@Override
+	public String buildAuthorizeUrl(GrantType grantType, OAuth2Parameters parameters) {
+		addAccessTypeIfMissing(parameters);
+		parameters.set("approval_prompt", "force");
+		return super.buildAuthorizeUrl(grantType, parameters);
 	}
 }
