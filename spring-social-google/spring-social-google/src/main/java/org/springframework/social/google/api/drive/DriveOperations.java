@@ -15,6 +15,7 @@
  */
 package org.springframework.social.google.api.drive;
 
+import java.io.OutputStream;
 import java.util.List;
 
 import org.springframework.core.io.Resource;
@@ -178,6 +179,15 @@ public interface DriveOperations {
 	 */
 	DriveFile upload(Resource resource, DriveFile metadata,
 			UploadParameters parameters);
+	
+	/**
+	 * Downloads a file from google drive 
+	 * @param url
+	 *			the url of the download
+	 * @param out
+	 *			outputstream to copy the answer to the outputstream will be closed
+	 */
+	DownloadMetadata load(String url, OutputStream out);
 
 	/**
 	 * Creates an empty file with metadata

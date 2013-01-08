@@ -20,13 +20,18 @@ import static org.springframework.http.MediaType.MULTIPART_FORM_DATA;
 import static org.springframework.social.google.api.drive.DriveFile.FOLDER;
 import static org.springframework.util.StringUtils.hasText;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.social.google.api.drive.CommentReply;
+import org.springframework.social.google.api.drive.DownloadMetadata;
 import org.springframework.social.google.api.drive.DriveAbout;
 import org.springframework.social.google.api.drive.DriveApp;
 import org.springframework.social.google.api.drive.DriveFile;
@@ -41,8 +46,10 @@ import org.springframework.social.google.api.drive.UploadParameters;
 import org.springframework.social.google.api.drive.UserPermission;
 import org.springframework.social.google.api.impl.AbstractGoogleApiOperations;
 import org.springframework.social.google.api.impl.PatchBuilder;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.ResponseExtractor;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -174,6 +181,18 @@ public class DriveTemplate extends AbstractGoogleApiOperations implements
 		ResponseEntity<DriveFile> response = restTemplate.exchange(MULTIPART_UPLOAD_URL + parameters, POST, entity, DriveFile.class);
 
 		return response.getBody();
+	}
+
+	@Override
+	public DownloadMetadata load(final String url, final OutputStream out){
+		return restTemplate.execute(url, HttpMethod.GET, null, new ResponseExtractor<DownloadMetadata>() {
+
+			@Override
+			public DownloadMetadata extractData(ClientHttpResponse response) throws IOException {
+				int bytes = FileCopyUtils.copy(response.getBody(), out);
+				return new DownloadMetadata(response.getStatusCode(), response.getStatusText(), response.getHeaders(), bytes);
+			}
+		});
 	}
 
 	@Override
