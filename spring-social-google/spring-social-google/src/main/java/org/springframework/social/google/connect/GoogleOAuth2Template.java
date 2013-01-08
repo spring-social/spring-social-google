@@ -60,35 +60,15 @@ public class GoogleOAuth2Template extends OAuth2Template {
 		this.offline = defaultOffline;
 	}
 
-	@Override
-	public String buildAuthorizeUrl(GrantType grantType, OAuth2Parameters parameters) {
-		addAccessTypeIfMissing(parameters);
-		return super.buildAuthorizeUrl(grantType, parameters);
-	}
-	
-	protected void addAccessTypeIfMissing(OAuth2Parameters parameters) {
+	protected void addAccessTypeIfMissing(MultiValueMap<String, String> parameters) {
 		if(!parameters.containsKey(ACCESS_TYPE_PARAMETER_NAME)) {
 			parameters.add(ACCESS_TYPE_PARAMETER_NAME, offline ? ACCESS_TYPE_OFFLINE : ACCESS_TYPE_ONLINE);
 		}
 	}
 
 	@Override
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected AccessGrant postForAccessGrant(String accessTokenUrl, MultiValueMap<String, String> parameters) {
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-		HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(parameters, headers);
-		ResponseEntity<Map> responseEntity = getRestTemplate().exchange(accessTokenUrl, HttpMethod.POST, requestEntity, Map.class);
-		Map<String, Object> responseMap = responseEntity.getBody();
-		return extractAccessGrant(responseMap);
+		addAccessTypeIfMissing(parameters);
+		return super.postForAccessGrant(accessTokenUrl, parameters);
 	}
-	
-	private AccessGrant extractAccessGrant(Map<String, Object> result) {
-		String accessToken = (String) result.get("access_token");
-		String scope = (String) result.get("scope");
-		String refreshToken = (String) result.get("refresh_token");
-		Integer expiresIn = (Integer) result.get("expires_in");
-		return createAccessGrant(accessToken, scope, refreshToken, expiresIn, result);
-	}
-	
 }
