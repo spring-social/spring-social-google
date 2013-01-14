@@ -65,12 +65,6 @@ public class GoogleOAuth2Template extends OAuth2Template {
 			parameters.set(ACCESS_TYPE_PARAMETER_NAME, offline ? ACCESS_TYPE_OFFLINE : ACCESS_TYPE_ONLINE);
 		}
 	}
-
-	@Override
-	public AccessGrant refreshAccess(String refreshToken, String scope, MultiValueMap<String, String> additionalParameters) {
-		addAccessTypeIfMissing(additionalParameters);
-		return super.refreshAccess(refreshToken, scope, additionalParameters);
-	}
 	
 	@Override
 	public String buildAuthenticateUrl(GrantType grantType, OAuth2Parameters parameters) {
