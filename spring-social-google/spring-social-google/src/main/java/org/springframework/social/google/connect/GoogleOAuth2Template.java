@@ -55,6 +55,7 @@ public class GoogleOAuth2Template extends OAuth2Template {
 	public GoogleOAuth2Template(String clientId, String clientSecret, boolean defaultOffline) {
 		super(clientId, clientSecret,
 				"https://accounts.google.com/o/oauth2/auth",
+				"https://accounts.google.com/o/oauth2/auth",
 				"https://accounts.google.com/o/oauth2/token");
 		setUseParametersForClientAuthentication(true);
 		this.offline = defaultOffline;
