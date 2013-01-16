@@ -23,6 +23,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.oauth2.AccessGrant;
+import org.springframework.social.oauth2.GrantType;
+import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.social.oauth2.OAuth2Template;
 import org.springframework.util.MultiValueMap;
 
@@ -32,30 +34,49 @@ import org.springframework.util.MultiValueMap;
  */
 public class GoogleOAuth2Template extends OAuth2Template {
 	
+	public static final String ACCESS_TYPE_PARAMETER_NAME = "access_type";
+	public static final String ACCESS_TYPE_OFFLINE = "offline";
+	public static final String ACCESS_TYPE_ONLINE = "online";
+
+	private final boolean offline;
+
 	public GoogleOAuth2Template(String clientId, String clientSecret) {
+		this(clientId, clientSecret, false);
+	}
+	
+	/**
+	 * @param clientId
+	 * @param clientSecret
+	 * @param defaultOffline
+	 *				if true, the default access_type for all 
+	 *					authorize urls will be "offline", which
+	 *                  gives us a refresh token for offline use
+	 */
+	public GoogleOAuth2Template(String clientId, String clientSecret, boolean defaultOffline) {
 		super(clientId, clientSecret,
+				"https://accounts.google.com/o/oauth2/auth",
 				"https://accounts.google.com/o/oauth2/auth",
 				"https://accounts.google.com/o/oauth2/token");
 		setUseParametersForClientAuthentication(true);
+		this.offline = defaultOffline;
 	}
 
+	protected void addAccessTypeIfMissing(MultiValueMap<String, String> parameters) {
+		if(!parameters.containsKey(ACCESS_TYPE_PARAMETER_NAME)) {
+			parameters.set(ACCESS_TYPE_PARAMETER_NAME, offline ? ACCESS_TYPE_OFFLINE : ACCESS_TYPE_ONLINE);
+		}
+	}
+	
 	@Override
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	protected AccessGrant postForAccessGrant(String accessTokenUrl, MultiValueMap<String, String> parameters) {
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-		HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(parameters, headers);
-		ResponseEntity<Map> responseEntity = getRestTemplate().exchange(accessTokenUrl, HttpMethod.POST, requestEntity, Map.class);
-		Map<String, Object> responseMap = responseEntity.getBody();
-		return extractAccessGrant(responseMap);
+	public String buildAuthenticateUrl(GrantType grantType, OAuth2Parameters parameters) {
+		addAccessTypeIfMissing(parameters);
+		return super.buildAuthenticateUrl(grantType, parameters);
 	}
 	
-	private AccessGrant extractAccessGrant(Map<String, Object> result) {
-		String accessToken = (String) result.get("access_token");
-		String scope = (String) result.get("scope");
-		String refreshToken = (String) result.get("refresh_token");
-		Integer expiresIn = (Integer) result.get("expires_in");
-		return createAccessGrant(accessToken, scope, refreshToken, expiresIn, result);
+	@Override
+	public String buildAuthorizeUrl(GrantType grantType, OAuth2Parameters parameters) {
+		addAccessTypeIfMissing(parameters);
+		parameters.set("approval_prompt", "force");
+		return super.buildAuthorizeUrl(grantType, parameters);
 	}
-	
 }

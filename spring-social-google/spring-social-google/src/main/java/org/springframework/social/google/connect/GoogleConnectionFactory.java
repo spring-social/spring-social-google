@@ -26,9 +26,16 @@ import org.springframework.social.oauth2.AccessGrant;
  */
 public class GoogleConnectionFactory extends OAuth2ConnectionFactory<Google> {
 
+	private final boolean offline;
+
 	public GoogleConnectionFactory(String clientId, String clientSecret) {
-		super("google", new GoogleServiceProvider(clientId, clientSecret),
+		this(clientId, clientSecret, false);
+	}
+
+	public GoogleConnectionFactory(String clientId, String clientSecret, boolean offline) {
+		super("google", new GoogleServiceProvider(clientId, clientSecret, offline),
 				new GoogleAdapter());
+		this.offline = offline;
 	}
 
 	@Override

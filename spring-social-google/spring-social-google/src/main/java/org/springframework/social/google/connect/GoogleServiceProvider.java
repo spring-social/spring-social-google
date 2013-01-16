@@ -26,7 +26,11 @@ import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
 public class GoogleServiceProvider extends AbstractOAuth2ServiceProvider<Google> {
 
 	public GoogleServiceProvider(String clientId, String clientSecret) {
-		super(new GoogleOAuth2Template(clientId, clientSecret));
+		this(clientId, clientSecret, false);
+	}
+
+	public GoogleServiceProvider(String clientId, String clientSecret, boolean offline) {
+		super(new GoogleOAuth2Template(clientId, clientSecret, offline));
 	}
 
 	@Override
