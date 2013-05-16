@@ -4,11 +4,11 @@
 	<groupId>org.springframework.social</groupId>
 	<artifactId>spring-social-google</artifactId>
 	<name>Spring Social Google</name>
-	<version>1.0.0.M2</version>
+	<version>1.0.0.BUILD-SNAPSHOT</version>
 
 	<properties>
-		<spring.social.version>1.1.0.M1</spring.social.version>
-		<spring.framework.version>3.2.0.RELEASE</spring.framework.version>
+		<spring.social.version>1.1.0.BUILD-SNAPSHOT</spring.social.version>
+		<spring.framework.version>3.2.2.RELEASE</spring.framework.version>
 	</properties>
 
 	<description>Spring Social extension with connection support and an API binding for Google</description>
@@ -54,6 +54,24 @@
 					<artifactId>spring-web</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-security</artifactId>
+			<version>${spring.social.version}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-config</artifactId>
+			<version>${spring.social.version}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
