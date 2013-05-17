@@ -42,7 +42,7 @@ public abstract class AbstractGoogleApiOperations {
 
 	protected void requireAuthorization() {
 		if (!isAuthorized) {
-			throw new MissingAuthorizationException();
+			throw new MissingAuthorizationException("google");
 		}
 	}
 	
