@@ -1,8 +1,8 @@
 Spring Social Google
 =====================
 
-spring-social-google - Library sources
-spring-social-google-quickstart - Example application
+Spring Social bindings for Google APIs, currently supports Google+, Tasks and Drive.
 
 Reference Manual: https://github.com/GabiAxel/spring-social-google/wiki/Spring-Social-Google-Reference-Manual
+
 Live Example: http://googleapis.cloudfoundry.com/
