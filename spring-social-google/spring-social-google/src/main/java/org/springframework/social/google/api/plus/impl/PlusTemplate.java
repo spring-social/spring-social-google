@@ -56,7 +56,7 @@ public class PlusTemplate extends AbstractGoogleApiOperations implements PlusOpe
 	}
 
 	@Override
-	public ActivitiesPage getActivitiesPage(String userId, String pageToken) {
+	public ActivitiesPage getActivities(String userId, String pageToken) {
 		StringBuilder sb = new StringBuilder(PEOPLE_URL).append(userId).append(ACTIVITIES_PUBLIC);
 		if(pageToken != null) {
 			sb.append("?pageToken=").append(pageToken);
@@ -65,8 +65,13 @@ public class PlusTemplate extends AbstractGoogleApiOperations implements PlusOpe
 	}
 
 	@Override
-	public ActivitiesPage getActivitiesPage(String userId) {
-		return getActivitiesPage(userId, null);
+	public ActivitiesPage getActivities(String userId) {
+		return getActivities(userId, null);
+	}
+	
+	@Override
+	public ActivitiesPage searchPublicActivities(String query, String pageToken) {
+		return activityQuery().searchFor(query).fromPage(pageToken).getPage();
 	}
 
 	@Override
@@ -104,6 +109,11 @@ public class PlusTemplate extends AbstractGoogleApiOperations implements PlusOpe
 		return new PersonQueryBuilderImpl(restTemplate);
 	}
 
+	@Override
+	public PeoplePage getPeopleInCircles(String id, String pageToken) {
+		return getEntity(PEOPLE_URL + id + "/people/visible", PeoplePage.class);
+	}
+	
 	@Override
 	public PeoplePage searchPeople(String query, String pageToken) {
 		return personQuery().searchFor(query).fromPage(pageToken).getPage();

@@ -32,6 +32,7 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * {@link TaskOperations} implementation.
+ * 
  * @author Gabriel Axel
  */
 public class TaskTemplate extends AbstractGoogleApiOperations implements
@@ -39,10 +40,10 @@ public class TaskTemplate extends AbstractGoogleApiOperations implements
 
 	static final String TASK_LISTS_URL = "https://www.googleapis.com/tasks/v1/users/@me/lists";
 	static final String TASKS_URL = "https://www.googleapis.com/tasks/v1/lists/";
-	
+
 	static final String DEFAULT = "@default";
 	static final String TASKS = "/tasks";
-	
+
 	public TaskTemplate(RestTemplate restTemplate, boolean isAuthorized) {
 		super(restTemplate, isAuthorized);
 	}
@@ -50,6 +51,11 @@ public class TaskTemplate extends AbstractGoogleApiOperations implements
 	@Override
 	public TaskListsPage getTaskLists() {
 		return taskListQuery().maxResultsNumber(100).getPage();
+	}
+
+	@Override
+	public TaskListsPage getTaskLists(String pageToken) {
+		return taskListQuery().fromPage(pageToken).getPage();
 	}
 
 	@Override
@@ -64,7 +70,12 @@ public class TaskTemplate extends AbstractGoogleApiOperations implements
 
 	@Override
 	public void deleteTaskList(TaskList taskList) {
-		deleteEntity(TASK_LISTS_URL, taskList);
+		deleteTaskList(taskList.getId());
+	}
+
+	@Override
+	public void deleteTaskList(String taskListId) {
+		deleteEntity(TASK_LISTS_URL, taskListId);
 	}
 
 	@Override
@@ -75,6 +86,12 @@ public class TaskTemplate extends AbstractGoogleApiOperations implements
 	@Override
 	public TasksPage getTasks() {
 		return taskQuery().maxResultsNumber(100).getPage();
+	}
+
+	@Override
+	public TasksPage getTasks(String taskListId, String pageToken) {
+		return taskQuery().fromTaskList(taskListId).fromPage(pageToken)
+				.getPage();
 	}
 
 	@Override
@@ -96,44 +113,59 @@ public class TaskTemplate extends AbstractGoogleApiOperations implements
 	public Task saveTask(String taskListId, Task task) {
 		return saveEntity(TASKS_URL + taskListId + TASKS, task);
 	}
-	
+
 	@Override
-	public Task createTaskAt(String taskListId, String parent, String previous, Task task) {
+	public Task createTaskAt(String taskListId, String parent, String previous,
+			Task task) {
 		isNull(task.getId());
-		StringBuilder sb = new StringBuilder(TASKS_URL).append(defaultIfBlank(taskListId, DEFAULT)).append(TASKS).append('?');
-		if(hasText(parent)) {
+		StringBuilder sb = new StringBuilder(TASKS_URL)
+				.append(defaultIfBlank(taskListId, DEFAULT)).append(TASKS)
+				.append('?');
+		if (hasText(parent)) {
 			sb.append("parent=").append(parent).append('&');
 		}
-		if(hasText(previous)) {
+		if (hasText(previous)) {
 			sb.append("previous=").append(previous);
 		}
 		return saveEntity(sb.toString(), task);
 	}
 
 	@Override
-	public Task moveTask(String taskListId, Task task, String parent, String previous) {
+	public Task moveTask(String taskListId, Task task, String parent,
+			String previous) {
 		notNull(task.getId());
-		isTrue(hasText(parent) || hasText(previous), "'parent' and/or 'previous' must be set");
+		isTrue(hasText(parent) || hasText(previous),
+				"'parent' and/or 'previous' must be set");
 		StringBuilder sb = new StringBuilder(TASKS_URL)
-			.append(defaultIfBlank(taskListId, DEFAULT))
-			.append(TASKS).append('/').append(task.getId()).append("/move?");
-		if(hasText(parent)) {
+				.append(defaultIfBlank(taskListId, DEFAULT)).append(TASKS)
+				.append('/').append(task.getId()).append("/move?");
+		if (hasText(parent)) {
 			sb.append("parent=").append(parent).append('&');
 		}
-		if(hasText(previous)) {
+		if (hasText(previous)) {
 			sb.append("previous=").append(previous);
 		}
 		return restTemplate.postForObject(sb.toString(), null, Task.class);
 	}
-	
+
+	@Override
+	public void deleteTask(String taskId) {
+		deleteTask(DEFAULT, taskId);
+	}
+
 	@Override
 	public void deleteTask(Task task) {
-		deleteTask(DEFAULT, task);
+		deleteTask(task.getId());
+	}
+
+	@Override
+	public void deleteTask(String taskListId, String taskId) {
+		deleteEntity(TASKS_URL + taskListId + TASKS, taskId);
 	}
 
 	@Override
 	public void deleteTask(String taskListId, Task task) {
-		deleteEntity(TASKS_URL + taskListId + TASKS, task);
+		deleteTask(taskListId, task.getId());
 	}
 
 	@Override
@@ -148,6 +180,7 @@ public class TaskTemplate extends AbstractGoogleApiOperations implements
 	@Override
 	public void clearCompletedTasks(TaskList taskList) {
 		notNull(taskList.getId());
-		restTemplate.postForLocation(TASKS_URL + taskList.getId() + "/clear", null);
+		restTemplate.postForLocation(TASKS_URL + taskList.getId() + "/clear",
+				null);
 	}
 }

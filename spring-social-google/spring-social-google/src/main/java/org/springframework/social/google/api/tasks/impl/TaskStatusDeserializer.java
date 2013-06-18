@@ -15,7 +15,6 @@
  */
 package org.springframework.social.google.api.tasks.impl;
 
-import org.codehaus.jackson.map.annotate.JsonCachable;
 import org.springframework.social.google.api.impl.ApiEnumDeserializer;
 import org.springframework.social.google.api.tasks.TaskStatus;
 
@@ -23,7 +22,6 @@ import org.springframework.social.google.api.tasks.TaskStatus;
  * {@link ApiEnumDeserializer} for {@link TaskStatus}
  * @author Gabriel Axel
  */
-@JsonCachable
 public class TaskStatusDeserializer extends ApiEnumDeserializer<TaskStatus> {
 
 	public TaskStatusDeserializer() {

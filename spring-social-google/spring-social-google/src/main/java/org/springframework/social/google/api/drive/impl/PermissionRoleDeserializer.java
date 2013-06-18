@@ -15,7 +15,6 @@
  */
 package org.springframework.social.google.api.drive.impl;
 
-import org.codehaus.jackson.map.annotate.JsonCachable;
 import org.springframework.social.google.api.drive.PermissionRole;
 import org.springframework.social.google.api.impl.ApiEnumDeserializer;
 
@@ -23,7 +22,6 @@ import org.springframework.social.google.api.impl.ApiEnumDeserializer;
  * {@link ApiEnumDeserializer} for {@link PermissionRole}
  * @author Gabriel Axel
  */
-@JsonCachable
 public class PermissionRoleDeserializer extends ApiEnumDeserializer<PermissionRole> {
 
 	public PermissionRoleDeserializer() {

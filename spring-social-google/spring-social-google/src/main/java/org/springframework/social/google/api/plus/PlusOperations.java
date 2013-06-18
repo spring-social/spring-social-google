@@ -42,7 +42,7 @@ public interface PlusOperations {
 	 *            page token, or null for first page
 	 * @return {@link Activity} page.
 	 */
-	ActivitiesPage getActivitiesPage(String userId, String pageToken);
+	ActivitiesPage getActivities(String userId, String pageToken);
 
 	/**
 	 * Retrieves a user's first page of activit.ies
@@ -51,7 +51,18 @@ public interface PlusOperations {
 	 *            user ID or "me"
 	 * @return {@link Activity} page
 	 */
-	ActivitiesPage getActivitiesPage(String userId);
+	ActivitiesPage getActivities(String userId);
+
+	/**
+	 * Searches for public activities matching a text query
+	 * 
+	 * @param query
+	 *            text to search by
+	 * @param pageToken
+	 *            page token, or null for first page
+	 * @return {@link Activity} page
+	 */
+	ActivitiesPage searchPublicActivities(String query, String pageToken);
 
 	/**
 	 * Creates an {@link ActivityQueryBuilder}.
@@ -95,6 +106,17 @@ public interface PlusOperations {
 	 * @return the retrieved {@link Person}
 	 */
 	Person getGoogleProfile();
+
+	/**
+	 * Retrieves people in a user's circles
+	 * 
+	 * @param id
+	 *            userId or "me"
+	 * @param pageToken
+	 *            page to retrieve or null for the first page
+	 * @return {@link PeoplePage} of visible people to the authenticated user
+	 */
+	PeoplePage getPeopleInCircles(String id, String pageToken);
 
 	/**
 	 * Retrieves people that match the query text.

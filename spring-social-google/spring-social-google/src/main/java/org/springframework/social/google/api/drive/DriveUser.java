@@ -15,7 +15,7 @@
  */
 package org.springframework.social.google.api.drive;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Model class representing a Google Drive user

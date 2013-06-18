@@ -15,10 +15,11 @@
  */
 package org.springframework.social.google.api.drive;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.springframework.social.google.api.drive.impl.CommentStatusDeserializer;
 import org.springframework.social.google.api.impl.ApiEnumSerializer;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * Enum representing a comment status (open or resolved)

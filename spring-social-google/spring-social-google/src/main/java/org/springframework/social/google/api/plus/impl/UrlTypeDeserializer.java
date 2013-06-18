@@ -15,7 +15,6 @@
  */
 package org.springframework.social.google.api.plus.impl;
 
-import org.codehaus.jackson.map.annotate.JsonCachable;
 import org.springframework.social.google.api.impl.ApiEnumDeserializer;
 import org.springframework.social.google.api.plus.Person.UrlType;
 
@@ -24,7 +23,6 @@ import org.springframework.social.google.api.plus.Person.UrlType;
  * 
  * @author Gabriel Axel
  */
-@JsonCachable
 public class UrlTypeDeserializer extends ApiEnumDeserializer<UrlType> {
 
 	public UrlTypeDeserializer() {

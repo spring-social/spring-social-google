@@ -2,8 +2,9 @@ package org.springframework.social.google.api.plus;
 
 import java.util.Date;
 
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.springframework.social.google.api.ApiEntity;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Model class representing a comment.

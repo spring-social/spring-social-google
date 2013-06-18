@@ -17,7 +17,7 @@ package org.springframework.social.google.api.userinfo;
 
 import java.io.Serializable;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Model class representing a legacy Google profile (predates Google+).

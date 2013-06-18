@@ -15,10 +15,11 @@
  */
 package org.springframework.social.google.api.tasks;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.springframework.social.google.api.impl.ApiEnumSerializer;
 import org.springframework.social.google.api.tasks.impl.TaskStatusDeserializer;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * Enum representing a task status (whether it is completed)

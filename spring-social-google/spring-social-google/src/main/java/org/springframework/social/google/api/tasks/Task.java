@@ -15,12 +15,15 @@
  */
 package org.springframework.social.google.api.tasks;
 
+import static com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING;
 import static org.springframework.social.google.api.tasks.TaskStatus.COMPLETED;
 import static org.springframework.social.google.api.tasks.TaskStatus.NEEDS_ACTION;
 
 import java.util.Date;
 
 import org.springframework.social.google.api.ApiEntity;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * Model class representing a task
@@ -29,12 +32,20 @@ import org.springframework.social.google.api.ApiEntity;
 public class Task extends ApiEntity {
 
 	private String title;
+	
 	private String notes;
+	
+	@JsonFormat(shape=STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'", timezone="UTC")
 	private Date due;
+	
 	private String parent;
+	
 	private String position;
+	
 	private Date updated;
+	
 	private TaskStatus status;
+	
 	private Date completed;
 
 	public Task() {
@@ -53,8 +64,8 @@ public class Task extends ApiEntity {
 		setCompleted(completed);
 	}
 	
-	public Task(String title, String notes, Date due, Date completed) {
-		this(null, title, notes, due, completed);
+	public Task(String title, String notes, Date due) {
+		this(null, title, notes, due, null);
 	}
 
 	public String getTitle() {

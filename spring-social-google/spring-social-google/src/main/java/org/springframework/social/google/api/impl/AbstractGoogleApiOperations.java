@@ -71,7 +71,11 @@ public abstract class AbstractGoogleApiOperations {
 	}
 
 	protected void deleteEntity(String baseUrl, ApiEntity entity) {
-		restTemplate.delete(baseUrl + '/' + entity.getId());
+		deleteEntity(baseUrl, entity.getId());
+	}
+	
+	protected void deleteEntity(String baseUrl, String id) {
+		restTemplate.delete(baseUrl + '/' + id);
 	}
 	
 	protected <T> T patch(String url, Object request, Class<T> responseType) {

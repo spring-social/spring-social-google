@@ -15,7 +15,6 @@
  */
 package org.springframework.social.google.api.drive.impl;
 
-import org.codehaus.jackson.map.annotate.JsonCachable;
 import org.springframework.social.google.api.drive.DriveApp.IconCategory;
 import org.springframework.social.google.api.impl.ApiEnumDeserializer;
 
@@ -24,7 +23,6 @@ import org.springframework.social.google.api.impl.ApiEnumDeserializer;
  * 
  * @author Gabriel Axel
  */
-@JsonCachable
 public class IconCategoryDeserializer extends ApiEnumDeserializer<IconCategory> {
 
 	public IconCategoryDeserializer() {
