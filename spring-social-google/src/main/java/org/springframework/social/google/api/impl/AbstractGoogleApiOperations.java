@@ -50,6 +50,11 @@ public abstract class AbstractGoogleApiOperations {
 		return restTemplate.getForObject(url, type);
 	}
 	
+	@SuppressWarnings("unchecked")
+	protected <T> T saveEntity(String url, T entity) {
+		return (T) restTemplate.postForObject(url, entity, entity.getClass());
+	}
+	
 	protected <T extends ApiEntity> T saveEntity(String baseUrl, T entity) {
 		
 		String url;

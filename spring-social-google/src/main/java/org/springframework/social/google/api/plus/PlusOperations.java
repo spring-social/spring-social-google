@@ -15,6 +15,10 @@
  */
 package org.springframework.social.google.api.plus;
 
+import org.springframework.social.google.api.plus.moments.Moment;
+import org.springframework.social.google.api.plus.moments.MomentQueryBuilder;
+import org.springframework.social.google.api.plus.moments.MomentsPage;
+
 /**
  * Defines operations for searching and retrieving Google+ activities, comments
  * and people. To use "me" as user ID, requires OAuth2 scope
@@ -157,4 +161,37 @@ public interface PlusOperations {
 	 * @return a new {@link PersonQueryBuilder}
 	 */
 	PersonQueryBuilder personQuery();
+
+	/**
+	 * Inserts a new moment (app activity)
+	 * 
+	 * @param moment
+	 *            Moment to insert
+	 * @return the inserted moment
+	 */
+	Moment insertMoment(Moment moment);
+
+	/**
+	 * Creates a new {@link MomentQueryBuilder}
+	 * 
+	 * @return a new {@link MomentQueryBuilder}
+	 */
+	MomentQueryBuilder momentQuery();
+
+	/**
+	 * Retrieves moments (app activities) created by this application
+	 * 
+	 * @param pageToken
+	 *            page to retrieve or null for first page
+	 * @return {@link MomentsPage} with moments created by this application
+	 */
+	MomentsPage getMoments(String pageToken);
+
+	/**
+	 * Deletes a moment (app activity) created by this application
+	 * 
+	 * @param id
+	 *            the moment ID
+	 */
+	void deleteMoment(String id);
 }

@@ -17,6 +17,9 @@ package org.springframework.social.google.api.plus.impl;
 
 import static org.springframework.util.StringUtils.hasText;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.springframework.social.google.api.impl.AbstractGoogleApiOperations;
 import org.springframework.social.google.api.plus.ActivitiesPage;
 import org.springframework.social.google.api.plus.Activity;
@@ -27,6 +30,9 @@ import org.springframework.social.google.api.plus.PeoplePage;
 import org.springframework.social.google.api.plus.Person;
 import org.springframework.social.google.api.plus.PersonQueryBuilder;
 import org.springframework.social.google.api.plus.PlusOperations;
+import org.springframework.social.google.api.plus.moments.Moment;
+import org.springframework.social.google.api.plus.moments.MomentQueryBuilder;
+import org.springframework.social.google.api.plus.moments.MomentsPage;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -46,8 +52,18 @@ public class PlusTemplate extends AbstractGoogleApiOperations implements PlusOpe
 	private static final String PLUSONERS = "/people/plusoners";
 	private static final String RESHARERS = "/people/resharers";
 	
+	private static final String MOMENTS_URL = PEOPLE_URL + "me/moments/vault";
+	
 	public PlusTemplate(RestTemplate restTemplate, boolean isAuthorized) {
 		super(restTemplate, isAuthorized);
+	}
+	
+	private static String encode(String text) {
+		try {
+			return URLEncoder.encode(text, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			throw new IllegalStateException(e);
+		}
 	}
 	
 	@Override
@@ -127,5 +143,25 @@ public class PlusTemplate extends AbstractGoogleApiOperations implements PlusOpe
 	@Override
 	public PeoplePage getActivityResharers(String activityId, String pageToken) {
 		return getEntity(ACTIVITIES_URL + activityId + RESHARERS, PeoplePage.class);
+	}
+
+	@Override
+	public Moment insertMoment(Moment moment) {
+		return saveEntity(MOMENTS_URL, moment);
+	}
+
+	@Override
+	public MomentQueryBuilder momentQuery() {
+		return new MomentQueryBuilderImpl(MOMENTS_URL, restTemplate);
+	}
+
+	@Override
+	public MomentsPage getMoments(String pageToken) {
+		return momentQuery().getPage();
+	}
+
+	@Override
+	public void deleteMoment(String id) {
+		deleteEntity("https://www.googleapis.com/plus/v1/moments", encode(id));
 	}
 }
