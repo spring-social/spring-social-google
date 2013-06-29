@@ -20,8 +20,10 @@ import org.springframework.social.google.api.query.QueryBuilder;
 
 /**
  * {@link QueryBuilder} for {@link Moment}.
+ * 
  * @author Gabriel Axel
  */
-public interface MomentQueryBuilder extends ApiQueryBuilder<MomentQueryBuilder, MomentsPage> {
+public interface MomentQueryBuilder extends
+		ApiQueryBuilder<MomentQueryBuilder, MomentsPage> {
 
 }

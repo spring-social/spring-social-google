@@ -15,25 +15,29 @@
  */
 package org.springframework.social.google.api.plus.moments;
 
-import static org.springframework.social.google.api.plus.moments.MomentTypes.DISCOVER_ACTIVITY;
-
-import com.fasterxml.jackson.annotation.JsonTypeName;
-
 /**
- * Activity representing discovery of something, such as a new album
- * 
- * @see {@link 
- * 	https://developers.google.com/+/api/moment-types/discover-activity}
+ * @see {@link http://schema.org/MusicRecording}
  * @author Gabriel Axel
  * 
  */
-@JsonTypeName(DISCOVER_ACTIVITY)
-public class DiscoverActivity extends Moment {
+public class Album {
 
-	protected DiscoverActivity() {
+	private String id;
+
+	private String name;
+
+	private String url;
+
+	public String getId() {
+		return id;
 	}
 
-	public DiscoverActivity(String targetUrl) {
-		super(targetUrl);
+	public String getName() {
+		return name;
 	}
+
+	public String getUrl() {
+		return url;
+	}
+
 }

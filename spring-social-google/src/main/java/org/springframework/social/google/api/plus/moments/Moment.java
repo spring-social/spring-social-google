@@ -15,63 +15,54 @@
  */
 package org.springframework.social.google.api.plus.moments;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import static com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING;
+
+import java.util.Date;
+
+import org.springframework.social.google.api.ApiEntity;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
+/**
+ * Abstract superclass for specific activity types.
+ * 
+ * @see {@link https://developers.google.com/+/api/moment-types/}
+ * @author Gabriel Axel
+ * 
+ */
 @JsonTypeInfo(property = "type", include = As.PROPERTY, use = Id.NAME)
 @JsonSubTypes({ @Type(AddActivity.class), @Type(BuyActivity.class),
 		@Type(CheckInActivity.class), @Type(CommentActivity.class),
 		@Type(CreateActivity.class), @Type(DiscoverActivity.class),
 		@Type(ListenActivity.class), @Type(ReserveActivity.class),
 		@Type(ReviewActivity.class), @Type(WantActivity.class) })
-public abstract class Moment {
-
-	public static class Target {
-		
-		@JsonProperty
-		String url;
-		
-		@JsonProperty
-		String id;
-		
-		@JsonProperty
-		public String name;
-		
-		@JsonProperty
-		public String description;
-		
-		@JsonProperty
-		public String image;
-	}
-	
-	@JsonIgnore
-	public void setId(String id) {
-		target.id = id;
-	}
+public abstract class Moment extends ApiEntity {
 
 	@JsonProperty
-	public Target target;
+	private MomentTarget target;
 
-	@JsonIgnore
-	public String getTargetUrl() {
-		return target.url;
-	}
-	
-	@JsonIgnore
-	public String getId() {
-		return target.id;
-	}
+	@JsonFormat(shape = STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
+	private Date startDate;
 
 	public Moment() {
 	}
 
 	public Moment(String targetUrl) {
-		target = new Target();
-		target.url = targetUrl;
+		target = new MomentTarget(targetUrl);
 	}
+
+	public MomentTarget getTarget() {
+		return target;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
 }

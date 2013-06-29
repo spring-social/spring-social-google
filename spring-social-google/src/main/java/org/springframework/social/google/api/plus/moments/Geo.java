@@ -13,24 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.google.api.plus.impl;
-
-import org.springframework.social.google.api.plus.moments.MomentQueryBuilder;
-import org.springframework.social.google.api.plus.moments.MomentsPage;
-import org.springframework.social.google.api.query.impl.ApiQueryBuilderImpl;
-import org.springframework.web.client.RestTemplate;
+package org.springframework.social.google.api.plus.moments;
 
 /**
- * {@link MomentQueryBuilder} implementation.
+ * Geolocation coordinates
  * 
  * @author Gabriel Axel
+ * 
  */
-public class MomentQueryBuilderImpl extends
-		ApiQueryBuilderImpl<MomentQueryBuilder, MomentsPage> implements
-		MomentQueryBuilder {
+public class Geo {
 
-	public MomentQueryBuilderImpl(String feedUrl, RestTemplate restTemplate) {
-		super(feedUrl, MomentsPage.class, restTemplate);
+	private float latitude;
+
+	private float longitude;
+
+	public float getLatitude() {
+		return latitude;
+	}
+
+	public float getLongitude() {
+		return longitude;
 	}
 
 }

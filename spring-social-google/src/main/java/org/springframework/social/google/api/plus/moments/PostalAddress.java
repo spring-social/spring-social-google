@@ -15,25 +15,42 @@
  */
 package org.springframework.social.google.api.plus.moments;
 
-import static org.springframework.social.google.api.plus.moments.MomentTypes.DISCOVER_ACTIVITY;
-
-import com.fasterxml.jackson.annotation.JsonTypeName;
-
 /**
- * Activity representing discovery of something, such as a new album
+ * Postal address
  * 
- * @see {@link 
- * 	https://developers.google.com/+/api/moment-types/discover-activity}
  * @author Gabriel Axel
  * 
  */
-@JsonTypeName(DISCOVER_ACTIVITY)
-public class DiscoverActivity extends Moment {
+public class PostalAddress {
 
-	protected DiscoverActivity() {
+	private String addressCountry;
+
+	private String addressLocality;
+
+	private String addressRegion;
+
+	private String postalCode;
+
+	private String streetAddress;
+
+	public String getAddressCountry() {
+		return addressCountry;
 	}
 
-	public DiscoverActivity(String targetUrl) {
-		super(targetUrl);
+	public String getAddressLocality() {
+		return addressLocality;
 	}
+
+	public String getAddressRegion() {
+		return addressRegion;
+	}
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	public String getStreetAddress() {
+		return streetAddress;
+	}
+
 }

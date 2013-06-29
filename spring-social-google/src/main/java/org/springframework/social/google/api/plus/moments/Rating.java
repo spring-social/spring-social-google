@@ -15,25 +15,47 @@
  */
 package org.springframework.social.google.api.plus.moments;
 
-import static org.springframework.social.google.api.plus.moments.MomentTypes.DISCOVER_ACTIVITY;
-
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonGetter;
 
 /**
- * Activity representing discovery of something, such as a new album
+ * Review rating
  * 
- * @see {@link 
- * 	https://developers.google.com/+/api/moment-types/discover-activity}
+ * @see {@link http://schema.org/Rating}
  * @author Gabriel Axel
  * 
  */
-@JsonTypeName(DISCOVER_ACTIVITY)
-public class DiscoverActivity extends Moment {
+public class Rating {
 
-	protected DiscoverActivity() {
+	private String ratingValue;
+
+	private String bestRating;
+
+	private String worstRating;
+
+	protected Rating() {
 	}
 
-	public DiscoverActivity(String targetUrl) {
-		super(targetUrl);
+	public Rating(String ratingValue, String bestRating, String worstRating) {
+		this.ratingValue = ratingValue;
+		this.bestRating = bestRating;
+		this.worstRating = worstRating;
 	}
+
+	@JsonGetter
+	protected String getType() {
+		return "http://schema.org/Rating";
+	}
+
+	public String getRatingValue() {
+		return ratingValue;
+	}
+
+	public String getBestRating() {
+		return bestRating;
+	}
+
+	public String getWorstRating() {
+		return worstRating;
+	}
+
 }

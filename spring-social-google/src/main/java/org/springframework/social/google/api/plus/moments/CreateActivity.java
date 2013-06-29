@@ -19,11 +19,20 @@ import static org.springframework.social.google.api.plus.moments.MomentTypes.CRE
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
+/**
+ * Activity representing creation of creative work such as a photo, blog entry,
+ * or microblog post
+ * 
+ * @see {@link https://developers.google.com/+/api/moment-types/create-activity}
+ * @author Gabriel Axel
+ * 
+ */
 @JsonTypeName(CREATE_ACTIVITY)
 public class CreateActivity extends Moment {
 
-	protected CreateActivity() {}
-	
+	protected CreateActivity() {
+	}
+
 	public CreateActivity(String targetUrl) {
 		super(targetUrl);
 	}

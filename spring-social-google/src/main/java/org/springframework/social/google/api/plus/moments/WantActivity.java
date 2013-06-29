@@ -19,11 +19,21 @@ import static org.springframework.social.google.api.plus.moments.MomentTypes.WAN
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
+/**
+ * Activity representing an indecation by the user that they want something,
+ * such as if they add a product to a wishlist, a movie to a watchlist, or a
+ * book to a reading list
+ * 
+ * @see {@link https://developers.google.com/+/api/moment-types/want-activity}
+ * @author Gabriel Axel
+ * 
+ */
 @JsonTypeName(WANT_ACTIVITY)
 public class WantActivity extends Moment {
 
-	protected WantActivity() {}
-	
+	protected WantActivity() {
+	}
+
 	public WantActivity(String targetUrl) {
 		super(targetUrl);
 	}

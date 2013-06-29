@@ -15,7 +15,13 @@
  */
 package org.springframework.social.google.api.plus.moments;
 
-public interface MomentTypes {
+/**
+ * Constants for the available moment types
+ * 
+ * @author Gabriel Axel
+ * 
+ */
+interface MomentTypes {
 
 	String ADD_ACTIVITY = "http://schemas.google.com/AddActivity";
 	String BUY_ACTIVITY = "http://schemas.google.com/BuyActivity";

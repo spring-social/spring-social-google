@@ -17,9 +17,6 @@ package org.springframework.social.google.api.plus.impl;
 
 import static org.springframework.util.StringUtils.hasText;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 import org.springframework.social.google.api.impl.AbstractGoogleApiOperations;
 import org.springframework.social.google.api.plus.ActivitiesPage;
 import org.springframework.social.google.api.plus.Activity;
@@ -33,6 +30,7 @@ import org.springframework.social.google.api.plus.PlusOperations;
 import org.springframework.social.google.api.plus.moments.Moment;
 import org.springframework.social.google.api.plus.moments.MomentQueryBuilder;
 import org.springframework.social.google.api.plus.moments.MomentsPage;
+import org.springframework.social.google.api.plus.moments.impl.MomentQueryBuilderImpl;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -56,14 +54,6 @@ public class PlusTemplate extends AbstractGoogleApiOperations implements PlusOpe
 	
 	public PlusTemplate(RestTemplate restTemplate, boolean isAuthorized) {
 		super(restTemplate, isAuthorized);
-	}
-	
-	private static String encode(String text) {
-		try {
-			return URLEncoder.encode(text, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			throw new IllegalStateException(e);
-		}
 	}
 	
 	@Override
@@ -162,6 +152,6 @@ public class PlusTemplate extends AbstractGoogleApiOperations implements PlusOpe
 
 	@Override
 	public void deleteMoment(String id) {
-		deleteEntity("https://www.googleapis.com/plus/v1/moments", encode(id));
+		deleteEntity("https://www.googleapis.com/plus/v1/moments", id);
 	}
 }

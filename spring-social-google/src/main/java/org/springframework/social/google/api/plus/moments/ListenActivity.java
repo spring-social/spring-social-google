@@ -19,11 +19,20 @@ import static org.springframework.social.google.api.plus.moments.MomentTypes.LIS
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
+/**
+ * Activity representing listening to a song, audio book, or other type of audio
+ * recording
+ * 
+ * @see {@link https://developers.google.com/+/api/moment-types/listen-activity}
+ * @author Gabriel Axel
+ * 
+ */
 @JsonTypeName(LISTEN_ACTIVITY)
 public class ListenActivity extends Moment {
 
-	protected ListenActivity() {}
-	
+	protected ListenActivity() {
+	}
+
 	public ListenActivity(String targetUrl) {
 		super(targetUrl);
 	}

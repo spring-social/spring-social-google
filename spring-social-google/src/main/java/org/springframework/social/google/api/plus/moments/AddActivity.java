@@ -19,11 +19,19 @@ import static org.springframework.social.google.api.plus.moments.MomentTypes.ADD
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
+/**
+ * Model class representing a generic fallback activity type.
+ * 
+ * @see {@link https://developers.google.com/+/api/moment-types/add-activity}
+ * @author Gabriel Axel
+ * 
+ */
 @JsonTypeName(ADD_ACTIVITY)
 public class AddActivity extends Moment {
 
-	public AddActivity() {}
-	
+	public AddActivity() {
+	}
+
 	public AddActivity(String targetUrl) {
 		super(targetUrl);
 	}

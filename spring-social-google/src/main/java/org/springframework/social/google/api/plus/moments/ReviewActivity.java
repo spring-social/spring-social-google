@@ -15,90 +15,83 @@
  */
 package org.springframework.social.google.api.plus.moments;
 
-import static org.springframework.social.google.api.plus.moments.MomentTypes.RESERVE_ACTIVITY;
+import static org.springframework.social.google.api.plus.moments.MomentTypes.REVIEW_ACTIVITY;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-@JsonTypeName(RESERVE_ACTIVITY)
+/**
+ * Activity representing a submission of a review, such as a review of a
+ * product, creative work, restaurant or other service
+ * 
+ * @see {@link 
+ * 	https://developers.google.com/+/api/moment-types/review-activity}
+ * @author Gabriel Axel
+ * 
+ */
+@JsonTypeName(REVIEW_ACTIVITY)
 public class ReviewActivity extends Moment {
-	
-	protected class Result {
 
+	protected static class Result {
+
+		@JsonProperty
 		String url;
-		
+
+		@JsonProperty
 		String text;
-		
+
+		@JsonProperty
 		String name;
-		
-		ReviewRating reviewRating;
-		
+
+		@JsonProperty
+		Rating reviewRating;
+
+		@JsonGetter
 		String getType() {
 			return "http://schema.org/Review";
 		}
-		
-	}
-	
-	public static class ReviewRating {
-		
-		private float ratingValue;
-		
-		private float bestRating;
-		
-		private float worstRating;
-		
-		protected ReviewRating() {}
-
-		public ReviewRating(float ratingValue, float bestRating,
-				float worstRating) {
-			this.ratingValue = ratingValue;
-			this.bestRating = bestRating;
-			this.worstRating = worstRating;
-		}
-
-		public float getRatingValue() {
-			return ratingValue;
-		}
-
-		public float getBestRating() {
-			return bestRating;
-		}
-
-		public float getWorstRating() {
-			return worstRating;
-		}
 
 	}
-	
+
+	@JsonProperty
 	private Result result;
 
-	protected ReviewActivity() {}
-	
-	public ReviewActivity(String targetUrl, String resultUrl, String resultText) {
+	protected ReviewActivity() {
+	}
+
+	public ReviewActivity(String targetUrl, String url, String text) {
 		super(targetUrl);
 		result = new Result();
-		result.url = resultUrl;
-		result.text = resultText;
+		result.url = url;
+		result.text = text;
 	}
-	
-	public ReviewActivity(String targetUrl, String resultUrl, String resultText, String resultName, ReviewRating reviewRating) {
-		this(targetUrl, resultUrl, resultText);
-		result.name = resultName;
+
+	public ReviewActivity(String targetUrl, String url, String text,
+			String name, Rating reviewRating) {
+		this(targetUrl, url, text);
+		result.name = name;
 		result.reviewRating = reviewRating;
 	}
-	
+
+	@JsonIgnore
 	public String getResultUrl() {
 		return result.url;
 	}
-	
+
+	@JsonIgnore
 	public String getResultText() {
 		return result.text;
 	}
-	
+
+	@JsonIgnore
 	public String getResultName() {
 		return result.name;
 	}
-	
-	public ReviewRating getReviewRating() {
+
+	@JsonIgnore
+	public Rating getReviewRating() {
 		return result.reviewRating;
 	}
 }

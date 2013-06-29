@@ -13,27 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.google.api.plus.moments;
+package org.springframework.social.google.api.plus.moments.impl;
 
-import static org.springframework.social.google.api.plus.moments.MomentTypes.DISCOVER_ACTIVITY;
-
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.springframework.social.google.api.plus.moments.MomentQueryBuilder;
+import org.springframework.social.google.api.plus.moments.MomentsPage;
+import org.springframework.social.google.api.query.impl.ApiQueryBuilderImpl;
+import org.springframework.web.client.RestTemplate;
 
 /**
- * Activity representing discovery of something, such as a new album
+ * {@link MomentQueryBuilder} implementation.
  * 
- * @see {@link 
- * 	https://developers.google.com/+/api/moment-types/discover-activity}
  * @author Gabriel Axel
- * 
  */
-@JsonTypeName(DISCOVER_ACTIVITY)
-public class DiscoverActivity extends Moment {
+public class MomentQueryBuilderImpl extends
+		ApiQueryBuilderImpl<MomentQueryBuilder, MomentsPage> implements
+		MomentQueryBuilder {
 
-	protected DiscoverActivity() {
+	public MomentQueryBuilderImpl(String feedUrl, RestTemplate restTemplate) {
+		super(feedUrl, MomentsPage.class, restTemplate);
 	}
 
-	public DiscoverActivity(String targetUrl) {
-		super(targetUrl);
-	}
 }
