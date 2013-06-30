@@ -112,6 +112,10 @@ public class Activity extends ApiEntity {
 	public static class Video extends Attachment {
 	}
 	
+	@JsonTypeName("audio")
+	public static class Audio extends Attachment {
+	}
+	
 	public static class ActivityObject {
 		
 		public static class TotalItemsWrapper {
