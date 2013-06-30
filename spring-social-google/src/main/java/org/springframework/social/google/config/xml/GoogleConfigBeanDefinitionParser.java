@@ -13,24 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.google.config.annotation;
+package org.springframework.social.google.config.xml;
 
-import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
-import org.springframework.social.config.annotation.AbstractProviderConfigRegistrarSupport;
-import org.springframework.social.google.api.Google;
+import org.springframework.social.config.xml.AbstractProviderConfigBeanDefinitionParser;
 import org.springframework.social.google.config.GoogleApiHelper;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
 import org.springframework.social.google.security.GoogleAuthenticationService;
 import org.springframework.social.security.provider.SocialAuthenticationService;
 
 /**
- * {@link ImportBeanDefinitionRegistrar} for configuring a {@link GoogleConnectionFactory} bean and a request-scoped {@link Google} bean.
- * @author Craig Walls
+ * Implementation of {@link AbstractConnectionFactoryBeanDefinitionParser} that
+ * creates a {@link GoogleConnectionFactory}.
+ * 
+ * @author Hakan Dilek
  */
-public class GoogleProviderConfigRegistrar extends AbstractProviderConfigRegistrarSupport {
+public class GoogleConfigBeanDefinitionParser extends
+		AbstractProviderConfigBeanDefinitionParser {
 
-	public GoogleProviderConfigRegistrar() {
-		super(EnableGoogle.class, GoogleConnectionFactory.class, GoogleApiHelper.class);
+	protected GoogleConfigBeanDefinitionParser() {
+		super(GoogleConnectionFactory.class, GoogleApiHelper.class);
 	}
 
 	@Override

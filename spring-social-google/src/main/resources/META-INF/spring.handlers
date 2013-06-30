@@ -1,0 +1,1 @@
+http\://www.springframework.org/schema/social/google=org.springframework.social.google.config.xml.GoogleNamespaceHandler
