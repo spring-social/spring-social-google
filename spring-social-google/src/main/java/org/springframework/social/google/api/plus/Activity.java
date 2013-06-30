@@ -53,7 +53,7 @@ public class Activity extends ApiEntity {
 	@JsonTypeInfo(property = "objectType", include = As.PROPERTY, use = Id.NAME)
 	@JsonSubTypes({ @Type(Article.class), @Type(Photo.class), @Type(Video.class),
 			@Type(Album.class), @Type(Event.class), @Type(Hangout.class),
-			@Type(Place.class) })
+			@Type(Place.class), @Type(Audio.class) })
 	public static abstract class Attachment {
 
 		private String url;
