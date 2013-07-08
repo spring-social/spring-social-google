@@ -76,22 +76,6 @@ public interface Google extends ApiBinding {
 	DriveOperations driveOperations();
 
 	/**
-	 * Applies OAuth2 authentication to an existing GData client implementation
-	 * by adding "Authorization" header. Use this method if you want to use
-	 * Spring Social Google with existing GData client code, or if you want to
-	 * work with APIs which are not yet implemented in the library.
-	 * 
-	 * @see <a href="http://code.google.com/p/gdata-java-client/">GData Java
-	 *      Client</a>
-	 * 
-	 * @param client
-	 *            subclass of externally instantiated {@link GoogleService} to
-	 *            which OAuth2 authentication will be applied
-	 *            http://code.google.com/p/gdata-java-client/
-	 */
-	void applyAuthentication(Object client);
-
-	/**
 	 * Returns the access token, allowing interoperability with other libraries
 	 * 
 	 * @see <a href="http://code.google.com/p/google-api-java-client/">Google

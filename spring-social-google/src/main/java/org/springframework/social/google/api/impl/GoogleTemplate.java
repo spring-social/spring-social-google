@@ -19,10 +19,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 import static com.fasterxml.jackson.databind.SerializationFeature.FAIL_ON_EMPTY_BEANS;
 import static com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS;
-import static org.springframework.util.ReflectionUtils.findMethod;
-import static org.springframework.util.ReflectionUtils.invokeMethod;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,13 +134,6 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 		return driveOperations;
 	}
 	
-	@Override
-	public void applyAuthentication(Object client) {
-		Method setHeaders = findMethod(client.getClass(), "setHeader", String.class, String.class);
-		invokeMethod(setHeaders, client, 
-			"Authorization", getOAuth2Version().getAuthorizationHeaderValue(accessToken));
-	}
-
 	@Override
 	public String getAccessToken() {
 		return accessToken;
