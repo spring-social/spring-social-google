@@ -49,7 +49,7 @@ public interface PlusOperations {
 	ActivitiesPage getActivities(String userId, String pageToken);
 
 	/**
-	 * Retrieves a user's first page of activit.ies
+	 * Retrieves a user's first page of activities
 	 * 
 	 * @param userId
 	 *            user ID or "me"
