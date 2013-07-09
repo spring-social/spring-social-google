@@ -31,7 +31,7 @@ public class UserInfoTemplate extends AbstractGoogleApiOperations implements Use
 		super(restTemplate, authorized);
 	}
 
-	public GoogleUserInfo getUserProfile() {
+	public GoogleUserInfo getUserInfo() {
 		requireAuthorization();
 		return restTemplate.getForObject("https://www.googleapis.com/oauth2/v2/userinfo", GoogleUserInfo.class);
 	}

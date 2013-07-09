@@ -33,7 +33,7 @@ public class GoogleAdapter implements ApiAdapter<Google> {
 	}
 
 	public void setConnectionValues(Google google, ConnectionValues values) {
-		GoogleUserInfo profile = google.userOperations().getUserProfile();
+		GoogleUserInfo profile = google.userOperations().getUserInfo();
 		values.setProviderUserId(profile.getId());
 		values.setDisplayName(profile.getName());
 		values.setProfileUrl(profile.getLink());
@@ -41,7 +41,7 @@ public class GoogleAdapter implements ApiAdapter<Google> {
 	}
 
 	public UserProfile fetchUserProfile(Google google) {
-		GoogleUserInfo profile = google.userOperations().getUserProfile();
+		GoogleUserInfo profile = google.userOperations().getUserInfo();
 		return new UserProfileBuilder()
 			.setUsername(profile.getEmail())
 			.setEmail(profile.getEmail())

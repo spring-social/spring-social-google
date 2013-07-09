@@ -26,5 +26,5 @@ public interface UserInfoOperations {
 	 * Retrieves authenticated user details.
 	 * @return {@link GoogleUserInfo} for the authenticated user
 	 */
-	GoogleUserInfo getUserProfile();
+	GoogleUserInfo getUserInfo();
 }
