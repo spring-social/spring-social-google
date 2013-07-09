@@ -16,7 +16,7 @@
 package org.springframework.social.google.api.userinfo.impl;
 
 import org.springframework.social.google.api.impl.AbstractGoogleApiOperations;
-import org.springframework.social.google.api.userinfo.GoogleUserProfile;
+import org.springframework.social.google.api.userinfo.GoogleUserInfo;
 import org.springframework.social.google.api.userinfo.UserInfoOperations;
 import org.springframework.web.client.RestTemplate;
 
@@ -31,9 +31,9 @@ public class UserInfoTemplate extends AbstractGoogleApiOperations implements Use
 		super(restTemplate, authorized);
 	}
 
-	public GoogleUserProfile getUserProfile() {
+	public GoogleUserInfo getUserProfile() {
 		requireAuthorization();
-		return restTemplate.getForObject("https://www.googleapis.com/oauth2/v2/userinfo", GoogleUserProfile.class);
+		return restTemplate.getForObject("https://www.googleapis.com/oauth2/v2/userinfo", GoogleUserInfo.class);
 	}
 
 }

@@ -16,15 +16,15 @@
 package org.springframework.social.google.api.userinfo;
 
 /**
- * Defines a single operation for retrieving the authenticated user profile.
+ * Defines a single operation for retrieving the authenticated user's details.
  * Requires OAuth2 scopes https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo#email
  * @author Gabriel Axel
  */
 public interface UserInfoOperations {
 
 	/**
-	 * Retrieves authenticated user profile.
-	 * @return {@link GoogleUserProfile} for the authenticated user
+	 * Retrieves authenticated user details.
+	 * @return {@link GoogleUserInfo} for the authenticated user
 	 */
-	GoogleUserProfile getUserProfile();
+	GoogleUserInfo getUserProfile();
 }

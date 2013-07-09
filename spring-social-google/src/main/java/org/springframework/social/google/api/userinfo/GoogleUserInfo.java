@@ -20,32 +20,33 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Model class representing a legacy Google profile (predates Google+).
+ * Model class representing the logged-in user details.
+ * 
  * @author Gabriel Axel
  */
-public class GoogleUserProfile implements Serializable {
+public class GoogleUserInfo implements Serializable {
 
 	private static final long serialVersionUID = -634483399121748105L;
-	
+
 	private String id;
-	
+
 	private String email;
-	
+
 	private String name;
-	
+
 	@JsonProperty("given_name")
 	private String firstName;
-	
+
 	@JsonProperty("family_name")
 	private String lastName;
-	
+
 	private String link;
-	
+
 	@JsonProperty("picture")
 	private String profilePictureUrl;
-	
+
 	private String gender;
-	
+
 	private String locale;
 
 	public String getId() {
