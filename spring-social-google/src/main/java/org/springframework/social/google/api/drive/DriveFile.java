@@ -25,7 +25,6 @@ import java.util.Map;
 
 import org.springframework.social.google.api.ApiEntity;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -39,17 +38,30 @@ public class DriveFile extends ApiEntity {
 	public static class Builder {
 
 		private String title;
+		
 		private String description;
+		
 		private String indexableText;
+		
 		private boolean starred;
+		
 		private boolean hidden;
+		
 		private boolean trashed;
+		
 		private boolean restricted;
+		
 		private boolean viewed;
+		
 		private Date lastViewedByMeDate;
+		
 		private String mimeType;
+		
 		private Date modifiedDate;
+		
 		private Collection<String> parentIds = new HashSet<String>();
+		
+		private Builder() {}
 		
 		public Builder setTitle(String title) {
 			this.title = title;
@@ -157,13 +169,16 @@ public class DriveFile extends ApiEntity {
 	
 	private static class IndexableTextObject {
 		
-		@SuppressWarnings("unused")
+		@JsonProperty
 		private String text;
 		
-		@JsonCreator
-		private IndexableTextObject(@JsonProperty String text) {
+		private IndexableTextObject(String text) {
 			this.text = text;
 		}
+	}
+	
+	public static Builder builder() {
+		return new Builder();
 	}
 	
 	private String title;
