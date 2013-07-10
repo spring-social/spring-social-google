@@ -1,0 +1,258 @@
+buildscript {
+    repositories {
+        maven { url 'http://repo.springsource.org/plugins-release' }
+    }
+    dependencies {
+        classpath 'org.springframework.build.gradle:docbook-reference-plugin:0.2.2'
+    }
+}
+
+configure(allprojects) {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+
+    group = 'org.springframework.social'
+
+    sourceCompatibility=1.6
+    targetCompatibility=1.6
+
+    ext {
+      springSocialVersion = '1.1.0.M3'
+      hamcrestVersion = '1.3'
+      jacksonVersion = '2.2.2'
+      junitVersion = '4.11'
+      mockitoVersion = '1.9.5'
+      servletApiVersion = '2.5'
+      springVersion = '3.2.3.RELEASE'
+      springSecurityCryptoVersion = '3.1.4.RELEASE'
+    }
+
+    [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:none']
+
+    sourceSets.test.resources.srcDirs = ['src/test/resources', 'src/test/java']
+
+    test.systemProperty("java.awt.headless", "true")
+
+    repositories {
+        maven { url "http://repo.springsource.org/libs-snapshot" }
+    }
+
+    dependencies {
+        testCompile ("org.hamcrest:hamcrest-library:$hamcrestVersion")
+        testCompile ("junit:junit-dep:$junitVersion")
+        testCompile ("org.mockito:mockito-core:$mockitoVersion")
+        testCompile ("org.springframework:spring-test:$springVersion")
+    }
+
+    // servlet-api (2.5) and tomcat-servlet-api (3.0) classpath entries should not be
+    // exported to dependent projects in Eclipse to avoid false compilation errors due
+    // to changing APIs across these versions
+    eclipse.classpath.file.whenMerged { classpath ->
+        classpath.entries.findAll { entry -> entry.path.contains('servlet-api') }*.exported = false
+    }
+}
+
+configure(subprojects) { subproject ->
+    apply from: "${rootProject.projectDir}/publish-maven.gradle"
+
+    jar {
+        manifest.attributes['Implementation-Title'] = subproject.name
+        manifest.attributes['Implementation-Version'] = subproject.version
+
+        from("${rootProject.projectDir}/src/dist") {
+            include "license.txt"
+            include "notice.txt"
+            into "META-INF"
+            expand(copyright: new Date().format('yyyy'), version: project.version)
+        }
+    }
+
+    javadoc {
+        options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
+        options.author = true
+        options.header = project.name
+        //options.overview = "${projectDir}/src/main/java/overview.html"
+    }
+
+    task sourcesJar(type: Jar, dependsOn:classes) {
+        classifier = 'sources'
+        from sourceSets.main.allJava
+    }
+
+    task javadocJar(type: Jar) {
+        classifier = 'javadoc'
+        from javadoc
+    }
+
+    artifacts {
+        archives sourcesJar
+        archives javadocJar
+    }
+}
+
+project('spring-social-google') {
+    description = 'Google API'
+    dependencies {
+       compile ("org.springframework.social:spring-social-core:$springSocialVersion")
+       compile ("org.springframework.social:spring-social-config:$springSocialVersion")
+       compile ("org.springframework.social:spring-social-security:$springSocialVersion", optional)
+       compile ("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
+       compile ("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
+       compile ("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
+       compile ("org.springframework.security:spring-security-crypto:$springSecurityCryptoVersion")
+       compile ("javax.servlet:servlet-api:$servletApiVersion", provided)
+       testCompile ("org.springframework:spring-test:$springVersion")
+    }
+}
+
+configure(rootProject) {
+    description = 'Spring Social Google'
+
+    apply plugin: 'docbook-reference'
+
+    reference {
+        ext.sourceDir = file('src/reference/docbook')
+    }
+
+    // don't publish the default jar for the root project
+    configurations.archives.artifacts.clear()
+
+    dependencies { // for integration tests
+    }
+    
+    task api(type: Javadoc) {
+        group = 'Documentation'
+        description = 'Generates aggregated Javadoc API documentation.'
+        title = "${rootProject.description} ${version} API"
+        options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
+        options.author = true
+        options.header = rootProject.description
+        options.overview = 'src/api/overview.html'
+        options.links(
+            'http://docs.jboss.org/jbossas/javadoc/4.0.5/connector'
+        )
+        source subprojects.collect { project ->
+            project.sourceSets.main.allJava
+        }
+        destinationDir = new File(buildDir, "api")
+        classpath = files(subprojects.collect { project ->
+            project.sourceSets.main.compileClasspath
+        })
+        maxMemory = '1024m'
+    }
+
+    task docsZip(type: Zip) {
+        group = 'Distribution'
+        classifier = 'docs'
+        description = "Builds -${classifier} archive containing api and reference " +
+            "for deployment at static.springframework.org/spring-social/docs."
+
+        from('src/dist') {
+            include 'changelog.txt'
+        }
+
+        from (api) {
+            into 'api'
+        }
+
+        from (reference) {
+            into 'reference'
+        }
+    }
+
+    task schemaZip(type: Zip) {
+        group = 'Distribution'
+        classifier = 'schema'
+        description = "Builds -${classifier} archive containing all " +
+            "XSDs for deployment at static.springframework.org/schema."
+
+        subprojects.each { subproject ->
+            def Properties schemas = new Properties();
+
+            subproject.sourceSets.main.resources.find {
+                it.path.endsWith('META-INF/spring.schemas')
+            }?.withInputStream { schemas.load(it) }
+
+            for (def key : schemas.keySet()) {
+                def shortName = key.replaceAll(/http.*schema.(.*).spring-.*/, '$1')
+                assert shortName != key
+                File xsdFile = subproject.sourceSets.main.resources.find {
+                    it.path.endsWith(schemas.get(key))
+                }
+                assert xsdFile != null
+                into (shortName) {
+                    from xsdFile.path
+                }
+            }
+        }
+    }
+
+    task distZip(type: Zip, dependsOn: [docsZip, schemaZip]) {
+        group = 'Distribution'
+        classifier = 'dist'
+        description = "Builds -${classifier} archive, containing all jars and docs, " +
+                      "suitable for community download page."
+
+        ext.baseDir = "${project.name}-${project.version}";
+
+        from('src/dist') {
+            include 'readme.txt'
+            include 'license.txt'
+            include 'notice.txt'
+            into "${baseDir}"
+            expand(copyright: new Date().format('yyyy'), version: project.version)
+        }
+
+        from(zipTree(docsZip.archivePath)) {
+            into "${baseDir}/docs"
+        }
+
+//        from(zipTree(schemaZip.archivePath)) {
+//            into "${baseDir}/schema"
+//        }
+
+        subprojects.each { subproject ->
+            into ("${baseDir}/libs") {
+                from subproject.jar
+                if (subproject.tasks.findByPath('sourcesJar')) {
+                    from subproject.sourcesJar
+                }
+                if (subproject.tasks.findByPath('javadocJar')) {
+                    from subproject.javadocJar
+                }
+            }
+        }
+    }
+
+    artifacts {
+        archives docsZip
+        archives schemaZip
+        archives distZip
+    }
+
+    task wrapper(type: Wrapper) {
+        description = 'Generates gradlew[.bat] scripts'
+        gradleVersion = '1.4'
+    }
+
+}
+
+task updateRootDocs << {
+    copy {
+        from 'src/dist'
+        into "${rootProject.projectDir}"
+        include 'notice.txt'
+        expand(copyright: new Date().format('yyyy'), version: project.version)
+        rename { filename -> 'NOTICE' }
+    }
+
+    copy {
+        from 'src/dist'
+        into "${rootProject.projectDir}"
+        include 'license.txt'
+        rename { filename -> 'LICENSE' }
+    }
+}
+
+build.dependsOn('updateRootDocs')

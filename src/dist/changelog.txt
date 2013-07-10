@@ -1,0 +1,7 @@
+Spring Social Google 1.0.0 Milestone 3 (? ?, 2013)
+===================================================
+Miscellaneous
+  * Upgraded to Jackson 2
+
+Improvements
+  * Support for Google+ Moments API

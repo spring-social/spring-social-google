@@ -1,8 +1,28 @@
-Spring Social Google
-=====================
+============================= Spring Social Google ===========================
+To check out the project and build from source, do the following:
 
-Spring Social bindings for Google APIs, currently supports Google+, Tasks and Drive.
+ git clone git://github.com/GabiAxel/spring-social-google.git
+ cd spring-social-google
+ ./gradlew build
 
-Reference Manual: https://github.com/GabiAxel/spring-social-google/wiki/Spring-Social-Google-Reference-Manual
+-------------------------------------------------------------------------------
+To generate Eclipse metadata (.classpath and .project files), do the following:
 
-Live Example: http://googleapis.cloudfoundry.com/
+ ./gradlew eclipse
+
+Once complete, you may then import the projects into Eclipse as usual:
+
+ File -> Import -> Existing projects into workspace
+
+-------------------------------------------------------------------------------
+To generate IDEA metadata (.iml and .ipr files), do the following:
+
+ ./gradlew idea
+
+-------------------------------------------------------------------------------
+To build the JavaDoc, do the following from within the root directory:
+
+ ./gradlew :docs:api
+
+The result will be available in 'docs/build/api'.
+===============================================================================

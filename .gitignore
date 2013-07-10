@@ -1,5 +1,13 @@
-**/target
-**/.DS_Store
+.classpath
+.project
+.settings
+.DS_Store
+build
+**/build
+**/src/test/java/exploration
+.gradle
+spring-social-core/src/test/java/exploration
 **/.classpath
 **/.project
 **/.settings
+**/bin
