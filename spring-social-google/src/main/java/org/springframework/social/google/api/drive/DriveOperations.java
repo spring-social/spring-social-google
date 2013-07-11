@@ -365,4 +365,25 @@ public interface DriveOperations {
 	 *            The ID of the reply
 	 */
 	void removeReply(String fileId, String commentId, String replyId);
+
+	/**
+	 * Downloads a file from Google Drive. This method first sends a request to
+	 * get the download URL, and then another request to download the file.
+	 * 
+	 * @param id
+	 *            The file ID
+	 * @return Resource abstraction for the file
+	 */
+	Resource downloadFile(String id);
+
+	/**
+	 * Downloads a file from Google Drive. This method uses {@link
+	 * DriveFile##getDownloadUrl()}, which may have expired since the file
+	 * metadata was fetched.
+	 * 
+	 * @param file
+	 *            The file metadata
+	 * @return Resource abstraction for the file
+	 */
+	Resource downloadFile(DriveFile file);
 }

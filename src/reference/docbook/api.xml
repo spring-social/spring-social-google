@@ -246,5 +246,10 @@ DriveFile metadata = DriveFile.builder()  // use this builder to set metadata
 UploadParameters parameters = new UploadParameters();  // call setters to modify upload parameters
 DriveFile file = google.driveOperations().upload(resource, metadata, parameters);
 		</programlisting>
+		<para>Downloading files also uses the resource abstraction. Call the <methodname>downloadFile()</methodname> Method
+		with either the file ID or the file metadata instance to get a Resource for the file:</para>
+		<programlisting language="java">
+Resource resource = google.driveOperations().downloadFile("NX01...");
+		</programlisting>
 	</section>
 </chapter>

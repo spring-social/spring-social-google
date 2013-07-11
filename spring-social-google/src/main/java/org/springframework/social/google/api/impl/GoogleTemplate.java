@@ -26,6 +26,7 @@ import java.util.List;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.ResourceHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.drive.DriveOperations;
@@ -106,6 +107,7 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 		messageConverters.add(jsonConverter);
 		messageConverters.add(new ByteArrayHttpMessageConverter());
 		messageConverters.add(formHttpMessageConverter);
+		messageConverters.add(new ResourceHttpMessageConverter());
 		return messageConverters;
 	}
 	

@@ -195,6 +195,8 @@ public class DriveFile extends ApiEntity {
 	
 	private String mimeType;
 	
+	private String downloadUrl;
+	
 	@JsonProperty
 	private Labels labels;
 	
@@ -262,6 +264,13 @@ public class DriveFile extends ApiEntity {
 
 	public String getMimeType() {
 		return mimeType;
+	}
+	
+	/**
+	 * @return Short lived download link that requires authentication
+	 */
+	public String getDownloadUrl() {
+		return downloadUrl;
 	}
 
 	public Date getCreatedDate() {

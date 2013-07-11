@@ -285,4 +285,13 @@ public class DriveTemplate extends AbstractGoogleApiOperations implements
 		restTemplate.delete(DRIVE_FILES_URL + fileId + COMMENTS + commentId + REPLIES + replyId);
 	}
 
+	@Override
+	public Resource downloadFile(String id) {
+		return downloadFile(getFile(id));
+	}
+
+	@Override
+	public Resource downloadFile(DriveFile file) {
+		return restTemplate.getForObject(file.getDownloadUrl(), Resource.class);
+	}
 }
