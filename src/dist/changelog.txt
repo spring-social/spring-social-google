@@ -1,7 +1,16 @@
-Spring Social Google 1.0.0 Milestone 3 (? ?, 2013)
-===================================================
+Spring Social Google 1.0.0 Milestone 3 (September 10, 2013)
+===========================================================
 Miscellaneous
   * Upgraded to Jackson 2
+  * Upgraded to Spring Social 1.1.0.M3
 
 Improvements
   * Support for Google+ Moments API
+  * Support for fetching users in Google+ circles
+  * Support for download from Google Drive
+  
+New Features
+  * Annotation and XML configuration
+  
+Bug Fixes
+  * Fixed JSON parsing of some Google+ attachment types
