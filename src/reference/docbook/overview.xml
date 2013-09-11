@@ -15,6 +15,14 @@
 	</section>
 	<section id="overview-howtoget">
 		<title>How to get</title>
+		<para>Spring Social Google milestones are hosted in the following repository:</para>
+		<programlisting language="xml">
+&lt;repository&gt;
+  &lt;id&gt;spring-social-google&lt;/id&gt;
+  &lt;name&gt;Spring Social Google&lt;/name&gt;
+  &lt;url&gt;https://github.com/GabiAxel/maven/raw/master/&lt;/url&gt;
+&lt;/repository&gt;
+    </programlisting>
 		<para>The following Maven dependency will add Spring Social Google to 
 		your project:</para>
 		<programlisting language="xml">
