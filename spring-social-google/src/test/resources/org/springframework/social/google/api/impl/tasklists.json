@@ -1,0 +1,20 @@
+{
+ "kind": "tasks#taskLists",
+ "etag": "\"zhaMOBt6ugsBcjvafbKQm19UaRg/AveC3v_uD5DxQZ-kr9V0m7E8hZw\"",
+ "items": [
+  {
+   "kind": "tasks#taskList",
+   "id": "MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow",
+   "title": "First Task List",
+   "updated": "2011-01-01T01:01:01.000Z",
+   "selfLink": "https://www.googleapis.com/tasks/v1/users/@me/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow"
+  },
+  {
+   "kind": "tasks#taskList",
+   "id": "MTY1OTA2NzU4OSQyMDAzMjM0MDc6NjI7MDQ0NjgwOjA",
+   "title": "Seconds Task List",
+   "updated": "2012-02-02T02:02:02.000Z",
+   "selfLink": "https://www.googleapis.com/tasks/v1/users/@me/lists/MTY1OTA2NzU4OSQyMDAzMjM0MDc6NjI7MDQ0NjgwOjA"
+  }
+ ]
+}

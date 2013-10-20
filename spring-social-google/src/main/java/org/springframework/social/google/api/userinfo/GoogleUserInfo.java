@@ -48,6 +48,27 @@ public class GoogleUserInfo implements Serializable {
 	private String gender;
 
 	private String locale;
+	
+	public GoogleUserInfo() {
+		
+	}
+	
+	public GoogleUserInfo(String id, String email, String name,
+			String firstName, String lastName, String link,
+			String profilePictureUrl, String gender, String locale) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.name = name;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.link = link;
+		this.profilePictureUrl = profilePictureUrl;
+		this.gender = gender;
+		this.locale = locale;
+	}
+
+
 
 	public String getId() {
 		return id;
