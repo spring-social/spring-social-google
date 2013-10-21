@@ -36,8 +36,6 @@ public class ApiQueryBuilderImpl<Q extends ApiQueryBuilder<?, T>, T extends ApiP
 	private final Class<T> type;
 	private final RestTemplate restTemplate;
 
-	private String pageToken;
-	
 	protected static String encode(String text) {
 		try {
 			return URLEncoder.encode(text, "UTF-8");
@@ -59,19 +57,9 @@ public class ApiQueryBuilderImpl<Q extends ApiQueryBuilder<?, T>, T extends ApiP
 	
 	@Override
 	public Q fromPage(String pageToken) {
-		this.pageToken = pageToken;
-		return castThis();
+		return appendQueryParam("pageToken", pageToken);
 	}
 	
-	@Override
-	protected StringBuilder build() {
-		
-		StringBuilder sb = super.build();
-		appendQueryParam(sb, "maxResults", maxResults);
-		appendQueryParam(sb, "pageToken", pageToken);
-		return sb;
-	}
-
 	@Override
 	public T getPage() {
 		try {

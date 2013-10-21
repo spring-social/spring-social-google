@@ -20,6 +20,9 @@ import static org.springframework.util.StringUtils.hasText;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.social.google.api.query.QueryBuilder;
 
@@ -34,7 +37,7 @@ public abstract class QueryBuilderImpl<Q extends QueryBuilder<?, T>, T> implemen
 	private static final Format dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS'Z'");
 	
 	protected String feedUrl;
-	protected int maxResults;
+	private Map<String, String> params = new HashMap<String, String>();	
 	
 	protected QueryBuilderImpl() {
 	}
@@ -50,49 +53,66 @@ public abstract class QueryBuilderImpl<Q extends QueryBuilder<?, T>, T> implemen
 	
 	@Override
 	public Q maxResultsNumber(int maxResults) {
-		this.maxResults = maxResults;
+		appendQueryParam("maxResults", maxResults);
 		return castThis();
 	}
 	
-	protected void appendQueryParam(StringBuilder sb, String name, Date value) {
+	protected Q appendQueryParam(String name, Date value) {
 		if(value != null) {
-			appendQueryParam(sb, name, dateFormatter.format(value));
+			appendQueryParam(name, dateFormatter.format(value));
 		}
+		return castThis();
 	}
 	
-	protected void appendQueryParam(StringBuilder sb, String name, int value) {
+	protected Q appendQueryParam(String name, int value) {
 		if(value > 0) {
-			appendQueryParam(sb, name, String.valueOf(value));
+			appendQueryParam(name, String.valueOf(value));
 		}
+		return castThis();
 	}
 	
-	protected void appendQueryParam(StringBuilder sb, String name, Object value) {
+	protected Q appendQueryParam(String name, boolean value) {
+		if(value) {
+			appendQueryParam(name, "true");
+		}
+		return castThis();
+	}
+	
+	protected Q appendQueryParam(String name, Object value) {
 		if(value != null) {
-			appendQueryParam(sb, name, value.toString());
+			appendQueryParam(name, value.toString());
 		}
+		return castThis();
 	}
 	
-	protected void appendQueryParam(StringBuilder sb, String name, Enum<?> value) {
+	protected Q appendQueryParam(StringBuilder sb, String name, Enum<?> value) {
 		if(value != null) {
-			appendQueryParam(sb, name, value.name().toLowerCase());
+			appendQueryParam(name, value.name().toLowerCase());
 		}
+		return castThis();
 	}
 	
-	protected void appendQueryParam(StringBuilder sb, String name, String value) {
+	protected Q appendQueryParam(String name, String value) {
 		if(hasText(value)) {
-			sb.append(name).append('=').append(value.trim()).append('&');
+			params.put(name, value);
 		}
+		return castThis();
 	}
 	
-	protected StringBuilder build() {
+	protected String build() {
 		
 		StringBuilder sb = new StringBuilder(feedUrl);
-		if(feedUrl.indexOf('?') < 0) {
+		if(!params.isEmpty() && feedUrl.indexOf('?') < 0) {
 			sb.append('?');
-		} else {
-			sb.append('&');
 		}
 		
-		return sb;
+		for(Entry<String, String> param : params.entrySet()) {
+			if(sb.charAt(sb.length() - 1) != '?') {
+				sb.append('&');
+			}
+			sb.append(param.getKey()).append('=').append(param.getValue());
+		}
+		
+		return sb.toString();
 	}
 }

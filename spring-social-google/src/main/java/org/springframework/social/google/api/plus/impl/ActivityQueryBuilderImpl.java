@@ -27,31 +27,18 @@ import org.springframework.web.client.RestTemplate;
  */
 public class ActivityQueryBuilderImpl extends ApiQueryBuilderImpl<ActivityQueryBuilder, ActivitiesPage> implements ActivityQueryBuilder {
 	
-	private String text;
-	private ActivitiesOrder order;
-	
 	public ActivityQueryBuilderImpl(RestTemplate restTemplate) {
 		super("https://www.googleapis.com/plus/v1/activities", ActivitiesPage.class, restTemplate);
 	}
 	
 	@Override
 	public ActivityQueryBuilder searchFor(String text) {
-		this.text = text;
-		return this;
+		return appendQueryParam("query", encode(text));
 	}
 	
 	@Override
 	public ActivityQueryBuilder orderBy(ActivitiesOrder order) {
-		this.order = order;
-		return this;
+		return appendQueryParam("orderBy", order);
 	}
 
-	@Override
-	protected StringBuilder build() {
-		
-		StringBuilder sb = super.build();
-		appendQueryParam(sb, "query", encode(text));
-		appendQueryParam(sb, "orderBy", order);
-		return sb;
-	}
 }

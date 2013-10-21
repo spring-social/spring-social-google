@@ -28,23 +28,13 @@ import org.springframework.web.client.RestTemplate;
  */
 public class PersonQueryBuilderImpl extends ApiQueryBuilderImpl<PersonQueryBuilder, PeoplePage> implements PersonQueryBuilder {
 
-	private String text;
-
 	public PersonQueryBuilderImpl(RestTemplate restTemplate) {
 		super(PEOPLE_SEARCH_URL, PeoplePage.class, restTemplate);
 	}
 	
 	@Override
 	public PersonQueryBuilder searchFor(String text) {
-		this.text = text;
-		return this;
+		return appendQueryParam("query", encode(text));
 	}
 	
-	@Override
-	protected StringBuilder build() {
-		StringBuilder sb = super.build();
-		appendQueryParam(sb, "query", encode(text));
-		return sb;
-	}
-
 }

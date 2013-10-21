@@ -222,16 +222,15 @@ class DriveFileQueryBuilderImpl extends ApiQueryBuilderImpl<DriveFileQueryBuilde
 	}
 	
 	@Override
-	protected StringBuilder build() {
-		StringBuilder sb = super.build();
+	protected String build() {
 		if(!qTerms.isEmpty()) {
 			StringBuilder qb = new StringBuilder(collectionToDelimitedString(qTerms, AND));
 			if(negate) {
 				qb.insert(0, NOT);
 			}
 			String encoded = encode(qb.toString());
-			appendQueryParam(sb, "q", encoded);
+			appendQueryParam("q", encoded);
 		}
-		return sb;
+		return super.build();
 	}
 }

@@ -34,14 +34,6 @@ class TaskQueryBuilderImpl extends
 		ApiQueryBuilderImpl<TaskQueryBuilder, TasksPage> implements TaskQueryBuilder {
 
 	private String taskListId = DEFAULT;
-	private Date completedMin;
-	private Date completedMax;
-	private Date dueMin;
-	private Date dueMax;
-	private Date updatedMin;
-	private boolean includeCompleted;
-	private boolean includeDeleted;
-	private boolean includeHidden;
 	
 	TaskQueryBuilderImpl(RestTemplate restTemplate) {
 		super(TasksPage.class, restTemplate);
@@ -55,74 +47,47 @@ class TaskQueryBuilderImpl extends
 	
 	@Override
 	public TaskQueryBuilder completedFrom(Date completedMin) {
-		this.completedMin = completedMin;
-		return this;
+		return appendQueryParam("completedMin", completedMin);
 	}
 
 	@Override
 	public TaskQueryBuilder completedUntil(Date completedMax) {
-		this.completedMax = completedMax;
-		return this;
+		return appendQueryParam("completedMax", completedMax);
 	}
 
 	@Override
 	public TaskQueryBuilder dueFrom(Date dueMin) {
-		this.dueMin = dueMin;
-		return this;
+		return appendQueryParam("dueMin", dueMin);
 	}
 
 	@Override
 	public TaskQueryBuilder dueUntil(Date dueMax) {
-		this.dueMax = dueMax;
-		return this;
+		return appendQueryParam("dueMax", dueMax);
 	}
 	
 	@Override
 	public TaskQueryBuilder updatedFrom(Date updatedMin) {
-		this.updatedMin = updatedMin;
-		return this;
+		return appendQueryParam("updatedMin", updatedMin);
 	}
 
 	@Override
-	public TaskQueryBuilder includeCompleted(boolean includeCompleted) {
-		this.includeCompleted = includeCompleted;
-		return this;
+	public TaskQueryBuilder includeCompleted(boolean showCompleted) {
+		return appendQueryParam("showCompleted", showCompleted);
 	}
 
 	@Override
-	public TaskQueryBuilder includeDeleted(boolean includeDeleted) {
-		this.includeDeleted = includeDeleted;
-		return this;
+	public TaskQueryBuilder includeDeleted(boolean showDeleted) {
+		return appendQueryParam("showDeleted", showDeleted);
 	}
 
 	@Override
-	public TaskQueryBuilder includeHidden(boolean includeHidden) {
-		this.includeHidden = includeHidden;
-		return this;
+	public TaskQueryBuilder includeHidden(boolean showHidden) {
+		return appendQueryParam("showHidden", showHidden);
 	}
 
 	@Override
-	protected StringBuilder build() {
-
-		// Workaround for 503 error when querying by dueMin or dueMax
-		if(dueMin != null && dueMax == null) {
-			dueMax = new Date(64060581600000L); // 4000 AD
-		}
-		if(dueMin == null && dueMax != null) {
-			dueMin = new Date(0L); // 1970 AD
-		}
-		
+	protected String build() {
 		feedUrl = TASKS_URL + taskListId + TASKS;
-		StringBuilder sb = super.build();
-		appendQueryParam(sb, "completedMin", completedMin);
-		appendQueryParam(sb, "completedMax", completedMax);
-		appendQueryParam(sb, "dueMin", dueMin);
-		appendQueryParam(sb, "dueMax", dueMax);
-		appendQueryParam(sb, "showCompleted", includeCompleted);
-		appendQueryParam(sb, "showDeleted", includeDeleted);
-		appendQueryParam(sb, "showHidden", includeHidden);
-		appendQueryParam(sb, "updatedMin", updatedMin);
-		
-		return sb;
+		return super.build();
 	}
 }
