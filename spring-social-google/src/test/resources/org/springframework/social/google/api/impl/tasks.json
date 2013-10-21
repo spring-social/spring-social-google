@@ -1,0 +1,30 @@
+{
+ "kind": "tasks#tasks",
+ "etag": "\"zhaMOBt6ugsBcjvafbKEm19UaRg/LTI0BzQ1NzM4Ng\"",
+ "items": [
+  {
+   "kind": "tasks#task",
+   "id": "MTY1OTA2NxR4OTQyMDAzMjM0CDc6MDox",
+   "etag": "\"zhaMOBt6ugsBcjvafbKQm19UaRg/MTM5OTU2OTUyOA\"",
+   "title": "Completed Task",
+   "updated": "2010-02-02T04:05:06.000Z",
+   "selfLink": "https://www.googleapis.com/tasks/v1/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow/tasks/MTY1OTA2NxR4OTQyMDAzMjM0CDc6MDox",
+   "position": "00000000002147483647",
+   "status": "completed",
+   "due": "2011-01-10T00:00:00.000Z",
+   "completed": "2011-01-01T01:01:01.000Z"
+  },
+  {
+   "kind": "tasks#task",
+   "id": "MTY1OTA2NzU4OTQyMQAzMjM0MDc6MDo4GTI5NjMfMTc",
+   "etag": "\"zhaMOBt6ugsBcjvafbKQm19UaRg/LTY1NjAwMDY2OQ\"",
+   "title": "Active Task",
+   "updated": "2010-01-01T01:02:03.000Z",
+   "selfLink": "https://www.googleapis.com/tasks/v1/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow/tasks/MTY1OTA2NzU4OTQyMQAzMjM0MDc6MDo4GTI5NjMfMTc",
+   "position": "00000000003221225471",
+   "notes": "Task notes",
+   "status": "needsAction",
+   "due": "2012-02-02T00:00:00.000Z"
+  }
+ ]
+}

@@ -15,6 +15,12 @@
  */
 package org.springframework.social.google.api.impl;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 import org.junit.Before;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -30,6 +36,11 @@ public class AbstractGoogleApiTest {
 	
 	protected MockRestServiceServer appAuthMockServer;
 	
+	private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
+	static {
+		dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+	}
+	
 	@Before
 	public void setup() {
 		google = new GoogleTemplate("ACCESS_TOKEN");
@@ -42,4 +53,11 @@ public class AbstractGoogleApiTest {
 		return new ClassPathResource(filename + ".json", getClass());
 	}
 	
+	protected static Date date(String formatted) {
+		try {
+			return dateFormat.parse(formatted);
+		} catch (ParseException e) {
+			throw new IllegalArgumentException(e);
+		}
+	}
 }
