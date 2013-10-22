@@ -21,13 +21,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.social.google.api.ApiEntity;
-import org.springframework.social.google.api.impl.ApiEnumSerializer;
-import org.springframework.social.google.api.plus.impl.UrlTypeDeserializer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * Model class representing a full Google profile
@@ -50,22 +46,7 @@ public class Person extends ApiEntity {
 		@JsonProperty
 		private String url;
 	}
-
-	@JsonSerialize(using = ApiEnumSerializer.class)
-	@JsonDeserialize(using = UrlTypeDeserializer.class)
-	public static enum UrlType {
-		HOME, WORK, BLOG, PROFILE, OTHER
-	}
-
-	private static class ProfileURL {
-
-		@JsonProperty
-		private String value;
-
-		@JsonProperty
-		private UrlType type;
-	}
-
+	
 	private static class PlaceLived {
 
 		@JsonProperty
@@ -75,45 +56,6 @@ public class Person extends ApiEntity {
 		private boolean primary;
 	}
 	
-	public static class Organization {
-
-		private String name;
-		private String title;
-		private String type;
-		private String startDate;
-		private String endDate;
-		private boolean primary;
-		
-		@Override
-		public String toString() {
-			return getName();
-		}
-		
-		public String getName() {
-			return name;
-		}
-		
-		public String getTitle() {
-			return title;
-		}
-		
-		public String getType() {
-			return type;
-		}
-
-		public String getStartDate() {
-			return startDate;
-		}
-
-		public String getEndDate() {
-			return endDate;
-		}
-
-		public boolean isPrimary() {
-			return primary;
-		}
-	}
-
 	@JsonProperty
 	private Name name;
 
@@ -132,7 +74,7 @@ public class Person extends ApiEntity {
 
 	private String relationshipStatus;
 
-	private Map<String, UrlType> urls;
+	private List<ProfileUrl> urls;
 
 	private List<Organization> organizations;
 
@@ -141,16 +83,6 @@ public class Person extends ApiEntity {
 	@Override
 	public String toString() {
 		return displayName;
-	}
-
-	@JsonSetter
-	private void setUrls(List<ProfileURL> urlsAsList) {
-		urls = new LinkedHashMap<String, Person.UrlType>();
-		if (urlsAsList != null) {
-			for (ProfileURL url : urlsAsList) {
-				urls.put(url.value, url.type);
-			}
-		}
 	}
 
 	@JsonSetter
@@ -201,7 +133,7 @@ public class Person extends ApiEntity {
 		return relationshipStatus;
 	}
 
-	public Map<String, UrlType> getUrls() {
+	public List<ProfileUrl> getUrls() {
 		return urls;
 	}
 

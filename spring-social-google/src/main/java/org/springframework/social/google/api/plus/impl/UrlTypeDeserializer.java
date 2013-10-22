@@ -16,7 +16,7 @@
 package org.springframework.social.google.api.plus.impl;
 
 import org.springframework.social.google.api.impl.ApiEnumDeserializer;
-import org.springframework.social.google.api.plus.Person.UrlType;
+import org.springframework.social.google.api.plus.UrlType;
 
 /**
  * {@link ApiEnumDeserializer} for {@link UrlType}
