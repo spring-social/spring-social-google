@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.google.api.impl;
+package org.springframework.social.google.api.tasks;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -30,6 +30,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 import java.util.Date;
 
 import org.junit.Test;
+import org.springframework.social.google.api.AbstractGoogleApiTest;
 import org.springframework.social.google.api.tasks.Task;
 import org.springframework.social.google.api.tasks.TaskList;
 import org.springframework.social.google.api.tasks.TaskListsPage;

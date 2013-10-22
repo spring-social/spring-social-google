@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.google.api.impl;
+package org.springframework.social.google.api;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -24,6 +24,7 @@ import java.util.TimeZone;
 import org.junit.Before;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.social.google.api.impl.GoogleTemplate;
 import org.springframework.test.web.client.MockRestServiceServer;
 
 public class AbstractGoogleApiTest {
