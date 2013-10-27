@@ -20,7 +20,7 @@
 &lt;repository&gt;
   &lt;id&gt;spring-social-google&lt;/id&gt;
   &lt;name&gt;Spring Social Google&lt;/name&gt;
-  &lt;url&gt;https://github.com/GabiAxel/maven/raw/master/&lt;/url&gt;
+  &lt;url&gt;http://gabiaxel.github.io/maven/&lt;/url&gt;
 &lt;/repository&gt;
     </programlisting>
 		<para>The following Maven dependency will add Spring Social Google to 
