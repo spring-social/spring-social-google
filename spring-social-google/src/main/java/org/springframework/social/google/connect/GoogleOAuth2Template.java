@@ -23,6 +23,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.oauth2.AccessGrant;
+import org.springframework.social.oauth2.GrantType;
+import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.social.oauth2.OAuth2Template;
 import org.springframework.util.MultiValueMap;
 
@@ -50,6 +52,19 @@ public class GoogleOAuth2Template extends OAuth2Template {
 		return extractAccessGrant(responseMap);
 	}
 	
+  @Override
+  public String buildAuthorizeUrl(GrantType grantType, OAuth2Parameters parameters) {
+    String scope = parameters.getScope();
+    if (scope != null) {
+      if (scope.contains("plus.login")) {
+        parameters.add("request_visible_actions", ALL_MOMENT_ACTIVITY_TYPES);
+        parameters.add("access_type", "offline");
+      }
+    }
+
+    return super.buildAuthorizeUrl(grantType, parameters);
+  }
+	
 	private AccessGrant extractAccessGrant(Map<String, Object> result) {
 		String accessToken = (String) result.get("access_token");
 		String scope = (String) result.get("scope");
@@ -62,4 +77,26 @@ public class GoogleOAuth2Template extends OAuth2Template {
 		return createAccessGrant(accessToken, scope, refreshToken, expiresIn, result);
 	}
 	
+  private static final String ALL_MOMENT_ACTIVITY_TYPES;
+
+  static {
+    final String[] MOMENT_ACTIVITY_TYPES = new String[] {
+      "Add", "Buy", "CheckIn", "Comment", "Create", "Discover", "Listen",
+      "Reserve", "Review", "Want"
+    };
+
+    StringBuilder sb = new StringBuilder();
+    boolean first = true;
+    for (String activityType : MOMENT_ACTIVITY_TYPES) {
+      if (first) {
+        first = false;
+      } else {
+        sb.append(' ');
+      }
+      sb.append("http://schemas.google.com/");
+      sb.append(activityType);
+      sb.append("Activity");
+    }
+    ALL_MOMENT_ACTIVITY_TYPES = sb.toString();
+  }
 }
