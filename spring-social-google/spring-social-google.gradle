@@ -1,0 +1,86 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'http://repo.springsource.org/plugins-release' }
+    }
+    dependencies {
+        classpath 'org.springframework.build.gradle:docbook-reference-plugin:0.2.2'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.3'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'maven-publish'
+apply plugin: 'bintray'
+
+group = 'org.springframework.social'
+
+sourceCompatibility=1.6
+targetCompatibility=1.6
+
+version= '1.1.0.M4'
+
+
+ext {
+    springSocialVersion = '1.1.0.M4'
+    hamcrestVersion = '1.3'
+    jacksonVersion = '2.2.2'
+    junitVersion = '4.11'
+    mockitoVersion = '1.9.5'
+    servletApiVersion = '2.5'
+    springVersion = '3.2.3.RELEASE'
+    springSecurityCryptoVersion = '3.1.4.RELEASE'
+}
+
+[compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:none']
+
+sourceSets.test.resources.srcDirs = ['src/test/resources', 'src/test/java']
+
+test.systemProperty("java.awt.headless", "true")
+
+repositories {
+    maven { url "http://repo.springsource.org/libs-snapshot" }
+}
+
+dependencies {
+    compile ("org.springframework.social:spring-social-core:$springSocialVersion")
+    compile ("org.springframework.social:spring-social-config:$springSocialVersion")
+    compile ("org.springframework.social:spring-social-security:$springSocialVersion")
+    compile ("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
+    compile ("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
+    compile ("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
+    compile ("org.springframework.security:spring-security-crypto:$springSecurityCryptoVersion")
+
+    testCompile ("org.hamcrest:hamcrest-library:$hamcrestVersion")
+    testCompile ("junit:junit-dep:$junitVersion")
+    testCompile ("org.mockito:mockito-core:$mockitoVersion")
+    testCompile ("org.springframework:spring-test:$springVersion")
+}
+
+publishing {
+    publications {
+        groovyMaven(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+// set bintrayUser & bintrayKey in gradle.properties
+bintray {
+    user = getProperty("bintrayUser")
+    key = getProperty("bintrayKey")
+    publications = ['groovyMaven']
+
+    def projectName = project.name
+    def projectDescription = project.description
+
+    pkg {
+        repo = 'maven' // or your repo name
+        name = 'org.springframework.social:spring-social-google'
+        desc = 'test from local'
+        licenses = ['Apache-2.0']
+    }
+    //uncomment for dry run
+//    dryRun = dry
+}
