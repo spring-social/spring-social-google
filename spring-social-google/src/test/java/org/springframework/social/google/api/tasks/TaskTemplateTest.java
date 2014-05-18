@@ -40,13 +40,13 @@ import org.springframework.social.google.api.tasks.TasksPage;
 public class TaskTemplateTest extends AbstractGoogleApiTest {
 
 	private static final String DEFAULT = "@default";
-	
+
 	private static final String FIRST_TASK_LIST_ID = "MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow";
 	private static final String FIRST_TASK_LIST_TITLE = "First Task List";
 
 	private static final String SECOND_TASK_LIST_ID = "MTY1OTA2NzU4OSQyMDAzMjM0MDc6NjI7MDQ0NjgwOjA";
 	private static final String SECONDS_TASK_LIST_TITLE = "Seconds Task List";
-	
+
 	private static final String COMPLETED_TASK_ID = "MTY1OTA2NxR4OTQyMDAzMjM0CDc6MDox";
 	private static final String COMPLETED_TASK_TITLE = "Completed Task";
 	private static final Date COMPLETED_TASK_UPDATED = date("2010-02-02T04:05:06.000Z");
@@ -60,7 +60,7 @@ public class TaskTemplateTest extends AbstractGoogleApiTest {
 	private static final Date ACTIVE_TASK_UPDATED = date("2010-01-01T01:02:03.000Z");
 	private static final String ACTIVE_TASK_POSITION = "00000000003221225471";
 	private static final Date ACTIVE_TASK_DUE = date("2012-02-02T00:00:00.000Z");
-	
+
 	@Test
 	public void getTasklistsPage() {
 		mockServer
@@ -82,7 +82,7 @@ public class TaskTemplateTest extends AbstractGoogleApiTest {
 		TaskList taskList = google.taskOperations().getTaskList(DEFAULT);
 		assertFirstTaskList(taskList);
 	}
-	
+
 	@Test
 	public void getTaskListById() {
 		mockServer
@@ -124,85 +124,87 @@ public class TaskTemplateTest extends AbstractGoogleApiTest {
 		mockServer
 				.expect(requestTo("https://www.googleapis.com/tasks/v1/users/@me/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow"))
 				.andExpect(method(DELETE)).andRespond(withNoContent());
-		google.taskOperations().deleteTaskList("MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow");
+		google.taskOperations().deleteTaskList(
+				"MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow");
 	}
 
 	@Test
 	public void getTasksInDefaultList() {
 		mockServer
-		.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/@default/tasks?maxResults=100"))
-		.andExpect(method(GET))
-		.andRespond(
-				withSuccess(jsonResource("tasks"), APPLICATION_JSON));
+				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/@default/tasks?maxResults=100"))
+				.andExpect(method(GET))
+				.andRespond(
+						withSuccess(jsonResource("tasks"), APPLICATION_JSON));
 		TasksPage page = google.taskOperations().getTasks();
 		assertTasksPage(page);
 	}
-	
+
 	@Test
 	public void getTasksByListId() {
 		mockServer
-		.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow/tasks"))
-		.andExpect(method(GET))
-		.andRespond(
-				withSuccess(jsonResource("tasks"), APPLICATION_JSON));
-		TasksPage page = google.taskOperations().getTasks(FIRST_TASK_LIST_ID, null);
+				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow/tasks"))
+				.andExpect(method(GET))
+				.andRespond(
+						withSuccess(jsonResource("tasks"), APPLICATION_JSON));
+		TasksPage page = google.taskOperations().getTasks(FIRST_TASK_LIST_ID,
+				null);
 		assertTasksPage(page);
 	}
-	
+
 	@Test
 	public void getTaskFromDefaultListById() {
 		mockServer
-		.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/@default/tasks/MTY1OTA2NzU4OTQyMQAzMjM0MDc6MDo4GTI5NjMfMTc"))
-		.andExpect(method(GET))
-		.andRespond(
-				withSuccess(jsonResource("task"), APPLICATION_JSON));
+				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/@default/tasks/MTY1OTA2NzU4OTQyMQAzMjM0MDc6MDo4GTI5NjMfMTc"))
+				.andExpect(method(GET))
+				.andRespond(withSuccess(jsonResource("task"), APPLICATION_JSON));
 		Task task = google.taskOperations().getTask(ACTIVE_TASK_ID);
 		assertActiveTask(task);
 	}
-	
+
 	@Test
 	public void getTaskByIds() {
 		mockServer
-		.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow/tasks/MTY1OTA2NzU4OTQyMQAzMjM0MDc6MDo4GTI5NjMfMTc"))
-		.andExpect(method(GET))
-		.andRespond(
-				withSuccess(jsonResource("task"), APPLICATION_JSON));
-		Task task = google.taskOperations().getTask(FIRST_TASK_LIST_ID, ACTIVE_TASK_ID);
+				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow/tasks/MTY1OTA2NzU4OTQyMQAzMjM0MDc6MDo4GTI5NjMfMTc"))
+				.andExpect(method(GET))
+				.andRespond(withSuccess(jsonResource("task"), APPLICATION_JSON));
+		Task task = google.taskOperations().getTask(FIRST_TASK_LIST_ID,
+				ACTIVE_TASK_ID);
 		assertActiveTask(task);
 	}
-	
+
 	@Test
 	public void createTask() {
 		mockServer
-		.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/@default/tasks"))
-		.andExpect(method(POST))
-		.andRespond(
-				withSuccess(jsonResource("task"), APPLICATION_JSON));
-		Task task = google.taskOperations().saveTask(new Task(ACTIVE_TASK_TITLE, ACTIVE_TASK_NOTES, ACTIVE_TASK_DUE));
+				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/@default/tasks"))
+				.andExpect(method(POST))
+				.andRespond(withSuccess(jsonResource("task"), APPLICATION_JSON));
+		Task task = google.taskOperations()
+				.saveTask(
+						new Task(ACTIVE_TASK_TITLE, ACTIVE_TASK_NOTES,
+								ACTIVE_TASK_DUE));
 		assertActiveTask(task);
 	}
-	
+
 	@Test
 	public void updateTask() {
 		mockServer
-		.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/@default/tasks/MTY1OTA2NzU4OTQyMQAzMjM0MDc6MDo4GTI5NjMfMTc"))
-		.andExpect(method(PUT))
-		.andRespond(
-				withSuccess(jsonResource("task"), APPLICATION_JSON));
-		Task task = google.taskOperations().saveTask(new Task(ACTIVE_TASK_ID, ACTIVE_TASK_TITLE, ACTIVE_TASK_NOTES, ACTIVE_TASK_DUE, null));
+				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/@default/tasks/MTY1OTA2NzU4OTQyMQAzMjM0MDc6MDo4GTI5NjMfMTc"))
+				.andExpect(method(PUT))
+				.andRespond(withSuccess(jsonResource("task"), APPLICATION_JSON));
+		Task task = google.taskOperations().saveTask(
+				new Task(ACTIVE_TASK_ID, ACTIVE_TASK_TITLE, ACTIVE_TASK_NOTES,
+						ACTIVE_TASK_DUE, null));
 		assertActiveTask(task);
 	}
-	
+
 	@Test
 	public void deleteTask() {
 		mockServer
-		.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/@default/tasks/MTY1OTA2NzU4OTQyMQAzMjM0MDc6MDo4GTI5NjMfMTc"))
-		.andExpect(method(DELETE))
-		.andRespond(
-				withNoContent());
+				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/@default/tasks/MTY1OTA2NzU4OTQyMQAzMjM0MDc6MDo4GTI5NjMfMTc"))
+				.andExpect(method(DELETE)).andRespond(withNoContent());
 		google.taskOperations().deleteTask(ACTIVE_TASK_ID);
 	}
-	
+
 	private void assertTaskListsPage(TaskListsPage page) {
 		assertNotNull(page);
 		assertEquals(2, page.getItems().size());
@@ -222,7 +224,7 @@ public class TaskTemplateTest extends AbstractGoogleApiTest {
 		assertEquals(SECOND_TASK_LIST_ID, taskList.getId());
 		assertEquals(SECONDS_TASK_LIST_TITLE, taskList.getTitle());
 	}
-	
+
 	private void assertTasksPage(TasksPage page) {
 		assertNotNull(page);
 		assertEquals(2, page.getItems().size());
@@ -230,7 +232,7 @@ public class TaskTemplateTest extends AbstractGoogleApiTest {
 		assertCompletedTask(page.getItems().get(0));
 		assertActiveTask(page.getItems().get(1));
 	}
-	
+
 	private void assertCompletedTask(Task task) {
 		assertNotNull(task);
 		assertEquals(COMPLETED_TASK_ID, task.getId());
@@ -241,7 +243,7 @@ public class TaskTemplateTest extends AbstractGoogleApiTest {
 		assertEquals(COMPLETED_TASK_UPDATED, task.getUpdated());
 		assertEquals(COMPLETED_TASK_COMPLETED, task.getCompleted());
 	}
-	
+
 	private void assertActiveTask(Task task) {
 		assertNotNull(task);
 		assertEquals(ACTIVE_TASK_ID, task.getId());
