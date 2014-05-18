@@ -22,7 +22,7 @@ import org.springframework.social.google.security.GoogleAuthenticationService;
 import org.springframework.social.security.provider.SocialAuthenticationService;
 
 /**
- * Implementation of {@link AbstractConnectionFactoryBeanDefinitionParser} that
+ * Implementation of {@link AbstractProviderConfigBeanDefinitionParser} that
  * creates a {@link GoogleConnectionFactory}.
  * 
  * @author Hakan Dilek

@@ -22,8 +22,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 /**
  * Activity representing discovery of something, such as a new album
  * 
- * @see {@link 
- * 	https://developers.google.com/+/api/moment-types/discover-activity}
+ * @see <a
+ *      href="https://developers.google.com/+/api/moment-types/discover-activity">Discover
+ *      Activity</a>
  * @author Gabriel Axel
  * 
  */

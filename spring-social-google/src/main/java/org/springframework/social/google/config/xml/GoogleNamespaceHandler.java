@@ -15,6 +15,7 @@
  */
 package org.springframework.social.google.config.xml;
 
+import org.springframework.beans.factory.xml.NamespaceHandler;
 import org.springframework.social.config.xml.AbstractProviderConfigBeanDefinitionParser;
 import org.springframework.social.config.xml.AbstractProviderConfigNamespaceHandler;
 

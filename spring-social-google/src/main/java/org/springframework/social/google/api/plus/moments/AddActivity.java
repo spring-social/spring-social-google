@@ -22,7 +22,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 /**
  * Model class representing a generic fallback activity type.
  * 
- * @see {@link https://developers.google.com/+/api/moment-types/add-activity}
+ * @see <a
+ *      href="https://developers.google.com/+/api/moment-types/add-activity">Add
+ *      Activity</a>
  * @author Gabriel Axel
  * 
  */

@@ -144,7 +144,7 @@ public interface TaskOperations {
 	 * Deletes a task from the default task list. Deleted tasks can be retrieved
 	 * using {@link TaskQueryBuilder#includeDeleted(boolean)}.
 	 * 
-	 * @param task
+	 * @param taskId
 	 *            the ID of the task to delete
 	 */
 	void deleteTask(String taskId);
@@ -164,7 +164,7 @@ public interface TaskOperations {
 	 * 
 	 * @param taskListId
 	 *            the containing task list ID
-	 * @param task
+	 * @param taskId
 	 *            the ID of the task to delete
 	 */
 	void deleteTask(String taskListId, String taskId);

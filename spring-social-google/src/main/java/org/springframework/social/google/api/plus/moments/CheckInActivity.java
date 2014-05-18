@@ -22,8 +22,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 /**
  * Activity representing check in at a location
  * 
- * @see 
- * 	{@link https://developers.google.com/+/api/moment-types/checkin-activity}
+ * @see <a
+ *      href="https://developers.google.com/+/api/moment-types/checkin-activity">Checkin
+ *      Activity</a>
  * @author Gabriel Axel
  * 
  */

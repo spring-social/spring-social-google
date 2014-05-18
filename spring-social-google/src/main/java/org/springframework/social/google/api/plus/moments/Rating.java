@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 /**
  * Review rating
  * 
- * @see {@link http://schema.org/Rating}
+ * @see <a href="http://schema.org/Rating">Rating</a>
  * @author Gabriel Axel
  * 
  */

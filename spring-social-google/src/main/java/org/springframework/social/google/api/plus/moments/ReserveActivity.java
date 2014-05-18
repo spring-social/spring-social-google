@@ -28,8 +28,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 /**
  * Activity representing a reservation at a business such as a restaurant
  * 
- * @see {@link 
- * 	https://developers.google.com/+/api/moment-types/reserve-activity}
+ * @see <a
+ *      href="https://developers.google.com/+/api/moment-types/reserve-activity">Reserve
+ *      Activity</a>
  * @author Gabriel Axel
  * 
  */

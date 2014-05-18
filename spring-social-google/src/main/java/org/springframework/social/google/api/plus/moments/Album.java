@@ -16,7 +16,7 @@
 package org.springframework.social.google.api.plus.moments;
 
 /**
- * @see {@link http://schema.org/MusicRecording}
+ * @see <a href="http://schema.org/MusicRecording">MusicRecording</a>
  * @author Gabriel Axel
  * 
  */

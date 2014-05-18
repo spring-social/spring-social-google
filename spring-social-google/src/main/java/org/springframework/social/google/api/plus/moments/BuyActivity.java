@@ -22,7 +22,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 /**
  * Activity representing a purchase.
  * 
- * @see {@link https://developers.google.com/+/api/moment-types/buy-activity}
+ * @see <a
+ *      href="https://developers.google.com/+/api/moment-types/buy-activity">Buy
+ *      Activity</a>
  * @author Gabriel Axel
  * 
  */

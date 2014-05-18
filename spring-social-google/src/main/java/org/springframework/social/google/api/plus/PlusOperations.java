@@ -91,7 +91,7 @@ public interface PlusOperations {
 	 *            activity ID
 	 * @param pageToken
 	 *            page to retrieve or null for first page
-	 * @return
+	 * @return page of {@link ActivityComment}
 	 */
 	ActivityCommentsPage getComments(String activityId, String pageToken);
 

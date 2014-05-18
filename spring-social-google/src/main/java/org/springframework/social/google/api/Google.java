@@ -67,6 +67,7 @@ public interface Google extends ApiBinding {
 	 * <li>https://www.googleapis.com/auth/drive.apps.readonly</li>
 	 * <li>https://www.googleapis.com/auth/drive.readonly</li>
 	 * <li>https://www.googleapis.com/auth/drive.readonly.metadata</li>
+	 * </ul>
 	 * See <a
 	 * href="https://developers.google.com/drive/scopes">https://developers
 	 * .google.com/drive/scopes</a> for details about the different scopes

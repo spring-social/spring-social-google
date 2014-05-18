@@ -26,8 +26,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
  * Activity representing a comment on an article, blog entry, or other creative
  * work
  * 
- * @see {@link 
- * 	https://developers.google.com/+/api/moment-types/comment-activity}
+ * @see <a
+ *      href="https://developers.google.com/+/api/moment-types/comment-activity">Comment
+ *      Activity</a>
  * @author Gabriel Axel
  * 
  */

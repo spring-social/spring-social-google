@@ -32,7 +32,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 /**
  * Abstract superclass for specific activity types.
  * 
- * @see {@link https://developers.google.com/+/api/moment-types/}
+ * @see <a href="https://developers.google.com/+/api/moment-types/">Moment
+ *      Types</a>
  * @author Gabriel Axel
  * 
  */

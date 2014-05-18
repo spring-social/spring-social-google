@@ -24,7 +24,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
  * such as if they add a product to a wishlist, a movie to a watchlist, or a
  * book to a reading list
  * 
- * @see {@link https://developers.google.com/+/api/moment-types/want-activity}
+ * @see <a
+ *      href="https://developers.google.com/+/api/moment-types/want-activity">Want
+ *      Activity</a>
  * @author Gabriel Axel
  * 
  */

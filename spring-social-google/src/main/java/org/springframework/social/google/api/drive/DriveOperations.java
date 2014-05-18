@@ -28,6 +28,7 @@ import org.springframework.core.io.Resource;
  * <li>https://www.googleapis.com/auth/drive.apps.readonly</li>
  * <li>https://www.googleapis.com/auth/drive.readonly</li>
  * <li>https://www.googleapis.com/auth/drive.readonly.metadata</li>
+ * </ul>
  * See <a
  * href="https://developers.google.com/drive/scopes">https://developers.google
  * .com/drive/scopes</a> for details about the different scopes
@@ -81,6 +82,7 @@ public interface DriveOperations {
 	 * Returns files and folders under the root folder
 	 * 
 	 * @param pageToken
+	 *            Page token or null
 	 * @return {@link DriveFilesPage}
 	 */
 	DriveFilesPage getRootFiles(String pageToken);
@@ -91,6 +93,7 @@ public interface DriveOperations {
 	 * @param parent
 	 *            folder ID or "root"
 	 * @param pageToken
+	 *            Page token or null
 	 * @return {@link DriveFilesPage}
 	 */
 	DriveFilesPage getFiles(String parent, String pageToken);
@@ -99,6 +102,7 @@ public interface DriveOperations {
 	 * Returns trashed files and folders
 	 * 
 	 * @param pageToken
+	 *            Page token or null
 	 * @return {@link DriveFilesPage}
 	 */
 	DriveFilesPage getTrashedFiles(String pageToken);
@@ -118,6 +122,7 @@ public interface DriveOperations {
 	 * @param id
 	 *            The ID of the file to untrash return The updated
 	 *            {@link DriveFile}
+	 * @return The trashed {@link DriveFile}
 	 */
 	DriveFile untrash(String id);
 
@@ -204,7 +209,7 @@ public interface DriveOperations {
 	 * 
 	 * @param fileId
 	 *            The ID of the file
-	 * @return List of {@link UserPermissionsList} for the file
+	 * @return List of {@link UserPermission} for the file
 	 */
 	List<UserPermission> getPermissions(String fileId);
 
@@ -286,6 +291,8 @@ public interface DriveOperations {
 	 * 
 	 * @param fileId
 	 *            The ID of the file
+	 * @param pageToken
+	 *            Page token or null
 	 * @return Page of comments
 	 */
 	FileCommentsPage getComments(String fileId, String pageToken);
@@ -377,8 +384,8 @@ public interface DriveOperations {
 	Resource downloadFile(String id);
 
 	/**
-	 * Downloads a file from Google Drive. This method uses {@link
-	 * DriveFile##getDownloadUrl()}, which may have expired since the file
+	 * Downloads a file from Google Drive. This method uses
+	 * {@link DriveFile#getDownloadUrl()}, which may have expired since the file
 	 * metadata was fetched.
 	 * 
 	 * @param file

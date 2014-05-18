@@ -23,7 +23,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
  * Activity representing listening to a song, audio book, or other type of audio
  * recording
  * 
- * @see {@link https://developers.google.com/+/api/moment-types/listen-activity}
+ * @see <a
+ *      href="https://developers.google.com/+/api/moment-types/listen-activity">Listen
+ *      Activity</a>
  * @author Gabriel Axel
  * 
  */

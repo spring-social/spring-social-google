@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A builder of a map to be used as the request body of PATCH operations.<br/><br/>
+ * A builder of a map to be used as the request body of PATCH operations.
  * The following code:
  * <pre>
  * new PatchBuilder()
@@ -41,7 +41,7 @@ import java.util.Map;
  * 	}
  * }
  * </pre>
- * @see {@link AbstractGoogleApiOperations#patch(String, Object)}
+ * @see AbstractGoogleApiOperations#patch(String, Object, Class)
  * @author Gabriel Axel
  *
  */

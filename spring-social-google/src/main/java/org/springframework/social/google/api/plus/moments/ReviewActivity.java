@@ -26,8 +26,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
  * Activity representing a submission of a review, such as a review of a
  * product, creative work, restaurant or other service
  * 
- * @see {@link 
- * 	https://developers.google.com/+/api/moment-types/review-activity}
+ * @see <a
+ *      href="https://developers.google.com/+/api/moment-types/review-activity">Review
+ *      Activity</a>
  * @author Gabriel Axel
  * 
  */

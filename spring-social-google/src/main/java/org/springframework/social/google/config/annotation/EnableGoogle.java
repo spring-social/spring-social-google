@@ -25,12 +25,17 @@ import java.lang.annotation.Target;
 import org.springframework.context.annotation.Import;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.google.api.Google;
+import org.springframework.social.google.connect.GoogleConnectionFactory;
 
 /**
- * Annotation to enable LinkedIn in a Spring Social application.
- * Configures a {@link LinkedInConnectionFactory} bean (and a {@link ConnectionFactoryLocator} bean if one isn't already registered).
- * Also configures a request-scoped {@link LinkedIn} bean fetched from the current user's {@link ConnectionRepository}. 
- * @author Craig Walls
+ * Annotation to enable Google in a Spring Social application. Configures a
+ * {@link GoogleConnectionFactory} bean (and a {@link ConnectionFactoryLocator}
+ * bean if one isn't already registered). Also configures a request-scoped
+ * {@link Google} bean fetched from the current user's
+ * {@link ConnectionRepository}.
+ * 
+ * @author Gabriel Axel
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
@@ -40,13 +45,17 @@ import org.springframework.social.connect.ConnectionRepository;
 public @interface EnableGoogle {
 
 	/**
-	 * The application's consumer key as issued by Twitter.
+	 * The application's consumer key as issued by Google.
+	 * 
+	 * @return Client key
 	 */
 	String appId();
-	
+
 	/**
-	 * The application's consumer secret as issued by Twitter.
+	 * The application's consumer secret as issued by Google.
+	 * 
+	 * @return Client secret
 	 */
 	String appSecret();
-	
+
 }

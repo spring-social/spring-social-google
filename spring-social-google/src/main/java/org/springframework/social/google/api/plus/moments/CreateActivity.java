@@ -23,7 +23,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
  * Activity representing creation of creative work such as a photo, blog entry,
  * or microblog post
  * 
- * @see {@link https://developers.google.com/+/api/moment-types/create-activity}
+ * @see <a
+ *      href="https://developers.google.com/+/api/moment-types/create-activity">Create
+ *      Activity</a>
  * @author Gabriel Axel
  * 
  */
