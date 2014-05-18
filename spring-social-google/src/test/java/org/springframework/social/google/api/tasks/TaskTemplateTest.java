@@ -124,6 +124,7 @@ public class TaskTemplateTest extends AbstractGoogleApiTest {
 		mockServer
 				.expect(requestTo("https://www.googleapis.com/tasks/v1/users/@me/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow"))
 				.andExpect(method(DELETE)).andRespond(withNoContent());
+		google.taskOperations().deleteTaskList("MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow");
 	}
 
 	@Test
