@@ -117,7 +117,11 @@ public class PlusTemplate extends AbstractGoogleApiOperations implements PlusOpe
 
 	@Override
 	public PeoplePage getPeopleInCircles(String id, String pageToken) {
-		return getEntity(PEOPLE_URL + id + "/people/visible", PeoplePage.class);
+		StringBuilder sb = new StringBuilder(PEOPLE_URL).append(id).append("/people/visible");
+		if(hasText(pageToken)) {
+			sb.append("?pageToken=").append(pageToken);
+		}
+		return getEntity(sb.toString(), PeoplePage.class);
 	}
 	
 	@Override
