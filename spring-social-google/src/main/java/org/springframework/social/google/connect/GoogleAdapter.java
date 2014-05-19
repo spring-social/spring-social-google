@@ -15,6 +15,7 @@
  */
 package org.springframework.social.google.connect;
 
+import org.springframework.social.ApiException;
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfile;
@@ -29,7 +30,12 @@ import org.springframework.social.google.api.userinfo.GoogleUserInfo;
 public class GoogleAdapter implements ApiAdapter<Google> {
 
 	public boolean test(Google google) {
-		return true;
+		try {
+			google.userOperations().getUserInfo();
+			return true;
+		} catch(ApiException e) {
+			return false;
+		}
 	}
 
 	public void setConnectionValues(Google google, ConnectionValues values) {
@@ -43,7 +49,7 @@ public class GoogleAdapter implements ApiAdapter<Google> {
 	public UserProfile fetchUserProfile(Google google) {
 		GoogleUserInfo profile = google.userOperations().getUserInfo();
 		return new UserProfileBuilder()
-			.setUsername(profile.getEmail())
+			.setUsername(profile.getId())
 			.setEmail(profile.getEmail())
 			.setName(profile.getName())
 			.setFirstName(profile.getFirstName())
