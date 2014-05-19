@@ -188,6 +188,8 @@ public class DriveFile extends ApiEntity {
 	private String selfLink;
 	
 	private String alternateLink;
+
+	private String iconLink;
 	
 	private String embedLink;
 	
@@ -253,6 +255,10 @@ public class DriveFile extends ApiEntity {
 	public String getAlternateLink() {
 		return alternateLink;
 	}
+	
+	public String getIconLink() {
+		return iconLink;
+	}
 
 	public String getEmbedLink() {
 		return embedLink;
@@ -272,7 +278,7 @@ public class DriveFile extends ApiEntity {
 	public String getDownloadUrl() {
 		return downloadUrl;
 	}
-
+	
 	public Date getCreatedDate() {
 		return createdDate;
 	}

@@ -92,6 +92,9 @@ public class DriveTemplateTests extends AbstractGoogleApiTest {
 		assertEquals(
 				"https://docs.google.com/file/d/0B3DS_k_gCihOVXpISDlScnJpTFk/edit?usp=drivesdk",
 				file.getAlternateLink());
+		assertEquals(
+				"https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png",
+				file.getIconLink());
 		assertFalse(file.isStarred());
 		assertFalse(file.isHidden());
 		assertFalse(file.isTrashed());
