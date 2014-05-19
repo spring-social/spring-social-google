@@ -1,72 +1,91 @@
 {
- "kind": "plus#person",
- "etag": "\"9Q4kEgczRt3gWehMocqSxXqUhYo/b6qW8Occ4cMgbcSpwwQMj4UKnew\"",
- "gender": "male",
- "urls": [
-  {
-   "value": "http://il.linkedin.com/pub/gabriel-axel/13/782/8a",
-   "label": "http://il.linkedin.com/pub/gabriel-axel/13/782/8a"
-  },
-  {
-   "value": "http://twitter.com/GabiAxel",
-   "label": "gabiaxel"
-  },
-  {
-   "value": "https://github.com/GabiAxel/spring-social-google",
-   "label": "Spring Social Google"
-  },
-  {
-   "value": "http://www.gabiaxel.com",
-   "type": "other",
-   "label": "Blog"
-  }
- ],
- "objectType": "person",
- "id": "114863353858610846998",
- "displayName": "Gabriel Axel",
- "name": {
-  "familyName": "Axel",
-  "givenName": "Gabriel"
- },
- "braggingRights": "Raising five cats",
- "aboutMe": "Software engineer",
- "relationshipStatus": "single",
- "url": "https://plus.google.com/114863353858610846998",
- "image": {
-  "url": "https://lh5.googleusercontent.com/-UyuMuAWmKIM/AAAAAAAAAAI/AAAAAAAAAn0/pMK2DzFNBNI/photo.jpg?sz=50"
- },
- "organizations": [
-  {
-   "name": "The Open University of Israel",
-   "title": "Natural Science",
-   "type": "school",
-   "startDate": "2003",
-   "endDate": "2011",
-   "primary": true
-  }
- ],
- "placesLived": [
-  {
-   "value": "Israel",
-   "primary": true
-  }
- ],
- "isPlusUser": true,
- "language": "en",
- "ageRange": {
-  "min": 21
- },
- "verified": false,
- "cover": {
-  "layout": "banner",
-  "coverPhoto": {
-   "url": "https://lh5.googleusercontent.com/-XviJW_7A56Q/T9kKKA9_iCI/AAAAAAAAAGI/DZCUNY97J0c/s1000/Green%2BGrass.jpg",
-   "height": 626,
-   "width": 940
-  },
-  "coverInfo": {
-   "topImageOffset": 0,
-   "leftImageOffset": 0
-  }
- }
+	"kind": "plus#person",
+	"etag": "\"9Q4kEgczRt3gWehMocqSxXqUhYo/b6qW8Occ4cMgbcSpwwQMj4UKnew\"",
+	"gender": "male",
+	"urls": 
+	[
+		{
+			"value": "http://il.linkedin.com/pub/gabriel-axel/13/782/8a",
+			"label": "http://il.linkedin.com/pub/gabriel-axel/13/782/8a"
+		},
+
+		{
+			"value": "http://twitter.com/GabiAxel",
+			"label": "gabiaxel"
+		},
+
+		{
+			"value": "https://github.com/GabiAxel/spring-social-google",
+			"label": "Spring Social Google"
+		},
+
+		{
+			"value": "http://www.gabiaxel.com",
+			"type": "other",
+			"label": "Blog"
+		}
+	],
+
+	"objectType": "person",
+	"id": "114863353858610846998",
+	"displayName": "Gabriel Axel",
+	"name": 
+	{
+		"familyName": "Axel",
+		"givenName": "Gabriel"
+	},
+
+	"braggingRights": "Raising five cats",
+	"aboutMe": "Software engineer",
+	"relationshipStatus": "single",
+	"url": "https://plus.google.com/114863353858610846998",
+	"image": 
+	{
+		"url": "https://lh5.googleusercontent.com/-UyuMuAWmKIM/AAAAAAAAAAI/AAAAAAAAAn0/pMK2DzFNBNI/photo.jpg?sz=50"
+	},
+
+	"organizations": 
+	[
+		{
+			"name": "The Open University of Israel",
+			"title": "Natural Science",
+			"type": "school",
+			"startDate": "2003",
+			"endDate": "2011",
+			"primary": true
+		}
+	],
+
+	"placesLived": 
+	[
+		{
+			"value": "Israel",
+			"primary": true
+		}
+	],
+
+	"isPlusUser": true,
+	"language": "en",
+	"ageRange": 
+	{
+		"min": 21
+	},
+
+	"verified": false,
+	"cover": 
+	{
+		"layout": "banner",
+		"coverPhoto": 
+		{
+			"url": "https://lh5.googleusercontent.com/-XviJW_7A56Q/T9kKKA9_iCI/AAAAAAAAAGI/DZCUNY97J0c/s1000/Green%2BGrass.jpg",
+			"height": 626,
+			"width": 940
+		},
+
+		"coverInfo": 
+		{
+			"topImageOffset": 0,
+			"leftImageOffset": 0
+		}
+	}
 }
