@@ -131,6 +131,8 @@ public class DriveAbout {
 
 	@JsonProperty("isCurrentAppInstalled")
 	private boolean currentAppInstalled;
+	
+	private String languageCode;
 
 	private DriveUser user;
 
@@ -220,4 +222,7 @@ public class DriveAbout {
 		return quotaBytesUsedAggregate;
 	}
 
+	public String getLanguageCode() {
+		return languageCode;
+	}
 }
