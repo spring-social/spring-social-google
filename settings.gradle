@@ -16,4 +16,5 @@
 
 rootProject.name = 'spring-social-google'
 
+include 'docs'
 include 'spring-social-google'

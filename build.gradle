@@ -1,9 +1,10 @@
 buildscript {
     repositories {
-        maven { url 'http://repo.springsource.org/plugins-release' }
+        maven { url 'http://repo.spring.io/plugins-release' }
     }
     dependencies {
-        classpath 'org.springframework.build.gradle:docbook-reference-plugin:0.2.2'
+        classpath 'org.springframework.build.gradle:docbook-reference-plugin:0.2.8'
+        classpath 'me.champeau.gradle:gradle-javadoc-hotfix-plugin:0.1'
     }
 }
 
@@ -11,21 +12,20 @@ configure(allprojects) {
     apply plugin: 'java'
     apply plugin: 'eclipse'
     apply plugin: 'idea'
+    apply plugin: 'javadocHotfix'
 
     group = 'org.springframework.social'
 
-    sourceCompatibility=1.7
-    targetCompatibility=1.7
+    sourceCompatibility=1.5
+    targetCompatibility=1.5
 
     ext {
-      springSocialVersion = '1.1.0.RELEASE'
-      hamcrestVersion = '1.3'
-      jacksonVersion = '2.3.3'
-      junitVersion = '4.11'
-      mockitoVersion = '1.9.5'
-      servletApiVersion = '2.5'
-      springVersion = '4.0.4.RELEASE'
-      springSecurityCryptoVersion = '3.1.4.RELEASE'
+        springSocialVersion = '1.1.0.BUILD-SNAPSHOT'
+        jacksonVersion = '2.3.3'
+        junitVersion = '4.11'
+        mockitoVersion = '1.9.5'
+        servletApiVersion = '3.0.1'
+        springVersion = '4.0.4.RELEASE'
     }
 
     [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:none']
@@ -35,14 +35,14 @@ configure(allprojects) {
     test.systemProperty("java.awt.headless", "true")
 
     repositories {
-        maven { url "http://repo.springsource.org/libs-snapshot" }
+        maven { url "http://repo.spring.io/libs-snapshot" }
+        maven { url "http://repo.spring.io/ebr-maven-external" }
     }
 
     dependencies {
-        testCompile ("org.hamcrest:hamcrest-library:$hamcrestVersion")
-        testCompile ("junit:junit-dep:$junitVersion")
-        testCompile ("org.mockito:mockito-core:$mockitoVersion")
-        testCompile ("org.springframework:spring-test:$springVersion")
+        testCompile "junit:junit:$junitVersion"
+        testCompile "org.mockito:mockito-all:$mockitoVersion"
+        testCompile "org.springframework:spring-test:$springVersion"
     }
 
     // servlet-api (2.5) and tomcat-servlet-api (3.0) classpath entries should not be
@@ -94,15 +94,14 @@ configure(subprojects) { subproject ->
 project('spring-social-google') {
     description = 'Google API'
     dependencies {
-       compile ("org.springframework.social:spring-social-core:$springSocialVersion")
+       compile "org.springframework.social:spring-social-core:$springSocialVersion"
        compile ("org.springframework.social:spring-social-config:$springSocialVersion")
        compile ("org.springframework.social:spring-social-security:$springSocialVersion", optional)
        compile ("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
        compile ("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
        compile ("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
-       compile ("org.springframework.security:spring-security-crypto:$springSecurityCryptoVersion")
-       compile ("javax.servlet:servlet-api:$servletApiVersion", provided)
-       testCompile ("org.springframework:spring-test:$springVersion")
+       compile ("javax.servlet:javax.servlet-api:$servletApiVersion", provided)
+       testCompile "org.springframework:spring-test:$springVersion"
     }
 }
 
@@ -112,7 +111,7 @@ configure(rootProject) {
     apply plugin: 'docbook-reference'
 
     reference {
-        ext.sourceDir = file('src/reference/docbook')
+        sourceDir = file('src/reference/docbook')
     }
 
     // don't publish the default jar for the root project
@@ -208,9 +207,9 @@ configure(rootProject) {
             into "${baseDir}/docs"
         }
 
-//        from(zipTree(schemaZip.archivePath)) {
-//            into "${baseDir}/schema"
-//        }
+        from(zipTree(schemaZip.archivePath)) {
+            into "${baseDir}/schema"
+        }
 
         subprojects.each { subproject ->
             into ("${baseDir}/libs") {
@@ -227,13 +226,13 @@ configure(rootProject) {
 
     artifacts {
         archives docsZip
-        archives schemaZip
+//        archives schemaZip
         archives distZip
     }
 
     task wrapper(type: Wrapper) {
         description = 'Generates gradlew[.bat] scripts'
-        gradleVersion = '1.4'
+        gradleVersion = '1.10'
     }
 
 }
