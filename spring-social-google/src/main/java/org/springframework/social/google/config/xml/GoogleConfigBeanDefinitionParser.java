@@ -16,7 +16,7 @@
 package org.springframework.social.google.config.xml;
 
 import org.springframework.social.config.xml.AbstractProviderConfigBeanDefinitionParser;
-import org.springframework.social.google.config.GoogleApiHelper;
+import org.springframework.social.google.config.support.GoogleApiHelper;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
 import org.springframework.social.google.security.GoogleAuthenticationService;
 import org.springframework.social.security.provider.SocialAuthenticationService;
