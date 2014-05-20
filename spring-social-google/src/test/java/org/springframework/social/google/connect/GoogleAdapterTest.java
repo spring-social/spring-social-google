@@ -34,13 +34,13 @@ public class GoogleAdapterTest {
 	public void fetchProfile() {
 		UserInfoOperations userOperations = Mockito.mock(UserInfoOperations.class);
 		Mockito.when(google.userOperations()).thenReturn(userOperations);
-		Mockito.when(userOperations.getUserInfo()).thenReturn(new GoogleUserInfo("123456789", "guznik@gmail.com", "Gabriel Axel", "Gabriel", "Axel", "https://plus.google.com/114863353858610846998", "https://lh5.googleusercontent.com/-UyuMuAWmKIM/AAAAAAAAAAI/AAAAAAAAAn0/pMK2DzFNBNI/photo.jpg", "male", "en"));
+		Mockito.when(userOperations.getUserInfo()).thenReturn(new GoogleUserInfo("114863353858610846998", "guznik@gmail.com", "Gabriel Axel", "Gabriel", "Axel", "https://plus.google.com/114863353858610846998", "https://lh5.googleusercontent.com/-UyuMuAWmKIM/AAAAAAAAAAI/AAAAAAAAAn0/pMK2DzFNBNI/photo.jpg", "male", "en"));
 		UserProfile profile = apiAdapter.fetchUserProfile(google);
 		assertEquals("Gabriel Axel", profile.getName());
 		assertEquals("Gabriel", profile.getFirstName());
 		assertEquals("Axel", profile.getLastName());
 		assertEquals("guznik@gmail.com", profile.getEmail());
-		assertEquals("guznik@gmail.com", profile.getUsername());
+		assertEquals("114863353858610846998", profile.getUsername());
 	}
 	
 }
