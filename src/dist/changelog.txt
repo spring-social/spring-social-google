@@ -1,3 +1,9 @@
+Spring Social Google 1.0.0.RC1 (May 20, 2014)
+=============================================
+Miscellaneous
+  * Upgraded to Spring Social 1.1.0.RELEASE
+  * Dropped old annotation and provider configuration
+
 Spring Social Google 1.0.0 Milestone 3 (September 10, 2013)
 ===========================================================
 Miscellaneous

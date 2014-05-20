@@ -15,14 +15,6 @@
 	</section>
 	<section id="overview-howtoget">
 		<title>How to get</title>
-		<para>Spring Social Google milestones are hosted in the following repository:</para>
-		<programlisting language="xml">
-&lt;repository&gt;
-  &lt;id&gt;spring-social-google&lt;/id&gt;
-  &lt;name&gt;Spring Social Google&lt;/name&gt;
-  &lt;url&gt;http://gabiaxel.github.io/maven/&lt;/url&gt;
-&lt;/repository&gt;
-    </programlisting>
 		<para>The following Maven dependency will add Spring Social Google to 
 		your project:</para>
 		<programlisting language="xml">
@@ -48,7 +40,7 @@
 		schedule than Spring Social. Consequently, Spring Social&apos;s 
 		version may differ from that of Spring Social Google.</para>
 		<para>Consult 
-		<ulink url="http://static.springsource.org/spring-social/docs/1.0.x/reference/html/overview.html#overview-howtoget">
+		<ulink url="http://docs.spring.io/spring-social/docs/1.1.x/reference/htmlsingle/#section_how-to-get">
 		Spring Social&apos;s reference documentation</ulink> for more 
 		information on Spring Social dependencies.</para>
 	</section>
