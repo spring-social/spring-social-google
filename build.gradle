@@ -20,7 +20,7 @@ configure(allprojects) {
     targetCompatibility=1.6
 
     ext {
-        springSocialVersion = '1.1.0.BUILD-SNAPSHOT'
+        springSocialVersion = '1.1.0.RELEASE'
         jacksonVersion = '2.3.3'
         junitVersion = '4.11'
         mockitoVersion = '1.9.5'
