@@ -308,5 +308,7 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
 		Map<String, Boolean> expectedPlacesLived = singletonMap("Israel", true);
 		assertEquals(expectedPlacesLived, person.getPlacesLived());
 		assertEquals("guznik@gmail.com", person.getAccountEmail());
+		assertEquals("https://plus.google.com/+GabrielAxel", person.getUrl());
+		assertTrue(person.isPlusUser());
 	}
 }

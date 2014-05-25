@@ -73,6 +73,9 @@ public class Person extends ApiEntity {
 	private String displayName;
 
 	private String url;
+	
+	@JsonProperty("isPlusUser")
+	private boolean plusUser;
 
 	@JsonProperty
 	private Image image;
@@ -136,6 +139,10 @@ public class Person extends ApiEntity {
 
 	public String getUrl() {
 		return url;
+	}
+	
+	public boolean isPlusUser() {
+		return plusUser;
 	}
 
 	public String getImageUrl() {
