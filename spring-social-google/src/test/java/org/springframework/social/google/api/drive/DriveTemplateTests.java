@@ -15,8 +15,13 @@
  */
 package org.springframework.social.google.api.drive;
 
-import static org.junit.Assert.*;
-import static org.springframework.http.HttpMethod.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.springframework.http.HttpMethod.DELETE;
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -112,6 +117,8 @@ public class DriveTemplateTests extends AbstractGoogleApiTest {
 		assertEquals(PermissionRole.OWNER, file.getUserPermission().getRole());
 		assertEquals(PermissionType.USER, file.getUserPermission().getType());
 
+		assertFalse(file.isFolder());
+		assertFalse(file.isShortcut());
 	}
 
 	@Test
