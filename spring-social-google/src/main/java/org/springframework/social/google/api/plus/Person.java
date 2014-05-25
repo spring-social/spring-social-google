@@ -84,7 +84,7 @@ public class Person extends ApiEntity {
 	private String gender;
 
 	private String occupation;
-	
+
 	private String aboutMe;
 
 	private String relationshipStatus;
@@ -159,7 +159,7 @@ public class Person extends ApiEntity {
 	public String getOccupation() {
 		return occupation;
 	}
-	
+
 	public String getAboutMe() {
 		return aboutMe;
 	}
@@ -185,7 +185,7 @@ public class Person extends ApiEntity {
 	}
 
 	public Set<String> getEmailAddresses() {
-		return emails.keySet();
+		return emails == null ? null : emails.keySet();
 	}
 
 	public String getAccountEmail() {
