@@ -21,20 +21,29 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.google.api.Google;
-import org.springframework.social.google.api.userinfo.GoogleUserInfo;
-import org.springframework.social.google.api.userinfo.UserInfoOperations;
+import org.springframework.social.google.api.plus.Person;
+import org.springframework.social.google.api.plus.PlusOperations;
 
 public class GoogleAdapterTest {
 
 	private GoogleAdapter apiAdapter = new GoogleAdapter();
-	
+
 	private Google google = Mockito.mock(Google.class);
-	
+
 	@Test
 	public void fetchProfile() {
-		UserInfoOperations userOperations = Mockito.mock(UserInfoOperations.class);
-		Mockito.when(google.userOperations()).thenReturn(userOperations);
-		Mockito.when(userOperations.getUserInfo()).thenReturn(new GoogleUserInfo("114863353858610846998", "guznik@gmail.com", "Gabriel Axel", "Gabriel", "Axel", "https://plus.google.com/114863353858610846998", "https://lh5.googleusercontent.com/-UyuMuAWmKIM/AAAAAAAAAAI/AAAAAAAAAn0/pMK2DzFNBNI/photo.jpg", "male", "en"));
+
+		PlusOperations plusOperations = Mockito.mock(PlusOperations.class);
+		Mockito.when(google.plusOperations()).thenReturn(plusOperations);
+
+		Person person = Mockito.mock(Person.class);
+		Mockito.when(person.getDisplayName()).thenReturn("Gabriel Axel");
+		Mockito.when(person.getGivenName()).thenReturn("Gabriel");
+		Mockito.when(person.getFamilyName()).thenReturn("Axel");
+		Mockito.when(person.getAccountEmail()).thenReturn("guznik@gmail.com");
+		Mockito.when(person.getId()).thenReturn("114863353858610846998");
+
+		Mockito.when(plusOperations.getGoogleProfile()).thenReturn(person);
 		UserProfile profile = apiAdapter.fetchUserProfile(google);
 		assertEquals("Gabriel Axel", profile.getName());
 		assertEquals("Gabriel", profile.getFirstName());
@@ -42,5 +51,5 @@ public class GoogleAdapterTest {
 		assertEquals("guznik@gmail.com", profile.getEmail());
 		assertEquals("114863353858610846998", profile.getUsername());
 	}
-	
+
 }

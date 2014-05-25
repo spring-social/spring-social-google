@@ -53,15 +53,13 @@ Google google = connection != null ? connection.getApi() : new GoogleTemplate();
 	<programlisting language="java">
 public interface Google {
 
-    UserInfoOperations userOperations();
-
     PlusOperations plusOperations();
 
     TaskOperations taskOperations();
 
     DriveOperations driveOperations();
-
-	String getAccessToken();
+    
+    String getAccessToken();
 
 }
 	</programlisting>
@@ -84,10 +82,6 @@ public interface Google {
 			</thead>
 			<tbody>
 				<row>
-					<entry>UserInfoOperations</entry>
-					<entry>Get the details of the user.</entry>
-				</row>
-				<row>
 					<entry>PlusOperations</entry>
 					<entry>Read Google+ activities and people profiles and create app 
 					activities.</entry>
@@ -108,19 +102,6 @@ public interface Google {
 	that can be performed via <interfacename>Google</interfacename> and 
 	its sub-APIs. For complete details on all of the operations available, 
 	refer to the JavaDoc.</para>
-	<section id="google-userinfo">
-		<title>Getting the authenticated user&apos;s details</title>
-		<para>You can retrieve the user&apos;s details using <methodname>
-		getUserProfile()</methodname> method:</para>
-		<programlisting language="java">
-GoogleUserInfo userInfo = google.userOperations().getUserInfo();
-		</programlisting>
-		<para>The <classname>UserInfo</classname> object will contain basic 
-		profile information about the authenticating user, including their 
-		first and last name and their Google profile ID. Depending on what 
-		authorization scope has been granted to the application, it may also 
-		include their email address.</para>
-	</section>
 	<section id="google-people">
 		<title>Reading Google+ Profiles</title>
 		<para>If you know a user&apos;s Google profile ID, you can get their 

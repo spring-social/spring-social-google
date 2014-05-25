@@ -19,6 +19,8 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.springframework.social.google.api.ApiEntity;
 
@@ -46,7 +48,7 @@ public class Person extends ApiEntity {
 		@JsonProperty
 		private String url;
 	}
-	
+
 	private static class PlaceLived {
 
 		@JsonProperty
@@ -55,11 +57,22 @@ public class Person extends ApiEntity {
 		@JsonProperty
 		private boolean primary;
 	}
-	
+
+	private static class Email {
+
+		@JsonProperty
+		private String value;
+
+		@JsonProperty
+		private String type;
+	}
+
 	@JsonProperty
 	private Name name;
 
 	private String displayName;
+
+	private String url;
 
 	@JsonProperty
 	private Image image;
@@ -70,6 +83,8 @@ public class Person extends ApiEntity {
 
 	private String gender;
 
+	private String occupation;
+	
 	private String aboutMe;
 
 	private String relationshipStatus;
@@ -79,6 +94,8 @@ public class Person extends ApiEntity {
 	private List<Organization> organizations;
 
 	private Map<String, Boolean> placesLived;
+
+	private Map<String, String> emails;
 
 	@Override
 	public String toString() {
@@ -95,6 +112,16 @@ public class Person extends ApiEntity {
 		}
 	}
 
+	@JsonSetter
+	private void setEmails(List<Email> emailsAsList) {
+		emails = new LinkedHashMap<String, String>();
+		if (emailsAsList != null) {
+			for (Email email : emailsAsList) {
+				emails.put(email.value, email.type);
+			}
+		}
+	}
+
 	public String getGivenName() {
 		return name == null ? null : name.givenName;
 	}
@@ -105,6 +132,10 @@ public class Person extends ApiEntity {
 
 	public String getDisplayName() {
 		return displayName;
+	}
+
+	public String getUrl() {
+		return url;
 	}
 
 	public String getImageUrl() {
@@ -125,6 +156,10 @@ public class Person extends ApiEntity {
 		return gender;
 	}
 
+	public String getOccupation() {
+		return occupation;
+	}
+	
 	public String getAboutMe() {
 		return aboutMe;
 	}
@@ -145,4 +180,22 @@ public class Person extends ApiEntity {
 		return placesLived;
 	}
 
+	public Map<String, String> getEmails() {
+		return emails;
+	}
+
+	public Set<String> getEmailAddresses() {
+		return emails.keySet();
+	}
+
+	public String getAccountEmail() {
+		if (emails != null) {
+			for (Entry<String, String> entry : emails.entrySet()) {
+				if (entry.getValue().equals("account")) {
+					return entry.getKey();
+				}
+			}
+		}
+		return null;
+	}
 }

@@ -6,7 +6,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import static org.springframework.http.HttpMethod.DELETE;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
@@ -277,30 +276,37 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
 		assertEquals("Axel", person.getFamilyName());
 		assertEquals("Gabriel Axel", person.getDisplayName());
 		assertEquals("male", person.getGender());
-		assertEquals("Software engineer", person.getAboutMe());
+		assertEquals(
+				"CTO and co-founder of <a href=\"https://www.docollab.com\" rel=\"nofollow\" target=\"_blank\">Docollab</a><br />",
+				person.getAboutMe());
+		assertEquals("Software Engineer", person.getOccupation());
 		assertEquals("single", person.getRelationshipStatus());
 		assertEquals(
 				"https://lh5.googleusercontent.com/-UyuMuAWmKIM/AAAAAAAAAAI/AAAAAAAAAn0/pMK2DzFNBNI/photo.jpg?sz=50",
 				person.getImageUrl());
 
-		List<ProfileUrl> expectedUrls = asList(
-				new ProfileUrl(
-						"http://il.linkedin.com/pub/gabriel-axel/13/782/8a",
-						"http://il.linkedin.com/pub/gabriel-axel/13/782/8a",
-						null),
-				new ProfileUrl("http://twitter.com/GabiAxel", "gabiaxel", null),
-				new ProfileUrl(
-						"https://github.com/GabiAxel/spring-social-google",
-						"Spring Social Google", null), new ProfileUrl(
-						"http://www.gabiaxel.com", "Blog", UrlType.OTHER));
+		List<ProfileUrl> expectedUrls = asList(new ProfileUrl(
+				"http://il.linkedin.com/pub/gabriel-axel/13/782/8a",
+				"http://il.linkedin.com/pub/gabriel-axel/13/782/8a",
+				UrlType.OTHER_PROFILE), new ProfileUrl(
+				"http://twitter.com/GabiAxel", "gabiaxel",
+				UrlType.OTHER_PROFILE), new ProfileUrl(
+				"https://github.com/GabiAxel/spring-social-google",
+				"Spring Social Google", UrlType.CONTRIBUTOR), new ProfileUrl(
+				"http://www.gabiaxel.com", "Blog", UrlType.OTHER),
+				new ProfileUrl("https://www.docollab.com",
+						"Docollab - Your Scientific Knowledgebase",
+						UrlType.OTHER));
 		assertEquals(expectedUrls, person.getUrls());
 
 		List<Organization> expectedOrganizations = asList(new Organization(
 				"The Open University of Israel", "Natural Science", "school",
-				"2003", "2011", true));
+				"2003", "2011", false), new Organization("Docollab", "CTO",
+				"work", null, null, true));
 		assertEquals(expectedOrganizations, person.getOrganizations());
 
 		Map<String, Boolean> expectedPlacesLived = singletonMap("Israel", true);
 		assertEquals(expectedPlacesLived, person.getPlacesLived());
+		assertEquals("guznik@gmail.com", person.getAccountEmail());
 	}
 }

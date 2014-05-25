@@ -20,7 +20,6 @@ import org.springframework.social.google.api.drive.DriveOperations;
 import org.springframework.social.google.api.impl.GoogleTemplate;
 import org.springframework.social.google.api.plus.PlusOperations;
 import org.springframework.social.google.api.tasks.TaskOperations;
-import org.springframework.social.google.api.userinfo.UserInfoOperations;
 
 /**
  * Interface specifying a basic set of operations for interacting with Google
@@ -29,16 +28,6 @@ import org.springframework.social.google.api.userinfo.UserInfoOperations;
  * @author Gabriel Axel
  */
 public interface Google extends ApiBinding {
-
-	/**
-	 * Retrieves {@link UserInfoOperations}, used for fetching user profile
-	 * (predates Google+). Requires OAuth2 scopes
-	 * https://www.googleapis.com/auth/userinfo.profile
-	 * https://www.googleapis.com/auth/userinfo#email
-	 * 
-	 * @return {@link UserInfoOperations} for the authenticated user
-	 */
-	UserInfoOperations userOperations();
 
 	/**
 	 * Retrieves {@link PlusOperations}, used for interacting with Google+ API.

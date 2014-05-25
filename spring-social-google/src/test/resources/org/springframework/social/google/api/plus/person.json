@@ -1,91 +1,94 @@
 {
-	"kind": "plus#person",
-	"etag": "\"9Q4kEgczRt3gWehMocqSxXqUhYo/b6qW8Occ4cMgbcSpwwQMj4UKnew\"",
-	"gender": "male",
-	"urls": 
-	[
-		{
-			"value": "http://il.linkedin.com/pub/gabriel-axel/13/782/8a",
-			"label": "http://il.linkedin.com/pub/gabriel-axel/13/782/8a"
-		},
-
-		{
-			"value": "http://twitter.com/GabiAxel",
-			"label": "gabiaxel"
-		},
-
-		{
-			"value": "https://github.com/GabiAxel/spring-social-google",
-			"label": "Spring Social Google"
-		},
-
-		{
-			"value": "http://www.gabiaxel.com",
-			"type": "other",
-			"label": "Blog"
-		}
-	],
-
-	"objectType": "person",
-	"id": "114863353858610846998",
-	"displayName": "Gabriel Axel",
-	"name": 
-	{
-		"familyName": "Axel",
-		"givenName": "Gabriel"
-	},
-
-	"braggingRights": "Raising five cats",
-	"aboutMe": "Software engineer",
-	"relationshipStatus": "single",
-	"url": "https://plus.google.com/114863353858610846998",
-	"image": 
-	{
-		"url": "https://lh5.googleusercontent.com/-UyuMuAWmKIM/AAAAAAAAAAI/AAAAAAAAAn0/pMK2DzFNBNI/photo.jpg?sz=50"
-	},
-
-	"organizations": 
-	[
-		{
-			"name": "The Open University of Israel",
-			"title": "Natural Science",
-			"type": "school",
-			"startDate": "2003",
-			"endDate": "2011",
-			"primary": true
-		}
-	],
-
-	"placesLived": 
-	[
-		{
-			"value": "Israel",
-			"primary": true
-		}
-	],
-
-	"isPlusUser": true,
-	"language": "en",
-	"ageRange": 
-	{
-		"min": 21
-	},
-
-	"verified": false,
-	"cover": 
-	{
-		"layout": "banner",
-		"coverPhoto": 
-		{
-			"url": "https://lh5.googleusercontent.com/-XviJW_7A56Q/T9kKKA9_iCI/AAAAAAAAAGI/DZCUNY97J0c/s1000/Green%2BGrass.jpg",
-			"height": 626,
-			"width": 940
-		},
-
-		"coverInfo": 
-		{
-			"topImageOffset": 0,
-			"leftImageOffset": 0
-		}
-	}
+  "braggingRights": "Raising five cats", 
+  "image": {
+    "url": "https://lh5.googleusercontent.com/-UyuMuAWmKIM/AAAAAAAAAAI/AAAAAAAAAn0/pMK2DzFNBNI/photo.jpg?sz=50"
+  }, 
+  "id": "114863353858610846998", 
+  "objectType": "person", 
+  "verified": false, 
+  "etag": "\"YFr-hUROXQN7IOa3dUHg9dQ8eq0/NEVHKJoN067kdVmOajomyD-wN6Y\"", 
+  "circledByCount": 51, 
+  "occupation": "Software Engineer", 
+  "aboutMe": "CTO and co-founder of <a href=\"https://www.docollab.com\" rel=\"nofollow\" target=\"_blank\">Docollab</a><br />", 
+  "kind": "plus#person", 
+  "placesLived": [
+    {
+      "primary": true, 
+      "value": "Israel"
+    }
+  ], 
+  "emails": [
+    {
+      "type": "account", 
+      "value": "guznik@gmail.com"
+    }
+  ], 
+  "organizations": [
+    {
+      "startDate": "2003", 
+      "endDate": "2011", 
+      "name": "The Open University of Israel", 
+      "title": "Natural Science", 
+      "primary": false, 
+      "type": "school"
+    }, 
+    {
+      "type": "work", 
+      "name": "Docollab", 
+      "primary": true, 
+      "title": "CTO"
+    }
+  ], 
+  "relationshipStatus": "single", 
+  "displayName": "Gabriel Axel", 
+  "name": {
+    "givenName": "Gabriel", 
+    "familyName": "Axel"
+  }, 
+  "language": "en", 
+  "url": "https://plus.google.com/+GabrielAxel", 
+  "gender": "male", 
+  "cover": {
+    "coverInfo": {
+      "leftImageOffset": 0, 
+      "topImageOffset": 0
+    }, 
+    "layout": "banner", 
+    "coverPhoto": {
+      "url": "https://lh5.googleusercontent.com/-XviJW_7A56Q/T9kKKA9_iCI/AAAAAAAAAGI/DZCUNY97J0c/s630/Green%2BGrass.jpg", 
+      "width": 940, 
+      "height": 626
+    }
+  }, 
+  "isPlusUser": true, 
+  "urls": [
+    {
+      "type": "otherProfile", 
+      "value": "http://il.linkedin.com/pub/gabriel-axel/13/782/8a", 
+      "label": "http://il.linkedin.com/pub/gabriel-axel/13/782/8a"
+    }, 
+    {
+      "type": "otherProfile", 
+      "value": "http://twitter.com/GabiAxel", 
+      "label": "gabiaxel"
+    }, 
+    {
+      "type": "contributor", 
+      "value": "https://github.com/GabiAxel/spring-social-google", 
+      "label": "Spring Social Google"
+    }, 
+    {
+      "type": "other", 
+      "value": "http://www.gabiaxel.com", 
+      "label": "Blog"
+    }, 
+    {
+      "type": "other", 
+      "value": "https://www.docollab.com", 
+      "label": "Docollab - Your Scientific Knowledgebase"
+    }
+  ], 
+  "ageRange": {
+    "min": 21
+  }
 }

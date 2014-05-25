@@ -22,7 +22,7 @@ import org.springframework.social.google.api.plus.moments.MomentsPage;
 /**
  * Defines operations for searching and retrieving Google+ activities, comments
  * and people. To use "me" as user ID, requires OAuth2 scope
- * https://www.googleapis.com/auth/plus.me
+ * https://www.googleapis.com/auth/plus.me , and to get your e-mail address add the scope "email".
  * 
  * @author Gabriel Axel
  */

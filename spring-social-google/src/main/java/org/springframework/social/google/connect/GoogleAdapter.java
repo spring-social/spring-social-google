@@ -21,40 +21,39 @@ import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.UserProfileBuilder;
 import org.springframework.social.google.api.Google;
-import org.springframework.social.google.api.userinfo.GoogleUserInfo;
+import org.springframework.social.google.api.plus.Person;
 
 /**
  * Google ApiAdapter implementation.
+ * 
  * @author Gabriel Axel
  */
 public class GoogleAdapter implements ApiAdapter<Google> {
 
 	public boolean test(Google google) {
 		try {
-			google.userOperations().getUserInfo();
+			google.plusOperations().getGoogleProfile();
 			return true;
-		} catch(ApiException e) {
+		} catch (ApiException e) {
 			return false;
 		}
 	}
 
 	public void setConnectionValues(Google google, ConnectionValues values) {
-		GoogleUserInfo profile = google.userOperations().getUserInfo();
+		Person profile = google.plusOperations().getGoogleProfile();
 		values.setProviderUserId(profile.getId());
-		values.setDisplayName(profile.getName());
-		values.setProfileUrl(profile.getLink());
-		values.setImageUrl(profile.getProfilePictureUrl());
+		values.setDisplayName(profile.getDisplayName());
+		values.setProfileUrl(profile.getUrl());
+		values.setImageUrl(profile.getImageUrl());
 	}
 
 	public UserProfile fetchUserProfile(Google google) {
-		GoogleUserInfo profile = google.userOperations().getUserInfo();
-		return new UserProfileBuilder()
-			.setUsername(profile.getId())
-			.setEmail(profile.getEmail())
-			.setName(profile.getName())
-			.setFirstName(profile.getFirstName())
-			.setLastName(profile.getLastName())
-			.build();
+		Person profile = google.plusOperations().getGoogleProfile();
+		return new UserProfileBuilder().setUsername(profile.getId())
+				.setEmail(profile.getAccountEmail())
+				.setName(profile.getDisplayName())
+				.setFirstName(profile.getGivenName())
+				.setLastName(profile.getFamilyName()).build();
 	}
 
 	public void updateStatus(Google google, String message) {

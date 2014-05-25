@@ -77,6 +77,7 @@ public class Organization {
 				nullSafeEquals(title, other.title) &&
 				nullSafeEquals(type, other.type) &&
 				nullSafeEquals(startDate, other.startDate) &&
+				nullSafeEquals(endDate, other.endDate) &&
 				primary == other.primary;
 	}
 
