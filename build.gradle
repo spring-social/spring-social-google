@@ -16,8 +16,8 @@ configure(allprojects) {
 
     group = 'org.springframework.social'
 
-    sourceCompatibility=1.5
-    targetCompatibility=1.5
+    sourceCompatibility=1.6
+    targetCompatibility=1.6
 
     ext {
         springSocialVersion = '1.1.0.BUILD-SNAPSHOT'
