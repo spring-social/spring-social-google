@@ -194,4 +194,13 @@ public interface PlusOperations {
 	 *            the moment ID
 	 */
 	void deleteMoment(String id);
+	
+	/**
+	 * Creates a post (as an activity) with only the message in the body.
+	 * 
+	 * @param message
+	 * 				The message to be posted
+	 */
+	void insertActivity(String message);
+	 
 }
