@@ -31,6 +31,7 @@ import org.springframework.social.google.api.plus.moments.Moment;
 import org.springframework.social.google.api.plus.moments.MomentQueryBuilder;
 import org.springframework.social.google.api.plus.moments.MomentsPage;
 import org.springframework.social.google.api.plus.moments.impl.MomentQueryBuilderImpl;
+import org.springframework.social.google.api.plus.posts.PostActivity;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -42,6 +43,8 @@ public class PlusTemplate extends AbstractGoogleApiOperations implements PlusOpe
 	private static final String PEOPLE_URL = "https://www.googleapis.com/plus/v1/people/";
 	private static final String ACTIVITIES_PUBLIC = "/activities/public";
 	private static final String ACTIVITIES_URL = "https://www.googleapis.com/plus/v1/activities/";
+	
+	private static final String ACTIVITIES_URL_PUBLIC = "https://www.googleapis.com/plusDomains/v1/people/me/activities";
 	
 	private static final String COMMENTS_URL = "https://www.googleapis.com/plus/v1/comments/";
 	private static final String COMMENTS = "/comments";
@@ -157,5 +160,12 @@ public class PlusTemplate extends AbstractGoogleApiOperations implements PlusOpe
 	@Override
 	public void deleteMoment(String id) {
 		deleteEntity("https://www.googleapis.com/plus/v1/moments", id);
+	}
+	
+	@Override
+	public void insertActivity(String message){
+		PostActivity newActivity = new PostActivity();
+		newActivity.createActivity(message);	
+		saveEntity(ACTIVITIES_URL_PUBLIC,newActivity);
 	}
 }
