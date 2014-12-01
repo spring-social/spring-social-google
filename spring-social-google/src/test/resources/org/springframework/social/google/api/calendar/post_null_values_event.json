@@ -1,0 +1,24 @@
+{
+  "id" : "onn6d9kbhps6fc47m96auhtkdo",
+  "etag" : "\"2831656302604000\"",
+  "htmlLink" : "https://www.google.com/calendar/event?eid=b25uNmQ5a2JocHM2ZmM0N205NmF1aHRrZG9fMjAxNTA2MDNUMDkwMDAwWiBtYXJ0eHdpbmtAbQ",
+  "created" : "2014-11-12T21:35:51.000Z",
+  "updated" : "2014-11-12T21:35:51.302Z",
+  "creator" : {
+    "email" : "martxw@gmail.com",
+    "displayName" : "Martin Wink",
+    "self" : true
+  },
+  "organizer" : {
+    "email" : "martxw@gmail.com",
+    "displayName" : "Martin Wink",
+    "self" : true
+  },
+  "start" : { },
+  "end" : { },
+  "iCalUID" : "onn6d9kbhps6fc47m96auhtkdo@google.com",
+  "sequence" : 0,
+  "reminders" : {
+    "useDefault" : true
+  }
+}

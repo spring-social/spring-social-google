@@ -1,0 +1,35 @@
+{
+
+ "kind": "calendar#event",
+ "etag": "\"2790377457886000\"",
+ "id": "_60q30c1g60o30e1i60o4ac1g60rj8gpl88rj2c1h84s34h9g60s30c1g60o30c1g6oo4agph751kah9o84r46ghg64o30c1g60o30c1g60o30c1g60o32c1g60o30c1g891jeh9o88qk6cpk612k6c1k6ss3idi488o36h1i8p1k6hhp6oog",
+ "status": "confirmed",
+ "htmlLink": "https://www.google.com/calendar/event?eid=YXNzcWs3YzhuM2o3MWppb2ZjN2Z1OGFtaXMgbWFydHh3aW5rQG0",
+ "created": "2014-01-15T13:28:42.000Z",
+ "updated": "2014-03-19T13:47:24.437Z",
+ "summary": "Wearable Tech Show",
+ "description": "http://www.wearabletechnologyshow.net/#loginbox",
+ "location": "Olympia",
+ "creator": {
+  "email": "martxw@gmail.com",
+  "displayName": "Martin Wink",
+  "self": true
+ },
+ "organizer": {
+  "email": "martxw@gmail.com",
+  "displayName": "Martin Wink",
+  "self": true
+ },
+ "start": {
+  "date": "2014-03-19"
+ },
+ "end": {
+  "date": "2014-03-20"
+ },
+ "transparency": "transparent",
+ "iCalUID": "assqk7c8n3j71jiofc7fu8amis@google.com",
+ "sequence": 0,
+ "reminders": {
+  "useDefault": false
+ }
+}

@@ -1,0 +1,7 @@
+{
+ "kind": "calendar#events",
+ "etag": "\"0001\"",
+ "nextSyncToken": "0002",
+ "items": [
+ ]
+}

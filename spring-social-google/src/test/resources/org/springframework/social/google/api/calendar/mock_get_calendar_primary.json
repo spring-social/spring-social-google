@@ -1,0 +1,48 @@
+{
+
+   "kind": "calendar#calendarListEntry",
+   "etag": "\"0000000000000000\"",
+   "id": "martxw@gmail.com",
+   "summary": "martxw@gmail.com",
+   "timeZone": "Europe/London",
+   "colorId": "15",
+   "backgroundColor": "#9fc6e7",
+   "foregroundColor": "#000000",
+   "selected": true,
+   "accessRole": "owner",
+   "defaultReminders": [
+	{
+	  "method": "email",
+	  "minutes": 20
+	},
+	{
+	  "method": "sms",
+	  "minutes": 15
+	},
+	{
+	  "method": "popup",
+	  "minutes": 10
+	}
+   ],
+   "notificationSettings": {
+    "notifications": [
+     {
+      "type": "eventCreation",
+      "method": "email"
+     },
+     {
+      "type": "eventChange",
+      "method": "sms"
+     },
+     {
+      "type": "eventCancellation",
+      "method": "email"
+     },
+     {
+      "type": "eventResponse",
+      "method": "email"
+     }
+    ]
+   },
+   "primary": true
+} 
