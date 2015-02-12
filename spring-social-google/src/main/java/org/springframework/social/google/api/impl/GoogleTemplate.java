@@ -31,6 +31,8 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.drive.DriveOperations;
 import org.springframework.social.google.api.drive.impl.DriveTemplate;
+import org.springframework.social.google.api.oauth2.OAuth2Operations;
+import org.springframework.social.google.api.oauth2.impl.OAuth2Template;
 import org.springframework.social.google.api.plus.PlusOperations;
 import org.springframework.social.google.api.plus.impl.PlusTemplate;
 import org.springframework.social.google.api.tasks.TaskOperations;
@@ -55,7 +57,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	
 	private String accessToken;
-
+	private OAuth2Operations oauth2Operations;
 	private PlusOperations plusOperations;
 	private TaskOperations taskOperations;
 	private DriveOperations driveOperations;
@@ -80,6 +82,7 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	}
 
 	private void initialize() {
+		oauth2Operations = new OAuth2Template(getRestTemplate(), isAuthorized());
 		plusOperations = new PlusTemplate(getRestTemplate(), isAuthorized());
 		taskOperations = new TaskTemplate(getRestTemplate(), isAuthorized());
 		driveOperations = new DriveTemplate(getRestTemplate(), isAuthorized());
@@ -130,6 +133,11 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	@Override
 	public String getAccessToken() {
 		return accessToken;
+	}
+
+	@Override
+	public OAuth2Operations oauth2Operations() {
+		return oauth2Operations;
 	}
 
 }
