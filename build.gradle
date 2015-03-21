@@ -166,14 +166,17 @@ configure(rootProject) {
             "XSDs for deployment at static.springframework.org/schema."
 
         subprojects.each { subproject ->
+            println "operating on subproject: ${subproject.name}"
             def Properties schemas = new Properties();
 
             subproject.sourceSets.main.resources.find {
                 it.path.endsWith('META-INF/spring.schemas')
+                println "found resource: ${it.path}"
             }?.withInputStream { schemas.load(it) }
 
             for (def key : schemas.keySet()) {
                 def shortName = key.replaceAll(/http.*schema.(.*).spring-.*/, '$1')
+                println "loading xsd file for ${shortName}"
                 assert shortName != key
                 File xsdFile = subproject.sourceSets.main.resources.find {
                     it.path.endsWith(schemas.get(key))
@@ -225,6 +228,7 @@ configure(rootProject) {
 
     artifacts {
         archives docsZip
+        archives schemaZip
         archives distZip
     }
 
