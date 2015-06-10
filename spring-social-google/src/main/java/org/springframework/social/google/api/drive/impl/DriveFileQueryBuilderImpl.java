@@ -23,10 +23,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.social.google.api.drive.DriveFileQueryBuilder;
 import org.springframework.social.google.api.drive.DriveFilesPage;
+import org.springframework.social.google.api.drive.PropertyVisibility;
 import org.springframework.social.google.api.query.impl.ApiQueryBuilderImpl;
 import org.springframework.web.client.RestTemplate;
 
@@ -49,6 +53,7 @@ class DriveFileQueryBuilderImpl extends ApiQueryBuilderImpl<DriveFileQueryBuilde
 	private static final String WRITERS = "writers";
 	private static final String READERS = "readers";
 	private static final String SHARED_WITH_ME = "sharedWithMe";
+	private static final String PROPERTIES = "properties";
 
 	private static final String CONTAINS = " contains ";
 	private static final String IN = " in ";
@@ -60,6 +65,9 @@ class DriveFileQueryBuilderImpl extends ApiQueryBuilderImpl<DriveFileQueryBuilde
 	private static final String LE = "<=";
 	private static final String NOT = "not ";
 	private static final String AND = " and ";
+	private static final String HAS = " has ";
+	private static final String OBJ_START = "{ ";
+	private static final String OBJ_END = " }";
 
 	private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
@@ -86,6 +94,23 @@ class DriveFileQueryBuilderImpl extends ApiQueryBuilderImpl<DriveFileQueryBuilde
 	
 	private DriveFileQueryBuilder addInTerm(String field, String value) {
 		qTerms.add(new StringBuilder().append('\'').append(value).append('\'').append(IN).append(field).toString());
+		return this;
+	}
+	
+	private DriveFileQueryBuilder addHasTerm(String field, Map<String, Object> item) {
+		List<String> criteria = new ArrayList<String>();
+		for (Entry<String, Object> p : item.entrySet()) {
+			if (p.getValue() != null) {
+				criteria.add(new StringBuffer().append(p.getKey()).append(EQ).append('\'').append(p.getValue()).append('\'').toString());
+			}
+		}
+		qTerms.add(new StringBuilder()
+			.append(field)
+			.append(HAS)
+			.append(OBJ_START)
+			.append(collectionToDelimitedString(criteria, AND))
+			.append(OBJ_END)
+			.toString());
 		return this;
 	}
 
@@ -209,6 +234,15 @@ class DriveFileQueryBuilderImpl extends ApiQueryBuilderImpl<DriveFileQueryBuilde
 	public DriveFileQueryBuilder sharedWithMe() {
 		qTerms.add(SHARED_WITH_ME);
 		return this;
+	}
+	
+	@Override
+	public DriveFileQueryBuilder propertiesHas(String propertyKey, String propertyValue, PropertyVisibility propertyVisibility) {
+		Map<String, Object> propertyDef = new HashMap<String, Object>();
+		propertyDef.put("key", propertyKey);
+		propertyDef.put("value", propertyValue);
+		propertyDef.put("visibility", propertyVisibility);
+		return addHasTerm(PROPERTIES, propertyDef);
 	}
 	
 	@Override

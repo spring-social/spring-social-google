@@ -74,6 +74,8 @@ public interface DriveFileQueryBuilder extends ApiQueryBuilder<DriveFileQueryBui
 
 	DriveFileQueryBuilder sharedWithMe();
 
+	DriveFileQueryBuilder propertiesHas(String propertyKey, String propertyValue, PropertyVisibility visibility);
+
 	DriveFileQueryBuilder isFolder();
 
 	DriveFileQueryBuilder isFile();

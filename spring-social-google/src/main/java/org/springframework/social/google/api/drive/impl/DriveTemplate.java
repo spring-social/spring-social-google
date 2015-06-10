@@ -20,6 +20,7 @@ import static org.springframework.http.MediaType.MULTIPART_FORM_DATA;
 import static org.springframework.social.google.api.drive.DriveFile.FOLDER;
 import static org.springframework.util.StringUtils.hasText;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.core.io.Resource;
@@ -36,6 +37,7 @@ import org.springframework.social.google.api.drive.DriveOperations;
 import org.springframework.social.google.api.drive.FileComment;
 import org.springframework.social.google.api.drive.FileCommentQueryBuilder;
 import org.springframework.social.google.api.drive.FileCommentsPage;
+import org.springframework.social.google.api.drive.FileProperty;
 import org.springframework.social.google.api.drive.FileRevision;
 import org.springframework.social.google.api.drive.UploadParameters;
 import org.springframework.social.google.api.drive.UserPermission;
@@ -67,6 +69,8 @@ public class DriveTemplate extends AbstractGoogleApiOperations implements
 	private static final String COMMENTS = "/comments/";
 	
 	private static final String REPLIES = "/replies/";
+	
+	private static final String PROPERTIES = "/properties/";
 	
 	private static final String SEND_NOTIFICATION = "?sendNotificationEmails=";
 	
@@ -293,5 +297,39 @@ public class DriveTemplate extends AbstractGoogleApiOperations implements
 	@Override
 	public Resource downloadFile(DriveFile file) {
 		return restTemplate.getForObject(file.getDownloadUrl(), Resource.class);
+	}
+
+	@Override
+	public List<FileProperty> getProperties(String fileId)
+	{
+		return getEntity(DRIVE_FILES_URL + fileId + PROPERTIES, FilePropertiesList.class).getItems();
+	}
+
+	@Override
+	public FileProperty getProperty(String fileId, String propertyKey)
+	{
+		return getEntity(DRIVE_FILES_URL + fileId + PROPERTIES + propertyKey, FileProperty.class);
+	}
+
+	@Override
+	public FileProperty addProperty(String fileId, FileProperty property)
+	{
+		return saveEntity(DRIVE_FILES_URL + fileId + PROPERTIES, property);
+	}
+
+	@Override
+	public FileProperty updateProperty(String fileId, FileProperty property)
+	{
+		Object patch = new PatchBuilder()
+			.set("value", property.getValue())
+			.set("visibility", property.getVisibility())
+			.getMap();
+		return patch(DRIVE_FILES_URL + fileId + PROPERTIES + property.getKey(), patch, FileProperty.class);
+	}
+
+	@Override
+	public void removeProperty(String fileId, String propertyKey)
+	{
+		restTemplate.delete(DRIVE_FILES_URL + fileId + PROPERTIES + propertyKey);
 	}
 }
