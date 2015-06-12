@@ -171,6 +171,17 @@ public interface DriveOperations {
 	void delete(String id);
 
 	/**
+	 * Move a file into a different folder
+	 * 
+	 * @param id
+	 *            The ID of the file to move
+	 * @param parentId
+	 *            The parent folder ID to move the file to, or "root"
+	 * @return The updated {@link DriveFile}
+	 */
+	DriveFile move(String id, String parentId);
+
+	/**
 	 * Uploads a file using multipart
 	 * 
 	 * @param resource

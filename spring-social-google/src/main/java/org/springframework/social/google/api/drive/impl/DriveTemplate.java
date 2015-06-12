@@ -30,6 +30,7 @@ import org.springframework.social.google.api.drive.CommentReply;
 import org.springframework.social.google.api.drive.DriveAbout;
 import org.springframework.social.google.api.drive.DriveApp;
 import org.springframework.social.google.api.drive.DriveFile;
+import org.springframework.social.google.api.drive.DriveFileParent;
 import org.springframework.social.google.api.drive.DriveFileQueryBuilder;
 import org.springframework.social.google.api.drive.DriveFilesPage;
 import org.springframework.social.google.api.drive.DriveOperations;
@@ -157,6 +158,13 @@ public class DriveTemplate extends AbstractGoogleApiOperations implements
 	@Override
 	public void delete(String id) {
 		restTemplate.delete(DRIVE_FILES_URL + id);
+	}
+
+	@Override
+	public DriveFile move(String id, String parentId) {
+		List<DriveFileParent> parents = new ArrayList<DriveFileParent>(1);
+		parents.add(new DriveFileParent(parentId));
+		return patch(DRIVE_FILES_URL + id, new PatchBuilder().set("parents", parents).getMap(), DriveFile.class);
 	}
 
 	@Override

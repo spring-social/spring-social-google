@@ -31,7 +31,7 @@ public class DriveFileParent {
 	public DriveFileParent() {
 	}
 	
-	DriveFileParent(String id) {
+	public DriveFileParent(String id) {
 		this.id = id;
 	}
 	
