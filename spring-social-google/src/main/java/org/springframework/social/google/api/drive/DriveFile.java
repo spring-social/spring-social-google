@@ -63,7 +63,7 @@ public class DriveFile extends ApiEntity {
 
 		private Collection<String> parentIds = new HashSet<String>();
 
-		private Builder() {
+		public Builder() {
 		}
 
 		public Builder setTitle(String title) {

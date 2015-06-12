@@ -169,6 +169,50 @@ public interface DriveOperations {
 	 *            The ID of the file to delete
 	 */
 	void delete(String id);
+	
+	/**
+	 * Create a copy of a file
+	 * 
+	 * @param id
+	 *            The ID of the source file
+	 * @return The newly-created {@link DriveFile} copy
+	 */
+	DriveFile copy(String id);
+
+	/**
+	 * Create a copy of a file
+	 * 
+	 * @param id
+	 *            The ID of the source file
+	 * @param parentIds
+	 *            Array of parent folder ID to place the file into, or "root"
+	 * @return The newly-created {@link DriveFile} copy
+	 */
+	DriveFile copy(String id, String[] parentIds);
+
+	/**
+	 * Create a copy of a file
+	 * 
+	 * @param id
+	 *            The ID of the source file
+	 * @param parentIds
+	 *            Array of parent folder ID to place the file into, or "root"
+	 * @param title
+	 *            The title to apply to the new file
+	 * @return The newly-created {@link DriveFile} copy
+	 */
+	DriveFile copy(String id, String[] parentIds, String title);
+
+	/**
+	 * Move a file into a different folder
+	 * 
+	 * @param id
+	 *            The ID of the file to move
+	 * @param parentId
+	 *            The parent folder ID to move the file to, or "root"
+	 * @return The updated {@link DriveFile}
+	 */
+	DriveFile move(String id, String parentId);
 
 	/**
 	 * Uploads a file using multipart
