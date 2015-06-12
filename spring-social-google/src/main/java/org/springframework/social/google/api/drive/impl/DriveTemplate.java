@@ -161,6 +161,11 @@ public class DriveTemplate extends AbstractGoogleApiOperations implements
 	}
 
 	@Override
+	public DriveFile copy(String id) {
+		return restTemplate.postForObject(DRIVE_FILES_URL + id + "/copy", null, DriveFile.class);
+	}
+
+	@Override
 	public DriveFile move(String id, String parentId) {
 		List<DriveFileParent> parents = new ArrayList<DriveFileParent>(1);
 		parents.add(new DriveFileParent(parentId));

@@ -169,6 +169,15 @@ public interface DriveOperations {
 	 *            The ID of the file to delete
 	 */
 	void delete(String id);
+	
+	/**
+	 * Create a copy of a file
+	 * 
+	 * @param id
+	 *            The ID of the source file
+	 * @return The newly-created {@link DriveFile} copy
+	 */
+	DriveFile copy(String id);
 
 	/**
 	 * Move a file into a different folder
