@@ -1,7 +1,9 @@
 .classpath
+.idea
 .project
 .settings
 .DS_Store
+*.iml
 build
 **/build
 **/src/test/java/exploration
