@@ -1,0 +1,61 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
+
+	<!-- WARNING: -->
+	<!-- WARNING: This file has been uploaded into Jenkins (build-server). -->
+	<!-- WARNING: Changes to this file will require Jenkins to be updated also. -->
+	<!-- if you are editing this file in Jenkins, consider copying the changes to cloud-commons/config/maven-settings.xml -->
+
+	<profiles>
+		<profile>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<id>sonar</id>
+			<properties>
+				<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  				<sonar.jdbc.url>jdbc:mysql://localhost:3306/sonar?useUnicode=true&amp;characterEncoding=utf8&amp;rewriteBatchedStatements=true&amp;useConfigs=maxPerformance</sonar.jdbc.url>
+				<sonar.jdbc.username>root</sonar.jdbc.username>
+				<sonar.jdbc.password>percussion</sonar.jdbc.password>
+				<sonar.jdbc.driverClassName>com.mysql.jdbc.Driver</sonar.jdbc.driverClassName>
+				<sonar.host.url>http://localhost:9000</sonar.host.url>
+			</properties>
+		</profile>
+		<profile>
+			<id>skipTests</id>
+			<activation>
+				<property>
+					<name>skipTests</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<properties>
+				<skipTests>true</skipTests>
+				<npm-test-phase>none</npm-test-phase>
+			</properties>
+		</profile>
+		<profile>
+			<id>deployOnly</id>
+			<activation>
+				<property>
+					<name>deployOnly</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<properties>
+				<skipTests>true</skipTests>
+				<npm-test-phase>none</npm-test-phase>
+				<npm-install-phase>none</npm-install-phase>
+			</properties>
+		</profile>
+	</profiles>
+
+	<servers>
+		<server>
+			<id>deployment</id>
+			<username>deployment</username>
+			<password>bfHP3Wgq</password>
+		</server>
+	</servers>
+
+</settings>
