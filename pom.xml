@@ -15,6 +15,10 @@
     <name>Spring Social Google</name>
     <description>Provides access to Google+ APIs and services.</description>
 
+    <properties>
+        <exec.gradle>gradlew</exec.gradle>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -30,7 +34,7 @@
                         </goals>
                         <configuration>
                             <workingDirectory>${basedir}</workingDirectory>
-                            <executable>gradlew</executable>
+                            <executable>${exec.gradle}</executable>
                             <arguments>
                                 <argument>clean</argument>
                             </arguments>
@@ -44,7 +48,7 @@
                         </goals>
                         <configuration>
                             <workingDirectory>${basedir}</workingDirectory>
-                            <executable>gradlew</executable>
+                            <executable>${exec.gradle}</executable>
                             <arguments>
                                 <argument>build</argument>
                             </arguments>
@@ -57,12 +61,12 @@
                 <configuration>
                     <tasks>
                         <copy file="spring-social-google/build/libs/spring-social-google-2.0.0.BUILD-PERC.jar"
-                              todir="target"/>
+                              todir="target" overwrite="true" verbose="true"/>
                     </tasks>
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>install</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>
