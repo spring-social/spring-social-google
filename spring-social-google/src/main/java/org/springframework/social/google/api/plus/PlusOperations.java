@@ -200,7 +200,8 @@ public interface PlusOperations {
 	 * 
 	 * @param message
 	 * 				The message to be posted
+	 * @return {@link ActivitiesPage} of newly created activity
 	 */
-	void insertActivity(String message);
+	Activity insertActivity(String message);
 	 
 }
