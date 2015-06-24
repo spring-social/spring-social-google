@@ -1,8 +1,9 @@
 package org.springframework.social.google.api.plus.posts;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.social.google.api.plus.Activity;
 
-public class PostAttachments {
+public class PostAttachment extends Activity.Attachment {
 
 	@JsonProperty
 	private String id;

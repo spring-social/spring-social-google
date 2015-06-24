@@ -39,6 +39,7 @@ import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.web.client.RestOperations;
 
 /**
  * <p>
@@ -125,6 +126,11 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	@Override
 	public DriveOperations driveOperations() {
 		return driveOperations;
+	}
+
+	@Override
+	public RestOperations restOperations() {
+		return getRestTemplate();
 	}
 	
 	@Override

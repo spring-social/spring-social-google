@@ -20,6 +20,7 @@ import org.springframework.social.google.api.drive.DriveOperations;
 import org.springframework.social.google.api.impl.GoogleTemplate;
 import org.springframework.social.google.api.plus.PlusOperations;
 import org.springframework.social.google.api.tasks.TaskOperations;
+import org.springframework.web.client.RestOperations;
 
 /**
  * Interface specifying a basic set of operations for interacting with Google
@@ -64,6 +65,13 @@ public interface Google extends ApiBinding {
 	 * @return {@link DriveOperations} for the authenticated user
 	 */
 	DriveOperations driveOperations();
+
+	/**
+	 * Retries {@link RestOperations}, used for interacting directly with the API
+	 *
+	 * @return {@link RestOperations} for the authenticated user
+	 */
+	RestOperations restOperations();
 
 	/**
 	 * Returns the access token, allowing interoperability with other libraries

@@ -40,16 +40,15 @@ import org.springframework.web.client.RestTemplate;
  */
 public class PlusTemplate extends AbstractGoogleApiOperations implements PlusOperations {
 
-	private static final String PEOPLE_URL = "https://www.googleapis.com/plus/v1/people/";
+	private static final String PEOPLE_URL = "https://www.googleapis.com/plusDomains/v1/people/";
 	private static final String ACTIVITIES_PUBLIC = "/activities/public";
-	private static final String ACTIVITIES_URL = "https://www.googleapis.com/plus/v1/activities/";
+	private static final String ACTIVITIES_URL = "https://www.googleapis.com/plusDomains/v1/activities/";
+	private static final String ACTIVITIES_INSERT_URL = "https://www.googleapis.com/plusDomains/v1/people/me/activities";
 	
-	private static final String ACTIVITIES_URL_PUBLIC = "https://www.googleapis.com/plusDomains/v1/people/me/activities";
-	
-	private static final String COMMENTS_URL = "https://www.googleapis.com/plus/v1/comments/";
+	private static final String COMMENTS_URL = "https://www.googleapis.com/plusDomains/v1/comments/";
 	private static final String COMMENTS = "/comments";
 	
-	static final String PEOPLE_SEARCH_URL = "https://www.googleapis.com/plus/v1/people";
+	static final String PEOPLE_SEARCH_URL = "https://www.googleapis.com/plusDomains/v1/people";
 	private static final String PLUSONERS = "/people/plusoners";
 	private static final String RESHARERS = "/people/resharers";
 	
@@ -163,9 +162,8 @@ public class PlusTemplate extends AbstractGoogleApiOperations implements PlusOpe
 	}
 	
 	@Override
-	public void insertActivity(String message){
-		PostActivity newActivity = new PostActivity();
-		newActivity.createActivity(message);	
-		saveEntity(ACTIVITIES_URL_PUBLIC,newActivity);
+	public Activity insertActivity(String message) {
+		PostActivity newActivity = new PostActivity(message);
+		return saveEntity(ACTIVITIES_INSERT_URL, newActivity);
 	}
 }
