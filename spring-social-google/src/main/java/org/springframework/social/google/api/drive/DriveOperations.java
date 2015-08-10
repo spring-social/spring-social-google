@@ -437,4 +437,58 @@ public interface DriveOperations {
 	 * @return Resource abstraction for the file
 	 */
 	Resource downloadFile(DriveFile file);
+
+	/**
+	 * Get the custom properties applied to this file
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @return
+	 *            The list of properties defined
+	 */
+	List<FileProperty> getProperties(String fileId);
+
+	/**
+	 * Get a specific custom property applied to this file
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @param propertyKey
+	 *            The key of the property
+	 * @return
+	 *            The the property information
+	 */
+	FileProperty getProperty(String fileId, String propertyKey);
+
+	/**
+	 * Adds a new property to a file
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @param property
+	 *            Property representation
+	 * @return The new {@link FileProperty}
+	 */
+	FileProperty addProperty(String fileId, FileProperty property);
+
+	/**
+	 * Updates a property
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @param property
+	 *            Property representation
+	 * @return The updated {@link FileProperty}
+	 */
+	FileProperty updateProperty(String fileId, FileProperty property);
+
+	/**
+	 * Deletes a property
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @param propertyKey
+	 *            The key of the property
+	 */
+	void removeProperty(String fileId, String propertyKey);
 }
