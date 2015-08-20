@@ -35,6 +35,8 @@ import org.springframework.social.google.api.plus.PlusOperations;
 import org.springframework.social.google.api.plus.impl.PlusTemplate;
 import org.springframework.social.google.api.tasks.TaskOperations;
 import org.springframework.social.google.api.tasks.impl.TaskTemplate;
+import org.springframework.social.google.api.calendar.CalendarOperations;
+import org.springframework.social.google.api.calendar.impl.CalendarTemplate;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
 
@@ -53,13 +55,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author Gabriel Axel
  */
 public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
-	
+
 	private String accessToken;
 
 	private PlusOperations plusOperations;
 	private TaskOperations taskOperations;
 	private DriveOperations driveOperations;
-	
+	private CalendarOperations calendarOperations;
+
 	/**
 	 * Creates a new instance of GoogleTemplate.
 	 * This constructor creates a new GoogleTemplate able to perform unauthenticated operations against Google+.
@@ -67,7 +70,7 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	public GoogleTemplate() {
 		initialize();
 	}
-	
+
 	/**
 	 * Creates a new instance of GoogleTemplate.
 	 * This constructor creates the FacebookTemplate using a given access token.
@@ -83,11 +86,12 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 		plusOperations = new PlusTemplate(getRestTemplate(), isAuthorized());
 		taskOperations = new TaskTemplate(getRestTemplate(), isAuthorized());
 		driveOperations = new DriveTemplate(getRestTemplate(), isAuthorized());
+		calendarOperations = new CalendarTemplate(getRestTemplate(), isAuthorized());
 	}
-	
+
 	@Override
 	protected List<HttpMessageConverter<?>> getMessageConverters() {
-		
+
 		MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -95,10 +99,10 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 		objectMapper.configure(FAIL_ON_EMPTY_BEANS, false);
 		objectMapper.setSerializationInclusion(NON_NULL);
 		jsonConverter.setObjectMapper(objectMapper);
-		
+
 		FormHttpMessageConverter formHttpMessageConverter = new FormHttpMessageConverter();
 		formHttpMessageConverter.addPartConverter(jsonConverter);
-		
+
 		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
 		messageConverters.add(jsonConverter);
 		messageConverters.add(new ByteArrayHttpMessageConverter());
@@ -106,7 +110,7 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 		messageConverters.add(new ResourceHttpMessageConverter());
 		return messageConverters;
 	}
-	
+
 	@Override
 	protected OAuth2Version getOAuth2Version() {
 		return OAuth2Version.BEARER;
@@ -121,12 +125,17 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	public TaskOperations taskOperations() {
 		return taskOperations;
 	}
-	
+
 	@Override
 	public DriveOperations driveOperations() {
 		return driveOperations;
 	}
-	
+
+	@Override
+	public CalendarOperations calendarOperations() {
+		return calendarOperations;
+	}
+
 	@Override
 	public String getAccessToken() {
 		return accessToken;
