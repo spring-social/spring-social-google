@@ -17,18 +17,20 @@ package org.springframework.social.google.api.calendar;
 
 /**
  * Interface defining operations for integrating with Google Calendar.
- * <p>See the reference documentation at
+ * 
+ * See the reference documentation at
  * <a href="http://developers.google.com/google-apps/calendar/v3/reference/">
- * http://developers.google.com/google-apps/calendar/v3/reference/</a>.</p>
- * <p>Requires one of the following OAuth scope(s):
- * <ul>
- * <li>https://www.googleapis.com/auth/calendar.readonly</li>
- * <li>https://www.googleapis.com/auth/calendar</li>
- * </ul>
+ * http://developers.google.com/google-apps/calendar/v3/reference/</a>.
+ * <br>
+ * Requires one of the following OAuth scope(s):
+ *   <ul>
+ *      <li>https://www.googleapis.com/auth/calendar.readonly</li>
+ *      <li>https://www.googleapis.com/auth/calendar</li>
+ *  </ul>
  * See
- * <a href="http://developers.google.com/google-apps/calendar/auth">
- * http://developers.google.com/google-apps/calendar/auth</a>
- * for details about the different scopes.</p>
+ * <a href="http://developers.google.com/google-apps/calendar/auth">http://developers.google.com/google-apps/calendar/auth</a>
+ * for details about the different scopes.
+ * 
  * 
  * @author Martin Wink
  */

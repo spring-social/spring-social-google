@@ -218,7 +218,7 @@ public class Event extends ApiEntity {
 		/**
 		 * Set the time zone in which the time is specified (e.g. "Europe/Zurich").
 		 * The time zone is required for recurring events.
-		 * @param date the new value or {@code null} if none.
+		 * @param timeZone the new value or {@code null} if none.
 		 * @return this {@link DateTimeTimezone}, for chaining.
 		 */
 		public DateTimeTimezone setTimeZone(TimeZone timeZone) {
