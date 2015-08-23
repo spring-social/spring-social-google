@@ -96,7 +96,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 
 		EventPage eventPage = google.calendarOperations()
 				.eventListQuery(CalendarOperations.PRIMARY_CALENDAR_ID)
-				.fromPage("abc123_¬!£$%^&*()_+-=[]{};'#:@~,./<>?")
+				.fromPage("abc123_Â¬!Â£$%^&*()_+-=[]{};'#:@~,./<>?")
 				.getPage();
 
 		assertNotNull(eventPage);
@@ -436,18 +436,18 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 
 		EventPage eventPage = google.calendarOperations()
 				.eventListQuery(CalendarOperations.PRIMARY_CALENDAR_ID)
-				.fromPage("pretendPageToken")
-				.alwaysIncludeEmail(true)
-				.iCalUID("test-iCalUID")
-				.maxAttendees(9)
-				.maxResultsNumber(50)
-				.orderBy(OrderBy.START_TIME)
+                                .alwaysIncludeEmail(true)
+        			.orderBy(OrderBy.START_TIME)
+				.timeZone(TEST_TIMEZONE)	
+                                .fromPage("pretendPageToken")
+				.singleEvents(true)	
+                                .showHiddenInvitations(true)
+				.maxResultsNumber(50)	
+                                .maxAttendees(9)
+                                .timeMin(TEST_TIME_MIN)
+                                .iCalUID("test-iCalUID")
 				.showDeleted(true)
-				.showHiddenInvitations(true)
-				.singleEvents(true)
-				.timeMax(TEST_TIME_MAX)
-				.timeMin(TEST_TIME_MIN)
-				.timeZone(TEST_TIMEZONE)
+                                .timeMax(TEST_TIME_MAX)	
 				.updatedMin(TEST_UPDATED_MIN)
 				.getPage();
 
@@ -464,7 +464,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 				withSuccess(jsonResource("mock_get_event"), APPLICATION_JSON));
 
 		EventPage eventPage = google.calendarOperations()
-				.eventListQuery("abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?")
+				.eventListQuery("abc123!\"Â£$%^&*()_+-=[]{};'#:@~,./<>?")
 				.getPage();
 
 		assertNotNull(eventPage);
@@ -480,8 +480,8 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 				withSuccess(jsonResource("mock_list_events_empty"), APPLICATION_JSON));
 
 		EventPage eventPage = google.calendarOperations()
-				.eventListQuery("abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?")
-				.fromPage("abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?")
+				.eventListQuery("abc123!\"Â£$%^&*()_+-=[]{};'#:@~,./<>?")
+				.fromPage("abc123!\"Â£$%^&*()_+-=[]{};'#:@~,./<>?")
 				.getPage();
 		
 		assertNotNull(eventPage);
@@ -512,7 +512,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 				.andRespond(
 						withSuccess(jsonResource("mock_get_event"), APPLICATION_JSON));
 
-		Event event = google.calendarOperations().getEvent("abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?", "abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?");
+		Event event = google.calendarOperations().getEvent("abc123!\"Â£$%^&*()_+-=[]{};'#:@~,./<>?", "abc123!\"Â£$%^&*()_+-=[]{};'#:@~,./<>?");
 
 		assertNotNull(event);
 	}
