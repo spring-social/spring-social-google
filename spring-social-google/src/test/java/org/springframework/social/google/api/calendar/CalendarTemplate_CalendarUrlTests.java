@@ -167,7 +167,7 @@ public class CalendarTemplate_CalendarUrlTests extends AbstractGoogleApiTest {
 				.andRespond(
 						withSuccess(jsonResource("mock_get_calendar_primary"), APPLICATION_JSON));
 
-		Calendar cal = google.calendarOperations().getCalendar("abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?");
+		Calendar cal = google.calendarOperations().getCalendar("abc123!\"Â£$%^&*()_+-=[]{};'#:@~,./<>?");
 
 		assertNotNull(cal);
 		// NB queried for "primary" but actually get back the real ID.
