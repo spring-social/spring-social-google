@@ -16,10 +16,11 @@ configure(allprojects) {
 
     group = 'org.springframework.social'
 
-    sourceCompatibility=1.6
-    targetCompatibility=1.6
+    sourceCompatibility = 1.6
+    targetCompatibility = 1.6
 
     ext {
+        springBootVersion = '1.2.6.RELEASE'
         springSocialVersion = '1.1.0.RELEASE'
         jacksonVersion = '2.3.3'
         junitVersion = '4.11'
@@ -40,9 +41,9 @@ configure(allprojects) {
     }
 
     dependencies {
-        testCompile "junit:junit:$junitVersion"
-        testCompile "org.mockito:mockito-all:$mockitoVersion"
-        testCompile "org.springframework:spring-test:$springVersion"
+        testCompile("junit:junit:$junitVersion")
+        testCompile("org.mockito:mockito-all:$mockitoVersion")
+        testCompile("org.springframework:spring-test:$springVersion")
     }
 
     // servlet-api (2.5) and tomcat-servlet-api (3.0) classpath entries should not be
@@ -75,7 +76,7 @@ configure(subprojects) { subproject ->
         //options.overview = "${projectDir}/src/main/java/overview.html"
     }
 
-    task sourcesJar(type: Jar, dependsOn:classes) {
+    task sourcesJar(type: Jar, dependsOn: classes) {
         classifier = 'sources'
         from sourceSets.main.allJava
     }
@@ -94,14 +95,18 @@ configure(subprojects) { subproject ->
 project('spring-social-google') {
     description = 'Google API'
     dependencies {
-       compile "org.springframework.social:spring-social-core:$springSocialVersion"
-       compile ("org.springframework.social:spring-social-config:$springSocialVersion")
-       compile ("org.springframework.social:spring-social-security:$springSocialVersion", optional)
-       compile ("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
-       compile ("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
-       compile ("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
-       compile ("javax.servlet:javax.servlet-api:$servletApiVersion", provided)
-       testCompile "org.springframework:spring-test:$springVersion"
+        compile("org.springframework.boot:spring-boot-starter:$springBootVersion", optional)
+        compile("org.springframework.boot:spring-boot-configuration-processor:$springBootVersion", optional)
+
+        compile("org.springframework.social:spring-social-core:$springSocialVersion")
+        compile("org.springframework.social:spring-social-config:$springSocialVersion")
+        compile("org.springframework.social:spring-social-security:$springSocialVersion", optional)
+        compile("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
+        compile("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
+        compile("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
+        compile("javax.servlet:javax.servlet-api:$servletApiVersion", provided)
+
+        testCompile "org.springframework:spring-test:$springVersion"
     }
 }
 
@@ -119,7 +124,7 @@ configure(rootProject) {
 
     dependencies { // for integration tests
     }
-    
+
     task api(type: Javadoc) {
         group = 'Documentation'
         description = 'Generates aggregated Javadoc API documentation.'
@@ -129,7 +134,7 @@ configure(rootProject) {
         options.header = rootProject.description
         options.overview = 'src/api/overview.html'
         options.links(
-            'http://docs.jboss.org/jbossas/javadoc/4.0.5/connector'
+                'http://docs.jboss.org/jbossas/javadoc/4.0.5/connector'
         )
         source subprojects.collect { project ->
             project.sourceSets.main.allJava
@@ -145,17 +150,17 @@ configure(rootProject) {
         group = 'Distribution'
         classifier = 'docs'
         description = "Builds -${classifier} archive containing api and reference " +
-            "for deployment at static.springframework.org/spring-social/docs."
+                "for deployment at static.springframework.org/spring-social/docs."
 
         from('src/dist') {
             include 'changelog.txt'
         }
 
-        from (api) {
+        from(api) {
             into 'api'
         }
 
-        from (reference) {
+        from(reference) {
             into 'reference'
         }
     }
@@ -164,7 +169,7 @@ configure(rootProject) {
         group = 'Distribution'
         classifier = 'schema'
         description = "Builds -${classifier} archive containing all " +
-            "XSDs for deployment at static.springframework.org/schema."
+                "XSDs for deployment at static.springframework.org/schema."
 
         subprojects.each { subproject ->
             def Properties schemas = new Properties();
@@ -180,7 +185,7 @@ configure(rootProject) {
                     it.path.endsWith(schemas.get(key))
                 }
                 assert xsdFile != null
-                into (shortName) {
+                into(shortName) {
                     from xsdFile.path
                 }
             }
@@ -191,7 +196,7 @@ configure(rootProject) {
         group = 'Distribution'
         classifier = 'dist'
         description = "Builds -${classifier} archive, containing all jars and docs, " +
-                      "suitable for community download page."
+                "suitable for community download page."
 
         ext.baseDir = "${project.name}-${project.version}";
 
@@ -212,7 +217,7 @@ configure(rootProject) {
         }
 
         subprojects.each { subproject ->
-            into ("${baseDir}/libs") {
+            into("${baseDir}/libs") {
                 from subproject.jar
                 if (subproject.tasks.findByPath('sourcesJar')) {
                     from subproject.sourcesJar
