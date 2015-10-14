@@ -2,6 +2,8 @@
 .project
 .settings
 .DS_Store
+*.iml
+/.idea/
 build
 **/build
 **/src/test/java/exploration
