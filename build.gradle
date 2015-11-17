@@ -170,8 +170,8 @@ configure(rootProject) {
             def Properties schemas = new Properties();
 
             subproject.sourceSets.main.resources.find {
-                it.path.endsWith('META-INF/spring.schemas')
                 println "found resource: ${it.path}"
+                it.path.endsWith('META-INF/spring.schemas')
             }?.withInputStream { schemas.load(it) }
 
             for (def key : schemas.keySet()) {
