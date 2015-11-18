@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2011-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,13 +23,15 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.springframework.social.google.api.ApiEntity;
+import org.springframework.social.google.api.plus.impl.AgeRangeDeserializer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * Model class representing a full Google profile
- * 
+ *
  * @author Gabriel Axel
  */
 public class Person extends ApiEntity {
@@ -73,7 +75,7 @@ public class Person extends ApiEntity {
 	private String displayName;
 
 	private String url;
-	
+
 	@JsonProperty("isPlusUser")
 	private boolean plusUser;
 
@@ -99,6 +101,14 @@ public class Person extends ApiEntity {
 	private Map<String, Boolean> placesLived;
 
 	private Map<String, String> emails;
+
+	@JsonProperty
+	@JsonDeserialize(using = AgeRangeDeserializer.class)
+	private AgeRange ageRange = AgeRange.UNKNOWN;
+
+	private String language;
+
+	private Boolean verified;
 
 	@Override
 	public String toString() {
@@ -140,7 +150,7 @@ public class Person extends ApiEntity {
 	public String getUrl() {
 		return url;
 	}
-	
+
 	public boolean isPlusUser() {
 		return plusUser;
 	}
@@ -205,4 +215,16 @@ public class Person extends ApiEntity {
 		}
 		return null;
 	}
+
+	public AgeRange getAgeRange() {
+		return ageRange;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public Boolean isVerified() {
+        return verified;
+    }
 }

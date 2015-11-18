@@ -309,6 +309,9 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
 		assertEquals(expectedPlacesLived, person.getPlacesLived());
 		assertEquals("guznik@gmail.com", person.getAccountEmail());
 		assertEquals("https://plus.google.com/+GabrielAxel", person.getUrl());
+		assertEquals(AgeRange.AGE_21_PLUS, person.getAgeRange());
+		assertEquals("en", person.getLanguage());
+		assertTrue(person.isVerified());
 		assertTrue(person.isPlusUser());
 	}
 }
