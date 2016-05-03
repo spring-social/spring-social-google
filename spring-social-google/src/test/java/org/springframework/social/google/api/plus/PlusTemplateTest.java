@@ -1,28 +1,23 @@
 package org.springframework.social.google.api.plus;
 
-import static java.util.Arrays.asList;
-import static java.util.Collections.singletonMap;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.springframework.http.HttpMethod.DELETE;
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.POST;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withNoContent;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
-
-import java.util.List;
-import java.util.Map;
-
 import org.junit.Test;
 import org.springframework.social.google.api.AbstractGoogleApiTest;
 import org.springframework.social.google.api.plus.moments.AddActivity;
 import org.springframework.social.google.api.plus.moments.Moment;
 import org.springframework.social.google.api.plus.moments.MomentsPage;
+
+import java.util.List;
+import java.util.Map;
+
+import static java.util.Arrays.asList;
+import static java.util.Collections.singletonMap;
+import static org.junit.Assert.*;
+import static org.springframework.http.HttpMethod.*;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withNoContent;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 public class PlusTemplateTest extends AbstractGoogleApiTest {
 
@@ -33,8 +28,7 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("person"), APPLICATION_JSON));
-		Person person = google.plusOperations().getPerson(
-				"114863353858610846998");
+		Person person = google.plusOperations().getPerson("114863353858610846998");
 		assertPerson(person);
 	}
 
@@ -276,6 +270,10 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
 		assertEquals("Axel", person.getFamilyName());
 		assertEquals("Gabriel Axel", person.getDisplayName());
 		assertEquals("male", person.getGender());
+		assertEquals("en", person.getLanguage());
+		assertEquals(false, person.isVerified());
+		assertEquals("cool beans", person.getNickname());
+		assertEquals("testing our code", person.getTagline());
 		assertEquals(
 				"CTO and co-founder of <a href=\"https://www.docollab.com\" rel=\"nofollow\" target=\"_blank\">Docollab</a><br />",
 				person.getAboutMe());
