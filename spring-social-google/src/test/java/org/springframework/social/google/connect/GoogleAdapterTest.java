@@ -15,14 +15,14 @@
  */
 package org.springframework.social.google.connect;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.plus.Person;
 import org.springframework.social.google.api.plus.PlusOperations;
+
+import static org.junit.Assert.assertEquals;
 
 public class GoogleAdapterTest {
 
@@ -42,6 +42,11 @@ public class GoogleAdapterTest {
 		Mockito.when(person.getFamilyName()).thenReturn("Axel");
 		Mockito.when(person.getAccountEmail()).thenReturn("guznik@gmail.com");
 		Mockito.when(person.getId()).thenReturn("114863353858610846998");
+		Mockito.when(person.getTagline()).thenReturn("testing our code");
+		Mockito.when(person.getNickname()).thenReturn("cool beans");
+		Mockito.when(person.getLanguage()).thenReturn("en");
+		Mockito.when(person.isVerified()).thenReturn(true);
+
 
 		Mockito.when(plusOperations.getGoogleProfile()).thenReturn(person);
 		UserProfile profile = apiAdapter.fetchUserProfile(google);
