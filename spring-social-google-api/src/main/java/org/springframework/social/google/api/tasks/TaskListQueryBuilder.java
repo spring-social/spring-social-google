@@ -13,8 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.springframework.social.google.api.tasks;
 
-rootProject.name = 'spring-social-google'
+import org.springframework.social.google.api.query.ApiQueryBuilder;
+import org.springframework.social.google.api.query.QueryBuilder;
 
-include 'spring-social-google-docs'
-include 'spring-social-google-api'
+/**
+ * {@link QueryBuilder} for {@link TaskList}
+ * @author Gabriel Axel
+ */
+public interface TaskListQueryBuilder extends ApiQueryBuilder<TaskListQueryBuilder, TaskListsPage> {
+
+}

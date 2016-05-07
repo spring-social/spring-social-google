@@ -13,8 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.springframework.social.google.api.plus;
 
-rootProject.name = 'spring-social-google'
-
-include 'spring-social-google-docs'
-include 'spring-social-google-api'
+/**
+ * Enum representing activity order for querying with {@link ActivityQueryBuilder}.
+ * @author Gabriel Axel
+ */
+public enum ActivitiesOrder {
+	BEST, RECENT
+}

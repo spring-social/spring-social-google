@@ -13,8 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.springframework.social.google.api.query;
 
-rootProject.name = 'spring-social-google'
+import java.util.List;
 
-include 'spring-social-google-docs'
-include 'spring-social-google-api'
+/**
+ * API query pagination result.
+ * @author Gabriel Axel
+ * @param <T> item type
+ */
+public abstract class ApiPage<T> extends ApiList<T> {
+
+	private String nextPageToken;
+	
+	protected ApiPage() {
+	}
+	
+	protected ApiPage(List<T> items, String nextPageToken) {
+		super(items);
+		this.nextPageToken = nextPageToken;
+	}
+	
+	public String getNextPageToken() {
+		return nextPageToken;
+	}
+
+}

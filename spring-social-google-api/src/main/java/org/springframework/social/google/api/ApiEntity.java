@@ -13,8 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.springframework.social.google.api;
 
-rootProject.name = 'spring-social-google'
+import static org.springframework.util.StringUtils.hasText;
 
-include 'spring-social-google-docs'
-include 'spring-social-google-api'
+/**
+ * Abstract superclass for API-specific entities
+ * @author Gabriel Axel
+ */
+public abstract class ApiEntity {
+
+	private String id;
+	
+	private String etag;
+
+	protected ApiEntity() {
+	}
+	
+	protected ApiEntity(String id) {
+		this.id = hasText(id) ? id : null;
+	}
+
+	public String getId() {
+		return id;
+	}
+	
+	public String getEtag() {
+		return etag;
+	}
+	
+}

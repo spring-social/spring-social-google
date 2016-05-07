@@ -13,8 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.springframework.social.google.api.query;
 
-rootProject.name = 'spring-social-google'
-
-include 'spring-social-google-docs'
-include 'spring-social-google-api'
+/**
+ * A super-interface for API-specific query builders.
+ * @author Gabriel Axel
+ * @param <Q> {@link QueryBuilder} type
+ * @param <T> Model type
+ */
+public interface QueryBuilder<Q extends QueryBuilder<?, T>, T> {
+	Q maxResultsNumber(int maxResults);
+}

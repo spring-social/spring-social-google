@@ -13,8 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.springframework.social.google.api.drive.impl;
 
-rootProject.name = 'spring-social-google'
+import org.springframework.social.google.api.drive.ReplyVerb;
+import org.springframework.social.google.api.impl.ApiEnumDeserializer;
 
-include 'spring-social-google-docs'
-include 'spring-social-google-api'
+/**
+ * {@link ApiEnumDeserializer} for {@link ReplyVerb}
+ * @author Gabriel Axel
+ */
+public class ReplyVerbDeserializer extends ApiEnumDeserializer<ReplyVerb> {
+
+	public ReplyVerbDeserializer() {
+		super(ReplyVerb.class);
+	}
+
+}

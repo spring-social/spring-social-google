@@ -13,8 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.springframework.social.google.api.drive;
 
-rootProject.name = 'spring-social-google'
+import org.springframework.social.google.api.drive.impl.CommentStatusDeserializer;
+import org.springframework.social.google.api.impl.ApiEnumSerializer;
 
-include 'spring-social-google-docs'
-include 'spring-social-google-api'
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+/**
+ * Enum representing a comment status (open or resolved)
+ * @author Gabriel Axel
+ */
+@JsonSerialize(using=ApiEnumSerializer.class)
+@JsonDeserialize(using=CommentStatusDeserializer.class)
+public enum CommentStatus {
+
+	OPEN, RESOLVED
+}

@@ -13,8 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.springframework.social.google.api.plus.impl;
 
-rootProject.name = 'spring-social-google'
+import org.springframework.social.google.api.impl.ApiEnumDeserializer;
+import org.springframework.social.google.api.plus.UrlType;
 
-include 'spring-social-google-docs'
-include 'spring-social-google-api'
+/**
+ * {@link ApiEnumDeserializer} for {@link UrlType}
+ * 
+ * @author Gabriel Axel
+ */
+public class UrlTypeDeserializer extends ApiEnumDeserializer<UrlType> {
+
+	public UrlTypeDeserializer() {
+		super(UrlType.class);
+	}
+
+}

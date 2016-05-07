@@ -13,8 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.springframework.social.google.api.tasks.impl;
 
-rootProject.name = 'spring-social-google'
+import org.springframework.social.google.api.impl.ApiEnumDeserializer;
+import org.springframework.social.google.api.tasks.TaskStatus;
 
-include 'spring-social-google-docs'
-include 'spring-social-google-api'
+/**
+ * {@link ApiEnumDeserializer} for {@link TaskStatus}
+ * @author Gabriel Axel
+ */
+public class TaskStatusDeserializer extends ApiEnumDeserializer<TaskStatus> {
+
+	public TaskStatusDeserializer() {
+		super(TaskStatus.class);
+	}
+
+}

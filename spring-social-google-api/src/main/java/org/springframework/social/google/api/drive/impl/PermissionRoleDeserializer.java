@@ -13,8 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.springframework.social.google.api.drive.impl;
 
-rootProject.name = 'spring-social-google'
+import org.springframework.social.google.api.drive.PermissionRole;
+import org.springframework.social.google.api.impl.ApiEnumDeserializer;
 
-include 'spring-social-google-docs'
-include 'spring-social-google-api'
+/**
+ * {@link ApiEnumDeserializer} for {@link PermissionRole}
+ * @author Gabriel Axel
+ */
+public class PermissionRoleDeserializer extends ApiEnumDeserializer<PermissionRole> {
+
+	public PermissionRoleDeserializer() {
+		super(PermissionRole.class);
+	}
+
+}

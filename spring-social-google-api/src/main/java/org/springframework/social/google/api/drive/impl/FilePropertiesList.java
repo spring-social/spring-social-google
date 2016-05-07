@@ -13,8 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.springframework.social.google.api.drive.impl;
 
-rootProject.name = 'spring-social-google'
+import org.springframework.social.google.api.drive.FileProperty;
+import org.springframework.social.google.api.query.ApiList;
 
-include 'spring-social-google-docs'
-include 'spring-social-google-api'
+/**
+ * {@link ApiList} of {@link FileProperty}
+ * @author Will Abson
+ */
+class FilePropertiesList extends ApiList<FileProperty> {
+
+}

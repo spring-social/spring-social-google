@@ -13,8 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.springframework.social.google.api.query;
 
-rootProject.name = 'spring-social-google'
+/**
+ * {@link QueryBuilder} extension for Google+.
+ * @author Gabriel Axel
+ * @param <Q> {@link QueryBuilder} type
+ * @param <T> Model type
+ */
+public interface ApiQueryBuilder<Q extends ApiQueryBuilder<?, T>, T extends ApiPage<?>> extends QueryBuilder<Q, T> {
 
-include 'spring-social-google-docs'
-include 'spring-social-google-api'
+	Q fromPage(String pageToken);
+	T getPage();
+}

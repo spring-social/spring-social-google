@@ -13,8 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.springframework.social.google.api.drive.impl;
 
-rootProject.name = 'spring-social-google'
+import org.springframework.social.google.api.drive.DriveApp.IconCategory;
+import org.springframework.social.google.api.impl.ApiEnumDeserializer;
 
-include 'spring-social-google-docs'
-include 'spring-social-google-api'
+/**
+ * {@link ApiEnumDeserializer} for {@link IconCategory}
+ * 
+ * @author Gabriel Axel
+ */
+public class IconCategoryDeserializer extends ApiEnumDeserializer<IconCategory> {
+
+	public IconCategoryDeserializer() {
+		super(IconCategory.class);
+	}
+
+}

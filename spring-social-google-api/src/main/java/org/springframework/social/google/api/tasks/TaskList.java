@@ -13,8 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.springframework.social.google.api.tasks;
 
-rootProject.name = 'spring-social-google'
+import org.springframework.social.google.api.ApiEntity;
 
-include 'spring-social-google-docs'
-include 'spring-social-google-api'
+/**
+ * Model class representing a task list
+ * @author Gabriel Axel
+ */
+public class TaskList extends ApiEntity {
+
+	private String title;
+	
+	public TaskList() {
+	}
+	
+	public TaskList(String id, String title) {
+		super(id);
+		this.title = title;
+	}
+
+	public TaskList(String title) {
+		this.title = title;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+}

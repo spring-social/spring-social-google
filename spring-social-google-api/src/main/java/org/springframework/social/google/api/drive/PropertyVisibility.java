@@ -13,8 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.springframework.social.google.api.drive;
 
-rootProject.name = 'spring-social-google'
+/**
+ * Enum representing the visibility of a custom property (PUBLIC or PRIVATE)
+ * @author Gabriel Axel
+ */
+public enum PropertyVisibility {
 
-include 'spring-social-google-docs'
-include 'spring-social-google-api'
+	PUBLIC, PRIVATE
+}

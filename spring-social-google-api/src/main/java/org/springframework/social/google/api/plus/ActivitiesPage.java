@@ -13,8 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.springframework.social.google.api.plus;
 
-rootProject.name = 'spring-social-google'
+import org.springframework.social.google.api.query.ApiPage;
 
-include 'spring-social-google-docs'
-include 'spring-social-google-api'
+/**
+ * {@link ApiPage} for {@link Activity}s pagination result.
+ * @author Gabriel Axel
+ */
+public class ActivitiesPage extends ApiPage<Activity> {
+
+}
