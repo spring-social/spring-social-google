@@ -1,0 +1,53 @@
+buildscript {
+  repositories {
+    maven { url 'http://repo.spring.io/plugins-release' }
+  }
+  dependencies {
+    classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'propdeps'
+apply plugin: 'propdeps-maven'
+apply plugin: 'propdeps-idea'
+apply plugin: 'propdeps-eclipse'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+  jcenter()
+  mavenCentral()
+}
+
+description = 'Google API for Spring Social'
+
+compileJava {
+  options.fork = true
+  options.incremental = true
+  options.encoding = 'UTF-8'
+}
+
+dependencies {
+  compile("org.springframework.social:spring-social-core:$springSocialVersion")
+  compile("org.springframework.social:spring-social-config:$springSocialVersion")
+
+  compile("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
+  compile("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
+  compile("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
+
+  optional("org.springframework.social:spring-social-security:$springSocialVersion")
+
+  provided("javax.servlet:javax.servlet-api:$servletApiVersion")
+
+  testCompile("org.springframework:spring-test:$springVersion")
+  testCompile("junit:junit:$junitVersion")
+  testCompile("org.mockito:mockito-all:$mockitoVersion")
+}
+
+test.systemProperty("java.awt.headless", "true")
+
+eclipse.classpath.file.whenMerged { classpath ->
+  classpath.entries.findAll { entry -> entry.path.contains('servlet-api') }*.exported = false
+}
