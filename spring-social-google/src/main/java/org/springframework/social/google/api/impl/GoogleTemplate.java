@@ -39,6 +39,7 @@ import org.springframework.social.google.api.tasks.TaskOperations;
 import org.springframework.social.google.api.tasks.impl.TaskTemplate;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
+import org.springframework.social.oauth2.TokenStrategy;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -76,7 +77,7 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	 * @param accessToken an access token granted by Google after OAuth2 authentication
 	 */
 	public GoogleTemplate(String accessToken) {
-		super(accessToken);
+		super(accessToken, TokenStrategy.ACCESS_TOKEN_PARAMETER);
 		this.accessToken = accessToken;
 		initialize();
 	}
