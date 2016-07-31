@@ -19,6 +19,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.google.api.Google;
+import org.springframework.social.google.api.oauth2.OAuth2Operations;
+import org.springframework.social.google.api.oauth2.UserInfo;
 import org.springframework.social.google.api.plus.Person;
 import org.springframework.social.google.api.plus.PlusOperations;
 

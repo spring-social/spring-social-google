@@ -1,3 +1,0 @@
-Manifest-Version: 1.0
-Class-Path: 
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.springframework.social.google.config.boot.GoogleAutoConfiguration
