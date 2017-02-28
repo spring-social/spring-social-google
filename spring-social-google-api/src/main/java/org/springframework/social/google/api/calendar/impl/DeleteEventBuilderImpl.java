@@ -18,6 +18,7 @@ package org.springframework.social.google.api.calendar.impl;
 import java.text.MessageFormat;
 
 import org.springframework.social.google.api.calendar.DeleteEventBuilder;
+import static org.springframework.social.google.api.query.impl.ApiQueryBuilderImpl.encode;
 
 /**
  * {@link DeleteEventBuilder} implementation.

@@ -22,7 +22,6 @@ import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.UserProfileBuilder;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.oauth2.UserInfo;
-import org.springframework.social.google.api.plus.Person;
 
 /**
  * Google ApiAdapter implementation.
@@ -31,32 +30,36 @@ import org.springframework.social.google.api.plus.Person;
  */
 public class GoogleAdapter implements ApiAdapter<Google> {
 
-	public boolean test(Google google) {
-		try {
-			google.oauth2Operations().getUserinfo();
-			return true;
-		} catch (ApiException e) {
-			return false;
-		}
-	}
+    @Override
+    public boolean test(Google google) {
+        try {
+            google.oauth2Operations().getUserinfo();
+            return true;
+        } catch (ApiException e) {
+            return false;
+        }
+    }
 
-	public void setConnectionValues(Google google, ConnectionValues values) {
-		UserInfo userInfo = google.oauth2Operations().getUserinfo();
-		values.setProviderUserId(userInfo.getId());
-		values.setDisplayName(userInfo.getName());
-		values.setProfileUrl(userInfo.getLink());
-		values.setImageUrl(userInfo.getPicture());
-	}
+    @Override
+    public void setConnectionValues(Google google, ConnectionValues values) {
+        UserInfo userInfo = google.oauth2Operations().getUserinfo();
+        values.setProviderUserId(userInfo.getId());
+        values.setDisplayName(userInfo.getName());
+        values.setProfileUrl(userInfo.getLink());
+        values.setImageUrl(userInfo.getPicture());
+    }
 
-	public UserProfile fetchUserProfile(Google google) {
-		UserInfo userInfo = google.oauth2Operations().getUserinfo();
-		return new UserProfileBuilder().setUsername(userInfo.getId())
-				.setEmail(userInfo.getEmail())
-				.setName(userInfo.getName())
-				.setFirstName(userInfo.getGivenName())
-				.setLastName(userInfo.getFamilyName()).build();
-	}
+    @Override
+    public UserProfile fetchUserProfile(Google google) {
+        UserInfo userInfo = google.oauth2Operations().getUserinfo();
+        return new UserProfileBuilder().setUsername(userInfo.getId())
+                .setEmail(userInfo.getEmail())
+                .setName(userInfo.getName())
+                .setFirstName(userInfo.getGivenName())
+                .setLastName(userInfo.getFamilyName()).build();
+    }
 
+    @Override
     public void updateStatus(Google google, String message) {
         throw new UnsupportedOperationException();
     }

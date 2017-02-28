@@ -19,6 +19,7 @@ import java.text.MessageFormat;
 
 import org.springframework.social.google.api.calendar.Event;
 import org.springframework.social.google.api.calendar.QuickAddEventBuilder;
+import static org.springframework.social.google.api.query.impl.ApiQueryBuilderImpl.encode;
 import org.springframework.util.Assert;
 
 /**

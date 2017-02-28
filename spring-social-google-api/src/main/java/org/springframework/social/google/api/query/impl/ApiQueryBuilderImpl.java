@@ -36,7 +36,7 @@ public class ApiQueryBuilderImpl<Q extends ApiQueryBuilder<?, T>, T extends ApiP
 	private final Class<T> type;
 	private final RestTemplate restTemplate;
 
-	protected static String encode(String text) {
+	public static String encode(String text) {
 		try {
 			return URLEncoder.encode(text, "UTF-8");
 		} catch (UnsupportedEncodingException e) {

@@ -16,17 +16,18 @@
 package org.springframework.social.google.api.calendar.impl;
 
 import java.text.MessageFormat;
+import static org.springframework.social.google.api.query.impl.ApiQueryBuilderImpl.encode;
 
 /**
  * {@link UriQueryBuilderImpl} subclass for getting a single event.
- * 
+ *
  * @author Martin Wink
  */
 public class EventGetQueryBuilderImpl extends UriQueryBuilderImpl<EventGetQueryBuilderImpl, Object> {
 
-	public EventGetQueryBuilderImpl(String urlTemplate, String calendarId, String eventId) {
-		super(MessageFormat.format(urlTemplate, encode(calendarId), encode(eventId)));
-	}
-	
-	// NB: Optional parameters not yet accommodated: alwaysIncludeEmail, maxAttendees, timeZone.
+    public EventGetQueryBuilderImpl(String urlTemplate, String calendarId, String eventId) {
+        super(MessageFormat.format(urlTemplate, encode(calendarId), encode(eventId)));
+    }
+
+    // NB: Optional parameters not yet accommodated: alwaysIncludeEmail, maxAttendees, timeZone.
 }

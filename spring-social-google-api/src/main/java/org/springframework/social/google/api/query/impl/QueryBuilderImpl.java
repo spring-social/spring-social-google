@@ -23,96 +23,102 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TimeZone;
 
 import org.springframework.social.google.api.query.QueryBuilder;
 
 /**
  * Abstract superclass for {@link QueryBuilder} implementations.
+ *
  * @author Gabriel Axel
  * @param <Q> {@link QueryBuilder} type
  * @param <T> Model type
  */
 public abstract class QueryBuilderImpl<Q extends QueryBuilder<?, T>, T> implements QueryBuilder<Q, T> {
 
-	private static final Format dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS'Z'");
-	
-	protected String feedUrl;
-	private Map<String, String> params = new HashMap<String, String>();	
-	
-	protected QueryBuilderImpl() {
-	}
-	
-	protected QueryBuilderImpl(String feedUrl) {
-		this.feedUrl = feedUrl;
-	}
+    protected String feedUrl;
+    private Map<String, String> params = new HashMap<String, String>();
 
-	@SuppressWarnings("unchecked")
-	protected Q castThis() {
-		return (Q)this;
-	}
-	
-	@Override
-	public Q maxResultsNumber(int maxResults) {
-		appendQueryParam("maxResults", maxResults);
-		return castThis();
-	}
-	
-	protected Q appendQueryParam(String name, Date value) {
-		if(value != null) {
-			appendQueryParam(name, dateFormatter.format(value));
-		}
-		return castThis();
-	}
-	
-	protected Q appendQueryParam(String name, int value) {
-		if(value > 0) {
-			appendQueryParam(name, String.valueOf(value));
-		}
-		return castThis();
-	}
-	
-	protected Q appendQueryParam(String name, boolean value) {
-		if(value) {
-			appendQueryParam(name, "true");
-		}
-		return castThis();
-	}
-	
-	protected Q appendQueryParam(String name, Object value) {
-		if(value != null) {
-			appendQueryParam(name, value.toString());
-		}
-		return castThis();
-	}
-	
-	protected Q appendQueryParam(StringBuilder sb, String name, Enum<?> value) {
-		if(value != null) {
-			appendQueryParam(name, value.name().toLowerCase());
-		}
-		return castThis();
-	}
-	
-	protected Q appendQueryParam(String name, String value) {
-		if(hasText(value)) {
-			params.put(name, value);
-		}
-		return castThis();
-	}
-	
-	protected String build() {
-		
-		StringBuilder sb = new StringBuilder(feedUrl);
-		if(!params.isEmpty() && feedUrl.indexOf('?') < 0) {
-			sb.append('?');
-		}
-		
-		for(Entry<String, String> param : params.entrySet()) {
-			if(sb.charAt(sb.length() - 1) != '?') {
-				sb.append('&');
-			}
-			sb.append(param.getKey()).append('=').append(param.getValue());
-		}
-		
-		return sb.toString();
-	}
+    private String formatDateParam(Date value) {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        dateFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return dateFormatter.format(value);
+    }
+
+    protected QueryBuilderImpl() {
+    }
+
+    protected QueryBuilderImpl(String feedUrl) {
+        this.feedUrl = feedUrl;
+    }
+
+    @SuppressWarnings("unchecked")
+    protected Q castThis() {
+        return (Q) this;
+    }
+
+    @Override
+    public Q maxResultsNumber(int maxResults) {
+        appendQueryParam("maxResults", maxResults);
+        return castThis();
+    }
+
+    protected Q appendQueryParam(String name, Date value) {
+        if (value != null) {
+            appendQueryParam(name, formatDateParam(value));
+        }
+        return castThis();
+    }
+
+    protected Q appendQueryParam(String name, int value) {
+        if (value > 0) {
+            appendQueryParam(name, String.valueOf(value));
+        }
+        return castThis();
+    }
+
+    protected Q appendQueryParam(String name, boolean value) {
+        if (value) {
+            appendQueryParam(name, "true");
+        }
+        return castThis();
+    }
+
+    protected Q appendQueryParam(String name, Object value) {
+        if (value != null) {
+            appendQueryParam(name, value.toString());
+        }
+        return castThis();
+    }
+
+    protected Q appendQueryParam(StringBuilder sb, String name, Enum<?> value) {
+        if (value != null) {
+            appendQueryParam(name, value.name().toLowerCase());
+        }
+        return castThis();
+    }
+
+    protected Q appendQueryParam(String name, String value) {
+        if (hasText(value)) {
+            params.put(name, value);
+        }
+        return castThis();
+    }
+
+    protected String build() {
+
+        StringBuilder sb = new StringBuilder(feedUrl);
+        if (!params.isEmpty() && feedUrl.indexOf('?') < 0) {
+            sb.append('?');
+        }
+
+        for (Entry<String, String> param : params.entrySet()) {
+            if (sb.charAt(sb.length() - 1) != '?') {
+                sb.append('&');
+            }
+            sb.append(param.getKey()).append('=').append(param.getValue());
+        }
+
+        return sb.toString();
+    }
 }

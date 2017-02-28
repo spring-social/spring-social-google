@@ -36,224 +36,207 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  */
 public class Person extends ApiEntity {
 
-	private static class Name {
+    private static class Name {
 
-		@JsonProperty
-		private String givenName;
+        @JsonProperty
+        private String givenName;
 
-		@JsonProperty
-		private String familyName;
-	}
+        @JsonProperty
+        private String familyName;
+    }
 
-	public static class Image {
+    public static class Image {
 
-		@JsonProperty
-		private String url;
-	}
+        @JsonProperty
+        private String url;
+    }
 
-	private static class PlaceLived {
+    private static class PlaceLived {
 
-		@JsonProperty
-		private String value;
+        @JsonProperty
+        private String value;
 
-		@JsonProperty
-		private boolean primary;
-	}
+        @JsonProperty
+        private boolean primary;
+    }
 
-	private static class Email {
+    private static class Email {
 
-		@JsonProperty
-		private String value;
+        @JsonProperty
+        private String value;
 
-		@JsonProperty
-		private String type;
-	}
+        @JsonProperty
+        private String type;
+    }
 
-	@JsonProperty
-	private Name name;
+    @JsonProperty
+    private Name name;
 
-	private String displayName;
+    private String displayName;
 
-	private String url;
+    private String url;
 
-	@JsonProperty("isPlusUser")
-	private boolean plusUser;
+    @JsonProperty("isPlusUser")
+    private boolean plusUser;
 
-	@JsonProperty
-	private Image image;
+    @JsonProperty
+    private Image image;
 
-	private String thumbnailUrl;
+    private String thumbnailUrl;
 
-	private Date birthday;
+    private Date birthday;
 
-	private String gender;
+    private String gender;
 
-	private String occupation;
+    private String occupation;
 
-	private String aboutMe;
+    private String aboutMe;
 
-	private String tagline;
+    private String tagline;
 
-	private String nickname;
+    private String nickname;
 
-	private String language;
+    private String language;
 
-	private Boolean verified = false;
+    private Boolean verified;
 
-	private String relationshipStatus;
+    private String relationshipStatus;
 
-	private List<ProfileUrl> urls;
+    private List<ProfileUrl> urls;
 
-	private List<Organization> organizations;
+    private List<Organization> organizations;
 
-	private Map<String, Boolean> placesLived;
+    private Map<String, Boolean> placesLived;
 
-	private Map<String, String> emails;
+    private Map<String, String> emails;
 
-	@JsonProperty
-	@JsonDeserialize(using = AgeRangeDeserializer.class)
-	private AgeRange ageRange = AgeRange.UNKNOWN;
+    @JsonProperty
+    @JsonDeserialize(using = AgeRangeDeserializer.class)
+    private AgeRange ageRange = AgeRange.UNKNOWN;
 
-	private String language;
+    @Override
+    public String toString() {
+        return displayName;
+    }
 
-	private Boolean verified;
+    @JsonSetter
+    private void setPlacesLived(List<PlaceLived> placesLivedAsList) {
+        placesLived = new LinkedHashMap<String, Boolean>();
+        if (placesLivedAsList != null) {
+            for (PlaceLived placeLived : placesLivedAsList) {
+                placesLived.put(placeLived.value, placeLived.primary);
+            }
+        }
+    }
 
-	@Override
-	public String toString() {
-		return displayName;
-	}
-
-	@JsonSetter
-	private void setPlacesLived(List<PlaceLived> placesLivedAsList) {
-		placesLived = new LinkedHashMap<String, Boolean>();
-		if (placesLivedAsList != null) {
-			for (PlaceLived placeLived : placesLivedAsList) {
-				placesLived.put(placeLived.value, placeLived.primary);
-			}
-		}
-	}
-
-	@JsonSetter
-	private void setEmails(List<Email> emailsAsList) {
-		emails = new LinkedHashMap<String, String>();
-		if (emailsAsList != null) {
-			for (Email email : emailsAsList) {
-				emails.put(email.value, email.type);
-			}
-		}
-	}
-
-	public String getGivenName() {
-		return name == null ? null : name.givenName;
-	}
-
-	public String getFamilyName() {
-		return name == null ? null : name.familyName;
-	}
-
-	public String getDisplayName() {
-		return displayName;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public boolean isPlusUser() {
-		return plusUser;
-	}
-
-	public String getImageUrl() {
-		if (thumbnailUrl != null) {
-			return thumbnailUrl;
-		}
-		if (image != null) {
-			return image.url;
-		}
-		return null;
-	}
-
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public String getOccupation() {
-		return occupation;
-	}
-
-	public String getAboutMe() {
-		return aboutMe;
-	}
-
-
-	public String getTagline() {
-		return tagline;
-	}
-
-
-	public String getNickname() {
-		return nickname;
-	}
-
-
-	public String getLanguage() {
-		return language;
-	}
-
-
-	public Boolean isVerified() {
-		return verified;
-	}
-
-
-	public String getRelationshipStatus() {
-		return relationshipStatus;
-	}
-
-	public List<ProfileUrl> getUrls() {
-		return urls;
-	}
-
-	public List<Organization> getOrganizations() {
-		return organizations;
-	}
-
-	public Map<String, Boolean> getPlacesLived() {
-		return placesLived;
-	}
-
-	public Map<String, String> getEmails() {
-		return emails;
-	}
-
-	public Set<String> getEmailAddresses() {
-		return emails == null ? null : emails.keySet();
-	}
-
-	public String getAccountEmail() {
-		if (emails != null) {
-			for (Entry<String, String> entry : emails.entrySet()) {
-				if (entry.getValue().equals("account")) {
-					return entry.getKey();
-				}
-			}
-		}
-		return null;
-	}
-
-	public AgeRange getAgeRange() {
-		return ageRange;
-	}
-
-	public String getLanguage() {
-		return language;
-	}
-
-	public Boolean isVerified() {
+    @JsonSetter
+    private void setEmails(List<Email> emailsAsList) {
+        emails = new LinkedHashMap<String, String>();
+        if (emailsAsList != null) {
+            for (Email email : emailsAsList) {
+                emails.put(email.value, email.type);
+            }
+        }
+    }
+
+    public String getGivenName() {
+        return name == null ? null : name.givenName;
+    }
+
+    public String getFamilyName() {
+        return name == null ? null : name.familyName;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public boolean isPlusUser() {
+        return plusUser;
+    }
+
+    public String getImageUrl() {
+        if (thumbnailUrl != null) {
+            return thumbnailUrl;
+        }
+        if (image != null) {
+            return image.url;
+        }
+        return null;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public String getAboutMe() {
+        return aboutMe;
+    }
+
+    public String getTagline() {
+        return tagline;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public Boolean isVerified() {
         return verified;
+    }
+
+    public String getRelationshipStatus() {
+        return relationshipStatus;
+    }
+
+    public List<ProfileUrl> getUrls() {
+        return urls;
+    }
+
+    public List<Organization> getOrganizations() {
+        return organizations;
+    }
+
+    public Map<String, Boolean> getPlacesLived() {
+        return placesLived;
+    }
+
+    public Map<String, String> getEmails() {
+        return emails;
+    }
+
+    public Set<String> getEmailAddresses() {
+        return emails == null ? null : emails.keySet();
+    }
+
+    public String getAccountEmail() {
+        if (emails != null) {
+            for (Entry<String, String> entry : emails.entrySet()) {
+                if (entry.getValue().equals("account")) {
+                    return entry.getKey();
+                }
+            }
+        }
+        return null;
+    }
+
+    public AgeRange getAgeRange() {
+        return ageRange;
     }
 }

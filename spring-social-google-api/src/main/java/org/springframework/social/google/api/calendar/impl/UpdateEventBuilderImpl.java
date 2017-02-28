@@ -18,29 +18,31 @@ package org.springframework.social.google.api.calendar.impl;
 import java.text.MessageFormat;
 
 import org.springframework.social.google.api.calendar.UpdateEventBuilder;
+import static org.springframework.social.google.api.query.impl.ApiQueryBuilderImpl.encode;
 
 /**
  * {@link UpdateEventBuilder} implementation.
- * 
+ *
  * @author Martin Wink
  */
 public class UpdateEventBuilderImpl extends UriQueryBuilderImpl<UpdateEventBuilder, Object> implements UpdateEventBuilder {
-	public UpdateEventBuilderImpl(String urlTemplate, String calendarId, String eventId) {
-		super(MessageFormat.format(urlTemplate, encode(calendarId), encode(eventId)));
-	}
 
-	@Override
-	public UpdateEventBuilder alwaysIncludeEmail(boolean alwaysIncludeEmail) {
-		return appendQueryParam("alwaysIncludeEmail", alwaysIncludeEmail);
-	}
+    public UpdateEventBuilderImpl(String urlTemplate, String calendarId, String eventId) {
+        super(MessageFormat.format(urlTemplate, encode(calendarId), encode(eventId)));
+    }
 
-	@Override
-	public UpdateEventBuilder maxAttendees(int maxAttendees) {
-		return appendQueryParam("maxAttendees", maxAttendees);
-	}
+    @Override
+    public UpdateEventBuilder alwaysIncludeEmail(boolean alwaysIncludeEmail) {
+        return appendQueryParam("alwaysIncludeEmail", alwaysIncludeEmail);
+    }
 
-	@Override
-	public UpdateEventBuilder sendNotifications(boolean sendNotifications) {
-		return appendQueryParam("sendNotifications", sendNotifications);
-	}
+    @Override
+    public UpdateEventBuilder maxAttendees(int maxAttendees) {
+        return appendQueryParam("maxAttendees", maxAttendees);
+    }
+
+    @Override
+    public UpdateEventBuilder sendNotifications(boolean sendNotifications) {
+        return appendQueryParam("sendNotifications", sendNotifications);
+    }
 }

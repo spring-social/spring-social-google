@@ -9,3 +9,4 @@ build
 bin
 .idea
 *.iml
+/.nb-gradle/

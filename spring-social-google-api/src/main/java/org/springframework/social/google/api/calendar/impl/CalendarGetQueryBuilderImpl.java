@@ -16,6 +16,7 @@
 package org.springframework.social.google.api.calendar.impl;
 
 import java.text.MessageFormat;
+import static org.springframework.social.google.api.query.impl.ApiQueryBuilderImpl.encode;
 
 /**
  * {@link UriQueryBuilderImpl} subclass for getting a single calendar.
