@@ -13,8 +13,9 @@ buildscript {
 description = 'Spring Social Google Root Project'
 
 allprojects {
-    group = "$group"
-    version = "$version"
+    
+    group = "org.springframework.social"
+    version = "2.0.0.SNAPSHOT"
 
     apply plugin: 'eclipse'
     apply plugin: 'idea'
@@ -33,6 +34,17 @@ allprojects {
     
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
+    
+    
+    ext {
+        springSocialVersion = '1.1.0.RELEASE'
+        jacksonVersion = '2.7.4'
+        junitVersion = '4.12'
+        mockitoVersion = '1.10.19'
+        servletApiVersion = '3.1.0'
+        springVersion = '4.2.6.RELEASE'
+        springBootVersion = '1.5.1.RELEASE'
+    }
 
     idea {
         module {
@@ -54,9 +66,9 @@ allprojects {
         classpath.entries.findAll { entry -> entry.path.contains('servlet-api') }*.exported = false
     }
     
-    signing {
-        sign configurations.archives
-    }
+//    signing {
+//        sign configurations.archives
+//    }
     
 }
 
