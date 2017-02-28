@@ -37,6 +37,9 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hamcrest.core.StringContains;
+import static org.hamcrest.core.StringContains.containsString;
+import org.mockito.Matchers;
 
 public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 
@@ -428,10 +431,23 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 
     @Test
     public void listEvents_primary_combined_options() {
-
+        
         mockServer
-                .expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?iCalUID=test-iCalUID&orderBy=startTime&timeZone=GMT&showHiddenInvitations=true&timeMin=2014-02-01T00:00:00.000Z&showDeleted=true&singleEvents=true&updatedMin=2014-03-01T00:00:00.000Z&alwaysIncludeEmail=true&maxResults=50&timeMax=2014-01-01T00:00:00.000Z&pageToken=pretendPageToken&maxAttendees=9"))
+                .expect(requestTo(containsString("https://www.googleapis.com/calendar/v3/calendars/primary/events?")))
                 .andExpect(method(GET))
+                .andExpect(requestTo(containsString("iCalUID=test-iCalUID")))
+                .andExpect(requestTo(containsString("orderBy=startTime")))
+                .andExpect(requestTo(containsString("timeZone=GMT")))
+                .andExpect(requestTo(containsString("showHiddenInvitations=true")))
+                .andExpect(requestTo(containsString("timeMin=2014-02-01T00:00:00.000Z")))
+                .andExpect(requestTo(containsString("showDeleted=true")))
+                .andExpect(requestTo(containsString("singleEvents=true")))
+                .andExpect(requestTo(containsString("updatedMin=2014-03-01T00:00:00.000Z")))
+                .andExpect(requestTo(containsString("alwaysIncludeEmail=true")))
+                .andExpect(requestTo(containsString("maxResults=50")))
+                .andExpect(requestTo(containsString("timeMax=2014-01-01T00:00:00.000Z")))
+                .andExpect(requestTo(containsString("pageToken=pretendPageToken")))
+                .andExpect(requestTo(containsString("maxAttendees=9")))
                 .andRespond(
                         withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
 
