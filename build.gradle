@@ -1,35 +1,35 @@
 apply plugin: 'base'
 
 task wrapper(type: Wrapper) {
-  gradleVersion = '2.13'
+    gradleVersion = '2.14'
 }
 
-description = 'Spring Social Google'
+description = 'Spring Social Google Root Project'
 
 allprojects {
-  group = 'org.springframework.social'
-  version = '1.1.0.RELEASE'
+    group = 'org.springframework.social'
+    version = '1.1.0.RELEASE'
 
-  apply plugin: 'eclipse'
-  apply plugin: 'idea'
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
 
-  idea {
-    module {
-      downloadJavadoc = true
-      downloadSources = true
+    idea {
+        module {
+            downloadJavadoc = true
+            downloadSources = true
 
-      inheritOutputDirs = false
-      outputDir = file("$buildDir/classes/main/")
+            inheritOutputDirs = false
+            outputDir = file("$buildDir/classes/main/")
+        }
     }
-  }
 
-  ext {
-    springSocialVersion = '1.1.0.RELEASE'
-    jacksonVersion = '2.7.4'
-    junitVersion = '4.12'
-    mockitoVersion = '1.10.19'
-    servletApiVersion = '3.1.0'
-    springVersion = '4.2.6.RELEASE'
-    springBootVersion = '1.5.1.RELEASE'
-  }
+    ext {
+        springSocialVersion = '1.1.0.RELEASE'
+        jacksonVersion = '2.7.4'
+        junitVersion = '4.12'
+        mockitoVersion = '1.10.19'
+        servletApiVersion = '3.1.0'
+        springVersion = '4.2.6.RELEASE'
+        springBootVersion = '1.5.1.RELEASE'
+    }
 }

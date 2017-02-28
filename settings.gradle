@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-rootProject.name = 'spring-social-google'
+rootProject.name = 'spring-social-google-root'
 
 include 'spring-social-google-docs'
-include 'spring-social-google-api'
+include 'spring-social-google'
+
