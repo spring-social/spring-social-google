@@ -59,18 +59,9 @@ install {
 }
 
 
-task release {
-    doLast {
-        logger.quiet('TODO: Implement release')
-    }
-}
+//uploadArchives {
+//
+//    
+//}
 
 
-task customRelease {
-    doLast {
-        
-        
-        
-        
-    }
-}

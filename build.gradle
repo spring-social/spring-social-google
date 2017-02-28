@@ -24,6 +24,7 @@ allprojects {
     apply plugin: 'propdeps-maven'
     apply plugin: 'propdeps-idea'
     apply plugin: 'propdeps-eclipse'
+    apply plugin: 'signing'
     
     repositories {
         jcenter()
@@ -51,6 +52,10 @@ allprojects {
     
     eclipse.classpath.file.whenMerged { classpath ->
         classpath.entries.findAll { entry -> entry.path.contains('servlet-api') }*.exported = false
+    }
+    
+    signing {
+        sign configurations.archives
     }
     
 }
