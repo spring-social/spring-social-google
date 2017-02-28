@@ -1,16 +1,9 @@
-apply plugin: 'maven'
-
 ext.optionalDeps = []
 ext.providedDeps = []
 
 ext.optional = { optionalDeps << it }
 ext.provided = { providedDeps << it }
 
-install {
-    repositories.mavenInstaller {
-        customizePom(pom, project)
-    }
-}
 
 def customizePom(pom, gradleProject) {
     pom.whenConfigured { generatedPom ->
@@ -56,5 +49,28 @@ def customizePom(pom, gradleProject) {
                 }
             }
         }
+    }
+}
+
+install {
+    repositories.mavenInstaller {
+        customizePom(pom, project)
+    }
+}
+
+
+task release {
+    doLast {
+        logger.quiet('TODO: Implement release')
+    }
+}
+
+
+task customRelease {
+    doLast {
+        
+        
+        
+        
     }
 }

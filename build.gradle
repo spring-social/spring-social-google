@@ -1,17 +1,37 @@
-apply plugin: 'base'
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.14'
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven { url 'http://repo.spring.io/plugins-release' }
+    }
+    
+    dependencies {
+        classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
+    }
 }
 
 description = 'Spring Social Google Root Project'
 
 allprojects {
-    group = 'org.springframework.social'
-    version = '1.1.0.RELEASE'
+    group = "$group"
+    version = "$version"
 
     apply plugin: 'eclipse'
     apply plugin: 'idea'
+    apply plugin: 'java'
+    apply plugin: 'maven'
+    apply plugin: 'propdeps'
+    apply plugin: 'propdeps-maven'
+    apply plugin: 'propdeps-idea'
+    apply plugin: 'propdeps-eclipse'
+    
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
 
     idea {
         module {
@@ -22,14 +42,51 @@ allprojects {
             outputDir = file("$buildDir/classes/main/")
         }
     }
-
-    ext {
-        springSocialVersion = '1.1.0.RELEASE'
-        jacksonVersion = '2.7.4'
-        junitVersion = '4.12'
-        mockitoVersion = '1.10.19'
-        servletApiVersion = '3.1.0'
-        springVersion = '4.2.6.RELEASE'
-        springBootVersion = '1.5.1.RELEASE'
+    
+    compileJava {
+        options.fork = true
+        options.incremental = true
+        options.encoding = 'UTF-8'
     }
+    
+    eclipse.classpath.file.whenMerged { classpath ->
+        classpath.entries.findAll { entry -> entry.path.contains('servlet-api') }*.exported = false
+    }
+    
+}
+
+
+configure(subprojects) { subproject ->
+    apply from: "${rootProject.projectDir}/publish-maven.gradle"
+    
+    jar {
+        manifest.attributes['Implementation-Title'] = subproject.name
+        manifest.attributes['Implementation-Version'] = subproject.version
+    }
+    
+    javadoc {
+        options.memberLevel = JavadocMemberLevel.PROTECTED
+        options.author = true
+        options.header = project.name
+    }
+
+    task sourcesJar(type: Jar, dependsOn:classes) {
+        classifier = 'sources'
+        from sourceSets.main.allJava
+    }
+
+    task javadocJar(type: Jar) {
+        classifier = 'javadoc'
+        from javadoc
+    }
+
+    artifacts {
+        archives sourcesJar
+        archives javadocJar
+    }
+
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.14'
 }
