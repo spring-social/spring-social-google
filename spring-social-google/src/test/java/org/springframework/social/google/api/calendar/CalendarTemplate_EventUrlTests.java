@@ -27,6 +27,8 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -86,17 +88,19 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	}
 
 	@Test
-	public void listEvents_primary_fromPage_escaping() {
+	public void listEvents_primary_fromPage_escaping() throws UnsupportedEncodingException {
+
+		String pageToken = "abc123_¬!£$%^&*()_+-=[]{};'#:@~,./<>?";
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?pageToken=abc123_%C2%AC%21%C2%A3%24%25%5E%26*%28%29_%2B-%3D%5B%5D%7B%7D%3B%27%23%3A%40%7E%2C.%2F%3C%3E%3F"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?pageToken=" + encodeUTF8(pageToken)))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
 
 		EventPage eventPage = google.calendarOperations()
 				.eventListQuery(CalendarOperations.PRIMARY_CALENDAR_ID)
-				.fromPage("abc123_¬!£$%^&*()_+-=[]{};'#:@~,./<>?")
+				.fromPage(pageToken)
 				.getPage();
 
 		assertNotNull(eventPage);
@@ -455,33 +459,38 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	}
 
 	@Test
-	public void listEvents_escape_calendarId() {
+	public void listEvents_escape_calendarId() throws UnsupportedEncodingException {
+
+		String calendarId = "abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?";
 
 		mockServer
-			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/abc123%21%22%C2%A3%24%25%5E%26*%28%29_%2B-%3D%5B%5D%7B%7D%3B%27%23%3A%40%7E%2C.%2F%3C%3E%3F/events"))
-			.andExpect(method(GET))
-			.andRespond(
-				withSuccess(jsonResource("mock_get_event"), APPLICATION_JSON));
+			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/" + encodeUTF8(calendarId) + "/events"))
+				.andExpect(method(GET))
+				.andRespond(
+						withSuccess(jsonResource("mock_get_event"), APPLICATION_JSON));
 
 		EventPage eventPage = google.calendarOperations()
-				.eventListQuery("abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?")
+				.eventListQuery(calendarId)
 				.getPage();
 
 		assertNotNull(eventPage);
 	}
 
 	@Test
-	public void listEvents_escape_pageToken() {
+	public void listEvents_escape_pageToken() throws UnsupportedEncodingException {
+
+		String calendarId = "abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?";
+		String pageToken = "abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?";
 
 		mockServer
-			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/abc123%21%22%C2%A3%24%25%5E%26*%28%29_%2B-%3D%5B%5D%7B%7D%3B%27%23%3A%40%7E%2C.%2F%3C%3E%3F/events?pageToken=abc123%21%22%C2%A3%24%25%5E%26*%28%29_%2B-%3D%5B%5D%7B%7D%3B%27%23%3A%40%7E%2C.%2F%3C%3E%3F"))
+			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/" + encodeUTF8(calendarId) + "/events?pageToken=" + encodeUTF8(pageToken)))
 			.andExpect(method(GET))
 			.andRespond(
-				withSuccess(jsonResource("mock_list_events_empty"), APPLICATION_JSON));
+					withSuccess(jsonResource("mock_list_events_empty"), APPLICATION_JSON));
 
 		EventPage eventPage = google.calendarOperations()
-				.eventListQuery("abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?")
-				.fromPage("abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?")
+				.eventListQuery(calendarId)
+				.fromPage(pageToken)
 				.getPage();
 		
 		assertNotNull(eventPage);
@@ -504,15 +513,18 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	}
 
 	@Test
-	public void getEvent_escape_calendarId() {
+	public void getEvent_escape_calendarId() throws UnsupportedEncodingException {
+
+		String calendarId = "abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?";
+		String eventId = "abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?";
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/abc123%21%22%C2%A3%24%25%5E%26*%28%29_%2B-%3D%5B%5D%7B%7D%3B%27%23%3A%40%7E%2C.%2F%3C%3E%3F/events/abc123%21%22%C2%A3%24%25%5E%26*%28%29_%2B-%3D%5B%5D%7B%7D%3B%27%23%3A%40%7E%2C.%2F%3C%3E%3F"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/" + encodeUTF8(calendarId) + "/events/" + encodeUTF8(eventId)))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_get_event"), APPLICATION_JSON));
 
-		Event event = google.calendarOperations().getEvent("abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?", "abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?");
+		Event event = google.calendarOperations().getEvent(calendarId, eventId);
 
 		assertNotNull(event);
 	}
@@ -561,4 +573,5 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 
 		google.calendarOperations().updateEvent("primary", event, true);
 	}
+
 }

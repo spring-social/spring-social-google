@@ -26,6 +26,9 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 import org.junit.Test;
 import org.springframework.social.google.api.AbstractGoogleApiTest;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 public class CalendarTemplate_CalendarUrlTests extends AbstractGoogleApiTest {
 
 	@Test
@@ -159,15 +162,19 @@ public class CalendarTemplate_CalendarUrlTests extends AbstractGoogleApiTest {
 	}
 
 	@Test
-	public void getCalendar_escaped() {
+	public void getCalendar_escaped() throws UnsupportedEncodingException {
+
+		String calendarId = "abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?";
+
+		String encodedCalendarId = URLEncoder.encode(calendarId, "UTF-8");
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList/abc123%21%22%C2%A3%24%25%5E%26*%28%29_%2B-%3D%5B%5D%7B%7D%3B%27%23%3A%40%7E%2C.%2F%3C%3E%3F"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList/" + encodedCalendarId))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_get_calendar_primary"), APPLICATION_JSON));
 
-		Calendar cal = google.calendarOperations().getCalendar("abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?");
+		Calendar cal = google.calendarOperations().getCalendar(calendarId);
 
 		assertNotNull(cal);
 		// NB queried for "primary" but actually get back the real ID.
