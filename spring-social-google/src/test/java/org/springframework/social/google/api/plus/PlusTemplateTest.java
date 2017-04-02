@@ -308,5 +308,6 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
 		assertEquals("guznik@gmail.com", person.getAccountEmail());
 		assertEquals("https://plus.google.com/+GabrielAxel", person.getUrl());
 		assertTrue(person.isPlusUser());
+		assertEquals(51, person.getCircledByCount());
 	}
 }

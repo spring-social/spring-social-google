@@ -72,6 +72,8 @@ public class Person extends ApiEntity {
 	@JsonProperty("isPlusUser")
 	private boolean plusUser;
 
+	private int circledByCount;
+
 	@JsonProperty
 	private Image image;
 
@@ -146,6 +148,10 @@ public class Person extends ApiEntity {
 	
 	public boolean isPlusUser() {
 		return plusUser;
+	}
+
+	public int getCircledByCount() {
+		return circledByCount;
 	}
 
 	public String getImageUrl() {
