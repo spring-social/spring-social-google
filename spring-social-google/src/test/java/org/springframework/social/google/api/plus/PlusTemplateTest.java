@@ -291,7 +291,7 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
 				UrlType.OTHER_PROFILE), new ProfileUrl(
 				"https://github.com/GabiAxel/spring-social-google",
 				"Spring Social Google", UrlType.CONTRIBUTOR), new ProfileUrl(
-				"http://www.gabiaxel.com", "Blog", UrlType.OTHER),
+				"http://www.gabiaxel.com", "Blog", UrlType.WEBSITE),
 				new ProfileUrl("https://www.docollab.com",
 						"Docollab - Your Scientific Knowledgebase",
 						UrlType.OTHER));
@@ -308,5 +308,6 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
 		assertEquals("guznik@gmail.com", person.getAccountEmail());
 		assertEquals("https://plus.google.com/+GabrielAxel", person.getUrl());
 		assertTrue(person.isPlusUser());
+		assertEquals(51, person.getCircledByCount());
 	}
 }

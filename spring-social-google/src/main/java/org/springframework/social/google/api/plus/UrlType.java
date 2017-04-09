@@ -15,14 +15,13 @@
  */
 package org.springframework.social.google.api.plus;
 
-import org.springframework.social.google.api.impl.ApiEnumSerializer;
-import org.springframework.social.google.api.plus.impl.UrlTypeDeserializer;
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.springframework.social.google.api.impl.ApiEnumSerializer;
+import org.springframework.social.google.api.plus.impl.UrlTypeDeserializer;
 
 @JsonSerialize(using = ApiEnumSerializer.class)
 @JsonDeserialize(using = UrlTypeDeserializer.class)
 public enum UrlType {
-	HOME, WORK, BLOG, PROFILE, OTHER, OTHER_PROFILE, CONTRIBUTOR
+    OTHER, OTHER_PROFILE, CONTRIBUTOR, WEBSITE
 }
