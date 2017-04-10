@@ -3,8 +3,8 @@ buildscript {
         maven { url 'http://repo.spring.io/plugins-release' }
     }
     dependencies {
-        classpath 'org.springframework.build.gradle:docbook-reference-plugin:0.2.8'
-        classpath 'me.champeau.gradle:gradle-javadoc-hotfix-plugin:0.1'
+        classpath("io.spring.gradle:propdeps-plugin:0.0.8")
+        classpath("io.spring.gradle:docbook-reference-plugin:0.3.1")
     }
 }
 
@@ -12,7 +12,6 @@ configure(allprojects) {
     apply plugin: 'java'
     apply plugin: 'eclipse'
     apply plugin: 'idea'
-    apply plugin: 'javadocHotfix'
 
     group = 'org.springframework.social'
 
@@ -172,7 +171,7 @@ configure(rootProject) {
 
         subprojects.each { subproject ->
             println "operating on subproject: ${subproject.name}"
-            def Properties schemas = new Properties();
+            Properties schemas = new Properties()
 
             subproject.sourceSets.main.resources.find {
                 println "found resource: ${it.path}"
@@ -244,20 +243,22 @@ configure(rootProject) {
 
 }
 
-task updateRootDocs << {
-    copy {
-        from 'src/dist'
-        into "${rootProject.projectDir}"
-        include 'notice.txt'
-        expand(copyright: new Date().format('yyyy'), version: project.version)
-        rename { filename -> 'NOTICE' }
-    }
+task updateRootDocs {
+    doLast {
+        copy {
+            from 'src/dist'
+            into "${rootProject.projectDir}"
+            include 'notice.txt'
+            expand(copyright: new Date().format('yyyy'), version: project.version)
+            rename { filename -> 'NOTICE' }
+        }
 
-    copy {
-        from 'src/dist'
-        into "${rootProject.projectDir}"
-        include 'license.txt'
-        rename { filename -> 'LICENSE' }
+        copy {
+            from 'src/dist'
+            into "${rootProject.projectDir}"
+            include 'license.txt'
+            rename { filename -> 'LICENSE' }
+        }
     }
 }
 
