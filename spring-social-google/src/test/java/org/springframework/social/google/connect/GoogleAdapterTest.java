@@ -22,8 +22,7 @@ import org.mockito.Mockito;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.oauth2.OAuth2Operations;
-import org.springframework.social.google.api.plus.Person;
-import org.springframework.social.google.api.plus.PlusOperations;
+import org.springframework.social.google.api.oauth2.UserInfo;
 
 public class GoogleAdapterTest {
 
@@ -33,29 +32,23 @@ public class GoogleAdapterTest {
 
 	@Test
 	public void fetchProfile() {
-		PlusOperations plusOperations = Mockito.mock(PlusOperations.class);
-		Mockito.when(google.plusOperations()).thenReturn(plusOperations);
+        OAuth2Operations oauth2Operations = Mockito.mock(OAuth2Operations.class);
+        Mockito.when(google.oauth2Operations()).thenReturn(oauth2Operations);
 
-		Person person = Mockito.mock(Person.class);
-		Mockito.when(person.getDisplayName()).thenReturn("Gabriel Axel");
-		Mockito.when(person.getGivenName()).thenReturn("Gabriel");
-		Mockito.when(person.getFamilyName()).thenReturn("Axel");
-		Mockito.when(person.getAccountEmail()).thenReturn("guznik@gmail.com");
-		Mockito.when(person.getId()).thenReturn("114863353858610846998");
-		Mockito.when(person.getTagline()).thenReturn("testing our code");
-		Mockito.when(person.getNickname()).thenReturn("cool beans");
-		Mockito.when(person.getLanguage()).thenReturn("en");
-		Mockito.when(person.isVerified()).thenReturn(true);
+        UserInfo userInfo = Mockito.mock(UserInfo.class);
+        Mockito.when(userInfo.getName()).thenReturn("Gabriel Axel");
+        Mockito.when(userInfo.getGivenName()).thenReturn("Gabriel");
+        Mockito.when(userInfo.getFamilyName()).thenReturn("Axel");
+        Mockito.when(userInfo.getEmail()).thenReturn("guznik@gmail.com");
+        Mockito.when(userInfo.getId()).thenReturn("114863353858610846998");
 
-        OAuth2Operations oAuth2Operations = Mockito.mock(OAuth2Operations.class);
-        Mockito.when(google.oauth2Operations()).thenReturn(oAuth2Operations);
-
-		UserProfile profile = apiAdapter.fetchUserProfile(google);
-		assertEquals("Gabriel Axel", profile.getName());
-		assertEquals("Gabriel", profile.getFirstName());
-		assertEquals("Axel", profile.getLastName());
-		assertEquals("guznik@gmail.com", profile.getEmail());
-		assertEquals("114863353858610846998", profile.getUsername());
+        Mockito.when(oauth2Operations.getUserinfo()).thenReturn(userInfo);
+        UserProfile profile = apiAdapter.fetchUserProfile(google);
+        assertEquals("Gabriel Axel", profile.getName());
+        assertEquals("Gabriel", profile.getFirstName());
+        assertEquals("Axel", profile.getLastName());
+        assertEquals("guznik@gmail.com", profile.getEmail());
+        assertEquals("114863353858610846998", profile.getUsername());
 	}
 
 }
