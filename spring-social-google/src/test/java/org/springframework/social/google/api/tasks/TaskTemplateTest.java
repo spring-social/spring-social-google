@@ -64,7 +64,7 @@ public class TaskTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void getTasklistsPage() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/tasks/v1/users/@me/lists"))
+				.expect(requestTo("https://www.googleapis.com/tasks/v1/users/@me/lists?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("tasklists"), APPLICATION_JSON));
@@ -75,7 +75,7 @@ public class TaskTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void getDefaultTaskList() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/tasks/v1/users/@me/lists/@default"))
+				.expect(requestTo("https://www.googleapis.com/tasks/v1/users/@me/lists/@default?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("tasklist"), APPLICATION_JSON));
@@ -86,7 +86,7 @@ public class TaskTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void getTaskListById() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/tasks/v1/users/@me/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow"))
+				.expect(requestTo("https://www.googleapis.com/tasks/v1/users/@me/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("tasklist"), APPLICATION_JSON));
@@ -98,7 +98,7 @@ public class TaskTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void createTaskList() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/tasks/v1/users/@me/lists"))
+				.expect(requestTo("https://www.googleapis.com/tasks/v1/users/@me/lists?access_token=ACCESS_TOKEN"))
 				.andExpect(method(POST))
 				.andRespond(
 						withSuccess(jsonResource("tasklist"), APPLICATION_JSON));
@@ -110,7 +110,7 @@ public class TaskTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void updateTaskList() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/tasks/v1/users/@me/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow"))
+				.expect(requestTo("https://www.googleapis.com/tasks/v1/users/@me/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow?access_token=ACCESS_TOKEN"))
 				.andExpect(method(PUT))
 				.andRespond(
 						withSuccess(jsonResource("tasklist"), APPLICATION_JSON));
@@ -122,7 +122,7 @@ public class TaskTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void deleteTaskList() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/tasks/v1/users/@me/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow"))
+				.expect(requestTo("https://www.googleapis.com/tasks/v1/users/@me/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow?access_token=ACCESS_TOKEN"))
 				.andExpect(method(DELETE)).andRespond(withNoContent());
 		google.taskOperations().deleteTaskList(
 				"MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow");
@@ -131,7 +131,7 @@ public class TaskTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void getTasksInDefaultList() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/@default/tasks?maxResults=100"))
+				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/@default/tasks?maxResults=100&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("tasks"), APPLICATION_JSON));
@@ -142,7 +142,7 @@ public class TaskTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void getTasksByListId() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow/tasks"))
+				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow/tasks?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("tasks"), APPLICATION_JSON));
@@ -154,7 +154,7 @@ public class TaskTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void getTaskFromDefaultListById() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/@default/tasks/MTY1OTA2NzU4OTQyMQAzMjM0MDc6MDo4GTI5NjMfMTc"))
+				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/@default/tasks/MTY1OTA2NzU4OTQyMQAzMjM0MDc6MDo4GTI5NjMfMTc?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("task"), APPLICATION_JSON));
 		Task task = google.taskOperations().getTask(ACTIVE_TASK_ID);
@@ -164,7 +164,7 @@ public class TaskTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void getTaskByIds() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow/tasks/MTY1OTA2NzU4OTQyMQAzMjM0MDc6MDo4GTI5NjMfMTc"))
+				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow/tasks/MTY1OTA2NzU4OTQyMQAzMjM0MDc6MDo4GTI5NjMfMTc?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("task"), APPLICATION_JSON));
 		Task task = google.taskOperations().getTask(FIRST_TASK_LIST_ID,
@@ -175,7 +175,7 @@ public class TaskTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void createTask() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/@default/tasks"))
+				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/@default/tasks?access_token=ACCESS_TOKEN"))
 				.andExpect(method(POST))
 				.andRespond(withSuccess(jsonResource("task"), APPLICATION_JSON));
 		Task task = google.taskOperations()
@@ -188,7 +188,7 @@ public class TaskTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void updateTask() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/@default/tasks/MTY1OTA2NzU4OTQyMQAzMjM0MDc6MDo4GTI5NjMfMTc"))
+				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/@default/tasks/MTY1OTA2NzU4OTQyMQAzMjM0MDc6MDo4GTI5NjMfMTc?access_token=ACCESS_TOKEN"))
 				.andExpect(method(PUT))
 				.andRespond(withSuccess(jsonResource("task"), APPLICATION_JSON));
 		Task task = google.taskOperations().saveTask(
@@ -200,7 +200,7 @@ public class TaskTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void deleteTask() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/@default/tasks/MTY1OTA2NzU4OTQyMQAzMjM0MDc6MDo4GTI5NjMfMTc"))
+				.expect(requestTo("https://www.googleapis.com/tasks/v1/lists/@default/tasks/MTY1OTA2NzU4OTQyMQAzMjM0MDc6MDo4GTI5NjMfMTc?access_token=ACCESS_TOKEN"))
 				.andExpect(method(DELETE)).andRespond(withNoContent());
 		google.taskOperations().deleteTask(ACTIVE_TASK_ID);
 	}

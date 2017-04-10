@@ -22,7 +22,6 @@ import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.UserProfileBuilder;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.oauth2.UserInfo;
-import org.springframework.social.google.api.plus.Person;
 
 /**
  * Google ApiAdapter implementation.

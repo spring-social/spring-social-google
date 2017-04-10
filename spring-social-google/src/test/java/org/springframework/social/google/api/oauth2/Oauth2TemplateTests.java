@@ -14,11 +14,11 @@ import org.springframework.social.google.api.plus.Person;
 
 public class Oauth2TemplateTests extends AbstractGoogleApiTest {
 
-	
+
 	@Test
 	public void getUserInfo() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/oauth2/v2/userinfo"))
+				.expect(requestTo("https://www.googleapis.com/oauth2/v2/userinfo?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("userinfo"), APPLICATION_JSON));

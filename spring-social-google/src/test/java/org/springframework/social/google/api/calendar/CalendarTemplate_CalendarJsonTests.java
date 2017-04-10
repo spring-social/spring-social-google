@@ -28,12 +28,10 @@ import org.junit.Test;
 import org.springframework.social.google.api.AbstractGoogleApiTest;
 
 public class CalendarTemplate_CalendarJsonTests extends AbstractGoogleApiTest {
-
 	@Test
 	public void listCalendars() {
-
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
@@ -43,7 +41,7 @@ public class CalendarTemplate_CalendarJsonTests extends AbstractGoogleApiTest {
 		assertNotNull(calPage);
 		assertNull(calPage.getNextPageToken());
 		assertEquals("\"0000000000000000\"", calPage.getEtag());
-		
+
 		assertEquals(5, calPage.getItems().size());
 		Calendar cal0 = calPage.getItems().get(0);
 		Calendar cal1 = calPage.getItems().get(1);
@@ -85,62 +83,62 @@ public class CalendarTemplate_CalendarJsonTests extends AbstractGoogleApiTest {
 		assertNull(cal2.getSummary());
 		assertEquals("", cal3.getSummary());
 		assertEquals("", cal4.getSummary());
-		
+
 		assertNull(cal0.getDescription());
 		assertEquals("Holidays and Observances in United Kingdom", cal1.getDescription());
 		assertNull(cal2.getDescription());
 		assertEquals("", cal3.getDescription());
 		assertEquals("", cal4.getDescription());
-		
+
 		assertNull(cal0.getLocation());
 		assertNull(cal1.getLocation());
 		assertNull(cal2.getLocation());
 		assertEquals("Somewhere", cal3.getLocation());
 		assertEquals("Somewhere", cal4.getLocation());
-		
+
 		assertEquals("Europe/London", cal0.getTimeZone().getID());
 		assertEquals("Europe/London", cal1.getTimeZone().getID());
 		assertNull(cal2.getTimeZone());
 		assertEquals("Europe/Paris", cal3.getTimeZone().getID());
 		// Empty timeZone => GMT
 		assertEquals("GMT", cal4.getTimeZone().getID());
-		
+
 		assertNull(cal0.getSummaryOverride());
 		assertNull(cal1.getSummaryOverride());
 		assertNull(cal2.getSummaryOverride());
 		assertEquals("My title", cal3.getSummaryOverride());
 		assertEquals("", cal4.getSummaryOverride());
-		
+
 		assertEquals("15", cal0.getColorId());
 		assertEquals("2", cal1.getColorId());
 		assertNull(cal2.getColorId());
 		assertEquals("", cal3.getColorId());
 		assertEquals("", cal4.getColorId());
-		
+
 		assertEquals("#9fc6e7", cal0.getBackgroundColor());
 		assertEquals("#d06b64", cal1.getBackgroundColor());
 		assertNull(cal2.getBackgroundColor());
 		assertEquals("", cal3.getBackgroundColor());
 		assertEquals("", cal4.getBackgroundColor());
-		
+
 		assertEquals("#000000", cal0.getForegroundColor());
 		assertEquals("#000000", cal1.getForegroundColor());
 		assertNull(cal2.getForegroundColor());
 		assertEquals("", cal3.getForegroundColor());
 		assertEquals("", cal4.getForegroundColor());
-		
+
 		assertEquals(false, cal0.isHidden());
 		assertEquals(false, cal1.isHidden());
 		assertEquals(false, cal2.isHidden());
 		assertEquals(true, cal3.isHidden());
 		assertEquals(true, cal4.isHidden());
-		
+
 		assertEquals(true, cal0.isSelected());
 		assertEquals(true, cal1.isSelected());
 		assertEquals(false, cal2.isSelected());
 		assertEquals(false, cal3.isSelected());
 		assertEquals(false, cal4.isSelected());
-		
+
 		assertEquals(PermissionRole.OWNER, cal0.getAccessRole());
 		assertEquals(PermissionRole.READER, cal1.getAccessRole());
 		assertNull(cal2.getAccessRole());
@@ -159,11 +157,11 @@ public class CalendarTemplate_CalendarJsonTests extends AbstractGoogleApiTest {
 		assertEquals(0, cal1.getDefaultReminders().size());
 		assertNull(cal2.getDefaultReminders());
 		assertNotNull(cal3.getDefaultReminders());
-		
+
 		// defaultReminders JSON contains [ {} ] but {} doesn't get instantiated, so size 0.
 		// But this should never occur in a real response.
 		assertEquals(0, cal3.getDefaultReminders().size());
-		
+
 		assertEquals(0, cal4.getDefaultReminders().size());
 
 		assertNotNull(cal0.getNotificationSettings());
@@ -177,13 +175,13 @@ public class CalendarTemplate_CalendarJsonTests extends AbstractGoogleApiTest {
 		assertEquals(NotificationMethod.EMAIL, cal0.getNotificationSettings().getNotifications().get(2).getMethod());
 		assertEquals(NotificationType.EVENT_RESPONSE, cal0.getNotificationSettings().getNotifications().get(3).getType());
 		assertEquals(NotificationMethod.EMAIL, cal0.getNotificationSettings().getNotifications().get(3).getMethod());
-		
-		// notificationSettings JSON contains {} and this time it does get instantiated, but no notifications.  
+
+		// notificationSettings JSON contains {} and this time it does get instantiated, but no notifications.
 		assertNotNull(cal1.getNotificationSettings());
 		assertNull(cal1.getNotificationSettings().getNotifications());
-		
+
 		assertNull(cal2.getNotificationSettings());
-		
+
 		assertNotNull(cal3.getNotificationSettings());
 		assertNotNull(cal3.getNotificationSettings().getNotifications());
 		assertEquals(0, cal3.getNotificationSettings().getNotifications().size());
@@ -201,7 +199,7 @@ public class CalendarTemplate_CalendarJsonTests extends AbstractGoogleApiTest {
 		assertEquals(false, cal2.isPrimary());
 		assertEquals(false, cal3.isPrimary());
 		assertEquals(false, cal4.isPrimary());
-		
+
 		assertEquals(false, cal0.isDeleted());
 		assertEquals(false, cal1.isDeleted());
 		assertEquals(false, cal2.isDeleted());

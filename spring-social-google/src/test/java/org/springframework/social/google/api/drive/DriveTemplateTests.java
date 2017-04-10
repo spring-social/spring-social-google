@@ -37,7 +37,7 @@ public class DriveTemplateTests extends AbstractGoogleApiTest {
 	public void getAbout() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/drive/v2/about"))
+				.expect(requestTo("https://www.googleapis.com/drive/v2/about?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("about"), APPLICATION_JSON));
@@ -76,7 +76,7 @@ public class DriveTemplateTests extends AbstractGoogleApiTest {
 	public void createFileMetadata() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/drive/v2/files/"))
+				.expect(requestTo("https://www.googleapis.com/drive/v2/files/?access_token=ACCESS_TOKEN"))
 				.andExpect(method(POST))
 				.andRespond(withSuccess(jsonResource("file"), APPLICATION_JSON));
 
@@ -125,7 +125,7 @@ public class DriveTemplateTests extends AbstractGoogleApiTest {
 	public void deleteFile() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/drive/v2/files/0B3DS_k_gCihOVXpISDlScnJpTFk"))
+				.expect(requestTo("https://www.googleapis.com/drive/v2/files/0B3DS_k_gCihOVXpISDlScnJpTFk?access_token=ACCESS_TOKEN"))
 				.andExpect(method(DELETE)).andRespond(withNoContent());
 		google.driveOperations().delete("0B3DS_k_gCihOVXpISDlScnJpTFk");
 	}

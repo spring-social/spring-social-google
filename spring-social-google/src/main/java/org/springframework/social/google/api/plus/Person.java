@@ -17,7 +17,9 @@ package org.springframework.social.google.api.plus;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.social.google.api.ApiEntity;
+import org.springframework.social.google.api.plus.impl.AgeRangeDeserializer;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -28,9 +30,7 @@ import java.util.Map.Entry;
  * @author Gabriel Axel
  */
 public class Person extends ApiEntity {
-
 	private static class Name {
-
 		@JsonProperty
 		private String givenName;
 
@@ -38,14 +38,12 @@ public class Person extends ApiEntity {
 		private String familyName;
 	}
 
-	public static class Image {
-
+	private static class Image {
 		@JsonProperty
 		private String url;
 	}
 
 	private static class PlaceLived {
-
 		@JsonProperty
 		private String value;
 
@@ -54,7 +52,6 @@ public class Person extends ApiEntity {
 	}
 
 	private static class Email {
-
 		@JsonProperty
 		private String value;
 
@@ -108,10 +105,6 @@ public class Person extends ApiEntity {
 	@JsonProperty
 	@JsonDeserialize(using = AgeRangeDeserializer.class)
 	private AgeRange ageRange = AgeRange.UNKNOWN;
-
-	private String language;
-
-	private Boolean verified;
 
 	@Override
 	public String toString() {
@@ -247,12 +240,4 @@ public class Person extends ApiEntity {
 	public AgeRange getAgeRange() {
 		return ageRange;
 	}
-
-	public String getLanguage() {
-		return language;
-	}
-
-	public Boolean isVerified() {
-        return verified;
-    }
 }

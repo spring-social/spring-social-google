@@ -15,16 +15,15 @@
  */
 package org.springframework.social.google.connect;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.oauth2.OAuth2Operations;
-import org.springframework.social.google.api.oauth2.UserInfo;
 import org.springframework.social.google.api.plus.Person;
 import org.springframework.social.google.api.plus.PlusOperations;
-
-import static org.junit.Assert.assertEquals;
 
 public class GoogleAdapterTest {
 
@@ -34,9 +33,8 @@ public class GoogleAdapterTest {
 
 	@Test
 	public void fetchProfile() {
-
-		OAuth2Operations oauth2Operations = Mockito.mock(OAuth2Operations.class);
-		Mockito.when(google.oauth2Operations()).thenReturn(oauth2Operations);
+		PlusOperations plusOperations = Mockito.mock(PlusOperations.class);
+		Mockito.when(google.plusOperations()).thenReturn(plusOperations);
 
 		Person person = Mockito.mock(Person.class);
 		Mockito.when(person.getDisplayName()).thenReturn("Gabriel Axel");
@@ -49,8 +47,9 @@ public class GoogleAdapterTest {
 		Mockito.when(person.getLanguage()).thenReturn("en");
 		Mockito.when(person.isVerified()).thenReturn(true);
 
+        OAuth2Operations oAuth2Operations = Mockito.mock(OAuth2Operations.class);
+        Mockito.when(google.oauth2Operations()).thenReturn(oAuth2Operations);
 
-		Mockito.when(plusOperations.getGoogleProfile()).thenReturn(person);
 		UserProfile profile = apiAdapter.fetchUserProfile(google);
 		assertEquals("Gabriel Axel", profile.getName());
 		assertEquals("Gabriel", profile.getFirstName());

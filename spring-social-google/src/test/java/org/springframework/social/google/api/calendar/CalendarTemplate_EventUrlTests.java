@@ -57,7 +57,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	public void listEvents_primary_no_options() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -68,12 +68,12 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 
 		assertNotNull(eventPage);
 	}
-	
+
 	@Test
 	public void listEvents_primary_fromPage() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?pageToken=CigKGnFiOGdnNWZkZDZkNXRwZGNyNW9kNDRhaHBvGAEggICAnbfk_5AUGg0IABIAGNiisr2F9sEC"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?pageToken=CigKGnFiOGdnNWZkZDZkNXRwZGNyNW9kNDRhaHBvGAEggICAnbfk_5AUGg0IABIAGNiisr2F9sEC&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -93,7 +93,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 		String pageToken = "abc123_¬!£$%^&*()_+-=[]{};'#:@~,./<>?";
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?pageToken=" + encodeUTF8(pageToken)))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?pageToken=" + encodeUTF8(pageToken) + "&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -110,7 +110,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	public void listEvents_primary_alwaysIncludeEmail_true() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?alwaysIncludeEmail=true"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?alwaysIncludeEmail=true&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -122,12 +122,12 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 
 		assertNotNull(eventPage);
 	}
-	
+
 	@Test
 	public void listEvents_primary_alwaysIncludeEmail_false() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -139,12 +139,12 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 
 		assertNotNull(eventPage);
 	}
-	
+
 	@Test
 	public void listEvents_primary_iCalUID() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?iCalUID=testiCalUID"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?iCalUID=testiCalUID&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -156,12 +156,12 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 
 		assertNotNull(eventPage);
 	}
-	
+
 	@Test
 	public void listEvents_primary_maxAttendees() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?maxAttendees=11"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?maxAttendees=11&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -173,12 +173,12 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 
 		assertNotNull(eventPage);
 	}
-	
+
 	@Test
 	public void listEvents_primary_maxResults() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?maxResults=100"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?maxResults=100&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -195,7 +195,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	public void listEvents_primary_orderBy_START_TIME() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?orderBy=startTime"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?orderBy=startTime&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -212,7 +212,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	public void listEvents_primary_orderBy_UPDATED() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?orderBy=updated"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?orderBy=updated&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -229,7 +229,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	public void listEvents_primary_showDeleted_true() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?showDeleted=true"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?showDeleted=true&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -246,7 +246,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	public void listEvents_primary_showDeleted_false() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -263,7 +263,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	public void listEvents_primary_showHiddenInvitations_true() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?showHiddenInvitations=true"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?showHiddenInvitations=true&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -280,7 +280,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	public void listEvents_primary_showHiddenInvitations_false() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -297,7 +297,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	public void listEvents_primary_singleEvents_true() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?singleEvents=true"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?singleEvents=true&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -314,7 +314,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	public void listEvents_primary_singleEvents_false() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -331,7 +331,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	public void listEvents_primary_timeMin_Date() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMin=2014-02-01T00:00:00.000Z"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMin=2014-02-01T00:00:00.000Z&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -348,7 +348,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	public void listEvents_primary_timeMin_YMD() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMin=2013-02-01T00:00:00.000Z"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMin=2013-02-01T00:00:00.000Z&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -365,7 +365,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	public void listEvents_primary_timeMax_Date() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMax=2014-01-01T00:00:00.000Z"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMax=2014-01-01T00:00:00.000Z&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -382,7 +382,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	public void listEvents_primary_timeMax_YMD() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMax=2013-01-01T00:00:00.000Z"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMax=2013-01-01T00:00:00.000Z&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -399,7 +399,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	public void listEvents_primary_timeZone() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?timeZone=GMT"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?timeZone=GMT&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -416,7 +416,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	public void listEvents_primary_updatedMin() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?updatedMin=2014-03-01T00:00:00.000Z"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?updatedMin=2014-03-01T00:00:00.000Z&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -433,7 +433,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	public void listEvents_primary_combined_options() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?alwaysIncludeEmail=true&orderBy=startTime&timeZone=GMT&pageToken=pretendPageToken&singleEvents=true&showHiddenInvitations=true&maxResults=50&maxAttendees=9&timeMin=2014-02-01T00:00:00.000Z&iCalUID=test-iCalUID&showDeleted=true&timeMax=2014-01-01T00:00:00.000Z&updatedMin=2014-03-01T00:00:00.000Z"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?alwaysIncludeEmail=true&orderBy=startTime&timeZone=GMT&pageToken=pretendPageToken&singleEvents=true&showHiddenInvitations=true&maxResults=50&maxAttendees=9&timeMin=2014-02-01T00:00:00.000Z&iCalUID=test-iCalUID&showDeleted=true&timeMax=2014-01-01T00:00:00.000Z&updatedMin=2014-03-01T00:00:00.000Z&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -442,16 +442,16 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 				.eventListQuery(CalendarOperations.PRIMARY_CALENDAR_ID)
                                 .alwaysIncludeEmail(true)
         			.orderBy(OrderBy.START_TIME)
-				.timeZone(TEST_TIMEZONE)	
+				.timeZone(TEST_TIMEZONE)
                                 .fromPage("pretendPageToken")
-				.singleEvents(true)	
+				.singleEvents(true)
                                 .showHiddenInvitations(true)
-				.maxResultsNumber(50)	
+				.maxResultsNumber(50)
                                 .maxAttendees(9)
                                 .timeMin(TEST_TIME_MIN)
                                 .iCalUID("test-iCalUID")
 				.showDeleted(true)
-                                .timeMax(TEST_TIME_MAX)	
+                                .timeMax(TEST_TIME_MAX)
 				.updatedMin(TEST_UPDATED_MIN)
 				.getPage();
 
@@ -464,7 +464,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 		String calendarId = "abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?";
 
 		mockServer
-			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/" + encodeUTF8(calendarId) + "/events"))
+			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/" + encodeUTF8(calendarId) + "/events?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_get_event"), APPLICATION_JSON));
@@ -483,7 +483,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 		String pageToken = "abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?";
 
 		mockServer
-			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/" + encodeUTF8(calendarId) + "/events?pageToken=" + encodeUTF8(pageToken)))
+			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/" + encodeUTF8(calendarId) + "/events?pageToken=" + encodeUTF8(pageToken) + "&access_token=ACCESS_TOKEN"))
 			.andExpect(method(GET))
 			.andRespond(
 					withSuccess(jsonResource("mock_list_events_empty"), APPLICATION_JSON));
@@ -492,7 +492,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 				.eventListQuery(calendarId)
 				.fromPage(pageToken)
 				.getPage();
-		
+
 		assertNotNull(eventPage);
 	}
 
@@ -502,7 +502,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 		String id = "_60q30c1g60o30e1i60o4ac1g60rj8gpl88rj2c1h84s34h9g60s30c1g60o30c1g6oo4agph751kah9o84r46ghg64o30c1g60o30c1g60o30c1g60o32c1g60o30c1g891jeh9o88qk6cpk612k6c1k6ss3idi488o36h1i8p1k6hhp6oog";
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events/_60q30c1g60o30e1i60o4ac1g60rj8gpl88rj2c1h84s34h9g60s30c1g60o30c1g6oo4agph751kah9o84r46ghg64o30c1g60o30c1g60o30c1g60o32c1g60o30c1g891jeh9o88qk6cpk612k6c1k6ss3idi488o36h1i8p1k6hhp6oog"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events/_60q30c1g60o30e1i60o4ac1g60rj8gpl88rj2c1h84s34h9g60s30c1g60o30c1g6oo4agph751kah9o84r46ghg64o30c1g60o30c1g60o30c1g60o32c1g60o30c1g891jeh9o88qk6cpk612k6c1k6ss3idi488o36h1i8p1k6hhp6oog?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_get_event"), APPLICATION_JSON));
@@ -519,7 +519,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 		String eventId = "abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?";
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/" + encodeUTF8(calendarId) + "/events/" + encodeUTF8(eventId)))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/" + encodeUTF8(calendarId) + "/events/" + encodeUTF8(eventId) + "?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_get_event"), APPLICATION_JSON));
@@ -533,7 +533,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 	public void quickAddEvent() {
 
 		mockServer
-			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events/quickAdd?text=Appointment+at+Somewhere+every+June+3rd+10am-10%3A25am&sendNotifications=true"))
+			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events/quickAdd?text=Appointment+at+Somewhere+every+June+3rd+10am-10%3A25am&sendNotifications=true&access_token=ACCESS_TOKEN"))
 			.andExpect(method(POST))
 			.andRespond(
 					withSuccess(jsonResource("mock_added_event"), APPLICATION_JSON));
@@ -549,7 +549,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 		String id = "_60q30c1g60o30e1i60o4ac1g60rj8gpl88rj2c1h84s34h9g60s30c1g60o30c1g6oo4agph751kah9o84r46ghg64o30c1g60o30c1g60o30c1g60o32c1g60o30c1g891jeh9o88qk6cpk612k6c1k6ss3idi488o36h1i8p1k6hhp6oog";
 
 		mockServer
-			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events/_60q30c1g60o30e1i60o4ac1g60rj8gpl88rj2c1h84s34h9g60s30c1g60o30c1g6oo4agph751kah9o84r46ghg64o30c1g60o30c1g60o30c1g60o32c1g60o30c1g891jeh9o88qk6cpk612k6c1k6ss3idi488o36h1i8p1k6hhp6oog?sendNotifications=true"))
+			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events/_60q30c1g60o30e1i60o4ac1g60rj8gpl88rj2c1h84s34h9g60s30c1g60o30c1g6oo4agph751kah9o84r46ghg64o30c1g60o30c1g60o30c1g60o32c1g60o30c1g891jeh9o88qk6cpk612k6c1k6ss3idi488o36h1i8p1k6hhp6oog?sendNotifications=true&access_token=ACCESS_TOKEN"))
 			.andExpect(method(DELETE))
 			.andRespond(
 					withSuccess());
@@ -565,7 +565,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 		Event event = mapper.readValue(jsonResource("mock_added_event").getFile(), Event.class);
 
 		mockServer
-		.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events/onn6d9kbhps6fc47m96auhtkdo?sendNotifications=true"))
+		.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events/onn6d9kbhps6fc47m96auhtkdo?sendNotifications=true&access_token=ACCESS_TOKEN"))
 		.andExpect(method(PUT))
 		.andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))	// compatible with because ";charset=UTF-8" is included.
 		.andRespond(
