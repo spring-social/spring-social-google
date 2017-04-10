@@ -1,0 +1,60 @@
+{
+ "kind": "calendar#events",
+ "etag": "\"0001\"",
+ "nextSyncToken": "0002",
+ "items": [
+
+{
+  "kind": "calendar#event",
+  "etag": "\"etag1\"",
+  "id": "",
+  "status": "cancelled",
+  "created": "",
+  "updated": "",
+  "creator": {
+  },
+  "organizer": {
+  },
+  "start": {
+    "date": "",
+    "dateTime": ""
+  },
+  "end": {
+    "date": "",
+    "dateTime": ""
+  },
+  "recurrence": [
+  ],
+  "originalStartTime": {
+    "date": "",
+    "dateTime": ""
+  },
+  "visibility": "private",
+  "attendees": [
+    {
+      "responseStatus": "tentative"
+    }
+  ],
+  "extendedProperties": {
+    "private": {
+    },
+    "shared": {
+    }
+  },
+  "gadget": {
+    "preferences": {
+    }
+  },
+  "reminders": {
+    "overrides": [
+      {
+        "method": "popup"
+      }
+    ]
+  },
+  "source": {
+  }
+}
+ 
+ ]
+}

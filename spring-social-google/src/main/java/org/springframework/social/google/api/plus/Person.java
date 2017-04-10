@@ -15,19 +15,12 @@
  */
 package org.springframework.social.google.api.plus;
 
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.springframework.social.google.api.ApiEntity;
-import org.springframework.social.google.api.plus.impl.AgeRangeDeserializer;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.springframework.social.google.api.ApiEntity;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * Model class representing a full Google profile
@@ -79,6 +72,8 @@ public class Person extends ApiEntity {
 	@JsonProperty("isPlusUser")
 	private boolean plusUser;
 
+	private int circledByCount;
+
 	@JsonProperty
 	private Image image;
 
@@ -91,6 +86,14 @@ public class Person extends ApiEntity {
 	private String occupation;
 
 	private String aboutMe;
+
+	private String tagline;
+
+	private String nickname;
+
+	private String language;
+
+	private Boolean verified = false;
 
 	private String relationshipStatus;
 
@@ -155,6 +158,10 @@ public class Person extends ApiEntity {
 		return plusUser;
 	}
 
+	public int getCircledByCount() {
+		return circledByCount;
+	}
+
 	public String getImageUrl() {
 		if (thumbnailUrl != null) {
 			return thumbnailUrl;
@@ -180,6 +187,27 @@ public class Person extends ApiEntity {
 	public String getAboutMe() {
 		return aboutMe;
 	}
+
+
+	public String getTagline() {
+		return tagline;
+	}
+
+
+	public String getNickname() {
+		return nickname;
+	}
+
+
+	public String getLanguage() {
+		return language;
+	}
+
+
+	public Boolean isVerified() {
+		return verified;
+	}
+
 
 	public String getRelationshipStatus() {
 		return relationshipStatus;

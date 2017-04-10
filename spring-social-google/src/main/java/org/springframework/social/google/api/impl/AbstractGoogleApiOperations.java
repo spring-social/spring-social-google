@@ -16,14 +16,21 @@
 package org.springframework.social.google.api.impl;
 
 import static org.springframework.http.HttpMethod.*;
-import static org.springframework.http.HttpMethod.PUT;
 import static org.springframework.util.StringUtils.hasText;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.google.api.ApiEntity;
+import org.springframework.util.StreamUtils;
+import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -34,10 +41,21 @@ public abstract class AbstractGoogleApiOperations {
 	
 	protected final RestTemplate restTemplate;
 	protected final boolean isAuthorized;
+	private final static Log logger = LogFactory.getLog(AbstractGoogleApiOperations.class);
 
 	protected AbstractGoogleApiOperations(RestTemplate restTemplate, boolean isAuthorized) {
 		this.restTemplate = restTemplate;
 		this.isAuthorized = isAuthorized;
+
+		restTemplate.setErrorHandler(new DefaultResponseErrorHandler(){
+			@Override
+			public void handleError(ClientHttpResponse response) throws IOException {
+				if (logger.isWarnEnabled()) {
+					String bodyText = StreamUtils.copyToString(response.getBody(), Charset.defaultCharset());
+					logger.warn("Google API REST response body:" + bodyText);
+				}
+			}
+		});
 	}
 
 	protected void requireAuthorization() {

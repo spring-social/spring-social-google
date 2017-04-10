@@ -15,12 +15,15 @@
  */
 package org.springframework.social.google.api;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import org.json.JSONObject;
 import org.junit.Before;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -60,5 +63,15 @@ public class AbstractGoogleApiTest {
 		} catch (ParseException e) {
 			throw new IllegalArgumentException(e);
 		}
+	}
+
+	protected String encodeUTF8(String textToEncode) throws UnsupportedEncodingException {
+
+		return URLEncoder.encode(textToEncode, "UTF-8");
+	}
+
+	protected String normalizeJsonObjectLineFeeds(String fileJsonString) {
+
+		return new JSONObject(fileJsonString).toString();
 	}
 }

@@ -15,8 +15,6 @@
  */
 package org.springframework.social.google.connect;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.social.connect.UserProfile;
@@ -25,6 +23,8 @@ import org.springframework.social.google.api.oauth2.OAuth2Operations;
 import org.springframework.social.google.api.oauth2.UserInfo;
 import org.springframework.social.google.api.plus.Person;
 import org.springframework.social.google.api.plus.PlusOperations;
+
+import static org.junit.Assert.assertEquals;
 
 public class GoogleAdapterTest {
 
@@ -38,14 +38,19 @@ public class GoogleAdapterTest {
 		OAuth2Operations oauth2Operations = Mockito.mock(OAuth2Operations.class);
 		Mockito.when(google.oauth2Operations()).thenReturn(oauth2Operations);
 
-		UserInfo userInfo = Mockito.mock(UserInfo.class);
-		Mockito.when(userInfo.getName()).thenReturn("Gabriel Axel");
-		Mockito.when(userInfo.getGivenName()).thenReturn("Gabriel");
-		Mockito.when(userInfo.getFamilyName()).thenReturn("Axel");
-		Mockito.when(userInfo.getEmail()).thenReturn("guznik@gmail.com");
-		Mockito.when(userInfo.getId()).thenReturn("114863353858610846998");
+		Person person = Mockito.mock(Person.class);
+		Mockito.when(person.getDisplayName()).thenReturn("Gabriel Axel");
+		Mockito.when(person.getGivenName()).thenReturn("Gabriel");
+		Mockito.when(person.getFamilyName()).thenReturn("Axel");
+		Mockito.when(person.getAccountEmail()).thenReturn("guznik@gmail.com");
+		Mockito.when(person.getId()).thenReturn("114863353858610846998");
+		Mockito.when(person.getTagline()).thenReturn("testing our code");
+		Mockito.when(person.getNickname()).thenReturn("cool beans");
+		Mockito.when(person.getLanguage()).thenReturn("en");
+		Mockito.when(person.isVerified()).thenReturn(true);
 
-		Mockito.when(oauth2Operations.getUserinfo()).thenReturn(userInfo);
+
+		Mockito.when(plusOperations.getGoogleProfile()).thenReturn(person);
 		UserProfile profile = apiAdapter.fetchUserProfile(google);
 		assertEquals("Gabriel Axel", profile.getName());
 		assertEquals("Gabriel", profile.getFirstName());

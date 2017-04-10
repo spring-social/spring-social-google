@@ -16,16 +16,18 @@
 package org.springframework.social.google.api;
 
 import org.springframework.social.ApiBinding;
+import org.springframework.social.google.api.calendar.CalendarOperations;
 import org.springframework.social.google.api.drive.DriveOperations;
 import org.springframework.social.google.api.impl.GoogleTemplate;
 import org.springframework.social.google.api.oauth2.OAuth2Operations;
 import org.springframework.social.google.api.plus.PlusOperations;
 import org.springframework.social.google.api.tasks.TaskOperations;
+import org.springframework.web.client.RestOperations;
 
 /**
  * Interface specifying a basic set of operations for interacting with Google
  * APIs. Implemented by {@link GoogleTemplate}.
- * 
+ *
  * @author Gabriel Axel
  */
 public interface Google extends ApiBinding {
@@ -41,7 +43,7 @@ public interface Google extends ApiBinding {
 	/**
 	 * Retrieves {@link PlusOperations}, used for interacting with Google+ API.
 	 * Some methods require OAuth2 scope https://www.googleapis.com/auth/plus.me
-	 * 
+	 *
 	 * @return {@link PlusOperations} for the authenticated user if
 	 *         authenticated
 	 */
@@ -51,7 +53,7 @@ public interface Google extends ApiBinding {
 	 * Retrieves {@link TaskOperations}, used for interacting with Google Tasks
 	 * API. Requires OAuth scope https://www.googleapis.com/auth/tasks or
 	 * https://www.googleapis.com/auth/tasks.readonly
-	 * 
+	 *
 	 * @return {@link TaskOperations} for the authenticated user
 	 */
 	TaskOperations taskOperations();
@@ -69,18 +71,32 @@ public interface Google extends ApiBinding {
 	 * See <a
 	 * href="https://developers.google.com/drive/scopes">https://developers
 	 * .google.com/drive/scopes</a> for details about the different scopes
-	 * 
+	 *
 	 * @return {@link DriveOperations} for the authenticated user
 	 */
 	DriveOperations driveOperations();
 
 	/**
+	 * Retrieves {@link CalendarOperations}, used for interacting with Google Calendar API.
+	 * Some methods require OAuth2 scope from the following:
+	 * <ul>
+	 * <li>https://www.googleapis.com/auth/calendar.readonly</li>
+	 * <li>https://www.googleapis.com/auth/calendar</li>
+	 * </ul>
+	 *
+	 * @return {@link CalendarOperations} for the authenticated user if authenticated
+	 */
+	CalendarOperations calendarOperations();
+
+	/**
 	 * Returns the access token, allowing interoperability with other libraries
-	 * 
+	 *
 	 * @see <a href="http://code.google.com/p/google-api-java-client/">Google
 	 *      APIs Client Library for Java</a>
-	 * 
+	 *
 	 * @return The OAuth2 access token
 	 */
 	String getAccessToken();
+
+  RestOperations restOperations();
 }

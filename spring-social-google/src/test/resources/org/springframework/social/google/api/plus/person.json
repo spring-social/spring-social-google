@@ -5,8 +5,10 @@
   }, 
   "id": "114863353858610846998", 
   "objectType": "person", 
-  "verified": true, 
-  "etag": "\"YFr-hUROXQN7IOa3dUHg9dQ8eq0/NEVHKJoN067kdVmOajomyD-wN6Y\"", 
+  "verified": false, 
+  "etag": "\"YFr-hUROXQN7IOa3dUHg9dQ8eq0/NEVHKJoN067kdVmOajomyD-wN6Y\"",
+  "tagline": "testing our code",
+  "nickname": "cool beans",
   "circledByCount": 51, 
   "occupation": "Software Engineer", 
   "aboutMe": "CTO and co-founder of <a href=\"https://www.docollab.com\" rel=\"nofollow\" target=\"_blank\">Docollab</a><br />", 
@@ -78,7 +80,7 @@
       "label": "Spring Social Google"
     }, 
     {
-      "type": "other", 
+      "type": "website",
       "value": "http://www.gabiaxel.com", 
       "label": "Blog"
     }, 

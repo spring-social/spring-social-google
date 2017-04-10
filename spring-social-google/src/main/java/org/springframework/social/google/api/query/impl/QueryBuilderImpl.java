@@ -17,12 +17,16 @@ package org.springframework.social.google.api.query.impl;
 
 import static org.springframework.util.StringUtils.hasText;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TimeZone;
 
 import org.springframework.social.google.api.query.QueryBuilder;
 
@@ -34,10 +38,24 @@ import org.springframework.social.google.api.query.QueryBuilder;
  */
 public abstract class QueryBuilderImpl<Q extends QueryBuilder<?, T>, T> implements QueryBuilder<Q, T> {
 
-	private static final Format dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS'Z'");
+	private static final Format dateFormatter;
+        
+        static {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+            dateFormatter = simpleDateFormat;
+        }
 	
 	protected String feedUrl;
-	private Map<String, String> params = new HashMap<String, String>();	
+	private Map<String, String> params = new LinkedHashMap<String, String>();	
+	
+	protected static String encode(String text) {
+		try {
+			return URLEncoder.encode(text, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			throw new IllegalStateException(e);
+		}
+	}
 	
 	protected QueryBuilderImpl() {
 	}
