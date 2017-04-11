@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2011-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,20 +17,20 @@ package org.springframework.social.google.api.plus;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.social.google.api.ApiEntity;
+import org.springframework.social.google.api.plus.impl.AgeRangeDeserializer;
 
 import java.util.*;
 import java.util.Map.Entry;
 
 /**
  * Model class representing a full Google profile
- * 
+ *
  * @author Gabriel Axel
  */
 public class Person extends ApiEntity {
-
 	private static class Name {
-
 		@JsonProperty
 		private String givenName;
 
@@ -38,14 +38,12 @@ public class Person extends ApiEntity {
 		private String familyName;
 	}
 
-	public static class Image {
-
+	private static class Image {
 		@JsonProperty
 		private String url;
 	}
 
 	private static class PlaceLived {
-
 		@JsonProperty
 		private String value;
 
@@ -54,7 +52,6 @@ public class Person extends ApiEntity {
 	}
 
 	private static class Email {
-
 		@JsonProperty
 		private String value;
 
@@ -68,7 +65,7 @@ public class Person extends ApiEntity {
 	private String displayName;
 
 	private String url;
-	
+
 	@JsonProperty("isPlusUser")
 	private boolean plusUser;
 
@@ -104,6 +101,10 @@ public class Person extends ApiEntity {
 	private Map<String, Boolean> placesLived;
 
 	private Map<String, String> emails;
+
+	@JsonProperty
+	@JsonDeserialize(using = AgeRangeDeserializer.class)
+	private AgeRange ageRange = AgeRange.UNKNOWN;
 
 	@Override
 	public String toString() {
@@ -145,7 +146,7 @@ public class Person extends ApiEntity {
 	public String getUrl() {
 		return url;
 	}
-	
+
 	public boolean isPlusUser() {
 		return plusUser;
 	}
@@ -234,5 +235,9 @@ public class Person extends ApiEntity {
 			}
 		}
 		return null;
+	}
+
+	public AgeRange getAgeRange() {
+		return ageRange;
 	}
 }

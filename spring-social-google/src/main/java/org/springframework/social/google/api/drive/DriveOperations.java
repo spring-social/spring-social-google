@@ -169,6 +169,50 @@ public interface DriveOperations {
 	 *            The ID of the file to delete
 	 */
 	void delete(String id);
+	
+	/**
+	 * Create a copy of a file
+	 * 
+	 * @param id
+	 *            The ID of the source file
+	 * @return The newly-created {@link DriveFile} copy
+	 */
+	DriveFile copy(String id);
+
+	/**
+	 * Create a copy of a file
+	 * 
+	 * @param id
+	 *            The ID of the source file
+	 * @param parentIds
+	 *            Array of parent folder ID to place the file into, or "root"
+	 * @return The newly-created {@link DriveFile} copy
+	 */
+	DriveFile copy(String id, String[] parentIds);
+
+	/**
+	 * Create a copy of a file
+	 * 
+	 * @param id
+	 *            The ID of the source file
+	 * @param parentIds
+	 *            Array of parent folder ID to place the file into, or "root"
+	 * @param title
+	 *            The title to apply to the new file
+	 * @return The newly-created {@link DriveFile} copy
+	 */
+	DriveFile copy(String id, String[] parentIds, String title);
+
+	/**
+	 * Move a file into a different folder
+	 * 
+	 * @param id
+	 *            The ID of the file to move
+	 * @param parentId
+	 *            The parent folder ID to move the file to, or "root"
+	 * @return The updated {@link DriveFile}
+	 */
+	DriveFile move(String id, String parentId);
 
 	/**
 	 * Uploads a file using multipart
@@ -393,4 +437,58 @@ public interface DriveOperations {
 	 * @return Resource abstraction for the file
 	 */
 	Resource downloadFile(DriveFile file);
+
+	/**
+	 * Get the custom properties applied to this file
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @return
+	 *            The list of properties defined
+	 */
+	List<FileProperty> getProperties(String fileId);
+
+	/**
+	 * Get a specific custom property applied to this file
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @param propertyKey
+	 *            The key of the property
+	 * @return
+	 *            The the property information
+	 */
+	FileProperty getProperty(String fileId, String propertyKey);
+
+	/**
+	 * Adds a new property to a file
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @param property
+	 *            Property representation
+	 * @return The new {@link FileProperty}
+	 */
+	FileProperty addProperty(String fileId, FileProperty property);
+
+	/**
+	 * Updates a property
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @param property
+	 *            Property representation
+	 * @return The updated {@link FileProperty}
+	 */
+	FileProperty updateProperty(String fileId, FileProperty property);
+
+	/**
+	 * Deletes a property
+	 * 
+	 * @param fileId
+	 *            The ID of the file
+	 * @param propertyKey
+	 *            The key of the property
+	 */
+	void removeProperty(String fileId, String propertyKey);
 }

@@ -22,19 +22,20 @@ import org.springframework.social.oauth2.AccessGrant;
 
 /**
  * Google ConnectionFactory implementation.
+ *
  * @author Gabriel Axel
  */
 public class GoogleConnectionFactory extends OAuth2ConnectionFactory<Google> {
 
-	public GoogleConnectionFactory(String clientId, String clientSecret) {
-		super("google", new GoogleServiceProvider(clientId, clientSecret),
-				new GoogleAdapter());
-	}
+    public GoogleConnectionFactory(String clientId, String clientSecret) {
+        super("google", new GoogleServiceProvider(clientId, clientSecret),
+            new GoogleAdapter());
+    }
 
-	@Override
-	protected String extractProviderUserId(AccessGrant accessGrant) {
-		Google api = ((GoogleServiceProvider)getServiceProvider()).getApi(accessGrant.getAccessToken());
-	    UserProfile userProfile = getApiAdapter().fetchUserProfile(api);
-	    return userProfile.getUsername();
-	}
+    @Override
+    protected String extractProviderUserId(AccessGrant accessGrant) {
+        Google api = ((GoogleServiceProvider) getServiceProvider()).getApi(accessGrant.getAccessToken());
+        UserProfile userProfile = getApiAdapter().fetchUserProfile(api);
+        return userProfile.getUsername();
+    }
 }

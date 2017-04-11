@@ -24,7 +24,7 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void getPersonById() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/plus/v1/people/114863353858610846998"))
+				.expect(requestTo("https://www.googleapis.com/plus/v1/people/114863353858610846998?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("person"), APPLICATION_JSON));
@@ -35,7 +35,7 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void getSelfProfile() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/plus/v1/people/me"))
+				.expect(requestTo("https://www.googleapis.com/plus/v1/people/me?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("person"), APPLICATION_JSON));
@@ -46,7 +46,7 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void searchPeople() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/plus/v1/people?query=pivotal"))
+				.expect(requestTo("https://www.googleapis.com/plus/v1/people?query=pivotal&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("people"), APPLICATION_JSON));
@@ -72,7 +72,7 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void searchPublicActivities() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/plus/v1/activities?query=spring+social"))
+				.expect(requestTo("https://www.googleapis.com/plus/v1/activities?query=spring+social&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("activities"),
@@ -107,7 +107,7 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void getActivity() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/plus/v1/activities/z13djjbraz2fdfp5g04chb0rkrvwhnmpch4"))
+				.expect(requestTo("https://www.googleapis.com/plus/v1/activities/z13djjbraz2fdfp5g04chb0rkrvwhnmpch4?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("activity"), APPLICATION_JSON));
@@ -150,7 +150,7 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void listComments() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/plus/v1/activities/z12ge3o4orj2sdkbb04chb0rkrvwhnmpch4/comments"))
+				.expect(requestTo("https://www.googleapis.com/plus/v1/activities/z12ge3o4orj2sdkbb04chb0rkrvwhnmpch4/comments?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("comments"), APPLICATION_JSON));
@@ -198,7 +198,7 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void getComment() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/plus/v1/comments/z12ge3o4orj2sdkbb04chb0rkrvwhnmpch4.1364410988265921"))
+				.expect(requestTo("https://www.googleapis.com/plus/v1/comments/z12ge3o4orj2sdkbb04chb0rkrvwhnmpch4.1364410988265921?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("comment"), APPLICATION_JSON));
@@ -222,7 +222,7 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void listMoments() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/plus/v1/people/me/moments/vault"))
+				.expect(requestTo("https://www.googleapis.com/plus/v1/people/me/moments/vault?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("moments"), APPLICATION_JSON));
@@ -235,7 +235,7 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void insertMoment() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/plus/v1/people/me/moments/vault"))
+				.expect(requestTo("https://www.googleapis.com/plus/v1/people/me/moments/vault?access_token=ACCESS_TOKEN"))
 				.andExpect(method(POST))
 				.andRespond(
 						withSuccess(jsonResource("moment"), APPLICATION_JSON));
@@ -243,7 +243,7 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
 				.plusOperations()
 				.insertMoment(
 						new AddActivity(
-								"https://developers.google.com/+/plugins/snippet/examples/thing"));
+								"https://developers.google.com/+/plugins/snippet/examples/thing?access_token=ACCESS_TOKEN"));
 		assertTrue(moment instanceof AddActivity);
 		assertEquals(
 				"Eg0xNDAwNDE2MjQ1ODY2GJa6uYvcss-izgEpCHuQgEQo0AkyAhAUQgcY1OXS0c8e",
@@ -256,7 +256,7 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
 	@Test
 	public void deleteMoment() {
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/plus/v1/moments/Eg0xNDAwNDE2MjQ1ODY2GJa6uYvcss-izgEpCHuQgEQo0AkyAhAUQgcY1OXS0c8e"))
+				.expect(requestTo("https://www.googleapis.com/plus/v1/moments/Eg0xNDAwNDE2MjQ1ODY2GJa6uYvcss-izgEpCHuQgEQo0AkyAhAUQgcY1OXS0c8e?access_token=ACCESS_TOKEN"))
 				.andExpect(method(DELETE)).andRespond(withNoContent());
 		google.plusOperations()
 				.deleteMoment(
@@ -307,6 +307,9 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
 		assertEquals(expectedPlacesLived, person.getPlacesLived());
 		assertEquals("guznik@gmail.com", person.getAccountEmail());
 		assertEquals("https://plus.google.com/+GabrielAxel", person.getUrl());
+		assertEquals(AgeRange.AGE_21_PLUS, person.getAgeRange());
+		assertEquals("en", person.getLanguage());
+		assertFalse(person.isVerified());
 		assertTrue(person.isPlusUser());
 		assertEquals(51, person.getCircledByCount());
 	}

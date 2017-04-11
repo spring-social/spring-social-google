@@ -3,8 +3,8 @@ buildscript {
         maven { url 'http://repo.spring.io/plugins-release' }
     }
     dependencies {
-        classpath 'org.springframework.build.gradle:docbook-reference-plugin:0.2.8'
-        classpath 'me.champeau.gradle:gradle-javadoc-hotfix-plugin:0.1'
+        classpath("io.spring.gradle:propdeps-plugin:0.0.8")
+        classpath("io.spring.gradle:docbook-reference-plugin:0.3.1")
     }
 }
 
@@ -12,12 +12,11 @@ configure(allprojects) {
     apply plugin: 'java'
     apply plugin: 'eclipse'
     apply plugin: 'idea'
-    apply plugin: 'javadocHotfix'
 
     group = 'org.springframework.social'
 
-    sourceCompatibility = 1.6
-    targetCompatibility = 1.6
+    sourceCompatibility=1.7
+    targetCompatibility=1.7
 
     ext {
         springBootVersion = '1.2.6.RELEASE'
@@ -31,13 +30,13 @@ configure(allprojects) {
 
     [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:none']
 
-    sourceSets.test.resources.srcDirs = ['src/test/resources', 'src/test/java']
-
     test.systemProperty("java.awt.headless", "true")
 
     repositories {
-        maven { url "http://repo.spring.io/libs-snapshot" }
-        maven { url "http://repo.spring.io/ebr-maven-external" }
+        jcenter()
+        mavenCentral()
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
     }
 
     dependencies {
@@ -70,10 +69,9 @@ configure(subprojects) { subproject ->
     }
 
     javadoc {
-        options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
+        options.memberLevel = JavadocMemberLevel.PROTECTED
         options.author = true
         options.header = project.name
-        //options.overview = "${projectDir}/src/main/java/overview.html"
     }
 
     task sourcesJar(type: Jar, dependsOn: classes) {
@@ -93,7 +91,7 @@ configure(subprojects) { subproject ->
 }
 
 project('spring-social-google') {
-    description = 'Google API'
+    description = 'Google API for Spring Social'
     dependencies {
         compile("org.springframework.boot:spring-boot-starter:$springBootVersion", optional)
         compile("org.springframework.boot:spring-boot-configuration-processor:$springBootVersion", optional)
@@ -129,7 +127,7 @@ configure(rootProject) {
         group = 'Documentation'
         description = 'Generates aggregated Javadoc API documentation.'
         title = "${rootProject.description} ${version} API"
-        options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
+        options.memberLevel = JavadocMemberLevel.PROTECTED
         options.author = true
         options.header = rootProject.description
         options.overview = 'src/api/overview.html'
@@ -172,14 +170,17 @@ configure(rootProject) {
                 "XSDs for deployment at static.springframework.org/schema."
 
         subprojects.each { subproject ->
-            def Properties schemas = new Properties();
+            println "operating on subproject: ${subproject.name}"
+            Properties schemas = new Properties()
 
             subproject.sourceSets.main.resources.find {
+                println "found resource: ${it.path}"
                 it.path.endsWith('META-INF/spring.schemas')
             }?.withInputStream { schemas.load(it) }
 
             for (def key : schemas.keySet()) {
                 def shortName = key.replaceAll(/http.*schema.(.*).spring-.*/, '$1')
+                println "loading xsd file for ${shortName}"
                 assert shortName != key
                 File xsdFile = subproject.sourceSets.main.resources.find {
                     it.path.endsWith(schemas.get(key))
@@ -231,31 +232,33 @@ configure(rootProject) {
 
     artifacts {
         archives docsZip
-//        archives schemaZip
+        archives schemaZip
         archives distZip
     }
 
     task wrapper(type: Wrapper) {
         description = 'Generates gradlew[.bat] scripts'
-        gradleVersion = '1.10'
+        gradleVersion = '3.4.1'
     }
 
 }
 
-task updateRootDocs << {
-    copy {
-        from 'src/dist'
-        into "${rootProject.projectDir}"
-        include 'notice.txt'
-        expand(copyright: new Date().format('yyyy'), version: project.version)
-        rename { filename -> 'NOTICE' }
-    }
+task updateRootDocs {
+    doLast {
+        copy {
+            from 'src/dist'
+            into "${rootProject.projectDir}"
+            include 'notice.txt'
+            expand(copyright: new Date().format('yyyy'), version: project.version)
+            rename { filename -> 'NOTICE' }
+        }
 
-    copy {
-        from 'src/dist'
-        into "${rootProject.projectDir}"
-        include 'license.txt'
-        rename { filename -> 'LICENSE' }
+        copy {
+            from 'src/dist'
+            into "${rootProject.projectDir}"
+            include 'license.txt'
+            rename { filename -> 'LICENSE' }
+        }
     }
 }
 

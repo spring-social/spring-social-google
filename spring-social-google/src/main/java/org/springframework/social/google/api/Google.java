@@ -19,6 +19,7 @@ import org.springframework.social.ApiBinding;
 import org.springframework.social.google.api.calendar.CalendarOperations;
 import org.springframework.social.google.api.drive.DriveOperations;
 import org.springframework.social.google.api.impl.GoogleTemplate;
+import org.springframework.social.google.api.oauth2.OAuth2Operations;
 import org.springframework.social.google.api.plus.PlusOperations;
 import org.springframework.social.google.api.tasks.TaskOperations;
 import org.springframework.web.client.RestOperations;
@@ -31,6 +32,14 @@ import org.springframework.web.client.RestOperations;
  */
 public interface Google extends ApiBinding {
 
+	/**
+	 * Retrieves {@link OAuth2Operations}, used for interacting with Google+ API.
+	 *
+	 * @return {@link PlusOperations} for the authenticated user if
+	 *         authenticated
+	 */
+	OAuth2Operations oauth2Operations();
+	
 	/**
 	 * Retrieves {@link PlusOperations}, used for interacting with Google+ API.
 	 * Some methods require OAuth2 scope https://www.googleapis.com/auth/plus.me

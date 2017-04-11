@@ -21,18 +21,18 @@ import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.UserProfileBuilder;
 import org.springframework.social.google.api.Google;
-import org.springframework.social.google.api.plus.Person;
+import org.springframework.social.google.api.oauth2.UserInfo;
 
 /**
  * Google ApiAdapter implementation.
- * 
+ *
  * @author Gabriel Axel
  */
 public class GoogleAdapter implements ApiAdapter<Google> {
 
 	public boolean test(Google google) {
 		try {
-			google.plusOperations().getGoogleProfile();
+			google.oauth2Operations().getUserinfo();
 			return true;
 		} catch (ApiException e) {
 			return false;
@@ -40,24 +40,24 @@ public class GoogleAdapter implements ApiAdapter<Google> {
 	}
 
 	public void setConnectionValues(Google google, ConnectionValues values) {
-		Person profile = google.plusOperations().getGoogleProfile();
-		values.setProviderUserId(profile.getId());
-		values.setDisplayName(profile.getDisplayName());
-		values.setProfileUrl(profile.getUrl());
-		values.setImageUrl(profile.getImageUrl());
+		UserInfo userInfo = google.oauth2Operations().getUserinfo();
+		values.setProviderUserId(userInfo.getId());
+		values.setDisplayName(userInfo.getName());
+		values.setProfileUrl(userInfo.getLink());
+		values.setImageUrl(userInfo.getPicture());
 	}
 
 	public UserProfile fetchUserProfile(Google google) {
-		Person profile = google.plusOperations().getGoogleProfile();
-		return new UserProfileBuilder().setUsername(profile.getId())
-				.setEmail(profile.getAccountEmail())
-				.setName(profile.getDisplayName())
-				.setFirstName(profile.getGivenName())
-				.setLastName(profile.getFamilyName()).build();
+		UserInfo userInfo = google.oauth2Operations().getUserinfo();
+		return new UserProfileBuilder().setUsername(userInfo.getId())
+				.setEmail(userInfo.getEmail())
+				.setName(userInfo.getName())
+				.setFirstName(userInfo.getGivenName())
+				.setLastName(userInfo.getFamilyName()).build();
 	}
 
-	public void updateStatus(Google google, String message) {
-		throw new UnsupportedOperationException();
-	}
+    public void updateStatus(Google google, String message) {
+        throw new UnsupportedOperationException();
+    }
 
 }

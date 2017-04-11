@@ -31,20 +31,19 @@ import org.springframework.social.google.api.impl.GoogleTemplate;
 import org.springframework.test.web.client.MockRestServiceServer;
 
 public class AbstractGoogleApiTest {
-
 	protected GoogleTemplate google;
-	
+
 	protected GoogleTemplate appAuthGoogle;
-	
+
 	protected MockRestServiceServer mockServer;
-	
+
 	protected MockRestServiceServer appAuthMockServer;
-	
+
 	private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
 	static {
 		dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 	}
-	
+
 	@Before
 	public void setup() {
 		google = new GoogleTemplate("ACCESS_TOKEN");
@@ -52,11 +51,11 @@ public class AbstractGoogleApiTest {
 		appAuthGoogle = new GoogleTemplate("APP_ACCESS_TOKEN");
 		appAuthMockServer = MockRestServiceServer.createServer(appAuthGoogle.getRestTemplate());
 	}
-	
+
 	protected Resource jsonResource(String filename) {
 		return new ClassPathResource(filename + ".json", getClass());
 	}
-	
+
 	protected static Date date(String formatted) {
 		try {
 			return dateFormat.parse(formatted);

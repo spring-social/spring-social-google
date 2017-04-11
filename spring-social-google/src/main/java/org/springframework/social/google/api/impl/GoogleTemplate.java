@@ -26,6 +26,8 @@ import org.springframework.social.google.api.calendar.CalendarOperations;
 import org.springframework.social.google.api.calendar.impl.CalendarTemplate;
 import org.springframework.social.google.api.drive.DriveOperations;
 import org.springframework.social.google.api.drive.impl.DriveTemplate;
+import org.springframework.social.google.api.oauth2.OAuth2Operations;
+import org.springframework.social.google.api.oauth2.impl.OAuth2Template;
 import org.springframework.social.google.api.plus.PlusOperations;
 import org.springframework.social.google.api.plus.impl.PlusTemplate;
 import org.springframework.social.google.api.tasks.TaskOperations;
@@ -33,6 +35,7 @@ import org.springframework.social.google.api.tasks.impl.TaskTemplate;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
 import org.springframework.web.client.RestOperations;
+import org.springframework.social.oauth2.TokenStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +60,7 @@ import static com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS
 public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 
 	private String accessToken;
-
+	private OAuth2Operations oauth2Operations;
 	private PlusOperations plusOperations;
 	private TaskOperations taskOperations;
 	private DriveOperations driveOperations;
@@ -77,12 +80,13 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	 * @param accessToken an access token granted by Google after OAuth2 authentication
 	 */
 	public GoogleTemplate(String accessToken) {
-		super(accessToken);
+		super(accessToken, TokenStrategy.ACCESS_TOKEN_PARAMETER);
 		this.accessToken = accessToken;
 		initialize();
 	}
 
 	private void initialize() {
+		oauth2Operations = new OAuth2Template(getRestTemplate(), isAuthorized());
 		plusOperations = new PlusTemplate(getRestTemplate(), isAuthorized());
 		taskOperations = new TaskTemplate(getRestTemplate(), isAuthorized());
 		driveOperations = new DriveTemplate(getRestTemplate(), isAuthorized());
@@ -139,6 +143,11 @@ public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 	@Override
 	public String getAccessToken() {
 		return accessToken;
+	}
+
+	@Override
+	public OAuth2Operations oauth2Operations() {
+		return oauth2Operations;
 	}
 
   @Override

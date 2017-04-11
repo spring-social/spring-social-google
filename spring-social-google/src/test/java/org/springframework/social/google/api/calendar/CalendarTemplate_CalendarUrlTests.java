@@ -35,7 +35,7 @@ public class CalendarTemplate_CalendarUrlTests extends AbstractGoogleApiTest {
 	public void listCalendars_with_minAccessRole_freeBusyReader() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=freeBusyReader"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=freeBusyReader&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
@@ -49,7 +49,7 @@ public class CalendarTemplate_CalendarUrlTests extends AbstractGoogleApiTest {
 	public void listCalendars_with_minAccessRole_owner() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=owner"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=owner&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
@@ -63,7 +63,7 @@ public class CalendarTemplate_CalendarUrlTests extends AbstractGoogleApiTest {
 	public void listCalendars_with_minAccessRole_reader() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=reader"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=reader&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
@@ -77,7 +77,7 @@ public class CalendarTemplate_CalendarUrlTests extends AbstractGoogleApiTest {
 	public void listCalendars_with_minAccessRole_writer() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=writer"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=writer&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
@@ -91,7 +91,7 @@ public class CalendarTemplate_CalendarUrlTests extends AbstractGoogleApiTest {
 	public void listCalendars_with_showDeleted_true() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?showDeleted=true"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?showDeleted=true&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
@@ -105,7 +105,7 @@ public class CalendarTemplate_CalendarUrlTests extends AbstractGoogleApiTest {
 	public void listCalendars_with_showDeleted_false() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
@@ -119,7 +119,7 @@ public class CalendarTemplate_CalendarUrlTests extends AbstractGoogleApiTest {
 	public void listCalendars_with_showHidden_true() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?showHidden=true"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?showHidden=true&access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
@@ -133,7 +133,7 @@ public class CalendarTemplate_CalendarUrlTests extends AbstractGoogleApiTest {
 	public void listCalendars_with_showHidden_false() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
@@ -147,7 +147,7 @@ public class CalendarTemplate_CalendarUrlTests extends AbstractGoogleApiTest {
 	public void getCalendar_primary() {
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList/primary"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList/primary?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_get_calendar_primary"), APPLICATION_JSON));
@@ -169,7 +169,7 @@ public class CalendarTemplate_CalendarUrlTests extends AbstractGoogleApiTest {
 		String encodedCalendarId = URLEncoder.encode(calendarId, "UTF-8");
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList/" + encodedCalendarId))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList/" + encodedCalendarId + "?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_get_calendar_primary"), APPLICATION_JSON));

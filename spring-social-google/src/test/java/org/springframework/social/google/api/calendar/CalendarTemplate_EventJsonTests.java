@@ -51,7 +51,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 	public void listEvents() {
 
 		mockServer
-			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events"))
+			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?access_token=ACCESS_TOKEN"))
 			.andExpect(method(GET))
 			.andRespond(
 					withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -69,7 +69,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 	public void listEvents_missing() {
 
 		mockServer
-			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events"))
+			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?access_token=ACCESS_TOKEN"))
 			.andExpect(method(GET))
 			.andRespond(
 					withSuccess(jsonResource("mock_list_events_missing"), APPLICATION_JSON));
@@ -88,7 +88,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 	public void listEvents_empty() {
 
 		mockServer
-			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events"))
+			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?access_token=ACCESS_TOKEN"))
 			.andExpect(method(GET))
 			.andRespond(
 					withSuccess(jsonResource("mock_list_events_empty"), APPLICATION_JSON));
@@ -107,9 +107,9 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 	@Test
 	public void listEvents_values_1() {
 // Fully populate the JSON first.
-		
+
 		mockServer
-			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events"))
+			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?access_token=ACCESS_TOKEN"))
 			.andExpect(method(GET))
 			.andRespond(
 					withSuccess(jsonResource("mock_list_events_values_1"), APPLICATION_JSON));
@@ -127,7 +127,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 		Event event = eventPage.getItems().get(0);
 		assertNotNull(event);
 		assertEquals("\"etag1\"", event.getEtag());
-		
+
 		assertEquals("string1", event.getId());
 		assertEquals(EventStatus.CONFIRMED, event.getStatus());
 		assertEquals("string3", event.getHtmlLink());
@@ -194,7 +194,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 			assertEquals(1, recurrence.size());
 			assertEquals("string16", recurrence.get(0));
 		}
-		
+
 		{
 			DateTimeTimezone dtz = event.getOriginalStartTime();
 			assertNotNull(dtz);
@@ -220,7 +220,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 			assertEquals("string26", att.getComment());
 			assertEquals(1, att.getAdditionalGuests().intValue());
 		}
-		
+
 		{
 			ExtendedProperties extendedProperties = event.getExtendedProperties();
 			assertNotNull(extendedProperties);
@@ -237,7 +237,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 				assertEquals("string28", m.get("(key2)"));
 			}
 		}
-		
+
 		{
 			Gadget gadget = event.getGadget();
 			assertNotNull(gadget);
@@ -248,13 +248,13 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 			assertEquals(11, gadget.getWidth().intValue());
 			assertEquals(11, gadget.getHeight().intValue());
 			assertEquals(DisplayMode.ICON, gadget.getDisplay());
-			
+
 			Map<String, String> m = gadget.getPreferences();
 			assertNotNull(m);
 			assertEquals(1, m.size());
 			assertEquals("string35", m.get("(key3)"));
 		}
-		
+
 		{
 			Reminders reminders = event.getReminders();
 			assertNotNull(reminders);
@@ -280,9 +280,9 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 	@Test
 	public void listEvents_values_2() {
 // Swap the values for the next in sequence - booleans swap, enums on to next, strings to empty, numbers to zero.
-		
+
 		mockServer
-			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events"))
+			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?access_token=ACCESS_TOKEN"))
 			.andExpect(method(GET))
 			.andRespond(
 					withSuccess(jsonResource("mock_list_events_values_2"), APPLICATION_JSON));
@@ -300,7 +300,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 		Event event = eventPage.getItems().get(0);
 		assertNotNull(event);
 		assertEquals("\"etag1\"", event.getEtag());
-		
+
 		assertEquals("", event.getId());
 		assertEquals(EventStatus.TENTATIVE, event.getStatus());
 		assertEquals("", event.getHtmlLink());
@@ -367,7 +367,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 			assertEquals(1, recurrence.size());
 			assertEquals("", recurrence.get(0));
 		}
-		
+
 		{
 			DateTimeTimezone dtz = event.getOriginalStartTime();
 			assertNotNull(dtz);
@@ -393,7 +393,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 			assertEquals("", att.getComment());
 			assertEquals(0, att.getAdditionalGuests().intValue());
 		}
-		
+
 		{
 			ExtendedProperties extendedProperties = event.getExtendedProperties();
 			assertNotNull(extendedProperties);
@@ -410,7 +410,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 				assertEquals("", m.get("(key2)"));
 			}
 		}
-		
+
 		{
 			Gadget gadget = event.getGadget();
 			assertNotNull(gadget);
@@ -421,13 +421,13 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 			assertEquals(0, gadget.getWidth().intValue());
 			assertEquals(0, gadget.getHeight().intValue());
 			assertEquals(DisplayMode.CHIP, gadget.getDisplay());
-			
+
 			Map<String, String> m = gadget.getPreferences();
 			assertNotNull(m);
 			assertEquals(1, m.size());
 			assertEquals("", m.get("(key3)"));
 		}
-		
+
 		{
 			Reminders reminders = event.getReminders();
 			assertNotNull(reminders);
@@ -453,9 +453,9 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 	@Test
 	public void listEvents_values_3() {
 // Swap the values for the next in sequence - booleans swap, enums on to next, strings to empty, numbers to zero.
-		
+
 		mockServer
-			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events"))
+			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?access_token=ACCESS_TOKEN"))
 			.andExpect(method(GET))
 			.andRespond(
 					withSuccess(jsonResource("mock_list_events_values_3"), APPLICATION_JSON));
@@ -473,7 +473,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 		Event event = eventPage.getItems().get(0);
 		assertNotNull(event);
 		assertEquals("\"etag1\"", event.getEtag());
-		
+
 		assertEquals("", event.getId());
 		assertEquals(EventStatus.CANCELLED, event.getStatus());
 		assertNull(event.getHtmlLink());
@@ -539,7 +539,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 			assertNotNull(recurrence);
 			assertEquals(0, recurrence.size());
 		}
-		
+
 		{
 			DateTimeTimezone dtz = event.getOriginalStartTime();
 			assertNotNull(dtz);
@@ -565,7 +565,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 			assertNull(att.getComment());
 			assertNull(att.getAdditionalGuests());
 		}
-		
+
 		{
 			ExtendedProperties extendedProperties = event.getExtendedProperties();
 			assertNotNull(extendedProperties);
@@ -580,7 +580,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 				assertEquals(0, m.size());
 			}
 		}
-		
+
 		{
 			Gadget gadget = event.getGadget();
 			assertNotNull(gadget);
@@ -591,12 +591,12 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 			assertNull(gadget.getWidth());
 			assertNull(gadget.getHeight());
 			assertNull(gadget.getDisplay());
-			
+
 			Map<String, String> m = gadget.getPreferences();
 			assertNotNull(m);
 			assertEquals(0, m.size());
 		}
-		
+
 		{
 			Reminders reminders = event.getReminders();
 			assertNotNull(reminders);
@@ -622,9 +622,9 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 	@Test
 	public void listEvents_values_4() {
 // Swap the values for the next in sequence - booleans swap, enums on to next, strings to empty, numbers to zero.
-		
+
 		mockServer
-			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events"))
+			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?access_token=ACCESS_TOKEN"))
 			.andExpect(method(GET))
 			.andRespond(
 					withSuccess(jsonResource("mock_list_events_values_4"), APPLICATION_JSON));
@@ -642,7 +642,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 		Event event = eventPage.getItems().get(0);
 		assertNotNull(event);
 		assertEquals("\"etag1\"", event.getEtag());
-		
+
 		assertEquals("", event.getId());
 		assertNull(event.getStatus());
 		assertNull(event.getHtmlLink());
@@ -699,7 +699,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 			List<String> recurrence = event.getRecurrence();
 			assertNull(recurrence);
 		}
-		
+
 		{
 			DateTimeTimezone dtz = event.getOriginalStartTime();
 			assertNotNull(dtz);
@@ -725,7 +725,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 			assertNull(att.getComment());
 			assertNull(att.getAdditionalGuests());
 		}
-		
+
 		{
 			ExtendedProperties extendedProperties = event.getExtendedProperties();
 			assertNotNull(extendedProperties);
@@ -738,7 +738,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 				assertNull(m);
 			}
 		}
-		
+
 		{
 			Gadget gadget = event.getGadget();
 			assertNotNull(gadget);
@@ -749,11 +749,11 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 			assertNull(gadget.getWidth());
 			assertNull(gadget.getHeight());
 			assertNull(gadget.getDisplay());
-			
+
 			Map<String, String> m = gadget.getPreferences();
 			assertNull(m);
 		}
-		
+
 		{
 			Reminders reminders = event.getReminders();
 			assertNotNull(reminders);
@@ -777,9 +777,9 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 	@Test
 	public void listEvents_values_5() {
 // Swap the values for the next in sequence - booleans swap, enums on to next, strings to empty, numbers to zero.
-		
+
 		mockServer
-			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events"))
+			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?access_token=ACCESS_TOKEN"))
 			.andExpect(method(GET))
 			.andRespond(
 					withSuccess(jsonResource("mock_list_events_values_5"), APPLICATION_JSON));
@@ -797,7 +797,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 		Event event = eventPage.getItems().get(0);
 		assertNotNull(event);
 		assertEquals("\"etag1\"", event.getEtag());
-		
+
 		assertEquals("", event.getId());
 		assertNull(event.getStatus());
 		assertNull(event.getHtmlLink());
@@ -848,7 +848,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 			List<String> recurrence = event.getRecurrence();
 			assertNull(recurrence);
 		}
-		
+
 		{
 			DateTimeTimezone dtz = event.getOriginalStartTime();
 			assertNull(dtz);
@@ -871,17 +871,17 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 			assertNull(att.getComment());
 			assertNull(att.getAdditionalGuests());
 		}
-		
+
 		{
 			ExtendedProperties extendedProperties = event.getExtendedProperties();
 			assertNull(extendedProperties);
 		}
-		
+
 		{
 			Gadget gadget = event.getGadget();
 			assertNull(gadget);
 		}
-		
+
 		{
 			Reminders reminders = event.getReminders();
 			assertNotNull(reminders);
@@ -901,9 +901,9 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 	@Test
 	public void listEvents_values_6() {
 // Swap the values for the next in sequence - booleans swap, enums on to next, strings to empty, numbers to zero.
-		
+
 		mockServer
-			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events"))
+			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?access_token=ACCESS_TOKEN"))
 			.andExpect(method(GET))
 			.andRespond(
 					withSuccess(jsonResource("mock_list_events_values_6"), APPLICATION_JSON));
@@ -921,7 +921,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 		Event event = eventPage.getItems().get(0);
 		assertNotNull(event);
 		assertEquals("\"etag1\"", event.getEtag());
-		
+
 		assertEquals("", event.getId());
 		assertNull(event.getStatus());
 		assertNull(event.getHtmlLink());
@@ -972,7 +972,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 			List<String> recurrence = event.getRecurrence();
 			assertNull(recurrence);
 		}
-		
+
 		{
 			DateTimeTimezone dtz = event.getOriginalStartTime();
 			assertNull(dtz);
@@ -983,17 +983,17 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 			assertNotNull(attendees);
 			assertEquals(0, attendees.size());
 		}
-		
+
 		{
 			ExtendedProperties extendedProperties = event.getExtendedProperties();
 			assertNull(extendedProperties);
 		}
-		
+
 		{
 			Gadget gadget = event.getGadget();
 			assertNull(gadget);
 		}
-		
+
 		{
 			Reminders reminders = event.getReminders();
 			assertNotNull(reminders);
@@ -1012,9 +1012,9 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 	@Test
 	public void listEvents_values_7() {
 // Swap the values for the next in sequence - booleans swap, enums on to next, strings to empty, numbers to zero.
-		
+
 		mockServer
-			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events"))
+			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?access_token=ACCESS_TOKEN"))
 			.andExpect(method(GET))
 			.andRespond(
 					withSuccess(jsonResource("mock_list_events_values_7"), APPLICATION_JSON));
@@ -1032,7 +1032,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 		Event event = eventPage.getItems().get(0);
 		assertNotNull(event);
 		assertEquals("\"etag1\"", event.getEtag());
-		
+
 		assertEquals("", event.getId());
 		assertNull(event.getStatus());
 		assertNull(event.getHtmlLink());
@@ -1083,7 +1083,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 			List<String> recurrence = event.getRecurrence();
 			assertNull(recurrence);
 		}
-		
+
 		{
 			DateTimeTimezone dtz = event.getOriginalStartTime();
 			assertNull(dtz);
@@ -1093,17 +1093,17 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 			List<Attendee> attendees = event.getAttendees();
 			assertNull(attendees);
 		}
-		
+
 		{
 			ExtendedProperties extendedProperties = event.getExtendedProperties();
 			assertNull(extendedProperties);
 		}
-		
+
 		{
 			Gadget gadget = event.getGadget();
 			assertNull(gadget);
 		}
-		
+
 		{
 			Reminders reminders = event.getReminders();
 			assertNull(reminders);
@@ -1121,7 +1121,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 		String id = "_60q30c1g60o30e1i60o4ac1g60rj8gpl88rj2c1h84s34h9g60s30c1g60o30c1g6oo4agph751kah9o84r46ghg64o30c1g60o30c1g60o30c1g60o32c1g60o30c1g891jeh9o88qk6cpk612k6c1k6ss3idi488o36h1i8p1k6hhp6oog";
 
 		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events/_60q30c1g60o30e1i60o4ac1g60rj8gpl88rj2c1h84s34h9g60s30c1g60o30c1g6oo4agph751kah9o84r46ghg64o30c1g60o30c1g60o30c1g60o32c1g60o30c1g891jeh9o88qk6cpk612k6c1k6ss3idi488o36h1i8p1k6hhp6oog"))
+				.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events/_60q30c1g60o30e1i60o4ac1g60rj8gpl88rj2c1h84s34h9g60s30c1g60o30c1g6oo4agph751kah9o84r46ghg64o30c1g60o30c1g60o30c1g60o32c1g60o30c1g891jeh9o88qk6cpk612k6c1k6ss3idi488o36h1i8p1k6hhp6oog?access_token=ACCESS_TOKEN"))
 				.andExpect(method(GET))
 				.andRespond(
 						withSuccess(jsonResource("mock_get_event"), APPLICATION_JSON));
@@ -1138,7 +1138,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
 
 		// Not testing the actual creation, but check URL.
 		mockServer
-			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events/quickAdd?text=Appointment+at+Somewhere+every+June+3rd+10am-10%3A25am&sendNotifications=true"))
+			.expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events/quickAdd?text=Appointment+at+Somewhere+every+June+3rd+10am-10%3A25am&sendNotifications=true&access_token=ACCESS_TOKEN"))
 			.andExpect(method(POST))
 			.andRespond(
 					withSuccess(jsonResource("mock_added_event"), APPLICATION_JSON));
