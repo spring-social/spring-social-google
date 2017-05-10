@@ -25,6 +25,8 @@ import org.springframework.social.google.api.query.ApiQueryBuilder;
 import org.springframework.social.google.api.query.QueryBuilder;
 import org.springframework.web.client.RestTemplate;
 
+import static org.springframework.util.StringUtils.hasText;
+
 /**
  * Abstract superclass for {@link QueryBuilder} implementations that query Google+.
  * @author Gabriel Axel
@@ -57,6 +59,7 @@ public class ApiQueryBuilderImpl<Q extends ApiQueryBuilder<?, T>, T extends ApiP
 	
 	@Override
 	public Q fromPage(String pageToken) {
+		pageToken = hasText(pageToken) ? encode(pageToken) : pageToken;
 		return appendQueryParam("pageToken", pageToken);
 	}
 	
