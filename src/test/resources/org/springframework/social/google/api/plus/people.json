@@ -1,0 +1,51 @@
+/**
+ * Copyright 2011-2017 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+{
+	"kind": "plus#peopleFeed",
+	"etag": "\"9Q4kEgczRt3gWehMocqSxXqUhYo/u7k7MO2klIAs5_bEwMTQCyTUieM\"",
+	"selfLink": "https://www.googleapis.com/plus/v1/people?query=pivotal&maxResults=2",
+	"title": "Google+ People Search Results",
+	"nextPageToken": "EAIaAA",
+	"items":
+	[
+		{
+			"kind": "plus#person",
+			"etag": "\"9Q4kEgczRt3gWehMocqSxXqUhYo/7ZemMOOXKRnGnpGhqjETDr9np8U\"",
+			"objectType": "page",
+			"id": "105320112436428794490",
+			"displayName": "Pivotal",
+			"url": "https://plus.google.com/105320112436428794490",
+			"image":
+			{
+				"url": "https://lh6.googleusercontent.com/-SpRmYYefQfI/AAAAAAAAAAI/AAAAAAAAAE4/utGWIQK75eE/photo.jpg?sz=50"
+			}
+		},
+
+		{
+			"kind": "plus#person",
+			"etag": "\"9Q4kEgczRt3gWehMocqSxXqUhYo/vjS7Xo-b477P4nZDHlK_3aV3FnA\"",
+			"objectType": "page",
+			"id": "113677672877589536101",
+			"displayName": "Pivotal Tracker",
+			"url": "https://plus.google.com/+pivotaltracker",
+			"image":
+			{
+				"url": "https://lh3.googleusercontent.com/-PoFlIF3qlf0/AAAAAAAAAAI/AAAAAAAAAEw/eCwYJIvhyDA/photo.jpg?sz=50"
+			}
+		}
+	]
+}

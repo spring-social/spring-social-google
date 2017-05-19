@@ -1,0 +1,129 @@
+/**
+ * Copyright 2011-2017 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+{
+ "kind": "calendar#events",
+ "etag": "\"0001\"",
+ "nextSyncToken": "0002",
+ "items": [
+
+{
+  "kind": "calendar#event",
+  "etag": "\"etag1\"",
+  "id": "string1",
+  "status": "confirmed",
+  "htmlLink": "string3",
+  "created": "2000-01-01T00:00:00.000Z",
+  "updated": "2000-01-01T00:00:00.000Z",
+  "summary": "string4",
+  "description": "string5",
+  "location": "string6",
+  "colorId": "string7",
+  "creator": {
+    "id": "string8",
+    "email": "string9",
+    "displayName": "string10",
+    "self": true
+  },
+  "organizer": {
+    "id": "string11",
+    "email": "string12",
+    "displayName": "string13",
+    "self": true
+  },
+  "start": {
+    "date": "2000-01-01",
+    "dateTime": "2000-01-01T00:00:00.000Z",
+    "timeZone": "string14"
+  },
+  "end": {
+    "date": "2000-01-01",
+    "dateTime": "2000-01-01T00:00:00.000Z",
+    "timeZone": "string15"
+  },
+  "endTimeUnspecified": true,
+  "recurrence": [
+    "string16"
+  ],
+  "recurringEventId": "string17",
+  "originalStartTime": {
+    "date": "2000-01-01",
+    "dateTime": "2000-01-01T00:00:00.000Z",
+    "timeZone": "string18"
+  },
+  "transparency": "opaque",
+  "visibility": "default",
+  "iCalUID": "string21",
+  "sequence": 1,
+  "attendees": [
+    {
+      "id": "string22",
+      "email": "string23",
+      "displayName": "string24",
+      "organizer": true,
+      "self": true,
+      "resource": true,
+      "optional": true,
+      "responseStatus": "needsAction",
+      "comment": "string26",
+      "additionalGuests": 1
+    }
+  ],
+  "attendeesOmitted": true,
+  "extendedProperties": {
+    "private": {
+      "(key1)": "string27"
+    },
+    "shared": {
+      "(key2)": "string28"
+    }
+  },
+  "hangoutLink": "string29",
+  "gadget": {
+    "type": "string30",
+    "title": "string31",
+    "link": "string32",
+    "iconLink": "string33",
+    "width": 11,
+    "height": 11,
+    "display": "icon",
+    "preferences": {
+      "(key3)": "string35"
+    }
+  },
+  "anyoneCanAddSelf": true,
+  "guestsCanInviteOthers": true,
+  "guestsCanModify": true,
+  "guestsCanSeeOtherGuests": true,
+  "privateCopy": true,
+  "locked": true,
+  "reminders": {
+    "useDefault": true,
+    "overrides": [
+      {
+        "method": "email",
+        "minutes": 12
+      }
+    ]
+  },
+  "source": {
+    "url": "string37",
+    "title": "string38"
+  }
+}
+
+ ]
+}

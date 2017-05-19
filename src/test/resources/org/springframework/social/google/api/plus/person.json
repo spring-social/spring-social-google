@@ -1,0 +1,112 @@
+/**
+ * Copyright 2011-2017 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+{
+  "braggingRights": "Raising five cats",
+  "image": {
+    "url": "https://lh5.googleusercontent.com/-UyuMuAWmKIM/AAAAAAAAAAI/AAAAAAAAAn0/pMK2DzFNBNI/photo.jpg?sz=50"
+  },
+  "id": "114863353858610846998",
+  "objectType": "person",
+  "verified": false,
+  "etag": "\"YFr-hUROXQN7IOa3dUHg9dQ8eq0/NEVHKJoN067kdVmOajomyD-wN6Y\"",
+  "tagline": "testing our code",
+  "nickname": "cool beans",
+  "circledByCount": 51,
+  "occupation": "Software Engineer",
+  "aboutMe": "CTO and co-founder of <a href=\"https://www.docollab.com\" rel=\"nofollow\" target=\"_blank\">Docollab</a><br />",
+  "kind": "plus#person",
+  "placesLived": [
+    {
+      "primary": true,
+      "value": "Israel"
+    }
+  ],
+  "emails": [
+    {
+      "type": "account",
+      "value": "guznik@gmail.com"
+    }
+  ],
+  "organizations": [
+    {
+      "startDate": "2003",
+      "endDate": "2011",
+      "name": "The Open University of Israel",
+      "title": "Natural Science",
+      "primary": false,
+      "type": "school"
+    },
+    {
+      "type": "work",
+      "name": "Docollab",
+      "primary": true,
+      "title": "CTO"
+    }
+  ],
+  "relationshipStatus": "single",
+  "displayName": "Gabriel Axel",
+  "name": {
+    "givenName": "Gabriel",
+    "familyName": "Axel"
+  },
+  "language": "en",
+  "url": "https://plus.google.com/+GabrielAxel",
+  "gender": "male",
+  "cover": {
+    "coverInfo": {
+      "leftImageOffset": 0,
+      "topImageOffset": 0
+    },
+    "layout": "banner",
+    "coverPhoto": {
+      "url": "https://lh5.googleusercontent.com/-XviJW_7A56Q/T9kKKA9_iCI/AAAAAAAAAGI/DZCUNY97J0c/s630/Green%2BGrass.jpg",
+      "width": 940,
+      "height": 626
+    }
+  },
+  "isPlusUser": true,
+  "urls": [
+    {
+      "type": "otherProfile",
+      "value": "http://il.linkedin.com/pub/gabriel-axel/13/782/8a",
+      "label": "http://il.linkedin.com/pub/gabriel-axel/13/782/8a"
+    },
+    {
+      "type": "otherProfile",
+      "value": "http://twitter.com/GabiAxel",
+      "label": "gabiaxel"
+    },
+    {
+      "type": "contributor",
+      "value": "https://github.com/GabiAxel/spring-social-google",
+      "label": "Spring Social Google"
+    },
+    {
+      "type": "website",
+      "value": "http://www.gabiaxel.com",
+      "label": "Blog"
+    },
+    {
+      "type": "other",
+      "value": "https://www.docollab.com",
+      "label": "Docollab - Your Scientific Knowledgebase"
+    }
+  ],
+  "ageRange": {
+    "min": 21
+  }
+}

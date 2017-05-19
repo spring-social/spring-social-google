@@ -1,265 +1,65 @@
 buildscript {
-    repositories {
-        maven { url 'http://repo.spring.io/plugins-release' }
-    }
-    dependencies {
-        classpath("io.spring.gradle:propdeps-plugin:0.0.8")
-        classpath("io.spring.gradle:docbook-reference-plugin:0.3.1")
-    }
+  repositories {
+    mavenCentral()
+    maven { url 'https://plugins.gradle.org/m2/'}
+    maven { url 'http://repo.spring.io/plugins-release' }
+  }
+  dependencies {
+    classpath 'com.netflix.nebula:gradle-extra-configurations-plugin:3.1.0'
+    classpath 'io.spring.gradle:spring-release-plugin:0.2.0'
+  }
 }
 
-configure(allprojects) {
-    apply plugin: 'java'
-    apply plugin: 'eclipse'
-    apply plugin: 'idea'
+apply plugin: 'io.spring.release'
+apply plugin: 'nebula.optional-base'
 
-    group = 'org.springframework.social'
-
-    sourceCompatibility=1.7
-    targetCompatibility=1.7
-
-    ext {
-        springBootVersion = '1.2.6.RELEASE'
-        springSocialVersion = '1.1.4.RELEASE'
-        jacksonVersion = '2.6.1'
-        junitVersion = '4.11'
-        mockitoVersion = '1.10.8'
-        servletApiVersion = '3.0.1'
-        springVersion = '4.2.3.RELEASE'
-    }
-
-    [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:none']
-
-    test.systemProperty("java.awt.headless", "true")
-
-    repositories {
-        jcenter()
-        mavenCentral()
-        maven { url "http://repo.spring.io/snapshot" }
-        maven { url "http://repo.spring.io/milestone" }
-    }
-
-    dependencies {
-        testCompile("junit:junit:$junitVersion")
-        testCompile("org.mockito:mockito-all:$mockitoVersion")
-        testCompile("org.springframework:spring-test:$springVersion")
-    }
-
-    // servlet-api (2.5) and tomcat-servlet-api (3.0) classpath entries should not be
-    // exported to dependent projects in Eclipse to avoid false compilation errors due
-    // to changing APIs across these versions
-    eclipse.classpath.file.whenMerged { classpath ->
-        classpath.entries.findAll { entry -> entry.path.contains('servlet-api') }*.exported = false
-    }
+repositories {
+  jcenter()
+  mavenCentral()
+  maven { url 'https://repo.spring.io/libs-milestone' }
+  maven { url 'https://repo.spring.io/libs-snapshot' }
 }
 
-configure(subprojects) { subproject ->
-    apply from: "${rootProject.projectDir}/publish-maven.gradle"
+ext {
+  jacksonVersion = findProperty('jacksonVersion') ?: '2.8.6'
 
-    jar {
-        manifest.attributes['Implementation-Title'] = subproject.name
-        manifest.attributes['Implementation-Version'] = subproject.version
+  springBootVersion = findProperty('springBootVersion') ?: '1.5.3.RELEASE'
+  springSocialVersion = findProperty('springSocialVersion') ?: '1.1.4.RELEASE'
+  springVersion = findProperty('springVersion') ?: '4.3.8.RELEASE'
 
-        from("${rootProject.projectDir}/src/dist") {
-            include "license.txt"
-            include "notice.txt"
-            into "META-INF"
-            expand(copyright: new Date().format('yyyy'), version: project.version)
-        }
-    }
-
-    javadoc {
-        options.memberLevel = JavadocMemberLevel.PROTECTED
-        options.author = true
-        options.header = project.name
-    }
-
-    task sourcesJar(type: Jar, dependsOn: classes) {
-        classifier = 'sources'
-        from sourceSets.main.allJava
-    }
-
-    task javadocJar(type: Jar) {
-        classifier = 'javadoc'
-        from javadoc
-    }
-
-    artifacts {
-        archives sourcesJar
-        archives javadocJar
-    }
+  jsonVersion = findProperty('jsonVersion') ?: '20170516'
+  junitVersion = findProperty('junitVersion') ?: '4.12'
+  mockitoVersion = findProperty('mockitoVersion') ?: '2.8.9'
 }
 
-project('spring-social-google') {
-    description = 'Google API for Spring Social'
-    dependencies {
-        compile("org.springframework.boot:spring-boot-starter:$springBootVersion", optional)
-        compile("org.springframework.boot:spring-boot-configuration-processor:$springBootVersion", optional)
+group = 'org.springframework.social'
+description = 'Google API for Spring Social'
 
-        compile("org.springframework.social:spring-social-core:$springSocialVersion")
-        compile("org.springframework.social:spring-social-config:$springSocialVersion")
-        compile("org.springframework.social:spring-social-security:$springSocialVersion", optional)
-        compile("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
-        compile("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
-        compile("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
-        compile("javax.servlet:javax.servlet-api:$servletApiVersion", provided)
-
-        testCompile "org.springframework:spring-test:$springVersion"
-    }
+contacts {
+  'michael@laccetti.com' {
+    moniker 'Michael Laccetti'
+    github 'mlaccetti'
+  }
 }
 
-configure(rootProject) {
-    description = 'Spring Social Google'
+[compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:all', '-Xlint:-processing', '-Werror']
 
-    apply plugin: 'docbook-reference'
+test.systemProperty('java.awt.headless', 'true')
 
-    reference {
-        sourceDir = file('src/reference/docbook')
-    }
+dependencies {
+  compile("org.springframework.boot:spring-boot-starter:$springBootVersion", optional)
+  compile("org.springframework.boot:spring-boot-configuration-processor:$springBootVersion", optional)
 
-    // don't publish the default jar for the root project
-    configurations.archives.artifacts.clear()
+  compile("org.springframework.social:spring-social-core:$springSocialVersion")
+  compile("org.springframework.social:spring-social-config:$springSocialVersion")
+  compile("org.springframework.social:spring-social-security:$springSocialVersion", optional)
 
-    dependencies { // for integration tests
-    }
+  compile("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
+  compile("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
+  compile("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
 
-    task api(type: Javadoc) {
-        group = 'Documentation'
-        description = 'Generates aggregated Javadoc API documentation.'
-        title = "${rootProject.description} ${version} API"
-        options.memberLevel = JavadocMemberLevel.PROTECTED
-        options.author = true
-        options.header = rootProject.description
-        options.overview = 'src/api/overview.html'
-        options.links(
-                'http://docs.jboss.org/jbossas/javadoc/4.0.5/connector'
-        )
-        source subprojects.collect { project ->
-            project.sourceSets.main.allJava
-        }
-        destinationDir = new File(buildDir, "api")
-        classpath = files(subprojects.collect { project ->
-            project.sourceSets.main.compileClasspath
-        })
-        maxMemory = '1024m'
-    }
-
-    task docsZip(type: Zip) {
-        group = 'Distribution'
-        classifier = 'docs'
-        description = "Builds -${classifier} archive containing api and reference " +
-                "for deployment at static.springframework.org/spring-social/docs."
-
-        from('src/dist') {
-            include 'changelog.txt'
-        }
-
-        from(api) {
-            into 'api'
-        }
-
-        from(reference) {
-            into 'reference'
-        }
-    }
-
-    task schemaZip(type: Zip) {
-        group = 'Distribution'
-        classifier = 'schema'
-        description = "Builds -${classifier} archive containing all " +
-                "XSDs for deployment at static.springframework.org/schema."
-
-        subprojects.each { subproject ->
-            println "operating on subproject: ${subproject.name}"
-            Properties schemas = new Properties()
-
-            subproject.sourceSets.main.resources.find {
-                println "found resource: ${it.path}"
-                it.path.endsWith('META-INF/spring.schemas')
-            }?.withInputStream { schemas.load(it) }
-
-            for (def key : schemas.keySet()) {
-                def shortName = key.replaceAll(/http.*schema.(.*).spring-.*/, '$1')
-                println "loading xsd file for ${shortName}"
-                assert shortName != key
-                File xsdFile = subproject.sourceSets.main.resources.find {
-                    it.path.endsWith(schemas.get(key))
-                }
-                assert xsdFile != null
-                into(shortName) {
-                    from xsdFile.path
-                }
-            }
-        }
-    }
-
-    task distZip(type: Zip, dependsOn: [docsZip, schemaZip]) {
-        group = 'Distribution'
-        classifier = 'dist'
-        description = "Builds -${classifier} archive, containing all jars and docs, " +
-                "suitable for community download page."
-
-        ext.baseDir = "${project.name}-${project.version}";
-
-        from('src/dist') {
-            include 'readme.txt'
-            include 'license.txt'
-            include 'notice.txt'
-            into "${baseDir}"
-            expand(copyright: new Date().format('yyyy'), version: project.version)
-        }
-
-        from(zipTree(docsZip.archivePath)) {
-            into "${baseDir}/docs"
-        }
-
-        from(zipTree(schemaZip.archivePath)) {
-            into "${baseDir}/schema"
-        }
-
-        subprojects.each { subproject ->
-            into("${baseDir}/libs") {
-                from subproject.jar
-                if (subproject.tasks.findByPath('sourcesJar')) {
-                    from subproject.sourcesJar
-                }
-                if (subproject.tasks.findByPath('javadocJar')) {
-                    from subproject.javadocJar
-                }
-            }
-        }
-    }
-
-    artifacts {
-        archives docsZip
-        archives schemaZip
-        archives distZip
-    }
-
-    task wrapper(type: Wrapper) {
-        description = 'Generates gradlew[.bat] scripts'
-        gradleVersion = '3.4.1'
-    }
-
+  testCompile("junit:junit:$junitVersion")
+  testCompile("org.mockito:mockito-core:$mockitoVersion")
+  testCompile("org.springframework:spring-test:$springVersion")
+  testCompile("org.json:json:$jsonVersion")
 }
-
-task updateRootDocs {
-    doLast {
-        copy {
-            from 'src/dist'
-            into "${rootProject.projectDir}"
-            include 'notice.txt'
-            expand(copyright: new Date().format('yyyy'), version: project.version)
-            rename { filename -> 'NOTICE' }
-        }
-
-        copy {
-            from 'src/dist'
-            into "${rootProject.projectDir}"
-            include 'license.txt'
-            rename { filename -> 'LICENSE' }
-        }
-    }
-}
-
-build.dependsOn('updateRootDocs')
