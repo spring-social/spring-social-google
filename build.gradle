@@ -10,6 +10,7 @@ buildscript {
   }
 }
 
+apply plugin: 'checkstyle'
 apply plugin: 'io.spring.release'
 apply plugin: 'nebula.optional-base'
 
@@ -66,4 +67,26 @@ dependencies {
   testCompile("org.mockito:mockito-core:$mockitoVersion")
   testCompile("org.springframework:spring-test:$springVersion")
   testCompile("org.json:json:$jsonVersion")
+}
+
+checkstyle {
+  toolVersion = "7.7"
+
+  configFile = file("${rootDir}/gradle/checkstyle.xml")
+
+  maxErrors = 0
+  maxWarnings = 0
+
+  showViolations = false
+  ignoreFailures = false
+}
+
+tasks.withType(Checkstyle) {
+  source = "src/main/java"
+
+  reports {
+    xml.enabled false
+    html.enabled true
+    html.stylesheet resources.text.fromFile("${rootDir}/gradle/checkstyle.xsl")
+  }
 }
