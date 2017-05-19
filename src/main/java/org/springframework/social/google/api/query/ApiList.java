@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.query;
 
 import java.util.List;
@@ -25,22 +24,22 @@ import java.util.List;
  */
 public abstract class ApiList<T> {
 
-	private List<T> items;
-	private String etag;
+  private List<T> items;
+  private String etag;
 
-	protected ApiList() {
-	}
+  protected ApiList() {
+  }
 
-	protected ApiList(final List<T> items) {
-		this.items = items;
-	}
+  protected ApiList(final List<T> items) {
+    this.items = items;
+  }
 
-	public List<T> getItems() {
-		return items;
-	}
+  public List<T> getItems() {
+    return items;
+  }
 
-	public String getEtag() {
-		return etag;
-	}
+  public String getEtag() {
+    return etag;
+  }
 
 }

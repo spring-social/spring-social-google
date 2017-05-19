@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 /**
-* Configuration support classes.
-*/
+ * Configuration support classes.
+ */
 package org.springframework.social.google.config.support;

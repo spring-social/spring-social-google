@@ -1,54 +1,38 @@
-/**
- * Copyright 2011-2017 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 {
-  "id" : "onn6d9kbhps6fc47m96auhtkdo",
-  "etag" : "\"2831656302604000\"",
-  "status" : "tentative",
-  "htmlLink" : "https://www.google.com/calendar/event?eid=b25uNmQ5a2JocHM2ZmM0N205NmF1aHRrZG9fMjAxNTA2MDNUMDkwMDAwWiBtYXJ0eHdpbmtAbQ",
-  "created" : "2014-11-12T21:35:51.000Z",
-  "updated" : "2014-11-12T21:35:51.302Z",
-  "summary" : "Another title",
-  "location" : "Another place",
-  "creator" : {
-    "email" : "martxw@gmail.com",
-    "displayName" : "Martin Wink",
-    "self" : true
+  "id": "onn6d9kbhps6fc47m96auhtkdo",
+  "etag": "\"2831656302604000\"",
+  "status": "tentative",
+  "htmlLink": "https://www.google.com/calendar/event?eid=b25uNmQ5a2JocHM2ZmM0N205NmF1aHRrZG9fMjAxNTA2MDNUMDkwMDAwWiBtYXJ0eHdpbmtAbQ",
+  "created": "2014-11-12T21:35:51.000Z",
+  "updated": "2014-11-12T21:35:51.302Z",
+  "summary": "Another title",
+  "location": "Another place",
+  "creator": {
+    "email": "martxw@gmail.com",
+    "displayName": "Martin Wink",
+    "self": true
   },
-  "organizer" : {
-    "email" : "martxw@gmail.com",
-    "displayName" : "Martin Wink",
-    "self" : true
+  "organizer": {
+    "email": "martxw@gmail.com",
+    "displayName": "Martin Wink",
+    "self": true
   },
-  "start" : {
-    "date" : "2013-11-27",
-    "dateTime" : "2013-11-28T00:00:00.000Z",
-    "timeZone" : "CET"
+  "start": {
+    "date": "2013-11-27",
+    "dateTime": "2013-11-28T00:00:00.000Z",
+    "timeZone": "CET"
   },
-  "end" : {
-    "date" : "2013-11-29",
-    "dateTime" : "2013-11-30T00:00:00.000Z",
-    "timeZone" : "MST"
+  "end": {
+    "date": "2013-11-29",
+    "dateTime": "2013-11-30T00:00:00.000Z",
+    "timeZone": "MST"
   },
-  "recurrence" : [ "RRULE:FREQ=MONTHLY;INTERVAL=1", "RRULE:FREQ=MONTHLY;INTERVAL=3" ],
-  "iCalUID" : "onn6d9kbhps6fc47m96auhtkdo@google.com",
-  "sequence" : 0,
-  "guestsCanInviteOthers" : false,
-  "guestsCanSeeOtherGuests" : true,
-  "reminders" : {
-    "useDefault" : true
+  "recurrence": ["RRULE:FREQ=MONTHLY;INTERVAL=1", "RRULE:FREQ=MONTHLY;INTERVAL=3"],
+  "iCalUID": "onn6d9kbhps6fc47m96auhtkdo@google.com",
+  "sequence": 0,
+  "guestsCanInviteOthers": false,
+  "guestsCanSeeOtherGuests": true,
+  "reminders": {
+    "useDefault": true
   }
 }

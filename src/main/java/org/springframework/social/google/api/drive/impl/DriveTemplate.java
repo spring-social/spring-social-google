@@ -1,11 +1,11 @@
-/*
- * Copyright 2011 the original author or authors.
+/**
+ * Copyright 2011-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -53,313 +53,304 @@ import org.springframework.web.client.RestTemplate;
  * @author Gabriel Axel
  */
 public class DriveTemplate extends AbstractGoogleApiOperations implements
-		DriveOperations {
-	
-	private static final String DRIVE_BASE_URL = "https://www.googleapis.com/drive/v2";
-	
-	private static final String DRIVE_ABOUT_URL = DRIVE_BASE_URL + "/about";
-	
-	private static final String DRIVE_APPS_URL = DRIVE_BASE_URL + "/apps/";
-	
-	static final String DRIVE_FILES_URL = DRIVE_BASE_URL + "/files/";
-	
-	private static final String PERMISSIONS = "/permissions/";
-	
-	private static final String REVISIONS = "/revisions/";
-	
-	private static final String COMMENTS = "/comments/";
-	
-	private static final String REPLIES = "/replies/";
-	
-	private static final String PROPERTIES = "/properties/";
-	
-	private static final String SEND_NOTIFICATION = "?sendNotificationEmails=";
-	
-	private static final String MULTIPART_UPLOAD_URL = 
-		"https://www.googleapis.com/upload/drive/v2/files?uploadType=multipart"; 
-	
-	public DriveTemplate(RestTemplate restTemplate, boolean isAuthorized) {
-		super(restTemplate, isAuthorized);
-	}
+  DriveOperations {
 
-	@Override
-	public DriveAbout getAbout() {
-		return getEntity(DRIVE_ABOUT_URL, DriveAbout.class);
-	}
-	
-	@Override
-	public List<DriveApp> getApps() {
-		return getEntity(DRIVE_APPS_URL, DriveAppsList.class).getItems();
-	}
+  private static final String DRIVE_BASE_URL = "https://www.googleapis.com/drive/v2";
+  static final String DRIVE_FILES_URL = DRIVE_BASE_URL + "/files/";
+  private static final String DRIVE_ABOUT_URL = DRIVE_BASE_URL + "/about";
+  private static final String DRIVE_APPS_URL = DRIVE_BASE_URL + "/apps/";
+  private static final String PERMISSIONS = "/permissions/";
 
-	@Override
-	public DriveApp getApp(String id) {
-		return getEntity(DRIVE_APPS_URL + id,  DriveApp.class);
-	}
-	
-	@Override
-	public DriveFile getFile(String id) {
-		return getEntity(DRIVE_FILES_URL + id, DriveFile.class);
-	}
+  private static final String REVISIONS = "/revisions/";
 
-	@Override
-	public DriveFileQueryBuilder driveFileQuery() {
-		return new DriveFileQueryBuilderImpl(restTemplate);
-	}
+  private static final String COMMENTS = "/comments/";
 
-	@Override
-	public DriveFilesPage getRootFiles(String pageToken) {
-		return getFiles("root", pageToken);
-	}
+  private static final String REPLIES = "/replies/";
 
-	@Override
-	public DriveFilesPage getFiles(String parent, String pageToken) {
-		return driveFileQuery()
-				.parentIs(parent)
-				.fromPage(pageToken)
-				.trashed(false)
-				.hidden(false)
-				.getPage();
-	}
+  private static final String PROPERTIES = "/properties/";
 
-	@Override
-	public DriveFilesPage getTrashedFiles(String pageToken) {
-		return driveFileQuery()
-				.trashed(true)
-				.getPage();
-	}
+  private static final String SEND_NOTIFICATION = "?sendNotificationEmails=";
 
-	@Override
-	public DriveFile trash(String id) {
-		return restTemplate.postForObject(DRIVE_FILES_URL + id + "/trash", null, DriveFile.class);
-	}
+  private static final String MULTIPART_UPLOAD_URL =
+    "https://www.googleapis.com/upload/drive/v2/files?uploadType=multipart";
 
-	@Override
-	public DriveFile untrash(String id) {
-		return restTemplate.postForObject(DRIVE_FILES_URL + id + "/untrash", null, DriveFile.class);
-	}
+  public DriveTemplate(final RestTemplate restTemplate, final boolean isAuthorized) {
+    super(restTemplate, isAuthorized);
+  }
 
-	@Override
-	public DriveFile star(String id) {
-		return patch(DRIVE_FILES_URL + id, new PatchBuilder().set("labels.starred", true).getMap(), DriveFile.class);
-	}
+  @Override
+  public DriveAbout getAbout() {
+    return getEntity(DRIVE_ABOUT_URL, DriveAbout.class);
+  }
 
-	@Override
-	public DriveFile unstar(String id) {
-		return patch(DRIVE_FILES_URL + id, new PatchBuilder().set("labels.starred", false).getMap(), DriveFile.class);
-	}
+  @Override
+  public List<DriveApp> getApps() {
+    return getEntity(DRIVE_APPS_URL, DriveAppsList.class).getItems();
+  }
 
-	@Override
-	public DriveFile hide(String id) {
-		return patch(DRIVE_FILES_URL + id, new PatchBuilder().set("labels.hidden", true).getMap(), DriveFile.class);
-	}
+  @Override
+  public DriveApp getApp(final String id) {
+    return getEntity(DRIVE_APPS_URL + id, DriveApp.class);
+  }
 
-	@Override
-	public DriveFile unhide(String id) {
-		return patch(DRIVE_FILES_URL + id, new PatchBuilder().set("labels.hidden", false).getMap(), DriveFile.class);
-	}
+  @Override
+  public DriveFile getFile(final String id) {
+    return getEntity(DRIVE_FILES_URL + id, DriveFile.class);
+  }
 
-	@Override
-	public void delete(String id) {
-		restTemplate.delete(DRIVE_FILES_URL + id);
-	}
+  @Override
+  public DriveFileQueryBuilder driveFileQuery() {
+    return new DriveFileQueryBuilderImpl(restTemplate);
+  }
 
-	@Override
-	public DriveFile copy(String id) {
-		return restTemplate.postForObject(DRIVE_FILES_URL + id + "/copy", null, DriveFile.class);
-	}
+  @Override
+  public DriveFilesPage getRootFiles(final String pageToken) {
+    return getFiles("root", pageToken);
+  }
 
-	@Override
-	public DriveFile copy(String id, String[] parentIds) {
-		DriveFile file = new DriveFile.Builder()
-		.setParents(parentIds)
-		.build();
-		return saveEntity(DRIVE_FILES_URL + id + "/copy", file);
-	}
+  @Override
+  public DriveFilesPage getFiles(final String parent, final String pageToken) {
+    return driveFileQuery()
+      .parentIs(parent)
+      .fromPage(pageToken)
+      .trashed(false)
+      .hidden(false)
+      .getPage();
+  }
 
-	@Override
-	public DriveFile copy(String id, String[] parentIds, String title) {
-		DriveFile file = new DriveFile.Builder()
-		.setTitle(title)
-		.setParents(parentIds)
-		.build();
-		return saveEntity(DRIVE_FILES_URL + id + "/copy", file);
-	}
+  @Override
+  public DriveFilesPage getTrashedFiles(final String pageToken) {
+    return driveFileQuery()
+      .trashed(true)
+      .getPage();
+  }
 
-	@Override
-	public DriveFile move(String id, String parentId) {
-		List<DriveFileParent> parents = new ArrayList<DriveFileParent>(1);
-		parents.add(new DriveFileParent(parentId));
-		return patch(DRIVE_FILES_URL + id, new PatchBuilder().set("parents", parents).getMap(), DriveFile.class);
-	}
+  @Override
+  public DriveFile trash(final String id) {
+    return restTemplate.postForObject(DRIVE_FILES_URL + id + "/trash", null, DriveFile.class);
+  }
 
-	@Override
-	public DriveFile upload(Resource resource, DriveFile metadata, UploadParameters parameters) {
-		
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MULTIPART_FORM_DATA);
-		
-		MultiValueMap<String, Object> body = new LinkedMultiValueMap<String, Object>();
-		body.add("metadata", metadata);
-		body.add("file", resource);
-		
-		HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<MultiValueMap<String,Object>>(body, headers);
-		
-		ResponseEntity<DriveFile> response = restTemplate.exchange(MULTIPART_UPLOAD_URL + parameters, POST, entity, DriveFile.class);
+  @Override
+  public DriveFile untrash(final String id) {
+    return restTemplate.postForObject(DRIVE_FILES_URL + id + "/untrash", null, DriveFile.class);
+  }
 
-		return response.getBody();
-	}
+  @Override
+  public DriveFile star(final String id) {
+    return patch(DRIVE_FILES_URL + id, new PatchBuilder().set("labels.starred", true).getMap(), DriveFile.class);
+  }
 
-	@Override
-	public DriveFile createFileMetadata(DriveFile metadata) {
-		return saveEntity(DRIVE_FILES_URL, metadata);
-	}
+  @Override
+  public DriveFile unstar(final String id) {
+    return patch(DRIVE_FILES_URL + id, new PatchBuilder().set("labels.starred", false).getMap(), DriveFile.class);
+  }
 
-	@Override
-	public DriveFile createFolder(String parentId, String name) {
-		return createFileMetadata(DriveFile.builder()
-			.setMimeType(FOLDER)
-			.setTitle(name)
-			.setParents(hasText(parentId) ? parentId : "root")
-			.build());
-	}
+  @Override
+  public DriveFile hide(final String id) {
+    return patch(DRIVE_FILES_URL + id, new PatchBuilder().set("labels.hidden", true).getMap(), DriveFile.class);
+  }
 
-	@Override
-	public List<UserPermission> getPermissions(String fileId) {
-		return getEntity(DRIVE_FILES_URL + fileId + PERMISSIONS, UserPermissionsList.class).getItems();
-	}
+  @Override
+  public DriveFile unhide(final String id) {
+    return patch(DRIVE_FILES_URL + id, new PatchBuilder().set("labels.hidden", false).getMap(), DriveFile.class);
+  }
 
-	@Override
-	public UserPermission addPermission(String fileId,
-			UserPermission permission, boolean sendNotificationEmails) {
-		return saveEntity(DRIVE_FILES_URL + fileId + PERMISSIONS + SEND_NOTIFICATION + sendNotificationEmails, permission);
-	}
+  @Override
+  public void delete(final String id) {
+    restTemplate.delete(DRIVE_FILES_URL + id);
+  }
 
-	@Override
-	public UserPermission updatesPermission(String fileId, String permissionId,
-			UserPermission permission) {
-		Object patch = new PatchBuilder()
-			.set("role", permission.getRole())
-			.set("additionalRoles", permission.getAdditionalRoles())
-			.getMap();
-		return patch(DRIVE_FILES_URL + fileId + PERMISSIONS + permissionId, patch, UserPermission.class);
-	}
+  @Override
+  public DriveFile copy(final String id) {
+    return restTemplate.postForObject(DRIVE_FILES_URL + id + "/copy", null, DriveFile.class);
+  }
 
-	@Override
-	public void removePermission(String fileId, String permissionId) {
-		restTemplate.delete(DRIVE_FILES_URL + fileId + PERMISSIONS + permissionId);
-	}
+  @Override
+  public DriveFile copy(final String id, final String[] parentIds) {
+    final DriveFile file = new DriveFile.Builder()
+      .setParents(parentIds)
+      .build();
+    return saveEntity(DRIVE_FILES_URL + id + "/copy", file);
+  }
 
-	@Override
-	public List<FileRevision> getRevisions(String fileId) {
-		return getEntity(DRIVE_FILES_URL + fileId + REVISIONS, FileRevisionsList.class).getItems();
-	}
+  @Override
+  public DriveFile copy(final String id, final String[] parentIds, final String title) {
+    final DriveFile file = new DriveFile.Builder()
+      .setTitle(title)
+      .setParents(parentIds)
+      .build();
+    return saveEntity(DRIVE_FILES_URL + id + "/copy", file);
+  }
 
-	@Override
-	public FileRevision updateRevision(String fileId, String revisionId,
-			FileRevision revision) {
-		Object patch = new PatchBuilder()
-			.set("pinned", revision.isPinned())
-			.set("publishAuto", revision.isPublishAuto())
-			.set("published", revision.isPublished())
-			.set("publishedOutsideDomain", revision.isPublishedOutsideDomain())
-			.getMap();
-		return patch(DRIVE_FILES_URL + fileId + REVISIONS + revisionId, patch, FileRevision.class);
-	}
+  @Override
+  public DriveFile move(final String id, final String parentId) {
+    final List<DriveFileParent> parents = new ArrayList<>(1);
+    parents.add(new DriveFileParent(parentId));
+    return patch(DRIVE_FILES_URL + id, new PatchBuilder().set("parents", parents).getMap(), DriveFile.class);
+  }
 
-	@Override
-	public FileCommentQueryBuilder fileCommentQueryBuilder(String fileId) {
-		return new FileCommentQueryBuilderImpl(DRIVE_FILES_URL + fileId + COMMENTS, FileCommentsPage.class, restTemplate);
-	}
+  @Override
+  public DriveFile upload(final Resource resource, final DriveFile metadata, final UploadParameters parameters) {
 
-	@Override
-	public FileCommentsPage getComments(String fileId, String pageToken) {
-		return fileCommentQueryBuilder(fileId)
-				.fromPage(pageToken)
-				.getPage();
-	}
+    final HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MULTIPART_FORM_DATA);
 
-	@Override
-	public FileComment addComment(String fileId, FileComment comment) {
-		return saveEntity(DRIVE_FILES_URL + fileId + COMMENTS, comment);
-	}
+    final MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+    body.add("metadata", metadata);
+    body.add("file", resource);
 
-	@Override
-	public FileComment updateComment(String fileId, String commentId,
-			FileComment comment) {
-		Object patch = new PatchBuilder()
-			.set("content", comment.getContent())
-			.getMap();
-		return patch(DRIVE_FILES_URL + fileId + COMMENTS + commentId, patch, FileComment.class);
-	}
+    final HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
 
-	@Override
-	public void removeComment(String fileId, String commentId) {
-		restTemplate.delete(DRIVE_FILES_URL + fileId + COMMENTS + commentId);
-	}
+    final ResponseEntity<DriveFile> response = restTemplate.exchange(MULTIPART_UPLOAD_URL + parameters, POST, entity, DriveFile.class);
 
-	@Override
-	public CommentReply addReply(String fileId, String commentId,
-			CommentReply reply) {
-		return saveEntity(DRIVE_FILES_URL + fileId + COMMENTS + commentId + REPLIES, reply);
-	}
+    return response.getBody();
+  }
 
-	@Override
-	public CommentReply updateReply(String fileId, String commentId,
-			String replyId, CommentReply reply) {
-		Object patch = new PatchBuilder()
-			.set("content", reply.getContent())
-			.set("verb", reply.getVerb())
-			.getMap();
-		return patch(DRIVE_FILES_URL + fileId + COMMENTS + commentId + REPLIES + replyId, patch, CommentReply.class);
-	}
+  @Override
+  public DriveFile createFileMetadata(final DriveFile metadata) {
+    return saveEntity(DRIVE_FILES_URL, metadata);
+  }
 
-	@Override
-	public void removeReply(String fileId, String commentId, String replyId) {
-		restTemplate.delete(DRIVE_FILES_URL + fileId + COMMENTS + commentId + REPLIES + replyId);
-	}
+  @Override
+  public DriveFile createFolder(final String parentId, final String name) {
+    return createFileMetadata(DriveFile.builder()
+      .setMimeType(FOLDER)
+      .setTitle(name)
+      .setParents(hasText(parentId) ? parentId : "root")
+      .build());
+  }
 
-	@Override
-	public Resource downloadFile(String id) {
-		return downloadFile(getFile(id));
-	}
+  @Override
+  public List<UserPermission> getPermissions(final String fileId) {
+    return getEntity(DRIVE_FILES_URL + fileId + PERMISSIONS, UserPermissionsList.class).getItems();
+  }
 
-	@Override
-	public Resource downloadFile(DriveFile file) {
-		return restTemplate.getForObject(file.getDownloadUrl(), Resource.class);
-	}
+  @Override
+  public UserPermission addPermission(final String fileId,
+                                      final UserPermission permission, final boolean sendNotificationEmails) {
+    return saveEntity(DRIVE_FILES_URL + fileId + PERMISSIONS + SEND_NOTIFICATION + sendNotificationEmails, permission);
+  }
 
-	@Override
-	public List<FileProperty> getProperties(String fileId)
-	{
-		return getEntity(DRIVE_FILES_URL + fileId + PROPERTIES, FilePropertiesList.class).getItems();
-	}
+  @Override
+  public UserPermission updatesPermission(final String fileId, final String permissionId,
+                                          final UserPermission permission) {
+    final Object patch = new PatchBuilder()
+      .set("role", permission.getRole())
+      .set("additionalRoles", permission.getAdditionalRoles())
+      .getMap();
+    return patch(DRIVE_FILES_URL + fileId + PERMISSIONS + permissionId, patch, UserPermission.class);
+  }
 
-	@Override
-	public FileProperty getProperty(String fileId, String propertyKey)
-	{
-		return getEntity(DRIVE_FILES_URL + fileId + PROPERTIES + propertyKey, FileProperty.class);
-	}
+  @Override
+  public void removePermission(final String fileId, final String permissionId) {
+    restTemplate.delete(DRIVE_FILES_URL + fileId + PERMISSIONS + permissionId);
+  }
 
-	@Override
-	public FileProperty addProperty(String fileId, FileProperty property)
-	{
-		return saveEntity(DRIVE_FILES_URL + fileId + PROPERTIES, property);
-	}
+  @Override
+  public List<FileRevision> getRevisions(final String fileId) {
+    return getEntity(DRIVE_FILES_URL + fileId + REVISIONS, FileRevisionsList.class).getItems();
+  }
 
-	@Override
-	public FileProperty updateProperty(String fileId, FileProperty property)
-	{
-		Object patch = new PatchBuilder()
-			.set("value", property.getValue())
-			.set("visibility", property.getVisibility())
-			.getMap();
-		return patch(DRIVE_FILES_URL + fileId + PROPERTIES + property.getKey(), patch, FileProperty.class);
-	}
+  @Override
+  public FileRevision updateRevision(final String fileId, final String revisionId,
+                                     final FileRevision revision) {
+    final Object patch = new PatchBuilder()
+      .set("pinned", revision.isPinned())
+      .set("publishAuto", revision.isPublishAuto())
+      .set("published", revision.isPublished())
+      .set("publishedOutsideDomain", revision.isPublishedOutsideDomain())
+      .getMap();
+    return patch(DRIVE_FILES_URL + fileId + REVISIONS + revisionId, patch, FileRevision.class);
+  }
 
-	@Override
-	public void removeProperty(String fileId, String propertyKey)
-	{
-		restTemplate.delete(DRIVE_FILES_URL + fileId + PROPERTIES + propertyKey);
-	}
+  @Override
+  public FileCommentQueryBuilder fileCommentQueryBuilder(final String fileId) {
+    return new FileCommentQueryBuilderImpl(DRIVE_FILES_URL + fileId + COMMENTS, FileCommentsPage.class, restTemplate);
+  }
+
+  @Override
+  public FileCommentsPage getComments(final String fileId, final String pageToken) {
+    return fileCommentQueryBuilder(fileId)
+      .fromPage(pageToken)
+      .getPage();
+  }
+
+  @Override
+  public FileComment addComment(final String fileId, final FileComment comment) {
+    return saveEntity(DRIVE_FILES_URL + fileId + COMMENTS, comment);
+  }
+
+  @Override
+  public FileComment updateComment(final String fileId, final String commentId,
+                                   final FileComment comment) {
+    final Object patch = new PatchBuilder()
+      .set("content", comment.getContent())
+      .getMap();
+    return patch(DRIVE_FILES_URL + fileId + COMMENTS + commentId, patch, FileComment.class);
+  }
+
+  @Override
+  public void removeComment(final String fileId, final String commentId) {
+    restTemplate.delete(DRIVE_FILES_URL + fileId + COMMENTS + commentId);
+  }
+
+  @Override
+  public CommentReply addReply(final String fileId, final String commentId,
+                               final CommentReply reply) {
+    return saveEntity(DRIVE_FILES_URL + fileId + COMMENTS + commentId + REPLIES, reply);
+  }
+
+  @Override
+  public CommentReply updateReply(final String fileId, final String commentId,
+                                  final String replyId, final CommentReply reply) {
+    final Object patch = new PatchBuilder()
+      .set("content", reply.getContent())
+      .set("verb", reply.getVerb())
+      .getMap();
+    return patch(DRIVE_FILES_URL + fileId + COMMENTS + commentId + REPLIES + replyId, patch, CommentReply.class);
+  }
+
+  @Override
+  public void removeReply(final String fileId, final String commentId, final String replyId) {
+    restTemplate.delete(DRIVE_FILES_URL + fileId + COMMENTS + commentId + REPLIES + replyId);
+  }
+
+  @Override
+  public Resource downloadFile(final String id) {
+    return downloadFile(getFile(id));
+  }
+
+  @Override
+  public Resource downloadFile(final DriveFile file) {
+    return restTemplate.getForObject(file.getDownloadUrl(), Resource.class);
+  }
+
+  @Override
+  public List<FileProperty> getProperties(final String fileId) {
+    return getEntity(DRIVE_FILES_URL + fileId + PROPERTIES, FilePropertiesList.class).getItems();
+  }
+
+  @Override
+  public FileProperty getProperty(final String fileId, final String propertyKey) {
+    return getEntity(DRIVE_FILES_URL + fileId + PROPERTIES + propertyKey, FileProperty.class);
+  }
+
+  @Override
+  public FileProperty addProperty(final String fileId, final FileProperty property) {
+    return saveEntity(DRIVE_FILES_URL + fileId + PROPERTIES, property);
+  }
+
+  @Override
+  public FileProperty updateProperty(final String fileId, final FileProperty property) {
+    final Object patch = new PatchBuilder()
+      .set("value", property.getValue())
+      .set("visibility", property.getVisibility())
+      .getMap();
+    return patch(DRIVE_FILES_URL + fileId + PROPERTIES + property.getKey(), patch, FileProperty.class);
+  }
+
+  @Override
+  public void removeProperty(final String fileId, final String propertyKey) {
+    restTemplate.delete(DRIVE_FILES_URL + fileId + PROPERTIES + propertyKey);
+  }
 }

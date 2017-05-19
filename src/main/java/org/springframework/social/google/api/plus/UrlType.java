@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.plus;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -24,5 +23,5 @@ import org.springframework.social.google.api.plus.impl.UrlTypeDeserializer;
 @JsonSerialize(using = ApiEnumSerializer.class)
 @JsonDeserialize(using = UrlTypeDeserializer.class)
 public enum UrlType {
-    OTHER, OTHER_PROFILE, CONTRIBUTOR, WEBSITE
+  OTHER, OTHER_PROFILE, CONTRIBUTOR, WEBSITE
 }

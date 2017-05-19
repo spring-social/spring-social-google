@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.query;
 
 import java.util.List;
@@ -25,18 +24,18 @@ import java.util.List;
  */
 public abstract class ApiPage<T> extends ApiList<T> {
 
-	private String nextPageToken;
+  private String nextPageToken;
 
-	protected ApiPage() {
-	}
+  protected ApiPage() {
+  }
 
-	protected ApiPage(final List<T> items, final String nextPageToken) {
-		super(items);
-		this.nextPageToken = nextPageToken;
-	}
+  protected ApiPage(final List<T> items, final String nextPageToken) {
+    super(items);
+    this.nextPageToken = nextPageToken;
+  }
 
-	public String getNextPageToken() {
-		return nextPageToken;
-	}
+  public String getNextPageToken() {
+    return nextPageToken;
+  }
 
 }

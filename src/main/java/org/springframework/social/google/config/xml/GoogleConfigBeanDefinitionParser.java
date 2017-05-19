@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.config.xml;
 
 import org.springframework.social.config.xml.AbstractProviderConfigBeanDefinitionParser;
@@ -29,15 +28,15 @@ import org.springframework.social.security.provider.SocialAuthenticationService;
  * @author Hakan Dilek
  */
 public class GoogleConfigBeanDefinitionParser extends
-		AbstractProviderConfigBeanDefinitionParser {
+  AbstractProviderConfigBeanDefinitionParser {
 
-	protected GoogleConfigBeanDefinitionParser() {
-		super(GoogleConnectionFactory.class, GoogleApiHelper.class);
-	}
+  protected GoogleConfigBeanDefinitionParser() {
+    super(GoogleConnectionFactory.class, GoogleApiHelper.class);
+  }
 
-	@Override
-	protected Class<? extends SocialAuthenticationService<?>> getAuthenticationServiceClass() {
-		return GoogleAuthenticationService.class;
-	}
+  @Override
+  protected Class<? extends SocialAuthenticationService<?>> getAuthenticationServiceClass() {
+    return GoogleAuthenticationService.class;
+  }
 
 }

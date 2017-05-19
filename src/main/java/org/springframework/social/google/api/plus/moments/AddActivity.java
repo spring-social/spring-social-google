@@ -1,11 +1,11 @@
-/*
- * Copyright 2011 the original author or authors.
+/**
+ * Copyright 2011-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,20 +21,20 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * Model class representing a generic fallback activity type.
- * 
+ *
  * @see <a
  *      href="https://developers.google.com/+/api/moment-types/add-activity">Add
  *      Activity</a>
  * @author Gabriel Axel
- * 
+ *
  */
 @JsonTypeName(ADD_ACTIVITY)
 public class AddActivity extends Moment {
 
-	public AddActivity() {
-	}
+  public AddActivity() {
+  }
 
-	public AddActivity(String targetUrl) {
-		super(targetUrl);
-	}
+  public AddActivity(final String targetUrl) {
+    super(targetUrl);
+  }
 }

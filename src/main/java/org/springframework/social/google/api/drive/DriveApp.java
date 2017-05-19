@@ -1,11 +1,11 @@
-/*
- * Copyright 2011 the original author or authors.
+/**
+ * Copyright 2011-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,115 +17,102 @@ package org.springframework.social.google.api.drive;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.social.google.api.ApiEntity;
 import org.springframework.social.google.api.drive.impl.IconCategoryDeserializer;
 import org.springframework.social.google.api.impl.ApiEnumSerializer;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 /**
  * Model class representing an application that is using Google Drive API
- * 
+ *
  * @author Gabriel Axel
  */
 public class DriveApp extends ApiEntity {
-	
-	@JsonSerialize(using = ApiEnumSerializer.class)
-	@JsonDeserialize(using = IconCategoryDeserializer.class)
-	public enum IconCategory {
-		APPLICATION, DOCUMENT, DOCUMENT_SHARED;
-	}
 
-	public static class AppIcon {
-		
-		@JsonProperty
-		private IconCategory category;
-		
-		@JsonProperty
-		private int size;
-		
-		@JsonProperty
-		private String iconUrl;
-	}
-	
-	private String name;
+  private String name;
+  private String objectType;
+  private boolean supportsCreate;
+  private boolean supportsImport;
+  private boolean installed;
+  private boolean authorized;
+  private boolean useByDefault;
+  private String productUrl;
+  private List<String> primaryMimeTypes;
+  private List<String> secondaryMimeTypes;
+  private List<String> primaryFileExtensions;
+  private List<String> secondaryFileExtensions;
+  private List<AppIcon> icons;
 
-	private String objectType;
+  public String getName() {
+    return name;
+  }
 
-	private boolean supportsCreate;
+  public String getObjectType() {
+    return objectType;
+  }
 
-	private boolean supportsImport;
+  public boolean isSupportsCreate() {
+    return supportsCreate;
+  }
 
-	private boolean installed;
+  public boolean isSupportsImport() {
+    return supportsImport;
+  }
 
-	private boolean authorized;
+  public boolean isInstalled() {
+    return installed;
+  }
 
-	private boolean useByDefault;
+  public boolean isAuthorized() {
+    return authorized;
+  }
 
-	private String productUrl;
+  public boolean isUseByDefault() {
+    return useByDefault;
+  }
 
-	private List<String> primaryMimeTypes;
+  public String getProductUrl() {
+    return productUrl;
+  }
 
-	private List<String> secondaryMimeTypes;
+  public List<String> getPrimaryMimeTypes() {
+    return primaryMimeTypes;
+  }
 
-	private List<String> primaryFileExtensions;
+  public List<String> getSecondaryMimeTypes() {
+    return secondaryMimeTypes;
+  }
 
-	private List<String> secondaryFileExtensions;
+  public List<String> getPrimaryFileExtensions() {
+    return primaryFileExtensions;
+  }
 
-	private List<AppIcon> icons;
+  public List<String> getSecondaryFileExtensions() {
+    return secondaryFileExtensions;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public List<AppIcon> getIcons() {
+    return icons;
+  }
 
-	public String getObjectType() {
-		return objectType;
-	}
+  @JsonSerialize(using = ApiEnumSerializer.class)
+  @JsonDeserialize(using = IconCategoryDeserializer.class)
+  public enum IconCategory {
+    APPLICATION, DOCUMENT, DOCUMENT_SHARED;
+  }
 
-	public boolean isSupportsCreate() {
-		return supportsCreate;
-	}
+  public static class AppIcon {
 
-	public boolean isSupportsImport() {
-		return supportsImport;
-	}
+    @JsonProperty
+    private IconCategory category;
 
-	public boolean isInstalled() {
-		return installed;
-	}
+    @JsonProperty
+    private int size;
 
-	public boolean isAuthorized() {
-		return authorized;
-	}
+    @JsonProperty
+    private String iconUrl;
+  }
 
-	public boolean isUseByDefault() {
-		return useByDefault;
-	}
-
-	public String getProductUrl() {
-		return productUrl;
-	}
-
-	public List<String> getPrimaryMimeTypes() {
-		return primaryMimeTypes;
-	}
-
-	public List<String> getSecondaryMimeTypes() {
-		return secondaryMimeTypes;
-	}
-
-	public List<String> getPrimaryFileExtensions() {
-		return primaryFileExtensions;
-	}
-
-	public List<String> getSecondaryFileExtensions() {
-		return secondaryFileExtensions;
-	}
-
-	public List<AppIcon> getIcons() {
-		return icons;
-	}
-	
 }

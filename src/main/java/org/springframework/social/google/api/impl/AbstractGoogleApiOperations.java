@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.impl;
 
-import static org.springframework.http.HttpMethod.*;
+import static org.springframework.http.HttpMethod.PATCH;
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
 import static org.springframework.util.StringUtils.hasText;
 
 import java.io.IOException;
@@ -40,69 +41,69 @@ import org.springframework.web.client.RestTemplate;
  */
 public abstract class AbstractGoogleApiOperations {
 
-	protected final RestTemplate restTemplate;
-	protected final boolean isAuthorized;
-	private final static Log logger = LogFactory.getLog(AbstractGoogleApiOperations.class);
+  private final static Log logger = LogFactory.getLog(AbstractGoogleApiOperations.class);
+  protected final RestTemplate restTemplate;
+  protected final boolean isAuthorized;
 
-	protected AbstractGoogleApiOperations(final RestTemplate restTemplate, final boolean isAuthorized) {
-		this.restTemplate = restTemplate;
-		this.isAuthorized = isAuthorized;
+  protected AbstractGoogleApiOperations(final RestTemplate restTemplate, final boolean isAuthorized) {
+    this.restTemplate = restTemplate;
+    this.isAuthorized = isAuthorized;
 
-		restTemplate.setErrorHandler(new DefaultResponseErrorHandler(){
-			@Override
-			public void handleError(final ClientHttpResponse response) throws IOException {
-				if (logger.isWarnEnabled()) {
-					final String bodyText = StreamUtils.copyToString(response.getBody(), Charset.defaultCharset());
-					logger.warn("Google API REST response body:" + bodyText);
-				}
-			}
-		});
-	}
+    restTemplate.setErrorHandler(new DefaultResponseErrorHandler() {
+      @Override
+      public void handleError(final ClientHttpResponse response) throws IOException {
+        if (logger.isWarnEnabled()) {
+          final String bodyText = StreamUtils.copyToString(response.getBody(), Charset.defaultCharset());
+          logger.warn("Google API REST response body:" + bodyText);
+        }
+      }
+    });
+  }
 
-	protected void requireAuthorization() {
-		if (!isAuthorized) {
-			throw new MissingAuthorizationException("google");
-		}
-	}
+  protected void requireAuthorization() {
+    if (!isAuthorized) {
+      throw new MissingAuthorizationException("google");
+    }
+  }
 
-	protected <T> T getEntity(final String url, final Class<T> type) {
-		return restTemplate.getForObject(url, type);
-	}
+  protected <T> T getEntity(final String url, final Class<T> type) {
+    return restTemplate.getForObject(url, type);
+  }
 
-	@SuppressWarnings("unchecked")
-	protected <T> T saveEntity(final String url, final T entity) {
-		return (T) restTemplate.postForObject(url, entity, entity.getClass());
-	}
+  @SuppressWarnings("unchecked")
+  protected <T> T saveEntity(final String url, final T entity) {
+    return (T) restTemplate.postForObject(url, entity, entity.getClass());
+  }
 
-	protected <T extends ApiEntity> T saveEntity(final String baseUrl, final T entity) {
+  protected <T extends ApiEntity> T saveEntity(final String baseUrl, final T entity) {
 
-		final String url;
-		final HttpMethod method;
+    final String url;
+    final HttpMethod method;
 
-		if(hasText(entity.getId())) {
-			url = baseUrl + '/' + entity.getId();
-			method = PUT;
-		} else {
-			url = baseUrl;
-			method = POST;
-		}
+    if (hasText(entity.getId())) {
+      url = baseUrl + '/' + entity.getId();
+      method = PUT;
+    } else {
+      url = baseUrl;
+      method = POST;
+    }
 
-		@SuppressWarnings("unchecked") final ResponseEntity<T> response =
-			restTemplate.exchange(url, method, new HttpEntity<T>(entity), (Class<T>)entity.getClass());
+    @SuppressWarnings("unchecked") final ResponseEntity<T> response =
+      restTemplate.exchange(url, method, new HttpEntity<>(entity), (Class<T>) entity.getClass());
 
-		return response.getBody();
-	}
+    return response.getBody();
+  }
 
-	protected void deleteEntity(final String baseUrl, final ApiEntity entity) {
-		deleteEntity(baseUrl, entity.getId());
-	}
+  protected void deleteEntity(final String baseUrl, final ApiEntity entity) {
+    deleteEntity(baseUrl, entity.getId());
+  }
 
-	protected void deleteEntity(final String baseUrl, final String id) {
-		restTemplate.delete(baseUrl + '/' + id);
-	}
+  protected void deleteEntity(final String baseUrl, final String id) {
+    restTemplate.delete(baseUrl + '/' + id);
+  }
 
-	protected <T> T patch(final String url, final Object request, final Class<T> responseType) {
-		final ResponseEntity<T> response = restTemplate.exchange(url, PATCH, new HttpEntity<Object>(request), responseType);
-		return response.getBody();
-	}
+  protected <T> T patch(final String url, final Object request, final Class<T> responseType) {
+    final ResponseEntity<T> response = restTemplate.exchange(url, PATCH, new HttpEntity<>(request), responseType);
+    return response.getBody();
+  }
 }

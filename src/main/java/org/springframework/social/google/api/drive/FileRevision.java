@@ -1,11 +1,11 @@
-/*
- * Copyright 2011 the original author or authors.
+/**
+ * Copyright 2011-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,123 +25,111 @@ import org.springframework.social.google.api.ApiEntity;
  * @author Gabriel Axel
  */
 public class FileRevision extends ApiEntity {
-	
-	public static class FileRevisionBuilder {
-		
-		private boolean pinned;
-		
-		private boolean publishAuto;
-		
-		private boolean published;
-		
-		private boolean publishedOutsideDomain;
 
-		public FileRevisionBuilder setPinned(boolean pinned) {
-			this.pinned = pinned;
-			return this;
-		}
+  private String mimeType;
+  private Date modifiedDate;
+  private boolean pinned;
+  private boolean published;
+  private String publishedLink;
+  private boolean publishAuto;
+  private boolean publishedOutsideDomain;
+  private String downloadUrl;
+  private Map<String, String> exportLinks;
+  private String lastModifyingUserName;
+  private String originalFilename;
+  private String md5Checksum;
+  private long fileSize;
 
-		public FileRevisionBuilder setPublishAuto(boolean publishAuto) {
-			this.publishAuto = publishAuto;
-			return this;
-		}
+  public String getMimeType() {
+    return mimeType;
+  }
 
-		public FileRevisionBuilder setPublished(boolean published) {
-			this.published = published;
-			return this;
-		}
+  public Date getModifiedDate() {
+    return modifiedDate;
+  }
 
-		public FileRevisionBuilder setPublishedOutsideDomain(boolean publishedOutsideDomain) {
-			this.publishedOutsideDomain = publishedOutsideDomain;
-			return this;
-		}
-		
-		public FileRevision build() {
-			FileRevision revision = new FileRevision();
-			revision.pinned = pinned;
-			revision.publishAuto = publishAuto;
-			revision.published = published;
-			revision.publishedOutsideDomain = publishedOutsideDomain;
-			return revision;
-		}
-	}
+  public boolean isPinned() {
+    return pinned;
+  }
 
-	private String mimeType;
-	
-	private Date modifiedDate;
-	
-	private boolean pinned;
-	
-	private boolean published;
-	
-	private String publishedLink;
-	
-	private boolean publishAuto;
-	
-	private boolean publishedOutsideDomain;
-	
-	private String downloadUrl;
-	
-	private Map<String, String> exportLinks;
-	
-	private String lastModifyingUserName;
-	
-	private String originalFilename;
-	
-	private String md5Checksum;
-	
-	private long fileSize;
+  public boolean isPublished() {
+    return published;
+  }
 
-	public String getMimeType() {
-		return mimeType;
-	}
+  public String getPublishedLink() {
+    return publishedLink;
+  }
 
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
+  public boolean isPublishAuto() {
+    return publishAuto;
+  }
 
-	public boolean isPinned() {
-		return pinned;
-	}
+  public boolean isPublishedOutsideDomain() {
+    return publishedOutsideDomain;
+  }
 
-	public boolean isPublished() {
-		return published;
-	}
+  public String getDownloadUrl() {
+    return downloadUrl;
+  }
 
-	public String getPublishedLink() {
-		return publishedLink;
-	}
+  public Map<String, String> getExportLinks() {
+    return exportLinks;
+  }
 
-	public boolean isPublishAuto() {
-		return publishAuto;
-	}
+  public String getLastModifyingUserName() {
+    return lastModifyingUserName;
+  }
 
-	public boolean isPublishedOutsideDomain() {
-		return publishedOutsideDomain;
-	}
+  public String getOriginalFilename() {
+    return originalFilename;
+  }
 
-	public String getDownloadUrl() {
-		return downloadUrl;
-	}
+  public String getMd5Checksum() {
+    return md5Checksum;
+  }
 
-	public Map<String, String> getExportLinks() {
-		return exportLinks;
-	}
+  public long getFileSize() {
+    return fileSize;
+  }
 
-	public String getLastModifyingUserName() {
-		return lastModifyingUserName;
-	}
+  public static class FileRevisionBuilder {
 
-	public String getOriginalFilename() {
-		return originalFilename;
-	}
+    private boolean pinned;
 
-	public String getMd5Checksum() {
-		return md5Checksum;
-	}
+    private boolean publishAuto;
 
-	public long getFileSize() {
-		return fileSize;
-	}
-	
+    private boolean published;
+
+    private boolean publishedOutsideDomain;
+
+    public FileRevisionBuilder setPinned(final boolean pinned) {
+      this.pinned = pinned;
+      return this;
+    }
+
+    public FileRevisionBuilder setPublishAuto(final boolean publishAuto) {
+      this.publishAuto = publishAuto;
+      return this;
+    }
+
+    public FileRevisionBuilder setPublished(final boolean published) {
+      this.published = published;
+      return this;
+    }
+
+    public FileRevisionBuilder setPublishedOutsideDomain(final boolean publishedOutsideDomain) {
+      this.publishedOutsideDomain = publishedOutsideDomain;
+      return this;
+    }
+
+    public FileRevision build() {
+      final FileRevision revision = new FileRevision();
+      revision.pinned = pinned;
+      revision.publishAuto = publishAuto;
+      revision.published = published;
+      revision.publishedOutsideDomain = publishedOutsideDomain;
+      return revision;
+    }
+  }
+
 }

@@ -13,8 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.plus;
+
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -22,223 +28,195 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.social.google.api.ApiEntity;
 import org.springframework.social.google.api.plus.impl.AgeRangeDeserializer;
 
-import java.util.*;
-import java.util.Map.Entry;
-
 /**
  * Model class representing a full Google profile
  *
  * @author Gabriel Axel
  */
 public class Person extends ApiEntity {
-	private static class Name {
-		@JsonProperty
-		private String givenName;
+  @JsonProperty
+  private Name name;
+  private String displayName;
+  private String url;
+  @JsonProperty("isPlusUser")
+  private boolean plusUser;
+  private int circledByCount;
+  @JsonProperty
+  private Image image;
+  private String thumbnailUrl;
+  private Date birthday;
+  private String gender;
+  private String occupation;
+  private String aboutMe;
+  private String tagline;
+  private String nickname;
+  private String language;
+  private Boolean verified = false;
+  private String relationshipStatus;
+  private List<ProfileUrl> urls;
+  private List<Organization> organizations;
+  private Map<String, Boolean> placesLived;
+  private Map<String, String> emails;
+  @JsonProperty
+  @JsonDeserialize(using = AgeRangeDeserializer.class)
+  private AgeRange ageRange = AgeRange.UNKNOWN;
 
-		@JsonProperty
-		private String familyName;
-	}
+  @Override
+  public String toString() {
+    return displayName;
+  }
 
-	private static class Image {
-		@JsonProperty
-		private String url;
-	}
+  public String getGivenName() {
+    return name == null ? null : name.givenName;
+  }
 
-	private static class PlaceLived {
-		@JsonProperty
-		private String value;
+  public String getFamilyName() {
+    return name == null ? null : name.familyName;
+  }
 
-		@JsonProperty
-		private boolean primary;
-	}
+  public String getDisplayName() {
+    return displayName;
+  }
 
-	private static class Email {
-		@JsonProperty
-		private String value;
+  public String getUrl() {
+    return url;
+  }
 
-		@JsonProperty
-		private String type;
-	}
+  public boolean isPlusUser() {
+    return plusUser;
+  }
 
-	@JsonProperty
-	private Name name;
+  public int getCircledByCount() {
+    return circledByCount;
+  }
 
-	private String displayName;
+  public String getImageUrl() {
+    if (thumbnailUrl != null) {
+      return thumbnailUrl;
+    }
+    if (image != null) {
+      return image.url;
+    }
+    return null;
+  }
 
-	private String url;
+  public Date getBirthday() {
+    return birthday;
+  }
 
-	@JsonProperty("isPlusUser")
-	private boolean plusUser;
+  public String getGender() {
+    return gender;
+  }
 
-	private int circledByCount;
+  public String getOccupation() {
+    return occupation;
+  }
 
-	@JsonProperty
-	private Image image;
+  public String getAboutMe() {
+    return aboutMe;
+  }
 
-	private String thumbnailUrl;
+  public String getTagline() {
+    return tagline;
+  }
 
-	private Date birthday;
+  public String getNickname() {
+    return nickname;
+  }
 
-	private String gender;
+  public String getLanguage() {
+    return language;
+  }
 
-	private String occupation;
+  public Boolean isVerified() {
+    return verified;
+  }
 
-	private String aboutMe;
+  public String getRelationshipStatus() {
+    return relationshipStatus;
+  }
 
-	private String tagline;
+  public List<ProfileUrl> getUrls() {
+    return urls;
+  }
 
-	private String nickname;
+  public List<Organization> getOrganizations() {
+    return organizations;
+  }
 
-	private String language;
+  public Map<String, Boolean> getPlacesLived() {
+    return placesLived;
+  }
 
-	private Boolean verified = false;
+  @JsonSetter
+  private void setPlacesLived(final List<PlaceLived> placesLivedAsList) {
+    placesLived = new LinkedHashMap<>();
+    if (placesLivedAsList != null) {
+      for (final PlaceLived placeLived : placesLivedAsList) {
+        placesLived.put(placeLived.value, placeLived.primary);
+      }
+    }
+  }
 
-	private String relationshipStatus;
+  public Map<String, String> getEmails() {
+    return emails;
+  }
 
-	private List<ProfileUrl> urls;
+  @JsonSetter
+  private void setEmails(final List<Email> emailsAsList) {
+    emails = new LinkedHashMap<>();
+    if (emailsAsList != null) {
+      for (final Email email : emailsAsList) {
+        emails.put(email.value, email.type);
+      }
+    }
+  }
 
-	private List<Organization> organizations;
+  public Set<String> getEmailAddresses() {
+    return emails == null ? null : emails.keySet();
+  }
 
-	private Map<String, Boolean> placesLived;
+  public String getAccountEmail() {
+    if (emails != null) {
+      for (final Entry<String, String> entry : emails.entrySet()) {
+        if (entry.getValue().equals("account")) {
+          return entry.getKey();
+        }
+      }
+    }
+    return null;
+  }
 
-	private Map<String, String> emails;
+  public AgeRange getAgeRange() {
+    return ageRange;
+  }
 
-	@JsonProperty
-	@JsonDeserialize(using = AgeRangeDeserializer.class)
-	private AgeRange ageRange = AgeRange.UNKNOWN;
+  private static class Name {
+    @JsonProperty
+    private String givenName;
 
-	@Override
-	public String toString() {
-		return displayName;
-	}
+    @JsonProperty
+    private String familyName;
+  }
 
-	@JsonSetter
-	private void setPlacesLived(final List<PlaceLived> placesLivedAsList) {
-		placesLived = new LinkedHashMap<String, Boolean>();
-		if (placesLivedAsList != null) {
-			for (final PlaceLived placeLived : placesLivedAsList) {
-				placesLived.put(placeLived.value, placeLived.primary);
-			}
-		}
-	}
+  private static class Image {
+    @JsonProperty
+    private String url;
+  }
 
-	@JsonSetter
-	private void setEmails(final List<Email> emailsAsList) {
-		emails = new LinkedHashMap<String, String>();
-		if (emailsAsList != null) {
-			for (final Email email : emailsAsList) {
-				emails.put(email.value, email.type);
-			}
-		}
-	}
+  private static class PlaceLived {
+    @JsonProperty
+    private String value;
 
-	public String getGivenName() {
-		return name == null ? null : name.givenName;
-	}
+    @JsonProperty
+    private boolean primary;
+  }
 
-	public String getFamilyName() {
-		return name == null ? null : name.familyName;
-	}
+  private static class Email {
+    @JsonProperty
+    private String value;
 
-	public String getDisplayName() {
-		return displayName;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public boolean isPlusUser() {
-		return plusUser;
-	}
-
-	public int getCircledByCount() {
-		return circledByCount;
-	}
-
-	public String getImageUrl() {
-		if (thumbnailUrl != null) {
-			return thumbnailUrl;
-		}
-		if (image != null) {
-			return image.url;
-		}
-		return null;
-	}
-
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public String getOccupation() {
-		return occupation;
-	}
-
-	public String getAboutMe() {
-		return aboutMe;
-	}
-
-
-	public String getTagline() {
-		return tagline;
-	}
-
-
-	public String getNickname() {
-		return nickname;
-	}
-
-
-	public String getLanguage() {
-		return language;
-	}
-
-
-	public Boolean isVerified() {
-		return verified;
-	}
-
-
-	public String getRelationshipStatus() {
-		return relationshipStatus;
-	}
-
-	public List<ProfileUrl> getUrls() {
-		return urls;
-	}
-
-	public List<Organization> getOrganizations() {
-		return organizations;
-	}
-
-	public Map<String, Boolean> getPlacesLived() {
-		return placesLived;
-	}
-
-	public Map<String, String> getEmails() {
-		return emails;
-	}
-
-	public Set<String> getEmailAddresses() {
-		return emails == null ? null : emails.keySet();
-	}
-
-	public String getAccountEmail() {
-		if (emails != null) {
-			for (final Entry<String, String> entry : emails.entrySet()) {
-				if (entry.getValue().equals("account")) {
-					return entry.getKey();
-				}
-			}
-		}
-		return null;
-	}
-
-	public AgeRange getAgeRange() {
-		return ageRange;
-	}
+    @JsonProperty
+    private String type;
+  }
 }

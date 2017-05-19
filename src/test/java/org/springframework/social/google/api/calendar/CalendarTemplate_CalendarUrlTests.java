@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.calendar;
 
 import static org.junit.Assert.assertEquals;
@@ -24,163 +23,163 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
-import org.junit.Test;
-import org.springframework.social.google.api.AbstractGoogleApiTest;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import org.junit.Test;
+import org.springframework.social.google.api.AbstractGoogleApiTest;
+
 public class CalendarTemplate_CalendarUrlTests extends AbstractGoogleApiTest {
 
-	@Test
-	public void listCalendars_with_minAccessRole_freeBusyReader() {
+  @Test
+  public void listCalendars_with_minAccessRole_freeBusyReader() {
 
-		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=freeBusyReader&access_token=ACCESS_TOKEN"))
-				.andExpect(method(GET))
-				.andRespond(
-						withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
+    mockServer
+      .expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=freeBusyReader&access_token=ACCESS_TOKEN"))
+      .andExpect(method(GET))
+      .andRespond(
+        withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
 
-		final CalendarPage calPage = google.calendarOperations().calendarListQuery().minAccessRole(PermissionRole.FREE_BUSY_READER).getPage();
+    final CalendarPage calPage = google.calendarOperations().calendarListQuery().minAccessRole(PermissionRole.FREE_BUSY_READER).getPage();
 
-		assertNotNull(calPage);
-	}
+    assertNotNull(calPage);
+  }
 
-	@Test
-	public void listCalendars_with_minAccessRole_owner() {
+  @Test
+  public void listCalendars_with_minAccessRole_owner() {
 
-		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=owner&access_token=ACCESS_TOKEN"))
-				.andExpect(method(GET))
-				.andRespond(
-						withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
+    mockServer
+      .expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=owner&access_token=ACCESS_TOKEN"))
+      .andExpect(method(GET))
+      .andRespond(
+        withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
 
-		final CalendarPage calPage = google.calendarOperations().calendarListQuery().minAccessRole(PermissionRole.OWNER).getPage();
+    final CalendarPage calPage = google.calendarOperations().calendarListQuery().minAccessRole(PermissionRole.OWNER).getPage();
 
-		assertNotNull(calPage);
-	}
+    assertNotNull(calPage);
+  }
 
-	@Test
-	public void listCalendars_with_minAccessRole_reader() {
+  @Test
+  public void listCalendars_with_minAccessRole_reader() {
 
-		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=reader&access_token=ACCESS_TOKEN"))
-				.andExpect(method(GET))
-				.andRespond(
-						withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
+    mockServer
+      .expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=reader&access_token=ACCESS_TOKEN"))
+      .andExpect(method(GET))
+      .andRespond(
+        withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
 
-		final CalendarPage calPage = google.calendarOperations().calendarListQuery().minAccessRole(PermissionRole.READER).getPage();
+    final CalendarPage calPage = google.calendarOperations().calendarListQuery().minAccessRole(PermissionRole.READER).getPage();
 
-		assertNotNull(calPage);
-	}
+    assertNotNull(calPage);
+  }
 
-	@Test
-	public void listCalendars_with_minAccessRole_writer() {
+  @Test
+  public void listCalendars_with_minAccessRole_writer() {
 
-		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=writer&access_token=ACCESS_TOKEN"))
-				.andExpect(method(GET))
-				.andRespond(
-						withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
+    mockServer
+      .expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=writer&access_token=ACCESS_TOKEN"))
+      .andExpect(method(GET))
+      .andRespond(
+        withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
 
-		final CalendarPage calPage = google.calendarOperations().calendarListQuery().minAccessRole(PermissionRole.WRITER).getPage();
+    final CalendarPage calPage = google.calendarOperations().calendarListQuery().minAccessRole(PermissionRole.WRITER).getPage();
 
-		assertNotNull(calPage);
-	}
+    assertNotNull(calPage);
+  }
 
-	@Test
-	public void listCalendars_with_showDeleted_true() {
+  @Test
+  public void listCalendars_with_showDeleted_true() {
 
-		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?showDeleted=true&access_token=ACCESS_TOKEN"))
-				.andExpect(method(GET))
-				.andRespond(
-						withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
+    mockServer
+      .expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?showDeleted=true&access_token=ACCESS_TOKEN"))
+      .andExpect(method(GET))
+      .andRespond(
+        withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
 
-		final CalendarPage calPage = google.calendarOperations().calendarListQuery().showDeleted(true).getPage();
+    final CalendarPage calPage = google.calendarOperations().calendarListQuery().showDeleted(true).getPage();
 
-		assertNotNull(calPage);
-	}
+    assertNotNull(calPage);
+  }
 
-	@Test
-	public void listCalendars_with_showDeleted_false() {
+  @Test
+  public void listCalendars_with_showDeleted_false() {
 
-		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?access_token=ACCESS_TOKEN"))
-				.andExpect(method(GET))
-				.andRespond(
-						withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
+    mockServer
+      .expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?access_token=ACCESS_TOKEN"))
+      .andExpect(method(GET))
+      .andRespond(
+        withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
 
-		final CalendarPage calPage = google.calendarOperations().calendarListQuery().showDeleted(false).getPage();
+    final CalendarPage calPage = google.calendarOperations().calendarListQuery().showDeleted(false).getPage();
 
-		assertNotNull(calPage);
-	}
+    assertNotNull(calPage);
+  }
 
-	@Test
-	public void listCalendars_with_showHidden_true() {
+  @Test
+  public void listCalendars_with_showHidden_true() {
 
-		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?showHidden=true&access_token=ACCESS_TOKEN"))
-				.andExpect(method(GET))
-				.andRespond(
-						withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
+    mockServer
+      .expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?showHidden=true&access_token=ACCESS_TOKEN"))
+      .andExpect(method(GET))
+      .andRespond(
+        withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
 
-		final CalendarPage calPage = google.calendarOperations().calendarListQuery().showHidden(true).getPage();
+    final CalendarPage calPage = google.calendarOperations().calendarListQuery().showHidden(true).getPage();
 
-		assertNotNull(calPage);
-	}
+    assertNotNull(calPage);
+  }
 
-	@Test
-	public void listCalendars_with_showHidden_false() {
+  @Test
+  public void listCalendars_with_showHidden_false() {
 
-		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?access_token=ACCESS_TOKEN"))
-				.andExpect(method(GET))
-				.andRespond(
-						withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
+    mockServer
+      .expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList?access_token=ACCESS_TOKEN"))
+      .andExpect(method(GET))
+      .andRespond(
+        withSuccess(jsonResource("mock_list_calendars"), APPLICATION_JSON));
 
-		final CalendarPage calPage = google.calendarOperations().calendarListQuery().showHidden(false).getPage();
+    final CalendarPage calPage = google.calendarOperations().calendarListQuery().showHidden(false).getPage();
 
-		assertNotNull(calPage);
-	}
+    assertNotNull(calPage);
+  }
 
-	@Test
-	public void getCalendar_primary() {
+  @Test
+  public void getCalendar_primary() {
 
-		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList/primary?access_token=ACCESS_TOKEN"))
-				.andExpect(method(GET))
-				.andRespond(
-						withSuccess(jsonResource("mock_get_calendar_primary"), APPLICATION_JSON));
+    mockServer
+      .expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList/primary?access_token=ACCESS_TOKEN"))
+      .andExpect(method(GET))
+      .andRespond(
+        withSuccess(jsonResource("mock_get_calendar_primary"), APPLICATION_JSON));
 
-		final Calendar cal = google.calendarOperations().getCalendar("primary");
+    final Calendar cal = google.calendarOperations().getCalendar("primary");
 
-		assertNotNull(cal);
-		// NB queried for "primary" but actually get back the real ID.
-		assertEquals("martxw@gmail.com", cal.getId());
-		assertEquals("martxw@gmail.com", cal.getSummary());
-		assertEquals(true, cal.isPrimary());
-	}
+    assertNotNull(cal);
+    // NB queried for "primary" but actually get back the real ID.
+    assertEquals("martxw@gmail.com", cal.getId());
+    assertEquals("martxw@gmail.com", cal.getSummary());
+    assertEquals(true, cal.isPrimary());
+  }
 
-	@Test
-	public void getCalendar_escaped() throws UnsupportedEncodingException {
+  @Test
+  public void getCalendar_escaped() throws UnsupportedEncodingException {
 
-		final String calendarId = "abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?";
+    final String calendarId = "abc123!\"£$%^&*()_+-=[]{};'#:@~,./<>?";
 
-		final String encodedCalendarId = URLEncoder.encode(calendarId, "UTF-8");
+    final String encodedCalendarId = URLEncoder.encode(calendarId, "UTF-8");
 
-		mockServer
-				.expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList/" + encodedCalendarId + "?access_token=ACCESS_TOKEN"))
-				.andExpect(method(GET))
-				.andRespond(
-						withSuccess(jsonResource("mock_get_calendar_primary"), APPLICATION_JSON));
+    mockServer
+      .expect(requestTo("https://www.googleapis.com/calendar/v3/users/me/calendarList/" + encodedCalendarId + "?access_token=ACCESS_TOKEN"))
+      .andExpect(method(GET))
+      .andRespond(
+        withSuccess(jsonResource("mock_get_calendar_primary"), APPLICATION_JSON));
 
-		final Calendar cal = google.calendarOperations().getCalendar(calendarId);
+    final Calendar cal = google.calendarOperations().getCalendar(calendarId);
 
-		assertNotNull(cal);
-		// NB queried for "primary" but actually get back the real ID.
-		assertEquals("martxw@gmail.com", cal.getId());
-		assertEquals("martxw@gmail.com", cal.getSummary());
-		assertEquals(true, cal.isPrimary());
-	}
+    assertNotNull(cal);
+    // NB queried for "primary" but actually get back the real ID.
+    assertEquals("martxw@gmail.com", cal.getId());
+    assertEquals("martxw@gmail.com", cal.getSummary());
+    assertEquals(true, cal.isPrimary());
+  }
 }

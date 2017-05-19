@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 /**
-* Spring Social Google's XML configuration namespace.
-*/
+ * Spring Social Google's XML configuration namespace.
+ */
 package org.springframework.social.google.config.xml;

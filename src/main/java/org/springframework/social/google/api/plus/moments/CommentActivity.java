@@ -1,11 +1,11 @@
-/*
- * Copyright 2011 the original author or authors.
+/**
+ * Copyright 2011-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,65 +25,65 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 /**
  * Activity representing a comment on an article, blog entry, or other creative
  * work
- * 
+ *
  * @see <a
  *      href="https://developers.google.com/+/api/moment-types/comment-activity">Comment
  *      Activity</a>
  * @author Gabriel Axel
- * 
+ *
  */
 @JsonTypeName(COMMENT_ACTIVITY)
 public class CommentActivity extends Moment {
 
-	protected static class Result {
+  @JsonProperty
+  private Result result;
 
-		@JsonProperty
-		String url;
+  protected CommentActivity() {
+  }
 
-		@JsonProperty
-		String text;
+  public CommentActivity(final String targetUrl, final String resultUrl, final String resultText) {
+    super(targetUrl);
+    result = new Result();
+    result.url = resultUrl;
+    result.text = resultText;
+  }
 
-		@JsonProperty
-		String name;
+  public CommentActivity(final String targetUrl, final String resultUrl,
+                         final String resultText, final String resultName) {
+    this(targetUrl, resultUrl, resultText);
+    result.name = resultName;
+  }
 
-		@JsonGetter
-		String getType() {
-			return "http://schema.org/Comment";
-		}
+  @JsonIgnore
+  public String getResultUrl() {
+    return result.url;
+  }
 
-	}
+  @JsonIgnore
+  public String getResultText() {
+    return result.text;
+  }
 
-	@JsonProperty
-	private Result result;
+  @JsonIgnore
+  public String getResultName() {
+    return result.name;
+  }
 
-	protected CommentActivity() {
-	}
+  protected static class Result {
 
-	public CommentActivity(String targetUrl, String resultUrl, String resultText) {
-		super(targetUrl);
-		result = new Result();
-		result.url = resultUrl;
-		result.text = resultText;
-	}
+    @JsonProperty
+    String url;
 
-	public CommentActivity(String targetUrl, String resultUrl,
-			String resultText, String resultName) {
-		this(targetUrl, resultUrl, resultText);
-		result.name = resultName;
-	}
+    @JsonProperty
+    String text;
 
-	@JsonIgnore
-	public String getResultUrl() {
-		return result.url;
-	}
+    @JsonProperty
+    String name;
 
-	@JsonIgnore
-	public String getResultText() {
-		return result.text;
-	}
+    @JsonGetter
+    String getType() {
+      return "http://schema.org/Comment";
+    }
 
-	@JsonIgnore
-	public String getResultName() {
-		return result.name;
-	}
+  }
 }

@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.security;
 
 import org.springframework.social.google.api.Google;
@@ -22,8 +21,8 @@ import org.springframework.social.security.provider.OAuth2AuthenticationService;
 
 public class GoogleAuthenticationService extends OAuth2AuthenticationService<Google> {
 
-    public GoogleAuthenticationService(final String apiKey, final String appSecret) {
-        super(new GoogleConnectionFactory(apiKey, appSecret));
-    }
+  public GoogleAuthenticationService(final String apiKey, final String appSecret) {
+    super(new GoogleConnectionFactory(apiKey, appSecret));
+  }
 
 }

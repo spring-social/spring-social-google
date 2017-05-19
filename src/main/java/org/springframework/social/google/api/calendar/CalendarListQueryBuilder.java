@@ -1,11 +1,11 @@
-/*
- * Copyright 2014 the original author or authors.
+/**
+ * Copyright 2011-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,30 +26,30 @@ import org.springframework.social.google.api.query.ApiQueryBuilder;
  * http://developers.google.com/google-apps/calendar/v3/reference/calendarList/list</a>
  * for details of the parameters.
  * </p>
- * 
+ *
  * @author Martin Wink
  */
 public interface CalendarListQueryBuilder extends ApiQueryBuilder<CalendarListQueryBuilder, CalendarPage> {
-	/**
-	 * The minimum access role for the user in the returned entries. Optional.
-	 * The default is no restriction. 
-	 * @param minAccessRole the minimum access role for the user in the returned entries.
-	 * @return this {@code CalendarListQueryBuilder}, for refining the query.
-	 */
-	CalendarListQueryBuilder minAccessRole(PermissionRole minAccessRole);
-	
-	/**
-	 * Whether to include deleted calendar list entries in the result. Optional.
-	 * The default is false.
-	 * @param showDeleted whether to include deleted calendar list entries in the result.
-	 * @return this {@code CalendarListQueryBuilder}, for refining the query.
-	 */
-	CalendarListQueryBuilder showDeleted(boolean showDeleted);
-	
-	/**
-	 * Whether to show hidden entries. Optional. The default is false.
-	 * @param showHidden whether to show hidden entries.
-	 * @return this {@code CalendarListQueryBuilder}, for refining the query.
-	 */
-	CalendarListQueryBuilder showHidden(boolean showHidden);
+  /**
+   * The minimum access role for the user in the returned entries. Optional.
+   * The default is no restriction.
+   * @param minAccessRole the minimum access role for the user in the returned entries.
+   * @return this {@code CalendarListQueryBuilder}, for refining the query.
+   */
+  CalendarListQueryBuilder minAccessRole(PermissionRole minAccessRole);
+
+  /**
+   * Whether to include deleted calendar list entries in the result. Optional.
+   * The default is false.
+   * @param showDeleted whether to include deleted calendar list entries in the result.
+   * @return this {@code CalendarListQueryBuilder}, for refining the query.
+   */
+  CalendarListQueryBuilder showDeleted(boolean showDeleted);
+
+  /**
+   * Whether to show hidden entries. Optional. The default is false.
+   * @param showHidden whether to show hidden entries.
+   * @return this {@code CalendarListQueryBuilder}, for refining the query.
+   */
+  CalendarListQueryBuilder showHidden(boolean showHidden);
 }

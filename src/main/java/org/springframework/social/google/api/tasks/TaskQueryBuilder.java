@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.tasks;
 
 import java.util.Date;
@@ -27,13 +26,21 @@ import org.springframework.social.google.api.query.QueryBuilder;
  */
 public interface TaskQueryBuilder extends ApiQueryBuilder<TaskQueryBuilder, TasksPage> {
 
-	TaskQueryBuilder fromTaskList(String taskListId);
-	TaskQueryBuilder completedFrom(Date completedMin);
-	TaskQueryBuilder completedUntil(Date completedMax);
-	TaskQueryBuilder dueFrom(Date dueMin);
-	TaskQueryBuilder dueUntil(Date dueMax);
-	TaskQueryBuilder updatedFrom(Date updatedMin);
-	TaskQueryBuilder includeCompleted(boolean includeCompleted);
-	TaskQueryBuilder includeDeleted(boolean includeDeleted);
-	TaskQueryBuilder includeHidden(boolean includeHidden);
+  TaskQueryBuilder fromTaskList(String taskListId);
+
+  TaskQueryBuilder completedFrom(Date completedMin);
+
+  TaskQueryBuilder completedUntil(Date completedMax);
+
+  TaskQueryBuilder dueFrom(Date dueMin);
+
+  TaskQueryBuilder dueUntil(Date dueMax);
+
+  TaskQueryBuilder updatedFrom(Date updatedMin);
+
+  TaskQueryBuilder includeCompleted(boolean includeCompleted);
+
+  TaskQueryBuilder includeDeleted(boolean includeDeleted);
+
+  TaskQueryBuilder includeHidden(boolean includeHidden);
 }

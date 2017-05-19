@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.config.boot;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,41 +47,41 @@ import org.springframework.social.google.connect.GoogleConnectionFactory;
  * @since 1.0.1
  */
 @Configuration
-@ConditionalOnClass({ SocialConfigurerAdapter.class, GoogleConnectionFactory.class })
+@ConditionalOnClass({SocialConfigurerAdapter.class, GoogleConnectionFactory.class})
 @ConditionalOnProperty(prefix = "spring.social.google", name = "app-id")
 @AutoConfigureBefore(SocialWebAutoConfiguration.class)
 @AutoConfigureAfter(WebMvcAutoConfiguration.class)
 public class GoogleAutoConfiguration {
 
-    @Configuration
-    @EnableSocial
-    @EnableConfigurationProperties(GoogleProperties.class)
-    @ConditionalOnWebApplication
-    protected static class GoogleConfigurerAdapter extends SocialConfigurerAdapter {
+  @Configuration
+  @EnableSocial
+  @EnableConfigurationProperties(GoogleProperties.class)
+  @ConditionalOnWebApplication
+  protected static class GoogleConfigurerAdapter extends SocialConfigurerAdapter {
 
-        @Autowired
-        private GoogleProperties properties;
+    @Autowired
+    private GoogleProperties properties;
 
-        @Bean
-        @ConditionalOnMissingBean
-        @Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES)
-        public Google google(final ConnectionRepository repository) {
-            final Connection<Google> connection = repository.findPrimaryConnection(Google.class);
-            return connection != null ? connection.getApi() : null;
-        }
-
-        @Bean(name = { "connect/googleConnect", "connect/googleConnected" })
-        @ConditionalOnProperty(prefix = "spring.social", name = "auto-connection-views")
-        public GenericConnectionStatusView googleConnectView() {
-            return new GenericConnectionStatusView("google", "Google");
-        }
-
-        @Override
-        public void addConnectionFactories(final ConnectionFactoryConfigurer configurer, final Environment environment) {
-            final GoogleConnectionFactory factory = new GoogleConnectionFactory(this.properties.getAppId(), this.properties.getAppSecret());
-            factory.setScope("email profile");
-            configurer.addConnectionFactory(factory);
-        }
+    @Bean
+    @ConditionalOnMissingBean
+    @Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES)
+    public Google google(final ConnectionRepository repository) {
+      final Connection<Google> connection = repository.findPrimaryConnection(Google.class);
+      return connection != null ? connection.getApi() : null;
     }
+
+    @Bean(name = {"connect/googleConnect", "connect/googleConnected"})
+    @ConditionalOnProperty(prefix = "spring.social", name = "auto-connection-views")
+    public GenericConnectionStatusView googleConnectView() {
+      return new GenericConnectionStatusView("google", "Google");
+    }
+
+    @Override
+    public void addConnectionFactories(final ConnectionFactoryConfigurer configurer, final Environment environment) {
+      final GoogleConnectionFactory factory = new GoogleConnectionFactory(this.properties.getAppId(), this.properties.getAppSecret());
+      factory.setScope("email profile");
+      configurer.addConnectionFactory(factory);
+    }
+  }
 
 }

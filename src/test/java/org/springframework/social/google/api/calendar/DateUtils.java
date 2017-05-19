@@ -13,22 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.calendar;
 
 import java.util.Date;
 import java.util.TimeZone;
 
 public class DateUtils {
-	private DateUtils() {
-	}
+  public static final TimeZone TEST_TIMEZONE = TimeZone.getTimeZone("GMT");
 
-	public static final TimeZone TEST_TIMEZONE = TimeZone.getTimeZone("GMT");
+  private DateUtils() {
+  }
 
-	public static Date makeDate(final int year, final int month, final int day) {
-		final java.util.Calendar cal = java.util.Calendar.getInstance(TEST_TIMEZONE);
-		cal.setTimeInMillis(0);
-		cal.set(year, month - 1, day);
-		return cal.getTime();
-	}
+  public static Date makeDate(final int year, final int month, final int day) {
+    final java.util.Calendar cal = java.util.Calendar.getInstance(TEST_TIMEZONE);
+    cal.setTimeInMillis(0);
+    cal.set(year, month - 1, day);
+    return cal.getTime();
+  }
 }

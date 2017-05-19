@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.impl;
 
 import java.io.IOException;
@@ -31,31 +30,31 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
  */
 public abstract class ApiEnumDeserializer<T extends Enum<?>> extends JsonDeserializer<T> {
 
-	private final Class<T> type;
+  private final Class<T> type;
 
-	public ApiEnumDeserializer(final Class<T> type) {
-		this.type = type;
-	}
+  public ApiEnumDeserializer(final Class<T> type) {
+    this.type = type;
+  }
 
-	@Override
-	public T deserialize(final JsonParser jp, final DeserializationContext ctxt)
-			throws IOException {
+  @Override
+  public T deserialize(final JsonParser jp, final DeserializationContext ctxt)
+    throws IOException {
 
-		final String camelCase = jp.getText();
+    final String camelCase = jp.getText();
 
-		final StringBuilder sb = new StringBuilder();
-		for(int i = 0; i < camelCase.length(); i++) {
-			final char c = camelCase.charAt(i);
-			if(Character.isUpperCase(c)) {
-				sb.append('_').append(c);
-			} else {
-				sb.append(Character.toUpperCase(c));
-			}
-		}
+    final StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < camelCase.length(); i++) {
+      final char c = camelCase.charAt(i);
+      if (Character.isUpperCase(c)) {
+        sb.append('_').append(c);
+      } else {
+        sb.append(Character.toUpperCase(c));
+      }
+    }
 
-		@SuppressWarnings({ "rawtypes", "unchecked" }) final T value = (T)Enum.valueOf((Class)type, sb.toString());
+    @SuppressWarnings({"rawtypes", "unchecked"}) final T value = (T) Enum.valueOf((Class) type, sb.toString());
 
-		return value;
-	}
+    return value;
+  }
 
 }

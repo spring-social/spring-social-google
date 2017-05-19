@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.connect;
 
 import org.springframework.social.connect.UserProfile;
@@ -28,15 +27,15 @@ import org.springframework.social.oauth2.AccessGrant;
  */
 public class GoogleConnectionFactory extends OAuth2ConnectionFactory<Google> {
 
-    public GoogleConnectionFactory(final String clientId, final String clientSecret) {
-        super("google", new GoogleServiceProvider(clientId, clientSecret),
-            new GoogleAdapter());
-    }
+  public GoogleConnectionFactory(final String clientId, final String clientSecret) {
+    super("google", new GoogleServiceProvider(clientId, clientSecret),
+      new GoogleAdapter());
+  }
 
-    @Override
-    protected String extractProviderUserId(final AccessGrant accessGrant) {
-        final Google api = ((GoogleServiceProvider) getServiceProvider()).getApi(accessGrant.getAccessToken());
-        final UserProfile userProfile = getApiAdapter().fetchUserProfile(api);
-        return userProfile.getUsername();
-    }
+  @Override
+  protected String extractProviderUserId(final AccessGrant accessGrant) {
+    final Google api = ((GoogleServiceProvider) getServiceProvider()).getApi(accessGrant.getAccessToken());
+    final UserProfile userProfile = getApiAdapter().fetchUserProfile(api);
+    return userProfile.getUsername();
+  }
 }

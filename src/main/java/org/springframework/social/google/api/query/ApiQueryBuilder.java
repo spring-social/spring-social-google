@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.query;
 
 /**
@@ -24,6 +23,7 @@ package org.springframework.social.google.api.query;
  */
 public interface ApiQueryBuilder<Q extends ApiQueryBuilder<?, T>, T extends ApiPage<?>> extends QueryBuilder<Q, T> {
 
-	Q fromPage(String pageToken);
-	T getPage();
+  Q fromPage(String pageToken);
+
+  T getPage();
 }

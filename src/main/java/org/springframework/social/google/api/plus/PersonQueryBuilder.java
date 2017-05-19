@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.plus;
 
 import org.springframework.social.google.api.query.ApiQueryBuilder;
@@ -24,5 +23,5 @@ import org.springframework.social.google.api.query.QueryBuilder;
  * @author Gabriel Axel
  */
 public interface PersonQueryBuilder extends ApiQueryBuilder<PersonQueryBuilder, PeoplePage> {
-	PersonQueryBuilder searchFor(String text);
+  PersonQueryBuilder searchFor(String text);
 }

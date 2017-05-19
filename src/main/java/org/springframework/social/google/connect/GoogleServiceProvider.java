@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.connect;
 
 import org.springframework.social.google.api.Google;
@@ -27,13 +26,13 @@ import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
  */
 public class GoogleServiceProvider extends AbstractOAuth2ServiceProvider<Google> {
 
-    public GoogleServiceProvider(final String clientId, final String clientSecret) {
-        super(new GoogleOAuth2Template(clientId, clientSecret));
-    }
+  public GoogleServiceProvider(final String clientId, final String clientSecret) {
+    super(new GoogleOAuth2Template(clientId, clientSecret));
+  }
 
-    @Override
-    public Google getApi(final String accessToken) {
-        return new GoogleTemplate(accessToken);
-    }
+  @Override
+  public Google getApi(final String accessToken) {
+    return new GoogleTemplate(accessToken);
+  }
 
 }

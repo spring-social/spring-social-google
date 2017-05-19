@@ -1,11 +1,11 @@
-/*
- * Copyright 2014 the original author or authors.
+/**
+ * Copyright 2011-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -30,68 +30,68 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * {@link CalendarOperations} implementation.
- * 
+ *
  * @author Martin Wink
  */
 public class CalendarTemplate extends AbstractGoogleApiOperations implements CalendarOperations {
-	
-	private static final String CALENDAR_BASE_URL = "https://www.googleapis.com/calendar/v3";
-	
-	public CalendarTemplate(RestTemplate restTemplate, boolean isAuthorized) {
-		super(restTemplate, isAuthorized);
-		Assert.notNull(restTemplate, "RestTemplate must not be null");
-	}
 
-	@Override
-	public CalendarListQueryBuilder calendarListQuery() {
-		return new CalendarListQueryBuilderImpl(CALENDAR_BASE_URL + "/users/me/calendarList", CalendarPage.class, restTemplate);
-	}
+  private static final String CALENDAR_BASE_URL = "https://www.googleapis.com/calendar/v3";
 
-	@Override
-	public EventListQueryBuilder eventListQuery(String calendarId) {
-		Assert.notNull(calendarId, "CalendarId must not be null");
-		return new EventListQueryBuilderImpl(CALENDAR_BASE_URL + "/calendars/{0}/events", calendarId, EventPage.class, restTemplate);
-	}
+  public CalendarTemplate(final RestTemplate restTemplate, final boolean isAuthorized) {
+    super(restTemplate, isAuthorized);
+    Assert.notNull(restTemplate, "RestTemplate must not be null");
+  }
 
-	@Override
-	public Calendar getCalendar(String calendarId) {
-		Assert.notNull(calendarId, "CalendarId must not be null");
-		CalendarGetQueryBuilderImpl builder = new CalendarGetQueryBuilderImpl(CALENDAR_BASE_URL + "/users/me/calendarList/{0}", calendarId); 
-		return restTemplate.getForObject(builder.buildUri(), Calendar.class);
-	}
+  @Override
+  public CalendarListQueryBuilder calendarListQuery() {
+    return new CalendarListQueryBuilderImpl(CALENDAR_BASE_URL + "/users/me/calendarList", CalendarPage.class, restTemplate);
+  }
 
-	@Override
-	public Event getEvent(String calendarId, String eventId) {
-		Assert.notNull(calendarId, "CalendarId must not be null");
-		Assert.notNull(eventId, "EventId must not be null");
-		EventGetQueryBuilderImpl builder = new EventGetQueryBuilderImpl(CALENDAR_BASE_URL + "/calendars/{0}/events/{1}", calendarId, eventId); 
-		return restTemplate.getForObject(builder.buildUri(), Event.class);
-	}
+  @Override
+  public EventListQueryBuilder eventListQuery(final String calendarId) {
+    Assert.notNull(calendarId, "CalendarId must not be null");
+    return new EventListQueryBuilderImpl(CALENDAR_BASE_URL + "/calendars/{0}/events", calendarId, EventPage.class, restTemplate);
+  }
 
-	@Override
-	public Event quickAddEvent(String calendarId, String specification, boolean sendNotifications) {
-		Assert.notNull(calendarId, "CalendarId must not be null");
-		Assert.notNull(specification, "Specification must not be null");
-		QuickAddEventBuilder builder = new QuickAddEventBuilderImpl(CALENDAR_BASE_URL + "/calendars/{0}/events/quickAdd", calendarId);
-		builder.text(specification).sendNotifications(sendNotifications);
-		return restTemplate.postForObject(builder.buildUri(), null, Event.class);
-	}
+  @Override
+  public Calendar getCalendar(final String calendarId) {
+    Assert.notNull(calendarId, "CalendarId must not be null");
+    final CalendarGetQueryBuilderImpl builder = new CalendarGetQueryBuilderImpl(CALENDAR_BASE_URL + "/users/me/calendarList/{0}", calendarId);
+    return restTemplate.getForObject(builder.buildUri(), Calendar.class);
+  }
 
-	@Override
-	public void deleteEvent(String calendarId, String eventId, boolean sendNotifications) {
-		Assert.notNull(calendarId, "CalendarId must not be null");
-		Assert.notNull(eventId, "EventId must not be null");
-		DeleteEventBuilder builder = new DeleteEventBuilderImpl(CALENDAR_BASE_URL + "/calendars/{0}/events/{1}", calendarId, eventId);
-		builder.sendNotifications(sendNotifications);
-		restTemplate.delete(builder.buildUri());
-	}
+  @Override
+  public Event getEvent(final String calendarId, final String eventId) {
+    Assert.notNull(calendarId, "CalendarId must not be null");
+    Assert.notNull(eventId, "EventId must not be null");
+    final EventGetQueryBuilderImpl builder = new EventGetQueryBuilderImpl(CALENDAR_BASE_URL + "/calendars/{0}/events/{1}", calendarId, eventId);
+    return restTemplate.getForObject(builder.buildUri(), Event.class);
+  }
 
-	@Override
-	public void updateEvent(String calendarId, Event event, boolean sendNotifications) {
-		Assert.notNull(calendarId, "CalendarId must not be null");
-		Assert.notNull(event, "Event must not be null");
-		UpdateEventBuilderImpl builder = new UpdateEventBuilderImpl(CALENDAR_BASE_URL + "/calendars/{0}/events/{1}", calendarId, event.getId());
-		builder.sendNotifications(sendNotifications);
-		restTemplate.put(builder.buildUri(), event);
-	}
+  @Override
+  public Event quickAddEvent(final String calendarId, final String specification, final boolean sendNotifications) {
+    Assert.notNull(calendarId, "CalendarId must not be null");
+    Assert.notNull(specification, "Specification must not be null");
+    final QuickAddEventBuilder builder = new QuickAddEventBuilderImpl(CALENDAR_BASE_URL + "/calendars/{0}/events/quickAdd", calendarId);
+    builder.text(specification).sendNotifications(sendNotifications);
+    return restTemplate.postForObject(builder.buildUri(), null, Event.class);
+  }
+
+  @Override
+  public void deleteEvent(final String calendarId, final String eventId, final boolean sendNotifications) {
+    Assert.notNull(calendarId, "CalendarId must not be null");
+    Assert.notNull(eventId, "EventId must not be null");
+    final DeleteEventBuilder builder = new DeleteEventBuilderImpl(CALENDAR_BASE_URL + "/calendars/{0}/events/{1}", calendarId, eventId);
+    builder.sendNotifications(sendNotifications);
+    restTemplate.delete(builder.buildUri());
+  }
+
+  @Override
+  public void updateEvent(final String calendarId, final Event event, final boolean sendNotifications) {
+    Assert.notNull(calendarId, "CalendarId must not be null");
+    Assert.notNull(event, "Event must not be null");
+    final UpdateEventBuilderImpl builder = new UpdateEventBuilderImpl(CALENDAR_BASE_URL + "/calendars/{0}/events/{1}", calendarId, event.getId());
+    builder.sendNotifications(sendNotifications);
+    restTemplate.put(builder.buildUri(), event);
+  }
 }

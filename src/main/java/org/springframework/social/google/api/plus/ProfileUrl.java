@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.plus;
 
 import static org.springframework.util.ObjectUtils.nullSafeEquals;
@@ -26,62 +25,62 @@ import static org.springframework.util.ObjectUtils.nullSafeHashCode;
  */
 public class ProfileUrl {
 
-	private String value;
+  private String value;
 
-	private String label;
+  private String label;
 
-	private UrlType type;
+  private UrlType type;
 
-	ProfileUrl() {
+  ProfileUrl() {
 
-	}
+  }
 
-	ProfileUrl(final String value, final String label, final UrlType type) {
-		this.value = value;
-		this.label = label;
-		this.type = type;
-	}
+  ProfileUrl(final String value, final String label, final UrlType type) {
+    this.value = value;
+    this.label = label;
+    this.type = type;
+  }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + nullSafeHashCode(value);
-		result = prime * result + nullSafeHashCode(label);
-		result = prime * result + nullSafeHashCode(type);
-		return result;
-	}
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + nullSafeHashCode(value);
+    result = prime * result + nullSafeHashCode(label);
+    result = prime * result + nullSafeHashCode(type);
+    return result;
+  }
 
-	@Override
-	public boolean equals(final Object o) {
-		if (this == o) {
-			return true;
-		}
-		if(!(o instanceof ProfileUrl)) {
-			return false;
-		}
-		final ProfileUrl other = (ProfileUrl)o;
-		return nullSafeEquals(value, other.value) &&
-				nullSafeEquals(label, other.label) &&
-				nullSafeEquals(type, other.type);
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof ProfileUrl)) {
+      return false;
+    }
+    final ProfileUrl other = (ProfileUrl) o;
+    return nullSafeEquals(value, other.value) &&
+      nullSafeEquals(label, other.label) &&
+      nullSafeEquals(type, other.type);
 
-	}
+  }
 
-	@Override
-	public String toString() {
-		return value;
-	}
+  @Override
+  public String toString() {
+    return value;
+  }
 
-	public String getValue() {
-		return value;
-	}
+  public String getValue() {
+    return value;
+  }
 
-	public String getLabel() {
-		return label;
-	}
+  public String getLabel() {
+    return label;
+  }
 
-	public UrlType getType() {
-		return type;
-	}
+  public UrlType getType() {
+    return type;
+  }
 
 }

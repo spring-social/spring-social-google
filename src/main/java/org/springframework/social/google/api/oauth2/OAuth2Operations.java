@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.oauth2;
 
 import org.springframework.social.google.api.plus.Person;
@@ -31,10 +30,10 @@ import org.springframework.social.google.api.plus.Person;
  * @author Charles Maheu
  */
 public interface OAuth2Operations {
-    /**
-     * Retrieves the authenticated user's Google user.
-     *
-     * @return the retrieved {@link Person}
-     */
-    UserInfo getUserinfo();
+  /**
+   * Retrieves the authenticated user's Google user.
+   *
+   * @return the retrieved {@link Person}
+   */
+  UserInfo getUserinfo();
 }

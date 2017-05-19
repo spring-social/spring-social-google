@@ -1,11 +1,11 @@
-/*
- * Copyright 2011 the original author or authors.
+/**
+ * Copyright 2011-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,205 +24,188 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 
 /**
  * Model class representing Google Drive general details for the current user
- * 
+ *
  * @author Gabriel Axel
  */
 public class DriveAbout {
 
-	public static class FormatMapping {
+  private String name;
+  private long quotaBytesTotal;
+  private long quotaBytesUsed;
+  private long quotaBytesUsedInTrash;
+  private long largestChangeId;
+  private long remainingChangeIds;
+  private String rootFolderId;
+  private String domainSharingPolicy;
+  private List<FormatMapping> importFormats;
+  private List<FormatMapping> exportFormats;
+  private List<RoleInfo> additionalRoleInfo;
+  private Map<String, Double> features;
+  private Map<String, Long> maxUploadSizes;
+  private String permissionId;
+  @JsonProperty("isCurrentAppInstalled")
+  private boolean currentAppInstalled;
+  private String languageCode;
+  private DriveUser user;
+  private long quotaBytesUsedAggregate;
 
-		@JsonProperty
-		private String source;
+  public String getName() {
+    return name;
+  }
 
-		@JsonProperty
-		private List<String> targets;
+  public long getQuotaBytesTotal() {
+    return quotaBytesTotal;
+  }
 
-		public String getSource() {
-			return source;
-		}
+  public long getQuotaBytesUsed() {
+    return quotaBytesUsed;
+  }
 
-		public List<String> getTargets() {
-			return targets;
-		}
+  public long getQuotaBytesUsedInTrash() {
+    return quotaBytesUsedInTrash;
+  }
 
-	}
+  public long getLargestChangeId() {
+    return largestChangeId;
+  }
 
-	public static class RoleSet {
+  public long getRemainingChangeIds() {
+    return remainingChangeIds;
+  }
 
-		@JsonProperty
-		private PermissionRole primaryRole;
+  public String getRootFolderId() {
+    return rootFolderId;
+  }
 
-		@JsonProperty
-		private List<AdditionalRole> additionalRoles;
+  public String getDomainSharingPolicy() {
+    return domainSharingPolicy;
+  }
 
-		public PermissionRole getPrimaryRole() {
-			return primaryRole;
-		}
+  public List<FormatMapping> getImportFormats() {
+    return importFormats;
+  }
 
-		public List<AdditionalRole> getAdditionalRoles() {
-			return additionalRoles;
-		}
+  public List<FormatMapping> getExportFormats() {
+    return exportFormats;
+  }
 
-	}
+  public List<RoleInfo> getAdditionalRoleInfo() {
+    return additionalRoleInfo;
+  }
 
-	public static class RoleInfo {
+  public Map<String, Double> getFeatures() {
+    return features;
+  }
 
-		@JsonProperty
-		private String type;
+  @JsonSetter
+  private void setFeatures(final List<Feature> featuresAsList) {
+    features = new HashMap<>();
+    for (final Feature feature : featuresAsList) {
+      features.put(feature.featureName, feature.featureRate);
+    }
+  }
 
-		@JsonProperty
-		private List<RoleSet> roleSets;
+  public Map<String, Long> getMaxUploadSizes() {
+    return maxUploadSizes;
+  }
 
-		public String getType() {
-			return type;
-		}
+  @JsonSetter
+  private void setMaxUploadSizes(final List<MaxUploadSize> maxUploadSizesAsList) {
+    maxUploadSizes = new HashMap<>();
+    for (final MaxUploadSize maxUploadSize : maxUploadSizesAsList) {
+      maxUploadSizes.put(maxUploadSize.type, maxUploadSize.size);
+    }
+  }
 
-		public List<RoleSet> getRoleSets() {
-			return roleSets;
-		}
+  public String getPermissionId() {
+    return permissionId;
+  }
 
-	}
+  public boolean isCurrentAppInstalled() {
+    return currentAppInstalled;
+  }
 
-	private static class Feature {
+  public DriveUser getUser() {
+    return user;
+  }
 
-		@JsonProperty
-		String featureName;
+  public long getQuotaBytesUsedAggregate() {
+    return quotaBytesUsedAggregate;
+  }
 
-		@JsonProperty
-		Double featureRate;
-	}
+  public String getLanguageCode() {
+    return languageCode;
+  }
 
-	private static class MaxUploadSize {
+  public static class FormatMapping {
 
-		@JsonProperty
-		String type;
+    @JsonProperty
+    private String source;
 
-		@JsonProperty
-		Long size;
-	}
+    @JsonProperty
+    private List<String> targets;
 
-	private String name;
+    public String getSource() {
+      return source;
+    }
 
-	private long quotaBytesTotal;
+    public List<String> getTargets() {
+      return targets;
+    }
 
-	private long quotaBytesUsed;
+  }
 
-	private long quotaBytesUsedInTrash;
+  public static class RoleSet {
 
-	private long largestChangeId;
+    @JsonProperty
+    private PermissionRole primaryRole;
 
-	private long remainingChangeIds;
+    @JsonProperty
+    private List<AdditionalRole> additionalRoles;
 
-	private String rootFolderId;
+    public PermissionRole getPrimaryRole() {
+      return primaryRole;
+    }
 
-	private String domainSharingPolicy;
+    public List<AdditionalRole> getAdditionalRoles() {
+      return additionalRoles;
+    }
 
-	private List<FormatMapping> importFormats;
+  }
 
-	private List<FormatMapping> exportFormats;
+  public static class RoleInfo {
 
-	private List<RoleInfo> additionalRoleInfo;
+    @JsonProperty
+    private String type;
 
-	private Map<String, Double> features;
+    @JsonProperty
+    private List<RoleSet> roleSets;
 
-	private Map<String, Long> maxUploadSizes;
+    public String getType() {
+      return type;
+    }
 
-	private String permissionId;
+    public List<RoleSet> getRoleSets() {
+      return roleSets;
+    }
 
-	@JsonProperty("isCurrentAppInstalled")
-	private boolean currentAppInstalled;
-	
-	private String languageCode;
+  }
 
-	private DriveUser user;
+  private static class Feature {
 
-	private long quotaBytesUsedAggregate;
+    @JsonProperty
+    String featureName;
 
-	@JsonSetter
-	private void setFeatures(List<Feature> featuresAsList) {
-		features = new HashMap<String, Double>();
-		for (Feature feature : featuresAsList) {
-			features.put(feature.featureName, feature.featureRate);
-		}
-	}
+    @JsonProperty
+    Double featureRate;
+  }
 
-	@JsonSetter
-	private void setMaxUploadSizes(List<MaxUploadSize> maxUploadSizesAsList) {
-		maxUploadSizes = new HashMap<String, Long>();
-		for (MaxUploadSize maxUploadSize : maxUploadSizesAsList) {
-			maxUploadSizes.put(maxUploadSize.type, maxUploadSize.size);
-		}
-	}
+  private static class MaxUploadSize {
 
-	public String getName() {
-		return name;
-	}
+    @JsonProperty
+    String type;
 
-	public long getQuotaBytesTotal() {
-		return quotaBytesTotal;
-	}
-
-	public long getQuotaBytesUsed() {
-		return quotaBytesUsed;
-	}
-
-	public long getQuotaBytesUsedInTrash() {
-		return quotaBytesUsedInTrash;
-	}
-
-	public long getLargestChangeId() {
-		return largestChangeId;
-	}
-
-	public long getRemainingChangeIds() {
-		return remainingChangeIds;
-	}
-
-	public String getRootFolderId() {
-		return rootFolderId;
-	}
-
-	public String getDomainSharingPolicy() {
-		return domainSharingPolicy;
-	}
-
-	public List<FormatMapping> getImportFormats() {
-		return importFormats;
-	}
-
-	public List<FormatMapping> getExportFormats() {
-		return exportFormats;
-	}
-
-	public List<RoleInfo> getAdditionalRoleInfo() {
-		return additionalRoleInfo;
-	}
-
-	public Map<String, Double> getFeatures() {
-		return features;
-	}
-
-	public Map<String, Long> getMaxUploadSizes() {
-		return maxUploadSizes;
-	}
-
-	public String getPermissionId() {
-		return permissionId;
-	}
-
-	public boolean isCurrentAppInstalled() {
-		return currentAppInstalled;
-	}
-
-	public DriveUser getUser() {
-		return user;
-	}
-
-	public long getQuotaBytesUsedAggregate() {
-		return quotaBytesUsedAggregate;
-	}
-
-	public String getLanguageCode() {
-		return languageCode;
-	}
+    @JsonProperty
+    Long size;
+  }
 }

@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.connect;
 
 import org.springframework.social.ApiException;
@@ -31,34 +30,34 @@ import org.springframework.social.google.api.oauth2.UserInfo;
  */
 public class GoogleAdapter implements ApiAdapter<Google> {
 
-	public boolean test(final Google google) {
-		try {
-			google.oauth2Operations().getUserinfo();
-			return true;
-		} catch (final ApiException e) {
-			return false;
-		}
-	}
-
-	public void setConnectionValues(final Google google, final ConnectionValues values) {
-		final UserInfo userInfo = google.oauth2Operations().getUserinfo();
-		values.setProviderUserId(userInfo.getId());
-		values.setDisplayName(userInfo.getName());
-		values.setProfileUrl(userInfo.getLink());
-		values.setImageUrl(userInfo.getPicture());
-	}
-
-	public UserProfile fetchUserProfile(final Google google) {
-		final UserInfo userInfo = google.oauth2Operations().getUserinfo();
-		return new UserProfileBuilder().setUsername(userInfo.getId())
-				.setEmail(userInfo.getEmail())
-				.setName(userInfo.getName())
-				.setFirstName(userInfo.getGivenName())
-				.setLastName(userInfo.getFamilyName()).build();
-	}
-
-    public void updateStatus(final Google google, final String message) {
-        throw new UnsupportedOperationException();
+  public boolean test(final Google google) {
+    try {
+      google.oauth2Operations().getUserinfo();
+      return true;
+    } catch (final ApiException e) {
+      return false;
     }
+  }
+
+  public void setConnectionValues(final Google google, final ConnectionValues values) {
+    final UserInfo userInfo = google.oauth2Operations().getUserinfo();
+    values.setProviderUserId(userInfo.getId());
+    values.setDisplayName(userInfo.getName());
+    values.setProfileUrl(userInfo.getLink());
+    values.setImageUrl(userInfo.getPicture());
+  }
+
+  public UserProfile fetchUserProfile(final Google google) {
+    final UserInfo userInfo = google.oauth2Operations().getUserinfo();
+    return new UserProfileBuilder().setUsername(userInfo.getId())
+      .setEmail(userInfo.getEmail())
+      .setName(userInfo.getName())
+      .setFirstName(userInfo.getGivenName())
+      .setLastName(userInfo.getFamilyName()).build();
+  }
+
+  public void updateStatus(final Google google, final String message) {
+    throw new UnsupportedOperationException();
+  }
 
 }

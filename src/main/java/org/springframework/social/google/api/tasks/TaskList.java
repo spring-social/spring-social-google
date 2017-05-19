@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.tasks;
 
 import org.springframework.social.google.api.ApiEntity;
@@ -24,26 +23,26 @@ import org.springframework.social.google.api.ApiEntity;
  */
 public class TaskList extends ApiEntity {
 
-	private String title;
+  private String title;
 
-	public TaskList() {
-	}
+  public TaskList() {
+  }
 
-	public TaskList(final String id, final String title) {
-		super(id);
-		this.title = title;
-	}
+  public TaskList(final String id, final String title) {
+    super(id);
+    this.title = title;
+  }
 
-	public TaskList(final String title) {
-		this.title = title;
-	}
+  public TaskList(final String title) {
+    this.title = title;
+  }
 
-	public String getTitle() {
-		return title;
-	}
+  public String getTitle() {
+    return title;
+  }
 
-	public void setTitle(final String title) {
-		this.title = title;
-	}
+  public void setTitle(final String title) {
+    this.title = title;
+  }
 
 }

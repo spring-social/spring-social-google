@@ -13,36 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.config.boot;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties("spring.social.google")
 public class GoogleProperties {
-    /**
-     * Application id.
-     */
-    private String appId;
+  /**
+   * Application id.
+   */
+  private String appId;
 
-    /**
-     * Application secret.
-     */
-    private String appSecret;
+  /**
+   * Application secret.
+   */
+  private String appSecret;
 
-    public String getAppId() {
-        return this.appId;
-    }
+  public String getAppId() {
+    return this.appId;
+  }
 
-    public void setAppId(final String appId) {
-        this.appId = appId;
-    }
+  public void setAppId(final String appId) {
+    this.appId = appId;
+  }
 
-    public String getAppSecret() {
-        return this.appSecret;
-    }
+  public String getAppSecret() {
+    return this.appSecret;
+  }
 
-    public void setAppSecret(final String appSecret) {
-        this.appSecret = appSecret;
-    }
+  public void setAppSecret(final String appSecret) {
+    this.appSecret = appSecret;
+  }
 }

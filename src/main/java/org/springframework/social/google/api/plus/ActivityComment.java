@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.plus;
 
 import java.util.Date;
 
-import org.springframework.social.google.api.ApiEntity;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.social.google.api.ApiEntity;
 
 /**
  * Model class representing a comment.
@@ -29,35 +27,32 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class ActivityComment extends ApiEntity {
 
-	public static class CommentObject {
+  private Date published;
+  private Date updated;
+  @JsonProperty
+  private CommentObject object;
+  private Person actor;
 
-		@JsonProperty
-		private String content;
-	}
+  public Date getPublished() {
+    return published;
+  }
 
-	private Date published;
+  public Date getUpdated() {
+    return updated;
+  }
 
-	private Date updated;
+  public String getContent() {
+    return object != null ? object.content : null;
+  }
 
-	@JsonProperty
-	private CommentObject object;
+  public Person getActor() {
+    return actor;
+  }
 
-	private Person actor;
+  public static class CommentObject {
 
-	public Date getPublished() {
-		return published;
-	}
-
-	public Date getUpdated() {
-		return updated;
-	}
-
-	public String getContent() {
-		return object != null ? object.content : null;
-	}
-
-	public Person getActor() {
-		return actor;
-	}
+    @JsonProperty
+    private String content;
+  }
 
 }

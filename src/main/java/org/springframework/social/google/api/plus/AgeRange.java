@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.plus;
 
 /**
@@ -23,52 +22,52 @@ package org.springframework.social.google.api.plus;
  * @author Michal Szwed
  */
 public enum AgeRange {
-	UNKNOWN(null, null),
-	AGE_17_MINUS(null, 17),
-	AGE_18_20(18, 20),
-	AGE_21_PLUS(21, null);
+  UNKNOWN(null, null),
+  AGE_17_MINUS(null, 17),
+  AGE_18_20(18, 20),
+  AGE_21_PLUS(21, null);
 
-	private Integer min;
-	private Integer max;
+  private Integer min;
+  private Integer max;
 
-	AgeRange(final Integer min, final Integer max) {
-		this.min = min;
-		this.max = max;
-	}
+  AgeRange(final Integer min, final Integer max) {
+    this.min = min;
+    this.max = max;
+  }
 
-	/**
-	 * @return The minimum integer value for the range (possibly null).
-	 */
-	public Integer getMin() {
-		return min;
-	}
+  /**
+   * Constructs an AgeRange from the min/max age values.
+   *
+   * @param min The minimum age
+   * @param max The maximum age
+   * @return an AgeRange
+   */
+  public static AgeRange fromMinMax(final Integer min, final Integer max) {
+    if (min == null && max == 17) {
+      return AGE_17_MINUS;
+    } else if (min == 18 && max == 20) {
+      return AGE_18_20;
+    } else if (min == 21 && max == null) {
+      return AGE_21_PLUS;
+    }
 
-	/**
-	 * @return The maximum integer value for the range (possibly null).
-	 */
-	public Integer getMax() {
-		return max;
-	}
+    final AgeRange unknown = AgeRange.UNKNOWN;
+    unknown.min = min;
+    unknown.max = max;
+    return unknown;
+  }
 
-	/**
-	 * Constructs an AgeRange from the min/max age values.
-	 *
-	 * @param min The minimum age
-	 * @param max The maximum age
-	 * @return an AgeRange
-	 */
-	public static AgeRange fromMinMax(final Integer min, final Integer max) {
-		if (min == null && max == 17) {
-			return AGE_17_MINUS;
-		} else if (min == 18 && max == 20) {
-			return AGE_18_20;
-		} else if (min == 21 && max == null) {
-			return AGE_21_PLUS;
-		}
+  /**
+   * @return The minimum integer value for the range (possibly null).
+   */
+  public Integer getMin() {
+    return min;
+  }
 
-		final AgeRange unknown = AgeRange.UNKNOWN;
-		unknown.min = min;
-		unknown.max = max;
-		return unknown;
-	}
+  /**
+   * @return The maximum integer value for the range (possibly null).
+   */
+  public Integer getMax() {
+    return max;
+  }
 }

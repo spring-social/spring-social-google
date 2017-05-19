@@ -13,8 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.impl;
+
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
+import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
+import static com.fasterxml.jackson.databind.SerializationFeature.FAIL_ON_EMPTY_BEANS;
+import static com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
@@ -35,16 +42,8 @@ import org.springframework.social.google.api.tasks.TaskOperations;
 import org.springframework.social.google.api.tasks.impl.TaskTemplate;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
-import org.springframework.web.client.RestOperations;
 import org.springframework.social.oauth2.TokenStrategy;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
-import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
-import static com.fasterxml.jackson.databind.SerializationFeature.FAIL_ON_EMPTY_BEANS;
-import static com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS;
+import org.springframework.web.client.RestOperations;
 
 /**
  * <p>
@@ -60,96 +59,96 @@ import static com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS
  */
 public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 
-	private String accessToken;
-	private OAuth2Operations oauth2Operations;
-	private PlusOperations plusOperations;
-	private TaskOperations taskOperations;
-	private DriveOperations driveOperations;
-	private CalendarOperations calendarOperations;
+  private String accessToken;
+  private OAuth2Operations oauth2Operations;
+  private PlusOperations plusOperations;
+  private TaskOperations taskOperations;
+  private DriveOperations driveOperations;
+  private CalendarOperations calendarOperations;
 
-	/**
-	 * Creates a new instance of GoogleTemplate.
-	 * This constructor creates a new GoogleTemplate able to perform unauthenticated operations against Google+.
-	 */
-	public GoogleTemplate() {
-		initialize();
-	}
+  /**
+   * Creates a new instance of GoogleTemplate.
+   * This constructor creates a new GoogleTemplate able to perform unauthenticated operations against Google+.
+   */
+  public GoogleTemplate() {
+    initialize();
+  }
 
-	/**
-	 * Creates a new instance of GoogleTemplate.
-	 * This constructor creates the FacebookTemplate using a given access token.
-	 * @param accessToken an access token granted by Google after OAuth2 authentication
-	 */
-	public GoogleTemplate(final String accessToken) {
-		super(accessToken, TokenStrategy.ACCESS_TOKEN_PARAMETER);
-		this.accessToken = accessToken;
-		initialize();
-	}
+  /**
+   * Creates a new instance of GoogleTemplate.
+   * This constructor creates the FacebookTemplate using a given access token.
+   * @param accessToken an access token granted by Google after OAuth2 authentication
+   */
+  public GoogleTemplate(final String accessToken) {
+    super(accessToken, TokenStrategy.ACCESS_TOKEN_PARAMETER);
+    this.accessToken = accessToken;
+    initialize();
+  }
 
-	private void initialize() {
-		oauth2Operations = new OAuth2Template(getRestTemplate(), isAuthorized());
-		plusOperations = new PlusTemplate(getRestTemplate(), isAuthorized());
-		taskOperations = new TaskTemplate(getRestTemplate(), isAuthorized());
-		driveOperations = new DriveTemplate(getRestTemplate(), isAuthorized());
-		calendarOperations = new CalendarTemplate(getRestTemplate(), isAuthorized());
-	}
+  private void initialize() {
+    oauth2Operations = new OAuth2Template(getRestTemplate(), isAuthorized());
+    plusOperations = new PlusTemplate(getRestTemplate(), isAuthorized());
+    taskOperations = new TaskTemplate(getRestTemplate(), isAuthorized());
+    driveOperations = new DriveTemplate(getRestTemplate(), isAuthorized());
+    calendarOperations = new CalendarTemplate(getRestTemplate(), isAuthorized());
+  }
 
-	@Override
-	protected List<HttpMessageConverter<?>> getMessageConverters() {
+  @Override
+  protected List<HttpMessageConverter<?>> getMessageConverters() {
 
-		final MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
-		final ObjectMapper objectMapper = new ObjectMapper();
-		objectMapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
-		objectMapper.configure(WRITE_DATES_AS_TIMESTAMPS, false);
-		objectMapper.configure(FAIL_ON_EMPTY_BEANS, false);
-		objectMapper.setSerializationInclusion(NON_NULL);
-		jsonConverter.setObjectMapper(objectMapper);
+    final MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
+    final ObjectMapper objectMapper = new ObjectMapper();
+    objectMapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
+    objectMapper.configure(WRITE_DATES_AS_TIMESTAMPS, false);
+    objectMapper.configure(FAIL_ON_EMPTY_BEANS, false);
+    objectMapper.setSerializationInclusion(NON_NULL);
+    jsonConverter.setObjectMapper(objectMapper);
 
-		final FormHttpMessageConverter formHttpMessageConverter = new FormHttpMessageConverter();
-		formHttpMessageConverter.addPartConverter(jsonConverter);
+    final FormHttpMessageConverter formHttpMessageConverter = new FormHttpMessageConverter();
+    formHttpMessageConverter.addPartConverter(jsonConverter);
 
-		final List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
-		messageConverters.add(jsonConverter);
-		messageConverters.add(new ByteArrayHttpMessageConverter());
-		messageConverters.add(formHttpMessageConverter);
-		messageConverters.add(new ResourceHttpMessageConverter());
-		return messageConverters;
-	}
+    final List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+    messageConverters.add(jsonConverter);
+    messageConverters.add(new ByteArrayHttpMessageConverter());
+    messageConverters.add(formHttpMessageConverter);
+    messageConverters.add(new ResourceHttpMessageConverter());
+    return messageConverters;
+  }
 
-	@Override
-	protected OAuth2Version getOAuth2Version() {
-		return OAuth2Version.BEARER;
-	}
+  @Override
+  protected OAuth2Version getOAuth2Version() {
+    return OAuth2Version.BEARER;
+  }
 
-	@Override
-	public PlusOperations plusOperations() {
-		return plusOperations;
-	}
+  @Override
+  public PlusOperations plusOperations() {
+    return plusOperations;
+  }
 
-	@Override
-	public TaskOperations taskOperations() {
-		return taskOperations;
-	}
+  @Override
+  public TaskOperations taskOperations() {
+    return taskOperations;
+  }
 
-	@Override
-	public DriveOperations driveOperations() {
-		return driveOperations;
-	}
+  @Override
+  public DriveOperations driveOperations() {
+    return driveOperations;
+  }
 
-	@Override
-	public CalendarOperations calendarOperations() {
-		return calendarOperations;
-	}
+  @Override
+  public CalendarOperations calendarOperations() {
+    return calendarOperations;
+  }
 
-	@Override
-	public String getAccessToken() {
-		return accessToken;
-	}
+  @Override
+  public String getAccessToken() {
+    return accessToken;
+  }
 
-	@Override
-	public OAuth2Operations oauth2Operations() {
-		return oauth2Operations;
-	}
+  @Override
+  public OAuth2Operations oauth2Operations() {
+    return oauth2Operations;
+  }
 
   @Override
   public RestOperations restOperations() {

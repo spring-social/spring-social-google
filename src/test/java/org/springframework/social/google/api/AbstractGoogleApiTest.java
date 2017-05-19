@@ -32,44 +32,42 @@ import org.springframework.social.google.api.impl.GoogleTemplate;
 import org.springframework.test.web.client.MockRestServiceServer;
 
 public class AbstractGoogleApiTest {
-	protected GoogleTemplate google;
+  private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
 
-	protected GoogleTemplate appAuthGoogle;
+  static {
+    dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+  }
 
-	protected MockRestServiceServer mockServer;
+  protected GoogleTemplate google;
+  protected GoogleTemplate appAuthGoogle;
+  protected MockRestServiceServer mockServer;
+  protected MockRestServiceServer appAuthMockServer;
 
-	protected MockRestServiceServer appAuthMockServer;
+  protected static Date date(final String formatted) {
+    try {
+      return dateFormat.parse(formatted);
+    } catch (final ParseException e) {
+      throw new IllegalArgumentException(e);
+    }
+  }
 
-	private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
-	static {
-		dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-	}
+  @Before
+  public void setup() {
+    google = new GoogleTemplate("ACCESS_TOKEN");
+    mockServer = MockRestServiceServer.createServer(google.getRestTemplate());
+    appAuthGoogle = new GoogleTemplate("APP_ACCESS_TOKEN");
+    appAuthMockServer = MockRestServiceServer.createServer(appAuthGoogle.getRestTemplate());
+  }
 
-	@Before
-	public void setup() {
-		google = new GoogleTemplate("ACCESS_TOKEN");
-		mockServer = MockRestServiceServer.createServer(google.getRestTemplate());
-		appAuthGoogle = new GoogleTemplate("APP_ACCESS_TOKEN");
-		appAuthMockServer = MockRestServiceServer.createServer(appAuthGoogle.getRestTemplate());
-	}
+  protected Resource jsonResource(final String filename) {
+    return new ClassPathResource(filename + ".json", getClass());
+  }
 
-	protected Resource jsonResource(final String filename) {
-		return new ClassPathResource(filename + ".json", getClass());
-	}
+  protected String encodeUTF8(final String textToEncode) throws UnsupportedEncodingException {
+    return URLEncoder.encode(textToEncode, "UTF-8");
+  }
 
-	protected static Date date(final String formatted) {
-		try {
-			return dateFormat.parse(formatted);
-		} catch (final ParseException e) {
-			throw new IllegalArgumentException(e);
-		}
-	}
-
-	protected String encodeUTF8(final String textToEncode) throws UnsupportedEncodingException {
-		return URLEncoder.encode(textToEncode, "UTF-8");
-	}
-
-	protected String normalizeJsonObjectLineFeeds(final String fileJsonString) throws JSONException {
-		return new JSONObject(fileJsonString).toString();
-	}
+  protected String normalizeJsonObjectLineFeeds(final String fileJsonString) throws JSONException {
+    return new JSONObject(fileJsonString).toString();
+  }
 }

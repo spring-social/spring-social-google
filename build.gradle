@@ -1,7 +1,7 @@
 buildscript {
   repositories {
     mavenCentral()
-    maven { url 'https://plugins.gradle.org/m2/'}
+    maven { url 'https://plugins.gradle.org/m2/' }
     maven { url 'http://repo.spring.io/plugins-release' }
   }
   dependencies {
@@ -40,6 +40,10 @@ contacts {
     moniker 'Michael Laccetti'
     github 'mlaccetti'
   }
+}
+
+license {
+  includes(["**/*.java", "**/*.properties"])
 }
 
 [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:all', '-Xlint:-processing', '-Werror']

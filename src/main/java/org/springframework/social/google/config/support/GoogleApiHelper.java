@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.config.support;
 
 import org.apache.commons.logging.Log;
@@ -26,31 +25,29 @@ import org.springframework.social.google.api.Google;
 
 public class GoogleApiHelper implements ApiHelper<Google> {
 
-    private final UsersConnectionRepository usersConnectionRepository;
+  private final static Log logger = LogFactory.getLog(GoogleApiHelper.class);
+  private final UsersConnectionRepository usersConnectionRepository;
+  private final UserIdSource userIdSource;
 
-    private final UserIdSource userIdSource;
+  private GoogleApiHelper(
+    final UsersConnectionRepository usersConnectionRepository,
+    final UserIdSource userIdSource) {
+    this.usersConnectionRepository = usersConnectionRepository;
+    this.userIdSource = userIdSource;
+  }
 
-    private GoogleApiHelper(
-      final UsersConnectionRepository usersConnectionRepository,
-      final UserIdSource userIdSource) {
-        this.usersConnectionRepository = usersConnectionRepository;
-        this.userIdSource = userIdSource;
+  public Google getApi() {
+    if (logger.isDebugEnabled()) {
+      logger.debug("Getting API binding instance for Google provider");
     }
 
-    public Google getApi() {
-        if (logger.isDebugEnabled()) {
-            logger.debug("Getting API binding instance for Google provider");
-        }
-
-        final Connection<Google> connection = usersConnectionRepository
-            .createConnectionRepository(userIdSource.getUserId())
-            .findPrimaryConnection(Google.class);
-        if (logger.isDebugEnabled() && connection == null) {
-            logger.debug("No current connection; Returning default GoogleTemplate instance.");
-        }
-        return connection != null ? connection.getApi() : null;
+    final Connection<Google> connection = usersConnectionRepository
+      .createConnectionRepository(userIdSource.getUserId())
+      .findPrimaryConnection(Google.class);
+    if (logger.isDebugEnabled() && connection == null) {
+      logger.debug("No current connection; Returning default GoogleTemplate instance.");
     }
-
-    private final static Log logger = LogFactory.getLog(GoogleApiHelper.class);
+    return connection != null ? connection.getApi() : null;
+  }
 
 }

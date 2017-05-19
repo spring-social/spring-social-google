@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api;
 
 import static org.springframework.util.StringUtils.hasText;
@@ -24,23 +23,23 @@ import static org.springframework.util.StringUtils.hasText;
  */
 public abstract class ApiEntity {
 
-	private String id;
+  private String id;
 
-	private String etag;
+  private String etag;
 
-	protected ApiEntity() {
-	}
+  protected ApiEntity() {
+  }
 
-	protected ApiEntity(final String id) {
-		this.id = hasText(id) ? id : null;
-	}
+  protected ApiEntity(final String id) {
+    this.id = hasText(id) ? id : null;
+  }
 
-	public String getId() {
-		return id;
-	}
+  public String getId() {
+    return id;
+  }
 
-	public String getEtag() {
-		return etag;
-	}
+  public String getEtag() {
+    return etag;
+  }
 
 }

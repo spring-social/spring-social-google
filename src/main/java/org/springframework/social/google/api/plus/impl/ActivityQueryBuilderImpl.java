@@ -1,11 +1,11 @@
-/*
- * Copyright 2011 the original author or authors.
+/**
+ * Copyright 2011-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,19 +26,19 @@ import org.springframework.web.client.RestTemplate;
  * @author Gabriel Axel
  */
 public class ActivityQueryBuilderImpl extends ApiQueryBuilderImpl<ActivityQueryBuilder, ActivitiesPage> implements ActivityQueryBuilder {
-	
-	public ActivityQueryBuilderImpl(RestTemplate restTemplate) {
-		super("https://www.googleapis.com/plus/v1/activities", ActivitiesPage.class, restTemplate);
-	}
-	
-	@Override
-	public ActivityQueryBuilder searchFor(String text) {
-		return appendQueryParam("query", encode(text));
-	}
-	
-	@Override
-	public ActivityQueryBuilder orderBy(ActivitiesOrder order) {
-		return appendQueryParam("orderBy", order);
-	}
+
+  public ActivityQueryBuilderImpl(final RestTemplate restTemplate) {
+    super("https://www.googleapis.com/plus/v1/activities", ActivitiesPage.class, restTemplate);
+  }
+
+  @Override
+  public ActivityQueryBuilder searchFor(final String text) {
+    return appendQueryParam("query", encode(text));
+  }
+
+  @Override
+  public ActivityQueryBuilder orderBy(final ActivitiesOrder order) {
+    return appendQueryParam("orderBy", order);
+  }
 
 }

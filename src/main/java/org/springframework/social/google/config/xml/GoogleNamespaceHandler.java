@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.config.xml;
 
 import org.springframework.beans.factory.xml.NamespaceHandler;
@@ -26,11 +25,11 @@ import org.springframework.social.config.xml.AbstractProviderConfigNamespaceHand
  * @author Hakan Dilek
  */
 public class GoogleNamespaceHandler extends
-		AbstractProviderConfigNamespaceHandler {
+  AbstractProviderConfigNamespaceHandler {
 
-	@Override
-	protected AbstractProviderConfigBeanDefinitionParser getProviderConfigBeanDefinitionParser() {
-		return new GoogleConfigBeanDefinitionParser();
-	}
+  @Override
+  protected AbstractProviderConfigBeanDefinitionParser getProviderConfigBeanDefinitionParser() {
+    return new GoogleConfigBeanDefinitionParser();
+  }
 
 }

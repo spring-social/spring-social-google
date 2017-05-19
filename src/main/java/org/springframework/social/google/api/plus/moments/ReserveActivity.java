@@ -1,11 +1,11 @@
-/*
- * Copyright 2011 the original author or authors.
+/**
+ * Copyright 2011-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,46 +27,46 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * Activity representing a reservation at a business such as a restaurant
- * 
+ *
  * @see <a
  *      href="https://developers.google.com/+/api/moment-types/reserve-activity">Reserve
  *      Activity</a>
  * @author Gabriel Axel
- * 
+ *
  */
 @JsonTypeName(RESERVE_ACTIVITY)
 public class ReserveActivity extends Moment {
 
-	protected static class Result {
+  @JsonProperty
+  private Result result;
 
-		@JsonProperty
-		@JsonFormat(shape = STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone = "UTC")
-		Date startDate;
+  protected ReserveActivity() {
+  }
 
-		@JsonProperty
-		int attendeeCount;
+  public ReserveActivity(final String targetUrl) {
+    super(targetUrl);
+    result = new Result();
+  }
 
-		@JsonGetter
-		String getType() {
-			return "http://schemas.google.com/Reservation";
-		}
+  public ReserveActivity(final String targetUrl, final Date startDate, final int attendeeCount) {
+    this(targetUrl);
+    result.startDate = startDate;
+    result.attendeeCount = attendeeCount;
+  }
 
-	}
+  protected static class Result {
 
-	@JsonProperty
-	private Result result;
+    @JsonProperty
+    @JsonFormat(shape = STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone = "UTC")
+    Date startDate;
 
-	protected ReserveActivity() {
-	}
+    @JsonProperty
+    int attendeeCount;
 
-	public ReserveActivity(String targetUrl) {
-		super(targetUrl);
-		result = new Result();
-	}
+    @JsonGetter
+    String getType() {
+      return "http://schemas.google.com/Reservation";
+    }
 
-	public ReserveActivity(String targetUrl, Date startDate, int attendeeCount) {
-		this(targetUrl);
-		result.startDate = startDate;
-		result.attendeeCount = attendeeCount;
-	}
+  }
 }

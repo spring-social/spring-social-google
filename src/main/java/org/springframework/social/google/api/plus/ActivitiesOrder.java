@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.plus;
 
 /**
@@ -21,5 +20,5 @@ package org.springframework.social.google.api.plus;
  * @author Gabriel Axel
  */
 public enum ActivitiesOrder {
-	BEST, RECENT
+  BEST, RECENT
 }

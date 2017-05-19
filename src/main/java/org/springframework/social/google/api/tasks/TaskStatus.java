@@ -13,22 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.tasks;
-
-import org.springframework.social.google.api.impl.ApiEnumSerializer;
-import org.springframework.social.google.api.tasks.impl.TaskStatusDeserializer;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.springframework.social.google.api.impl.ApiEnumSerializer;
+import org.springframework.social.google.api.tasks.impl.TaskStatusDeserializer;
 
 /**
  * Enum representing a task status (whether it is completed)
  * @author Gabriel Axel
  */
-@JsonSerialize(using=ApiEnumSerializer.class)
-@JsonDeserialize(using=TaskStatusDeserializer.class)
+@JsonSerialize(using = ApiEnumSerializer.class)
+@JsonDeserialize(using = TaskStatusDeserializer.class)
 public enum TaskStatus {
 
-	NEEDS_ACTION, COMPLETED
+  NEEDS_ACTION, COMPLETED
 }

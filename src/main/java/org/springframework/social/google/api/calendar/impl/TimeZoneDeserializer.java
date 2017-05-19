@@ -1,11 +1,11 @@
-/*
- * Copyright 2014 the original author or authors.
+/**
+ * Copyright 2011-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,23 +15,22 @@
  */
 package org.springframework.social.google.api.calendar.impl;
 
-import com.fasterxml.jackson.core.JsonParseException;
+import java.io.IOException;
+import java.util.TimeZone;
+
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
-import java.io.IOException;
-import java.util.TimeZone;
-
 /**
  * {@link JsonDeserializer} for {@link TimeZone}.
- * 
+ *
  * @author Martin Wink
  */
 public class TimeZoneDeserializer extends JsonDeserializer<TimeZone> {
-	@Override
-	public TimeZone deserialize(JsonParser jp, DeserializationContext ctxt)
-			throws JsonParseException, IOException {
-		return TimeZone.getTimeZone(jp.getValueAsString());
-	}
+  @Override
+  public TimeZone deserialize(final JsonParser jp, final DeserializationContext ctxt)
+    throws IOException {
+    return TimeZone.getTimeZone(jp.getValueAsString());
+  }
 }

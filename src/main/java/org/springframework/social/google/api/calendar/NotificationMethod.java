@@ -1,11 +1,11 @@
-/*
- * Copyright 2014 the original author or authors.
+/**
+ * Copyright 2011-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,32 +15,31 @@
  */
 package org.springframework.social.google.api.calendar;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.social.google.api.calendar.impl.NotificationMethodDeserializer;
 import org.springframework.social.google.api.impl.ApiEnumSerializer;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 /**
  * Enumeration representing a notification method.
- * 
+ *
  * @author Martin Wink
  */
-@JsonSerialize(using=ApiEnumSerializer.class)
-@JsonDeserialize(using=NotificationMethodDeserializer.class)
+@JsonSerialize(using = ApiEnumSerializer.class)
+@JsonDeserialize(using = NotificationMethodDeserializer.class)
 public enum NotificationMethod {
-	/**
-	 * "email" - Reminders are sent via email.
-	 */
-	EMAIL,
-	
-	/**
-	 *  "sms" - Reminders are sent via SMS.
-	 */
-	SMS,
-	
-	/**
-	 * "popup" - Reminders are sent via a UI popup.
-	 */
-	POPUP
+  /**
+   * "email" - Reminders are sent via email.
+   */
+  EMAIL,
+
+  /**
+   *  "sms" - Reminders are sent via SMS.
+   */
+  SMS,
+
+  /**
+   * "popup" - Reminders are sent via a UI popup.
+   */
+  POPUP
 }

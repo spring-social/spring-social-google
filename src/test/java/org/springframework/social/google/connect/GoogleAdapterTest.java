@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.connect;
 
 import static org.junit.Assert.assertEquals;
@@ -27,29 +26,29 @@ import org.springframework.social.google.api.oauth2.UserInfo;
 
 public class GoogleAdapterTest {
 
-	private GoogleAdapter apiAdapter = new GoogleAdapter();
+  private GoogleAdapter apiAdapter = new GoogleAdapter();
 
-	private Google google = Mockito.mock(Google.class);
+  private Google google = Mockito.mock(Google.class);
 
-	@Test
-	public void fetchProfile() {
-        final OAuth2Operations oauth2Operations = Mockito.mock(OAuth2Operations.class);
-        Mockito.when(google.oauth2Operations()).thenReturn(oauth2Operations);
+  @Test
+  public void fetchProfile() {
+    final OAuth2Operations oauth2Operations = Mockito.mock(OAuth2Operations.class);
+    Mockito.when(google.oauth2Operations()).thenReturn(oauth2Operations);
 
-        final UserInfo userInfo = Mockito.mock(UserInfo.class);
-        Mockito.when(userInfo.getName()).thenReturn("Gabriel Axel");
-        Mockito.when(userInfo.getGivenName()).thenReturn("Gabriel");
-        Mockito.when(userInfo.getFamilyName()).thenReturn("Axel");
-        Mockito.when(userInfo.getEmail()).thenReturn("guznik@gmail.com");
-        Mockito.when(userInfo.getId()).thenReturn("114863353858610846998");
+    final UserInfo userInfo = Mockito.mock(UserInfo.class);
+    Mockito.when(userInfo.getName()).thenReturn("Gabriel Axel");
+    Mockito.when(userInfo.getGivenName()).thenReturn("Gabriel");
+    Mockito.when(userInfo.getFamilyName()).thenReturn("Axel");
+    Mockito.when(userInfo.getEmail()).thenReturn("guznik@gmail.com");
+    Mockito.when(userInfo.getId()).thenReturn("114863353858610846998");
 
-        Mockito.when(oauth2Operations.getUserinfo()).thenReturn(userInfo);
-        final UserProfile profile = apiAdapter.fetchUserProfile(google);
-        assertEquals("Gabriel Axel", profile.getName());
-        assertEquals("Gabriel", profile.getFirstName());
-        assertEquals("Axel", profile.getLastName());
-        assertEquals("guznik@gmail.com", profile.getEmail());
-        assertEquals("114863353858610846998", profile.getUsername());
-	}
+    Mockito.when(oauth2Operations.getUserinfo()).thenReturn(userInfo);
+    final UserProfile profile = apiAdapter.fetchUserProfile(google);
+    assertEquals("Gabriel Axel", profile.getName());
+    assertEquals("Gabriel", profile.getFirstName());
+    assertEquals("Axel", profile.getLastName());
+    assertEquals("guznik@gmail.com", profile.getEmail());
+    assertEquals("114863353858610846998", profile.getUsername());
+  }
 
 }

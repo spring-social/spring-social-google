@@ -1,11 +1,11 @@
-/*
- * Copyright 2011 the original author or authors.
+/**
+ * Copyright 2011-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,74 +25,74 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 /**
  * Activity representing a submission of a review, such as a review of a
  * product, creative work, restaurant or other service
- * 
+ *
  * @see <a
  *      href="https://developers.google.com/+/api/moment-types/review-activity">Review
  *      Activity</a>
  * @author Gabriel Axel
- * 
+ *
  */
 @JsonTypeName(REVIEW_ACTIVITY)
 public class ReviewActivity extends Moment {
 
-	protected static class Result {
+  @JsonProperty
+  private Result result;
 
-		@JsonProperty
-		String url;
+  protected ReviewActivity() {
+  }
 
-		@JsonProperty
-		String text;
+  public ReviewActivity(final String targetUrl, final String url, final String text) {
+    super(targetUrl);
+    result = new Result();
+    result.url = url;
+    result.text = text;
+  }
 
-		@JsonProperty
-		String name;
+  public ReviewActivity(final String targetUrl, final String url, final String text,
+                        final String name, final Rating reviewRating) {
+    this(targetUrl, url, text);
+    result.name = name;
+    result.reviewRating = reviewRating;
+  }
 
-		@JsonProperty
-		Rating reviewRating;
+  @JsonIgnore
+  public String getResultUrl() {
+    return result.url;
+  }
 
-		@JsonGetter
-		String getType() {
-			return "http://schema.org/Review";
-		}
+  @JsonIgnore
+  public String getResultText() {
+    return result.text;
+  }
 
-	}
+  @JsonIgnore
+  public String getResultName() {
+    return result.name;
+  }
 
-	@JsonProperty
-	private Result result;
+  @JsonIgnore
+  public Rating getReviewRating() {
+    return result.reviewRating;
+  }
 
-	protected ReviewActivity() {
-	}
+  protected static class Result {
 
-	public ReviewActivity(String targetUrl, String url, String text) {
-		super(targetUrl);
-		result = new Result();
-		result.url = url;
-		result.text = text;
-	}
+    @JsonProperty
+    String url;
 
-	public ReviewActivity(String targetUrl, String url, String text,
-			String name, Rating reviewRating) {
-		this(targetUrl, url, text);
-		result.name = name;
-		result.reviewRating = reviewRating;
-	}
+    @JsonProperty
+    String text;
 
-	@JsonIgnore
-	public String getResultUrl() {
-		return result.url;
-	}
+    @JsonProperty
+    String name;
 
-	@JsonIgnore
-	public String getResultText() {
-		return result.text;
-	}
+    @JsonProperty
+    Rating reviewRating;
 
-	@JsonIgnore
-	public String getResultName() {
-		return result.name;
-	}
+    @JsonGetter
+    String getType() {
+      return "http://schema.org/Review";
+    }
 
-	@JsonIgnore
-	public Rating getReviewRating() {
-		return result.reviewRating;
-	}
+  }
 }

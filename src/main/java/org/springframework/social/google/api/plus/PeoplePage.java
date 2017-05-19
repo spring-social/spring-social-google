@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.plus;
 
 import java.util.List;
@@ -27,10 +26,10 @@ import org.springframework.social.google.api.query.ApiPage;
  */
 public class PeoplePage extends ApiPage<Person> {
 
-	public PeoplePage() {
-	}
+  public PeoplePage() {
+  }
 
-	public PeoplePage(final List<Person> items, final String nextPageToken) {
-		super(items, nextPageToken);
-	}
+  public PeoplePage(final List<Person> items, final String nextPageToken) {
+    super(items, nextPageToken);
+  }
 }

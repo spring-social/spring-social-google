@@ -1,151 +1,130 @@
-/**
- * Copyright 2011-2017 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 {
- "kind": "calendar#calendarList",
- "etag": "\"0000000000000000\"",
- "nextSyncToken": "000000000000000a",
- "items": [
-  {
-
-   "kind": "calendar#calendarListEntry",
-   "etag": "\"0000000000000000\"",
-   "id": "martxw@gmail.com",
-   "summary": "martxw@gmail.com",
-   "timeZone": "Europe/London",
-   "colorId": "15",
-   "backgroundColor": "#9fc6e7",
-   "foregroundColor": "#000000",
-   "selected": true,
-   "accessRole": "owner",
-   "defaultReminders": [
-	{
-	  "method": "email",
-	  "minutes": 20
-	},
-	{
-	  "method": "sms",
-	  "minutes": 15
-	},
-	{
-	  "method": "popup",
-	  "minutes": 10
-	}
-   ],
-   "notificationSettings": {
-    "notifications": [
-     {
-      "type": "eventCreation",
-      "method": "email"
-     },
-     {
-      "type": "eventChange",
-      "method": "sms"
-     },
-     {
-      "type": "eventCancellation",
-      "method": "email"
-     },
-     {
-      "type": "eventResponse",
-      "method": "email"
-     }
-    ]
-   },
-   "primary": true
-  },
-  {
-
-   "kind": "calendar#calendarListEntry",
-   "etag": "\"0000000000000001\"",
-   "id": "en.uk#holiday@group.v.calendar.google.com",
-   "summary": "Holidays in United Kingdom",
-   "description": "Holidays and Observances in United Kingdom",
-   "timeZone": "Europe/London",
-   "colorId": "2",
-   "backgroundColor": "#d06b64",
-   "foregroundColor": "#000000",
-   "selected": true,
-   "accessRole": "reader",
-   "defaultReminders": [
-   ],
-   "notificationSettings": {
-   }
-  },
-  {
-
-   "kind": "calendar#calendarListEntry",
-   "etag": "\"0000000000000002\"",
-   "id": "missing_values#martxw@gmail.com"
-  },
-  {
-
-   "kind": "calendar#calendarListEntry",
-   "etag": "\"0000000000000003\"",
-   "id": "alternate_values_1#martxw@gmail.com",
-   "summary": "",
-   "description": "",
-   "location": "Somewhere",
-   "timeZone": "Europe/Paris",
-   "summaryOverride": "My title",
-   "colorId": "",
-   "backgroundColor": "",
-   "foregroundColor": "",
-   "hidden": true,
-   "selected": false,
-   "accessRole": "writer",
-   "defaultReminders": [
-	{
-	}
-   ],
-   "notificationSettings": {
-    "notifications": [
-    ]
-   },
-   "primary": false,
-   "deleted": true,
-   "defaultReminders": [
-   ]
-  },
-  {
-
-   "kind": "calendar#calendarListEntry",
-   "etag": "\"0000000000000004\"",
-   "id": "alternate_values_2#martxw@gmail.com",
-   "summary": "",
-   "description": "",
-   "location": "Somewhere",
-   "timeZone": "",
-   "summaryOverride": "",
-   "colorId": "",
-   "backgroundColor": "",
-   "foregroundColor": "",
-   "hidden": true,
-   "selected": false,
-   "accessRole": "freeBusyReader",
-   "primary": false,
-   "deleted": true,
-   "defaultReminders": [
-   ],
-   "notificationSettings": {
-    "notifications": [
-     {
-     }
-    ]
-   }
-  }
- ]
+  "kind": "calendar#calendarList",
+  "etag": "\"0000000000000000\"",
+  "nextSyncToken": "000000000000000a",
+  "items": [
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"0000000000000000\"",
+      "id": "martxw@gmail.com",
+      "summary": "martxw@gmail.com",
+      "timeZone": "Europe/London",
+      "colorId": "15",
+      "backgroundColor": "#9fc6e7",
+      "foregroundColor": "#000000",
+      "selected": true,
+      "accessRole": "owner",
+      "defaultReminders": [
+        {
+          "method": "email",
+          "minutes": 20
+        },
+        {
+          "method": "sms",
+          "minutes": 15
+        },
+        {
+          "method": "popup",
+          "minutes": 10
+        }
+      ],
+      "notificationSettings": {
+        "notifications": [
+          {
+            "type": "eventCreation",
+            "method": "email"
+          },
+          {
+            "type": "eventChange",
+            "method": "sms"
+          },
+          {
+            "type": "eventCancellation",
+            "method": "email"
+          },
+          {
+            "type": "eventResponse",
+            "method": "email"
+          }
+        ]
+      },
+      "primary": true
+    },
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"0000000000000001\"",
+      "id": "en.uk#holiday@group.v.calendar.google.com",
+      "summary": "Holidays in United Kingdom",
+      "description": "Holidays and Observances in United Kingdom",
+      "timeZone": "Europe/London",
+      "colorId": "2",
+      "backgroundColor": "#d06b64",
+      "foregroundColor": "#000000",
+      "selected": true,
+      "accessRole": "reader",
+      "defaultReminders": [
+      ],
+      "notificationSettings": {
+      }
+    },
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"0000000000000002\"",
+      "id": "missing_values#martxw@gmail.com"
+    },
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"0000000000000003\"",
+      "id": "alternate_values_1#martxw@gmail.com",
+      "summary": "",
+      "description": "",
+      "location": "Somewhere",
+      "timeZone": "Europe/Paris",
+      "summaryOverride": "My title",
+      "colorId": "",
+      "backgroundColor": "",
+      "foregroundColor": "",
+      "hidden": true,
+      "selected": false,
+      "accessRole": "writer",
+      "defaultReminders": [
+        {
+        }
+      ],
+      "notificationSettings": {
+        "notifications": [
+        ]
+      },
+      "primary": false,
+      "deleted": true,
+      "defaultReminders": [
+      ]
+    },
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"0000000000000004\"",
+      "id": "alternate_values_2#martxw@gmail.com",
+      "summary": "",
+      "description": "",
+      "location": "Somewhere",
+      "timeZone": "",
+      "summaryOverride": "",
+      "colorId": "",
+      "backgroundColor": "",
+      "foregroundColor": "",
+      "hidden": true,
+      "selected": false,
+      "accessRole": "freeBusyReader",
+      "primary": false,
+      "deleted": true,
+      "defaultReminders": [
+      ],
+      "notificationSettings": {
+        "notifications": [
+          {
+          }
+        ]
+      }
+    }
+  ]
 }

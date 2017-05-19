@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.impl;
 
 import java.io.IOException;
@@ -30,31 +29,31 @@ import com.fasterxml.jackson.databind.SerializerProvider;
  */
 public class ApiEnumSerializer extends JsonSerializer<Enum<?>> {
 
-	public static String enumToString(final Enum<?> value) {
+  public static String enumToString(final Enum<?> value) {
 
-		if(value == null) {
-			return null;
-		}
+    if (value == null) {
+      return null;
+    }
 
-		final String underscored = value.name();
+    final String underscored = value.name();
 
-		final StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < underscored.length(); i++) {
-			final char c = underscored.charAt(i);
-			if (c == '_') {
-				sb.append(Character.toUpperCase(underscored.charAt(++i)));
-			} else {
-				sb.append(Character.toLowerCase(c));
-			}
-		}
-		return sb.toString();
-	}
+    final StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < underscored.length(); i++) {
+      final char c = underscored.charAt(i);
+      if (c == '_') {
+        sb.append(Character.toUpperCase(underscored.charAt(++i)));
+      } else {
+        sb.append(Character.toLowerCase(c));
+      }
+    }
+    return sb.toString();
+  }
 
-	@Override
-	public void serialize(final Enum<?> value, final JsonGenerator jgen,
+  @Override
+  public void serialize(final Enum<?> value, final JsonGenerator jgen,
                         final SerializerProvider provider) throws IOException {
 
-		jgen.writeString(enumToString(value));
-	}
+    jgen.writeString(enumToString(value));
+  }
 
 }

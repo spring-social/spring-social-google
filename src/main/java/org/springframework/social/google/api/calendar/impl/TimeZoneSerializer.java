@@ -1,11 +1,11 @@
-/*
- * Copyright 2014 the original author or authors.
+/**
+ * Copyright 2011-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,23 +15,22 @@
  */
 package org.springframework.social.google.api.calendar.impl;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
-
 import java.io.IOException;
 import java.util.TimeZone;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+
 /**
  * {@link JsonSerializer} for {@link TimeZone}.
- * 
+ *
  * @author Martin Wink
  */
 public class TimeZoneSerializer extends JsonSerializer<TimeZone> {
-	@Override
-	public void serialize(TimeZone value, JsonGenerator jgen, SerializerProvider provider)
-			throws IOException, JsonProcessingException {
-		jgen.writeString(value.getID());
-	}
+  @Override
+  public void serialize(final TimeZone value, final JsonGenerator jgen, final SerializerProvider provider)
+    throws IOException {
+    jgen.writeString(value.getID());
+  }
 }

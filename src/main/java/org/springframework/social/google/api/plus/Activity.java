@@ -13,14 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.plus;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import org.springframework.social.google.api.ApiEntity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -29,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.springframework.social.google.api.ApiEntity;
 
 /**
  * Model class representing a Google+ activity
@@ -36,163 +34,154 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
  */
 public class Activity extends ApiEntity {
 
-	public static class PreviewImage {
+  private String title;
+  private Date published;
+  private Date updated;
+  private String url;
+  @JsonProperty
+  private Person actor;
+  @JsonProperty
+  private ActivityObject object;
 
-		@JsonProperty
-		protected String url;
+  public String getTitle() {
+    return title;
+  }
 
-		@JsonProperty
-		protected String type;
+  public Date getPublished() {
+    return published;
+  }
 
-		@JsonProperty
-		protected int height;
+  public Date getUpdated() {
+    return updated;
+  }
 
-		@JsonProperty
-		protected int width;
-	}
+  public String getUrl() {
+    return url;
+  }
 
-	@JsonTypeInfo(property = "objectType", include = As.PROPERTY, use = Id.NAME)
-	@JsonSubTypes({ @Type(Article.class), @Type(Photo.class), @Type(Video.class),
-			@Type(Album.class), @Type(Event.class), @Type(Hangout.class),
-			@Type(Place.class), @Type(Audio.class) })
-	public static abstract class Attachment {
+  public Person getActor() {
+    return actor;
+  }
 
-		private String url;
-		private String displayName;
-		private String content;
+  public String getContent() {
+    return object.content;
+  }
 
-		@JsonProperty
-		private PreviewImage image;
+  public List<Attachment> getAttachments() {
+    return object.attachments == null ? new ArrayList<>() : object.attachments;
+  }
 
-		public String getUrl() {
-			return url;
-		}
+  public int getPlusOners() {
+    return object.plusoners.totalItems;
+  }
 
-		public String getDisplayName() {
-			return displayName;
-		}
+  public int getResharers() {
+    return object.resharers.totalItems;
+  }
 
-		public String getContent() {
-			return content;
-		}
+  public int getReplies() {
+    return object.replies.totalItems;
+  }
 
-		public String getPreviewImageUrl() {
-			return image == null ? null : image.url;
-		}
+  public static class PreviewImage {
 
-		public String getPreviewImageContentType() {
-			return image == null ? null : image.type;
-		}
-	}
+    @JsonProperty
+    protected String url;
 
-	@JsonTypeName("article")
-	public static class Article extends Attachment {
-	}
+    @JsonProperty
+    protected String type;
 
-	@JsonTypeName("album")
-	public static class Album extends Attachment {
-	}
+    @JsonProperty
+    protected int height;
 
-	@JsonTypeName("event")
-	public static class Event extends Attachment {
-	}
+    @JsonProperty
+    protected int width;
+  }
 
-	@JsonTypeName("hangout")
-	public static class Hangout extends Attachment {
-	}
+  @JsonTypeInfo(property = "objectType", include = As.PROPERTY, use = Id.NAME)
+  @JsonSubTypes({@Type(Article.class), @Type(Photo.class), @Type(Video.class),
+    @Type(Album.class), @Type(Event.class), @Type(Hangout.class),
+    @Type(Place.class), @Type(Audio.class)})
+  public static abstract class Attachment {
 
-	@JsonTypeName("photo")
-	public static class Photo extends Attachment {
-	}
+    private String url;
+    private String displayName;
+    private String content;
 
-	@JsonTypeName("place")
-	public static class Place extends Attachment {
-	}
+    @JsonProperty
+    private PreviewImage image;
 
-	@JsonTypeName("video")
-	public static class Video extends Attachment {
-	}
+    public String getUrl() {
+      return url;
+    }
 
-	@JsonTypeName("audio")
-	public static class Audio extends Attachment {
-	}
+    public String getDisplayName() {
+      return displayName;
+    }
 
-	public static class ActivityObject {
+    public String getContent() {
+      return content;
+    }
 
-		public static class TotalItemsWrapper {
+    public String getPreviewImageUrl() {
+      return image == null ? null : image.url;
+    }
 
-			@JsonProperty
-			private int totalItems;
-		}
+    public String getPreviewImageContentType() {
+      return image == null ? null : image.type;
+    }
+  }
 
-		@JsonProperty
-		private String content;
+  @JsonTypeName("article")
+  public static class Article extends Attachment {
+  }
 
-		@JsonProperty
-		private List<Attachment> attachments;
+  @JsonTypeName("album")
+  public static class Album extends Attachment {
+  }
 
-		@JsonProperty
-		private TotalItemsWrapper plusoners;
+  @JsonTypeName("event")
+  public static class Event extends Attachment {
+  }
 
-		@JsonProperty
-		private TotalItemsWrapper resharers;
+  @JsonTypeName("hangout")
+  public static class Hangout extends Attachment {
+  }
 
-		@JsonProperty
-		private TotalItemsWrapper replies;
+  @JsonTypeName("photo")
+  public static class Photo extends Attachment {
+  }
 
-	}
+  @JsonTypeName("place")
+  public static class Place extends Attachment {
+  }
 
-	private String title;
+  @JsonTypeName("video")
+  public static class Video extends Attachment {
+  }
 
-	private Date published;
+  @JsonTypeName("audio")
+  public static class Audio extends Attachment {
+  }
 
-	private Date updated;
+  public static class ActivityObject {
 
-	private String url;
+    @JsonProperty
+    private String content;
+    @JsonProperty
+    private List<Attachment> attachments;
+    @JsonProperty
+    private TotalItemsWrapper plusoners;
+    @JsonProperty
+    private TotalItemsWrapper resharers;
+    @JsonProperty
+    private TotalItemsWrapper replies;
 
-	@JsonProperty
-	private Person actor;
+    public static class TotalItemsWrapper {
 
-	@JsonProperty
-	private ActivityObject object;
+      @JsonProperty
+      private int totalItems;
+    }
 
-	public String getTitle() {
-		return title;
-	}
-
-	public Date getPublished() {
-		return published;
-	}
-
-	public Date getUpdated() {
-		return updated;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public Person getActor() {
-		return actor;
-	}
-
-	public String getContent() {
-		return object.content;
-	}
-
-	public List<Attachment> getAttachments() {
-		return object.attachments == null ? new ArrayList<Attachment>() : object.attachments;
-	}
-
-	public int getPlusOners() {
-		return object.plusoners.totalItems;
-	}
-
-	public int getResharers() {
-		return object.resharers.totalItems;
-	}
-
-	public int getReplies() {
-		return object.replies.totalItems;
-	}
+  }
 }

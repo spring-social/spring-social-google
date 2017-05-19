@@ -1,11 +1,11 @@
-/*
- * Copyright 2011 the original author or authors.
+/**
+ * Copyright 2011-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *       http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,155 +32,155 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * {@link TaskOperations} implementation.
- * 
+ *
  * @author Gabriel Axel
  */
 public class TaskTemplate extends AbstractGoogleApiOperations implements
-		TaskOperations {
+  TaskOperations {
 
-	static final String TASK_LISTS_URL = "https://www.googleapis.com/tasks/v1/users/@me/lists";
-	static final String TASKS_URL = "https://www.googleapis.com/tasks/v1/lists/";
+  static final String TASK_LISTS_URL = "https://www.googleapis.com/tasks/v1/users/@me/lists";
+  static final String TASKS_URL = "https://www.googleapis.com/tasks/v1/lists/";
 
-	static final String DEFAULT = "@default";
-	static final String TASKS = "/tasks";
+  static final String DEFAULT = "@default";
+  static final String TASKS = "/tasks";
 
-	public TaskTemplate(RestTemplate restTemplate, boolean isAuthorized) {
-		super(restTemplate, isAuthorized);
-	}
+  public TaskTemplate(final RestTemplate restTemplate, final boolean isAuthorized) {
+    super(restTemplate, isAuthorized);
+  }
 
-	@Override
-	public TaskListsPage getTaskLists() {
-		return taskListQuery().maxResultsNumber(100).getPage();
-	}
+  private static String defaultIfBlank(final String value, final String defaultValue) {
+    return hasText(value) ? value : defaultValue;
+  }
 
-	@Override
-	public TaskListsPage getTaskLists(String pageToken) {
-		return taskListQuery().fromPage(pageToken).getPage();
-	}
+  @Override
+  public TaskListsPage getTaskLists() {
+    return taskListQuery().maxResultsNumber(100).getPage();
+  }
 
-	@Override
-	public TaskList getTaskList(String id) {
-		return getEntity(TASK_LISTS_URL + '/' + id, TaskList.class);
-	}
+  @Override
+  public TaskListsPage getTaskLists(final String pageToken) {
+    return taskListQuery().fromPage(pageToken).getPage();
+  }
 
-	@Override
-	public TaskList saveTaskList(TaskList taskList) {
-		return saveEntity(TASK_LISTS_URL, taskList);
-	}
+  @Override
+  public TaskList getTaskList(final String id) {
+    return getEntity(TASK_LISTS_URL + '/' + id, TaskList.class);
+  }
 
-	@Override
-	public void deleteTaskList(TaskList taskList) {
-		deleteTaskList(taskList.getId());
-	}
+  @Override
+  public TaskList saveTaskList(final TaskList taskList) {
+    return saveEntity(TASK_LISTS_URL, taskList);
+  }
 
-	@Override
-	public void deleteTaskList(String taskListId) {
-		deleteEntity(TASK_LISTS_URL, taskListId);
-	}
+  @Override
+  public void deleteTaskList(final TaskList taskList) {
+    deleteTaskList(taskList.getId());
+  }
 
-	@Override
-	public TaskListQueryBuilder taskListQuery() {
-		return new TaskListQueryBuilderImpl(restTemplate);
-	}
+  @Override
+  public void deleteTaskList(final String taskListId) {
+    deleteEntity(TASK_LISTS_URL, taskListId);
+  }
 
-	@Override
-	public TasksPage getTasks() {
-		return taskQuery().maxResultsNumber(100).getPage();
-	}
+  @Override
+  public TaskListQueryBuilder taskListQuery() {
+    return new TaskListQueryBuilderImpl(restTemplate);
+  }
 
-	@Override
-	public TasksPage getTasks(String taskListId, String pageToken) {
-		return taskQuery().fromTaskList(taskListId).fromPage(pageToken)
-				.getPage();
-	}
+  @Override
+  public TasksPage getTasks() {
+    return taskQuery().maxResultsNumber(100).getPage();
+  }
 
-	@Override
-	public Task getTask(String id) {
-		return getTask(DEFAULT, id);
-	}
+  @Override
+  public TasksPage getTasks(final String taskListId, final String pageToken) {
+    return taskQuery().fromTaskList(taskListId).fromPage(pageToken)
+      .getPage();
+  }
 
-	@Override
-	public Task getTask(String taskListId, String id) {
-		return getEntity(TASKS_URL + taskListId + TASKS + '/' + id, Task.class);
-	}
+  @Override
+  public Task getTask(final String id) {
+    return getTask(DEFAULT, id);
+  }
 
-	@Override
-	public Task saveTask(Task task) {
-		return saveTask(DEFAULT, task);
-	}
+  @Override
+  public Task getTask(final String taskListId, final String id) {
+    return getEntity(TASKS_URL + taskListId + TASKS + '/' + id, Task.class);
+  }
 
-	@Override
-	public Task saveTask(String taskListId, Task task) {
-		return saveEntity(TASKS_URL + taskListId + TASKS, task);
-	}
+  @Override
+  public Task saveTask(final Task task) {
+    return saveTask(DEFAULT, task);
+  }
 
-	@Override
-	public Task createTaskAt(String taskListId, String parent, String previous,
-			Task task) {
-		isNull(task.getId());
-		StringBuilder sb = new StringBuilder(TASKS_URL)
-				.append(defaultIfBlank(taskListId, DEFAULT)).append(TASKS)
-				.append('?');
-		if (hasText(parent)) {
-			sb.append("parent=").append(parent).append('&');
-		}
-		if (hasText(previous)) {
-			sb.append("previous=").append(previous);
-		}
-		return saveEntity(sb.toString(), task);
-	}
+  @Override
+  public Task saveTask(final String taskListId, final Task task) {
+    return saveEntity(TASKS_URL + taskListId + TASKS, task);
+  }
 
-	@Override
-	public Task moveTask(String taskListId, Task task, String parent,
-			String previous) {
-		notNull(task.getId());
-		isTrue(hasText(parent) || hasText(previous),
-				"'parent' and/or 'previous' must be set");
-		StringBuilder sb = new StringBuilder(TASKS_URL)
-				.append(defaultIfBlank(taskListId, DEFAULT)).append(TASKS)
-				.append('/').append(task.getId()).append("/move?");
-		if (hasText(parent)) {
-			sb.append("parent=").append(parent).append('&');
-		}
-		if (hasText(previous)) {
-			sb.append("previous=").append(previous);
-		}
-		return restTemplate.postForObject(sb.toString(), null, Task.class);
-	}
+  @Override
+  public Task createTaskAt(final String taskListId, final String parent, final String previous,
+                           final Task task) {
+    isNull(task.getId(), "Task ID should not be null.");
+    final StringBuilder sb = new StringBuilder(TASKS_URL)
+      .append(defaultIfBlank(taskListId, DEFAULT)).append(TASKS)
+      .append('?');
+    if (hasText(parent)) {
+      sb.append("parent=").append(parent).append('&');
+    }
+    if (hasText(previous)) {
+      sb.append("previous=").append(previous);
+    }
+    return saveEntity(sb.toString(), task);
+  }
 
-	@Override
-	public void deleteTask(String taskId) {
-		deleteTask(DEFAULT, taskId);
-	}
+  @Override
+  public Task moveTask(final String taskListId, final Task task, final String parent,
+                       final String previous) {
+    notNull(task.getId(), "Task ID should not be null.");
+    isTrue(hasText(parent) || hasText(previous),
+      "'parent' and/or 'previous' must be set");
+    final StringBuilder sb = new StringBuilder(TASKS_URL)
+      .append(defaultIfBlank(taskListId, DEFAULT)).append(TASKS)
+      .append('/').append(task.getId()).append("/move?");
+    if (hasText(parent)) {
+      sb.append("parent=").append(parent).append('&');
+    }
+    if (hasText(previous)) {
+      sb.append("previous=").append(previous);
+    }
+    return restTemplate.postForObject(sb.toString(), null, Task.class);
+  }
 
-	@Override
-	public void deleteTask(Task task) {
-		deleteTask(task.getId());
-	}
+  @Override
+  public void deleteTask(final String taskId) {
+    deleteTask(DEFAULT, taskId);
+  }
 
-	@Override
-	public void deleteTask(String taskListId, String taskId) {
-		deleteEntity(TASKS_URL + taskListId + TASKS, taskId);
-	}
+  @Override
+  public void deleteTask(final Task task) {
+    deleteTask(task.getId());
+  }
 
-	@Override
-	public void deleteTask(String taskListId, Task task) {
-		deleteTask(taskListId, task.getId());
-	}
+  @Override
+  public void deleteTask(final String taskListId, final String taskId) {
+    deleteEntity(TASKS_URL + taskListId + TASKS, taskId);
+  }
 
-	@Override
-	public TaskQueryBuilder taskQuery() {
-		return new TaskQueryBuilderImpl(restTemplate);
-	}
+  @Override
+  public void deleteTask(final String taskListId, final Task task) {
+    deleteTask(taskListId, task.getId());
+  }
 
-	private static String defaultIfBlank(String value, String defaultValue) {
-		return hasText(value) ? value : defaultValue;
-	}
+  @Override
+  public TaskQueryBuilder taskQuery() {
+    return new TaskQueryBuilderImpl(restTemplate);
+  }
 
-	@Override
-	public void clearCompletedTasks(TaskList taskList) {
-		notNull(taskList.getId());
-		restTemplate.postForLocation(TASKS_URL + taskList.getId() + "/clear",
-				null);
-	}
+  @Override
+  public void clearCompletedTasks(final TaskList taskList) {
+    notNull(taskList.getId(), "Task ID should not be null.");
+    restTemplate.postForLocation(TASKS_URL + taskList.getId() + "/clear",
+      null);
+  }
 }

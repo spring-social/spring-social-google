@@ -13,12 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.social.google.api.oauth2;
 
-import org.springframework.social.google.api.ApiEntity;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.social.google.api.ApiEntity;
 
 /**
  * Model class representing a Google user
@@ -27,114 +25,114 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class UserInfo extends ApiEntity {
 
-	@JsonProperty
-	private String name;
+  @JsonProperty
+  private String name;
 
-	@JsonProperty("given_name")
-	private String givenName;
+  @JsonProperty("given_name")
+  private String givenName;
 
-	@JsonProperty("family_name")
-	private String familyName;
+  @JsonProperty("family_name")
+  private String familyName;
 
-	@JsonProperty
-	private String gender;
+  @JsonProperty
+  private String gender;
 
-	@JsonProperty
-	private String picture;
+  @JsonProperty
+  private String picture;
 
-	@JsonProperty
-	private String link;
+  @JsonProperty
+  private String link;
 
-	@JsonProperty
-	private String email;
+  @JsonProperty
+  private String email;
 
-	@JsonProperty("verified_email")
-	private String verifiedEmail;
+  @JsonProperty("verified_email")
+  private String verifiedEmail;
 
-	@JsonProperty
-	private String hd;
+  @JsonProperty
+  private String hd;
 
-	@JsonProperty
-	private String locale;
+  @JsonProperty
+  private String locale;
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setName(final String name) {
-		this.name = name;
-	}
+  public void setName(final String name) {
+    this.name = name;
+  }
 
-	public String getGivenName() {
-		return givenName;
-	}
+  public String getGivenName() {
+    return givenName;
+  }
 
-	public void setGivenName(final String givenName) {
-		this.givenName = givenName;
-	}
+  public void setGivenName(final String givenName) {
+    this.givenName = givenName;
+  }
 
-	public String getFamilyName() {
-		return familyName;
-	}
+  public String getFamilyName() {
+    return familyName;
+  }
 
-	public void setFamilyName(final String familyName) {
-		this.familyName = familyName;
-	}
+  public void setFamilyName(final String familyName) {
+    this.familyName = familyName;
+  }
 
-	public String getGender() {
-		return gender;
-	}
+  public String getGender() {
+    return gender;
+  }
 
-	public void setGender(final String gender) {
-		this.gender = gender;
-	}
+  public void setGender(final String gender) {
+    this.gender = gender;
+  }
 
-	public String getPicture() {
-		return picture;
-	}
+  public String getPicture() {
+    return picture;
+  }
 
-	public void setPicture(final String picture) {
-		this.picture = picture;
-	}
+  public void setPicture(final String picture) {
+    this.picture = picture;
+  }
 
-	public String getLink() {
-		return link;
-	}
+  public String getLink() {
+    return link;
+  }
 
-	public void setLink(final String link) {
-		this.link = link;
-	}
+  public void setLink(final String link) {
+    this.link = link;
+  }
 
-	public String getEmail() {
-		return email;
-	}
+  public String getEmail() {
+    return email;
+  }
 
-	public void setEmail(final String email) {
-		this.email = email;
-	}
+  public void setEmail(final String email) {
+    this.email = email;
+  }
 
-	public String getVerifiedEmail() {
-		return verifiedEmail;
-	}
+  public String getVerifiedEmail() {
+    return verifiedEmail;
+  }
 
-	public void setVerifiedEmail(final String verifiedEmail) {
-		this.verifiedEmail = verifiedEmail;
-	}
+  public void setVerifiedEmail(final String verifiedEmail) {
+    this.verifiedEmail = verifiedEmail;
+  }
 
-	public String getHd() {
-		return hd;
-	}
+  public String getHd() {
+    return hd;
+  }
 
-	public void setHd(final String hd) {
-		this.hd = hd;
-	}
+  public void setHd(final String hd) {
+    this.hd = hd;
+  }
 
-	public String getLocale() {
-		return locale;
-	}
+  public String getLocale() {
+    return locale;
+  }
 
-	public void setLocale(final String locale) {
-		this.locale = locale;
-	}
+  public void setLocale(final String locale) {
+    this.locale = locale;
+  }
 
 }
