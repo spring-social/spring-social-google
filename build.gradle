@@ -14,6 +14,13 @@ apply plugin: 'checkstyle'
 apply plugin: 'io.spring.release'
 apply plugin: 'nebula.optional-base'
 
+task wrapper(type: Wrapper) {
+  gradleVersion = '3.5'
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
 repositories {
   jcenter()
   mavenCentral()
