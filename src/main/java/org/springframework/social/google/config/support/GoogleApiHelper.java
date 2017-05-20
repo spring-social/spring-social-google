@@ -24,8 +24,8 @@ import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.google.api.Google;
 
 public class GoogleApiHelper implements ApiHelper<Google> {
+  private static final Log logger = LogFactory.getLog(GoogleApiHelper.class);
 
-  private final static Log logger = LogFactory.getLog(GoogleApiHelper.class);
   private final UsersConnectionRepository usersConnectionRepository;
   private final UserIdSource userIdSource;
 
@@ -36,6 +36,9 @@ public class GoogleApiHelper implements ApiHelper<Google> {
     this.userIdSource = userIdSource;
   }
 
+  /**
+   * Return the API binding instance.
+   */
   public Google getApi() {
     if (logger.isDebugEnabled()) {
       logger.debug("Getting API binding instance for Google provider");

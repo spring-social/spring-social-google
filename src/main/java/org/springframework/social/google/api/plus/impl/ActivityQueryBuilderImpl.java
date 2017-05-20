@@ -25,7 +25,8 @@ import org.springframework.web.client.RestTemplate;
  * {@link ActivityQueryBuilder} implementation.
  * @author Gabriel Axel
  */
-public class ActivityQueryBuilderImpl extends ApiQueryBuilderImpl<ActivityQueryBuilder, ActivitiesPage> implements ActivityQueryBuilder {
+public class ActivityQueryBuilderImpl extends ApiQueryBuilderImpl<ActivityQueryBuilder, ActivitiesPage>
+  implements ActivityQueryBuilder {
 
   public ActivityQueryBuilderImpl(final RestTemplate restTemplate) {
     super("https://www.googleapis.com/plus/v1/activities", ActivitiesPage.class, restTemplate);

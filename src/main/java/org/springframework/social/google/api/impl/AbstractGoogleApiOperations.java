@@ -40,8 +40,8 @@ import org.springframework.web.client.RestTemplate;
  * @author Gabriel Axel
  */
 public abstract class AbstractGoogleApiOperations {
+  private static final Log logger = LogFactory.getLog(AbstractGoogleApiOperations.class);
 
-  private final static Log logger = LogFactory.getLog(AbstractGoogleApiOperations.class);
   protected final RestTemplate restTemplate;
   protected final boolean isAuthorized;
 

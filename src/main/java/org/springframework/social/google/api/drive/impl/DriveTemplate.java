@@ -201,7 +201,8 @@ public class DriveTemplate extends AbstractGoogleApiOperations implements
 
     final HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
 
-    final ResponseEntity<DriveFile> response = restTemplate.exchange(MULTIPART_UPLOAD_URL + parameters, POST, entity, DriveFile.class);
+    final ResponseEntity<DriveFile> response =
+      restTemplate.exchange(MULTIPART_UPLOAD_URL + parameters, POST, entity, DriveFile.class);
 
     return response.getBody();
   }
@@ -228,7 +229,8 @@ public class DriveTemplate extends AbstractGoogleApiOperations implements
   @Override
   public UserPermission addPermission(final String fileId,
                                       final UserPermission permission, final boolean sendNotificationEmails) {
-    return saveEntity(DRIVE_FILES_URL + fileId + PERMISSIONS + SEND_NOTIFICATION + sendNotificationEmails, permission);
+    return saveEntity(DRIVE_FILES_URL + fileId + PERMISSIONS + SEND_NOTIFICATION + sendNotificationEmails,
+      permission);
   }
 
   @Override
@@ -265,7 +267,8 @@ public class DriveTemplate extends AbstractGoogleApiOperations implements
 
   @Override
   public FileCommentQueryBuilder fileCommentQueryBuilder(final String fileId) {
-    return new FileCommentQueryBuilderImpl(DRIVE_FILES_URL + fileId + COMMENTS, FileCommentsPage.class, restTemplate);
+    return new FileCommentQueryBuilderImpl(DRIVE_FILES_URL + fileId + COMMENTS, FileCommentsPage.class,
+      restTemplate);
   }
 
   @Override

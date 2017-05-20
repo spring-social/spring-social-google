@@ -26,7 +26,8 @@ import org.springframework.web.client.RestTemplate;
  * {@link FileCommentQueryBuilder} implementation.
  * @author Gabriel Axel
  */
-public class FileCommentQueryBuilderImpl extends ApiQueryBuilderImpl<FileCommentQueryBuilder, FileCommentsPage> implements FileCommentQueryBuilder {
+public class FileCommentQueryBuilderImpl extends ApiQueryBuilderImpl<FileCommentQueryBuilder, FileCommentsPage>
+  implements FileCommentQueryBuilder {
 
   public FileCommentQueryBuilderImpl(final String feedUrl,
                                      final Class<FileCommentsPage> type, final RestTemplate restTemplate) {

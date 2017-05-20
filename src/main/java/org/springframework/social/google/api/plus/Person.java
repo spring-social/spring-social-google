@@ -38,9 +38,11 @@ public class Person extends ApiEntity {
   private Name name;
   private String displayName;
   private String url;
+
   @JsonProperty("isPlusUser")
   private boolean plusUser;
   private int circledByCount;
+
   @JsonProperty
   private Image image;
   private String thumbnailUrl;
@@ -57,6 +59,7 @@ public class Person extends ApiEntity {
   private List<Organization> organizations;
   private Map<String, Boolean> placesLived;
   private Map<String, String> emails;
+
   @JsonProperty
   @JsonDeserialize(using = AgeRangeDeserializer.class)
   private AgeRange ageRange = AgeRange.UNKNOWN;
@@ -90,13 +93,18 @@ public class Person extends ApiEntity {
     return circledByCount;
   }
 
+  /**
+   * Get the image URL - uses the thumbnail if set, then the main image, otherwise returns null.
+   */
   public String getImageUrl() {
     if (thumbnailUrl != null) {
       return thumbnailUrl;
     }
+
     if (image != null) {
       return image.url;
     }
+
     return null;
   }
 
@@ -172,10 +180,20 @@ public class Person extends ApiEntity {
     }
   }
 
+  /**
+   * Return the email address(es) associated with this person.
+
+   * @return Null if no emails found, otherwise a set.
+   */
   public Set<String> getEmailAddresses() {
     return emails == null ? null : emails.keySet();
   }
 
+  /**
+   * Return the account email.
+   *
+   * @return Null if no account email found, otherwise a single String.
+   */
   public String getAccountEmail() {
     if (emails != null) {
       for (final Entry<String, String> entry : emails.entrySet()) {

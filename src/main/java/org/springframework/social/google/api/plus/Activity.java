@@ -33,13 +33,14 @@ import org.springframework.social.google.api.ApiEntity;
  * @author Gabriel Axel
  */
 public class Activity extends ApiEntity {
-
   private String title;
   private Date published;
   private Date updated;
   private String url;
+
   @JsonProperty
   private Person actor;
+
   @JsonProperty
   private ActivityObject object;
 
@@ -84,7 +85,6 @@ public class Activity extends ApiEntity {
   }
 
   public static class PreviewImage {
-
     @JsonProperty
     protected String url;
 
@@ -102,8 +102,7 @@ public class Activity extends ApiEntity {
   @JsonSubTypes({@Type(Article.class), @Type(Photo.class), @Type(Video.class),
     @Type(Album.class), @Type(Event.class), @Type(Hangout.class),
     @Type(Place.class), @Type(Audio.class)})
-  public static abstract class Attachment {
-
+  public abstract static class Attachment {
     private String url;
     private String displayName;
     private String content;
@@ -165,23 +164,24 @@ public class Activity extends ApiEntity {
   }
 
   public static class ActivityObject {
-
     @JsonProperty
     private String content;
+
     @JsonProperty
     private List<Attachment> attachments;
+
     @JsonProperty
     private TotalItemsWrapper plusoners;
+
     @JsonProperty
     private TotalItemsWrapper resharers;
+
     @JsonProperty
     private TotalItemsWrapper replies;
 
     public static class TotalItemsWrapper {
-
       @JsonProperty
       private int totalItems;
     }
-
   }
 }

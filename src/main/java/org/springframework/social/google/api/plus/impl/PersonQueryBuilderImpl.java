@@ -26,7 +26,8 @@ import org.springframework.web.client.RestTemplate;
  * {@link PersonQueryBuilder} implementation.
  * @author Gabriel Axel
  */
-public class PersonQueryBuilderImpl extends ApiQueryBuilderImpl<PersonQueryBuilder, PeoplePage> implements PersonQueryBuilder {
+public class PersonQueryBuilderImpl extends ApiQueryBuilderImpl<PersonQueryBuilder, PeoplePage>
+  implements PersonQueryBuilder {
 
   public PersonQueryBuilderImpl(final RestTemplate restTemplate) {
     super(PEOPLE_SEARCH_URL, PeoplePage.class, restTemplate);

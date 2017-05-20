@@ -205,6 +205,7 @@
       <property name="minLineCount" value="2" />
       <property name="allowedAnnotations" value="Override, Test" />
       <property name="allowThrowsTagsForSubclasses" value="true" />
+      <property name="tokens" value="METHOD_DEF" />
     </module>
     <module name="MethodName">
       <property name="format" value="^[a-z][a-zA-Z0-9][a-zA-Z0-9_]*$" />

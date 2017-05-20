@@ -28,7 +28,9 @@ import com.fasterxml.jackson.databind.SerializerProvider;
  * @author Gabriel Axel
  */
 public class ApiEnumSerializer extends JsonSerializer<Enum<?>> {
-
+  /**
+   * Convert an enumeration to a String representation.
+   */
   public static String enumToString(final Enum<?> value) {
 
     if (value == null) {

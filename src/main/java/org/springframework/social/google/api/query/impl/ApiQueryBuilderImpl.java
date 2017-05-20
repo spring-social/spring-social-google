@@ -29,7 +29,8 @@ import org.springframework.web.client.RestTemplate;
  * @param <Q> {@link QueryBuilder} type
  * @param <T> Model type
  */
-public class ApiQueryBuilderImpl<Q extends ApiQueryBuilder<?, T>, T extends ApiPage<?>> extends QueryBuilderImpl<Q, T> implements ApiQueryBuilder<Q, T> {
+public class ApiQueryBuilderImpl<Q extends ApiQueryBuilder<?, T>, T extends ApiPage<?>>
+  extends QueryBuilderImpl<Q, T> implements ApiQueryBuilder<Q, T> {
 
   private final Class<T> type;
   private final RestTemplate restTemplate;
@@ -53,7 +54,7 @@ public class ApiQueryBuilderImpl<Q extends ApiQueryBuilder<?, T>, T extends ApiP
   @Override
   public T getPage() {
     try {
-      return restTemplate.getForObject(new URI(build().toString()), type);
+      return restTemplate.getForObject(new URI(build()), type);
     } catch (final URISyntaxException e) {
       throw new IllegalStateException(e);
     }

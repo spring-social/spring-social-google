@@ -24,15 +24,12 @@ import static org.springframework.util.ObjectUtils.nullSafeHashCode;
  *
  */
 public class ProfileUrl {
-
   private String value;
-
   private String label;
-
   private UrlType type;
 
   ProfileUrl() {
-
+    // empty
   }
 
   ProfileUrl(final String value, final String label, final UrlType type) {
@@ -60,10 +57,9 @@ public class ProfileUrl {
       return false;
     }
     final ProfileUrl other = (ProfileUrl) o;
-    return nullSafeEquals(value, other.value) &&
-      nullSafeEquals(label, other.label) &&
-      nullSafeEquals(type, other.type);
-
+    return nullSafeEquals(value, other.value)
+      && nullSafeEquals(label, other.label)
+      && nullSafeEquals(type, other.type);
   }
 
   @Override
