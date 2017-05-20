@@ -141,6 +141,7 @@
         <xsl:variable name="warningCount" select="count(key('files', @name)/error[@severity='warning'])" />
         <xsl:variable name="infoCount" select="count(key('files', @name)/error[@severity='info'])" />
 
+        <xsl:if test="$errorCount > 0 or $warningCount > 0 or $infoCount > 0">
         <tr>
           <xsl:call-template name="alternated-row" />
           <td>
@@ -158,11 +159,13 @@
             <xsl:value-of select="$infoCount" />
           </td>
         </tr>
+        </xsl:if>
       </xsl:for-each>
     </table>
   </xsl:template>
 
   <xsl:template match="file">
+    <xsl:if test="count(error) > 0">
     <a name="f-{translate(@name,'\','/')}"></a>
     <h3>File
       <xsl:value-of select="@name" />
@@ -191,6 +194,7 @@
       </xsl:for-each>
     </table>
     <a href="#top">Back to top</a>
+    </xsl:if>
   </xsl:template>
 
   <xsl:template match="checkstyle" mode="summary">
