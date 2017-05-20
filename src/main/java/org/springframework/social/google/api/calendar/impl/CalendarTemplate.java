@@ -34,7 +34,6 @@ import org.springframework.web.client.RestTemplate;
  * @author Martin Wink
  */
 public class CalendarTemplate extends AbstractGoogleApiOperations implements CalendarOperations {
-
   private static final String CALENDAR_BASE_URL = "https://www.googleapis.com/calendar/v3";
 
   public CalendarTemplate(final RestTemplate restTemplate, final boolean isAuthorized) {
@@ -44,19 +43,22 @@ public class CalendarTemplate extends AbstractGoogleApiOperations implements Cal
 
   @Override
   public CalendarListQueryBuilder calendarListQuery() {
-    return new CalendarListQueryBuilderImpl(CALENDAR_BASE_URL + "/users/me/calendarList", CalendarPage.class, restTemplate);
+    return new CalendarListQueryBuilderImpl(CALENDAR_BASE_URL + "/users/me/calendarList",
+      CalendarPage.class, restTemplate);
   }
 
   @Override
   public EventListQueryBuilder eventListQuery(final String calendarId) {
     Assert.notNull(calendarId, "CalendarId must not be null");
-    return new EventListQueryBuilderImpl(CALENDAR_BASE_URL + "/calendars/{0}/events", calendarId, EventPage.class, restTemplate);
+    return new EventListQueryBuilderImpl(CALENDAR_BASE_URL + "/calendars/{0}/events",
+      calendarId, EventPage.class, restTemplate);
   }
 
   @Override
   public Calendar getCalendar(final String calendarId) {
     Assert.notNull(calendarId, "CalendarId must not be null");
-    final CalendarGetQueryBuilderImpl builder = new CalendarGetQueryBuilderImpl(CALENDAR_BASE_URL + "/users/me/calendarList/{0}", calendarId);
+    final CalendarGetQueryBuilderImpl builder =
+      new CalendarGetQueryBuilderImpl(CALENDAR_BASE_URL + "/users/me/calendarList/{0}", calendarId);
     return restTemplate.getForObject(builder.buildUri(), Calendar.class);
   }
 
@@ -64,7 +66,8 @@ public class CalendarTemplate extends AbstractGoogleApiOperations implements Cal
   public Event getEvent(final String calendarId, final String eventId) {
     Assert.notNull(calendarId, "CalendarId must not be null");
     Assert.notNull(eventId, "EventId must not be null");
-    final EventGetQueryBuilderImpl builder = new EventGetQueryBuilderImpl(CALENDAR_BASE_URL + "/calendars/{0}/events/{1}", calendarId, eventId);
+    final EventGetQueryBuilderImpl builder =
+      new EventGetQueryBuilderImpl(CALENDAR_BASE_URL + "/calendars/{0}/events/{1}", calendarId, eventId);
     return restTemplate.getForObject(builder.buildUri(), Event.class);
   }
 
@@ -72,7 +75,8 @@ public class CalendarTemplate extends AbstractGoogleApiOperations implements Cal
   public Event quickAddEvent(final String calendarId, final String specification, final boolean sendNotifications) {
     Assert.notNull(calendarId, "CalendarId must not be null");
     Assert.notNull(specification, "Specification must not be null");
-    final QuickAddEventBuilder builder = new QuickAddEventBuilderImpl(CALENDAR_BASE_URL + "/calendars/{0}/events/quickAdd", calendarId);
+    final QuickAddEventBuilder builder =
+      new QuickAddEventBuilderImpl(CALENDAR_BASE_URL + "/calendars/{0}/events/quickAdd", calendarId);
     builder.text(specification).sendNotifications(sendNotifications);
     return restTemplate.postForObject(builder.buildUri(), null, Event.class);
   }
@@ -81,7 +85,8 @@ public class CalendarTemplate extends AbstractGoogleApiOperations implements Cal
   public void deleteEvent(final String calendarId, final String eventId, final boolean sendNotifications) {
     Assert.notNull(calendarId, "CalendarId must not be null");
     Assert.notNull(eventId, "EventId must not be null");
-    final DeleteEventBuilder builder = new DeleteEventBuilderImpl(CALENDAR_BASE_URL + "/calendars/{0}/events/{1}", calendarId, eventId);
+    final DeleteEventBuilder builder =
+      new DeleteEventBuilderImpl(CALENDAR_BASE_URL + "/calendars/{0}/events/{1}", calendarId, eventId);
     builder.sendNotifications(sendNotifications);
     restTemplate.delete(builder.buildUri());
   }
@@ -90,7 +95,8 @@ public class CalendarTemplate extends AbstractGoogleApiOperations implements Cal
   public void updateEvent(final String calendarId, final Event event, final boolean sendNotifications) {
     Assert.notNull(calendarId, "CalendarId must not be null");
     Assert.notNull(event, "Event must not be null");
-    final UpdateEventBuilderImpl builder = new UpdateEventBuilderImpl(CALENDAR_BASE_URL + "/calendars/{0}/events/{1}", calendarId, event.getId());
+    final UpdateEventBuilderImpl builder =
+      new UpdateEventBuilderImpl(CALENDAR_BASE_URL + "/calendars/{0}/events/{1}", calendarId, event.getId());
     builder.sendNotifications(sendNotifications);
     restTemplate.put(builder.buildUri(), event);
   }

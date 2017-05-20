@@ -64,5 +64,4 @@ public abstract class Moment extends ApiEntity {
   public Date getStartDate() {
     return startDate;
   }
-
 }

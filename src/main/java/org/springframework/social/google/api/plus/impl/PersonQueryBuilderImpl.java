@@ -36,5 +36,4 @@ public class PersonQueryBuilderImpl extends ApiQueryBuilderImpl<PersonQueryBuild
   public PersonQueryBuilder searchFor(final String text) {
     return appendQueryParam("query", encode(text));
   }
-
 }

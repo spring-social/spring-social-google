@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,7 +27,6 @@ import org.springframework.social.google.api.ApiEntity;
  * @author Gabriel Axel
  */
 public class FileComment extends ApiEntity {
-
   private Date createdDate;
   private Date modifiedDate;
   private DriveUser author;
@@ -35,12 +34,14 @@ public class FileComment extends ApiEntity {
   private String content;
   private boolean deleted;
   private CommentStatus status;
+
   @JsonProperty
   private CommentContext context;
+
   private List<CommentReply> replies;
 
   public FileComment() {
-
+    // empty
   }
 
   public FileComment(final String content) {
@@ -51,6 +52,9 @@ public class FileComment extends ApiEntity {
     this(content, contextType.toString(), contextValue);
   }
 
+  /**
+   * Create a new File comment.
+   */
   public FileComment(final String content, final String contextType, final String contextValue) {
     this(content);
     context = new CommentContext();
@@ -101,13 +105,10 @@ public class FileComment extends ApiEntity {
   }
 
   private static class CommentContext {
-
     @JsonProperty
     private String type;
 
     @JsonProperty
     private String value;
-
   }
-
 }

@@ -83,5 +83,4 @@ public class GoogleAutoConfiguration {
       configurer.addConnectionFactory(factory);
     }
   }
-
 }

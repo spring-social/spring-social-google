@@ -25,7 +25,6 @@ import org.springframework.social.google.api.ApiEntity;
  * @author Gabriel Axel
  */
 public class FileRevision extends ApiEntity {
-
   private String mimeType;
   private Date modifiedDate;
   private boolean pinned;
@@ -93,13 +92,9 @@ public class FileRevision extends ApiEntity {
   }
 
   public static class FileRevisionBuilder {
-
     private boolean pinned;
-
     private boolean publishAuto;
-
     private boolean published;
-
     private boolean publishedOutsideDomain;
 
     public FileRevisionBuilder setPinned(final boolean pinned) {
@@ -122,6 +117,9 @@ public class FileRevision extends ApiEntity {
       return this;
     }
 
+    /**
+     * Build a new FileRevision object from the given POJO.
+     */
     public FileRevision build() {
       final FileRevision revision = new FileRevision();
       revision.pinned = pinned;
@@ -131,5 +129,4 @@ public class FileRevision extends ApiEntity {
       return revision;
     }
   }
-
 }

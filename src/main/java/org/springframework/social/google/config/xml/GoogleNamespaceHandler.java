@@ -31,5 +31,4 @@ public class GoogleNamespaceHandler extends
   protected AbstractProviderConfigBeanDefinitionParser getProviderConfigBeanDefinitionParser() {
     return new GoogleConfigBeanDefinitionParser();
   }
-
 }

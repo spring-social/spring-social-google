@@ -24,7 +24,8 @@ import org.springframework.social.google.api.calendar.UpdateEventBuilder;
  *
  * @author Martin Wink
  */
-public class UpdateEventBuilderImpl extends UriQueryBuilderImpl<UpdateEventBuilder, Object> implements UpdateEventBuilder {
+public class UpdateEventBuilderImpl extends UriQueryBuilderImpl<UpdateEventBuilder, Object>
+  implements UpdateEventBuilder {
   public UpdateEventBuilderImpl(final String urlTemplate, final String calendarId, final String eventId) {
     super(MessageFormat.format(urlTemplate, encode(calendarId), encode(eventId)));
   }

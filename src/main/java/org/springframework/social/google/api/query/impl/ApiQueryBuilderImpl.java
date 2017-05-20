@@ -58,5 +58,4 @@ public class ApiQueryBuilderImpl<Q extends ApiQueryBuilder<?, T>, T extends ApiP
       throw new IllegalStateException(e);
     }
   }
-
 }

@@ -114,5 +114,4 @@ public class DriveApp extends ApiEntity {
     @JsonProperty
     private String iconUrl;
   }
-
 }

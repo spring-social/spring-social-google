@@ -56,5 +56,4 @@ public abstract class ApiEnumDeserializer<T extends Enum<?>> extends JsonDeseria
 
     return value;
   }
-
 }

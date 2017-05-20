@@ -27,5 +27,4 @@ public class PermissionTypeDeserializer extends ApiEnumDeserializer<PermissionTy
   public PermissionTypeDeserializer() {
     super(PermissionType.class);
   }
-
 }

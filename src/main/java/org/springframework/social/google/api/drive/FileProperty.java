@@ -23,14 +23,12 @@ import org.springframework.social.google.api.ApiEntity;
  * @author Will Abson
  */
 public class FileProperty extends ApiEntity {
-
   private String key;
-
   private String value;
-
   private PropertyVisibility visibility;
 
   public FileProperty() {
+    // empty
   }
 
   public FileProperty(final String key, final String value) {
@@ -38,6 +36,9 @@ public class FileProperty extends ApiEntity {
     this.value = value;
   }
 
+  /**
+   * Full constructor
+   */
   public FileProperty(final String key, final String value, final PropertyVisibility visibility) {
     this.key = key;
     this.value = value;
@@ -67,5 +68,4 @@ public class FileProperty extends ApiEntity {
   public void setVisibility(final PropertyVisibility visibility) {
     this.visibility = visibility;
   }
-
 }

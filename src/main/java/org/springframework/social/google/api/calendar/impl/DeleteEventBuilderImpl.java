@@ -24,7 +24,8 @@ import org.springframework.social.google.api.calendar.DeleteEventBuilder;
  *
  * @author Martin Wink
  */
-public class DeleteEventBuilderImpl extends UriQueryBuilderImpl<DeleteEventBuilder, Object> implements DeleteEventBuilder {
+public class DeleteEventBuilderImpl extends UriQueryBuilderImpl<DeleteEventBuilder, Object>
+  implements DeleteEventBuilder {
   public DeleteEventBuilderImpl(final String urlTemplate, final String calendarId, final String eventId) {
     super(MessageFormat.format(urlTemplate, encode(calendarId), encode(eventId)));
   }

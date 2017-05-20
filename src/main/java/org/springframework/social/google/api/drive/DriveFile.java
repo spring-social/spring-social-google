@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,9 +32,9 @@ import org.springframework.social.google.api.ApiEntity;
  * @author Gabriel Axel
  */
 public class DriveFile extends ApiEntity {
-
   public static final String FOLDER = "application/vnd.google-apps.folder";
   public static final String SHORTCUT = "application/vnd.google-apps.drive-sdk";
+
   private String title;
   private String description;
   private String selfLink;
@@ -44,22 +44,28 @@ public class DriveFile extends ApiEntity {
   private String thumbnailLink;
   private String mimeType;
   private String downloadUrl;
+
   @JsonProperty
   private Labels labels;
+
   private Date createdDate;
   private Date modifiedDate;
   private Date lastViewedByMeDate;
+
   private List<DriveFileParent> parents;
   private Map<String, String> exportLinks;
   private UserPermission userPermission;
+
   private String md5Checksum;
   private long fileSize;
   private long quotaBytesUsed;
+
   private List<String> ownerNames;
   private String lastModifyingUserName;
   private boolean editable;
   private boolean writersCanShare;
   private boolean appDataContents;
+
   /**
    * This field is write-only
    */
@@ -286,6 +292,11 @@ public class DriveFile extends ApiEntity {
       return setParents(Arrays.asList(parentIds));
     }
 
+    /**
+     * Convert the given POJO into a DriveFile object.
+     *
+     * @return The populated DriveFile object.
+     */
     public DriveFile build() {
       final DriveFile file = new DriveFile();
       file.title = title;
@@ -311,7 +322,6 @@ public class DriveFile extends ApiEntity {
   }
 
   private static class Labels {
-
     @JsonProperty
     private boolean starred;
 
@@ -329,13 +339,11 @@ public class DriveFile extends ApiEntity {
   }
 
   private static class IndexableTextObject {
-
     @JsonProperty
-    private String text;
+    private final String text;
 
     private IndexableTextObject(final String text) {
       this.text = text;
     }
   }
-
 }

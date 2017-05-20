@@ -41,5 +41,4 @@ public abstract class ApiList<T> {
   public String getEtag() {
     return etag;
   }
-
 }

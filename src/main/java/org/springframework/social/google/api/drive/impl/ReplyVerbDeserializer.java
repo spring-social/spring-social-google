@@ -27,5 +27,4 @@ public class ReplyVerbDeserializer extends ApiEnumDeserializer<ReplyVerb> {
   public ReplyVerbDeserializer() {
     super(ReplyVerb.class);
   }
-
 }

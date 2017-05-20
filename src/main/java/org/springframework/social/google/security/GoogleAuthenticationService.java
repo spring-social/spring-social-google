@@ -24,5 +24,4 @@ public class GoogleAuthenticationService extends OAuth2AuthenticationService<Goo
   public GoogleAuthenticationService(final String apiKey, final String appSecret) {
     super(new GoogleConnectionFactory(apiKey, appSecret));
   }
-
 }

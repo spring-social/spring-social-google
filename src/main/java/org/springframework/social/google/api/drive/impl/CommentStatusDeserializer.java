@@ -27,5 +27,4 @@ public class CommentStatusDeserializer extends ApiEnumDeserializer<CommentStatus
   public CommentStatusDeserializer() {
     super(CommentStatus.class);
   }
-
 }

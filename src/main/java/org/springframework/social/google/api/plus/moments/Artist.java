@@ -27,5 +27,4 @@ public class Artist {
   public String getName() {
     return name;
   }
-
 }

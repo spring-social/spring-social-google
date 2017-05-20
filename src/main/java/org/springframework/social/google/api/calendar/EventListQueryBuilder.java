@@ -46,10 +46,10 @@ public interface EventListQueryBuilder extends ApiQueryBuilder<EventListQueryBui
 
   /**
    * Specifies event ID in the iCalendar format to be included in the response. Optional.
-   * @param iCalUID the event ID in the iCalendar format.
+   * @param iCalUid the event ID in the iCalendar format.
    * @return this {@code EventListQueryBuilder}, for refining the query.
    */
-  EventListQueryBuilder iCalUID(String iCalUID);
+  EventListQueryBuilder iCalUid(String iCalUid);
 
   /**
    * The maximum number of attendees to include in the response. If there are more than

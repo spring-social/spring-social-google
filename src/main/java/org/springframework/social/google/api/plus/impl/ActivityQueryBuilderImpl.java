@@ -40,5 +40,4 @@ public class ActivityQueryBuilderImpl extends ApiQueryBuilderImpl<ActivityQueryB
   public ActivityQueryBuilder orderBy(final ActivitiesOrder order) {
     return appendQueryParam("orderBy", order);
   }
-
 }

@@ -27,5 +27,4 @@ public class TaskStatusDeserializer extends ApiEnumDeserializer<TaskStatus> {
   public TaskStatusDeserializer() {
     super(TaskStatus.class);
   }
-
 }

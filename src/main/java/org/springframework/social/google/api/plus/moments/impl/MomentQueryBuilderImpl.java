@@ -32,5 +32,4 @@ public class MomentQueryBuilderImpl extends
   public MomentQueryBuilderImpl(final String feedUrl, final RestTemplate restTemplate) {
     super(feedUrl, MomentsPage.class, restTemplate);
   }
-
 }

@@ -55,5 +55,4 @@ public class ApiEnumSerializer extends JsonSerializer<Enum<?>> {
 
     jgen.writeString(enumToString(value));
   }
-
 }

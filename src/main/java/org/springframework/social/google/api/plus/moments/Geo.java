@@ -34,5 +34,4 @@ public class Geo {
   public float getLongitude() {
     return longitude;
   }
-
 }

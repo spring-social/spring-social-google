@@ -28,5 +28,4 @@ public class UrlTypeDeserializer extends ApiEnumDeserializer<UrlType> {
   public UrlTypeDeserializer() {
     super(UrlType.class);
   }
-
 }

@@ -21,7 +21,6 @@ package org.springframework.social.google.api.drive;
  *
  */
 public class UploadParameters {
-
   private boolean convert;
   private boolean ocr;
   private String ocrLanguage;
@@ -113,7 +112,8 @@ public class UploadParameters {
 
   /**
    *
-   * @param targetLanguage Target language to translate the file to. If no sourceLanguage is provided, the API will attempt to detect the language.
+   * @param targetLanguage Target language to translate the file to.
+   *                      If no sourceLanguage is provided, the API will attempt to detect the language.
    * @return the {@link UploadParameters} instance
    */
   public UploadParameters setTargetLanguage(final String targetLanguage) {
@@ -140,5 +140,4 @@ public class UploadParameters {
     this.timedTextTrackName = timedTextTrackName;
     return this;
   }
-
 }

@@ -25,21 +25,15 @@ import static org.springframework.util.ObjectUtils.nullSafeHashCode;
  *
  */
 public class Organization {
-
   private String name;
-
   private String title;
-
   private String type;
-
   private String startDate;
-
   private String endDate;
-
   private boolean primary;
 
   Organization() {
-
+    // empty
   }
 
   Organization(final String name, final String title, final String type, final String startDate,
@@ -70,16 +64,18 @@ public class Organization {
     if (this == o) {
       return true;
     }
+
     if (!(o instanceof Organization)) {
       return false;
     }
+
     final Organization other = (Organization) o;
-    return nullSafeEquals(name, other.name) &&
-      nullSafeEquals(title, other.title) &&
-      nullSafeEquals(type, other.type) &&
-      nullSafeEquals(startDate, other.startDate) &&
-      nullSafeEquals(endDate, other.endDate) &&
-      primary == other.primary;
+    return nullSafeEquals(name, other.name)
+      && nullSafeEquals(title, other.title)
+      && nullSafeEquals(type, other.type)
+      && nullSafeEquals(startDate, other.startDate)
+      && nullSafeEquals(endDate, other.endDate)
+      && primary == other.primary;
   }
 
   @Override

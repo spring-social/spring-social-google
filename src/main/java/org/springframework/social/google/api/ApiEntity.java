@@ -41,5 +41,4 @@ public abstract class ApiEntity {
   public String getEtag() {
     return etag;
   }
-
 }

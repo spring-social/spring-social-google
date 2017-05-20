@@ -38,7 +38,8 @@ import org.springframework.web.client.RestTemplate;
  * {@link DriveFileQueryBuilder} implementation.
  * @author Gabriel Axel
  */
-class DriveFileQueryBuilderImpl extends ApiQueryBuilderImpl<DriveFileQueryBuilder, DriveFilesPage> implements DriveFileQueryBuilder {
+class DriveFileQueryBuilderImpl extends ApiQueryBuilderImpl<DriveFileQueryBuilder, DriveFilesPage>
+  implements DriveFileQueryBuilder {
 
   private static final String TITLE = "title";
   private static final String FULL_TEXT = "fullText";
@@ -72,7 +73,7 @@ class DriveFileQueryBuilderImpl extends ApiQueryBuilderImpl<DriveFileQueryBuilde
   private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
   private boolean negate;
-  private List<String> qTerms = new ArrayList<>();
+  private final List<String> qTerms = new ArrayList<>();
 
   DriveFileQueryBuilderImpl(final RestTemplate restTemplate) {
     super(DRIVE_FILES_URL, DriveFilesPage.class, restTemplate);
@@ -101,7 +102,8 @@ class DriveFileQueryBuilderImpl extends ApiQueryBuilderImpl<DriveFileQueryBuilde
     final List<String> criteria = new ArrayList<>();
     for (final Entry<String, Object> p : item.entrySet()) {
       if (p.getValue() != null) {
-        criteria.add(new StringBuffer().append(p.getKey()).append(EQ).append('\'').append(p.getValue()).append('\'').toString());
+        criteria.add(new StringBuffer().append(p.getKey()).append(EQ).append('\'').append(p.getValue())
+          .append('\'').toString());
       }
     }
     qTerms.add(new StringBuilder()
@@ -237,7 +239,8 @@ class DriveFileQueryBuilderImpl extends ApiQueryBuilderImpl<DriveFileQueryBuilde
   }
 
   @Override
-  public DriveFileQueryBuilder propertiesHas(final String propertyKey, final String propertyValue, final PropertyVisibility propertyVisibility) {
+  public DriveFileQueryBuilder propertiesHas(final String propertyKey, final String propertyValue,
+                                             final PropertyVisibility propertyVisibility) {
     final Map<String, Object> propertyDef = new HashMap<>();
     propertyDef.put("key", propertyKey);
     propertyDef.put("value", propertyValue);

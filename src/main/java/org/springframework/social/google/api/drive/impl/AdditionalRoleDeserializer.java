@@ -27,5 +27,4 @@ public class AdditionalRoleDeserializer extends ApiEnumDeserializer<AdditionalRo
   public AdditionalRoleDeserializer() {
     super(AdditionalRole.class);
   }
-
 }

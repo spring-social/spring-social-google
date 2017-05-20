@@ -37,5 +37,4 @@ public abstract class ApiPage<T> extends ApiList<T> {
   public String getNextPageToken() {
     return nextPageToken;
   }
-
 }

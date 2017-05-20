@@ -38,5 +38,4 @@ public class GoogleConfigBeanDefinitionParser extends
   protected Class<? extends SocialAuthenticationService<?>> getAuthenticationServiceClass() {
     return GoogleAuthenticationService.class;
   }
-
 }

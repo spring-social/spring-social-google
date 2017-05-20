@@ -29,7 +29,9 @@ import org.springframework.social.google.api.oauth2.UserInfo;
  * @author Gabriel Axel
  */
 public class GoogleAdapter implements ApiAdapter<Google> {
-
+  /**
+   * Attempt to see if the connection is valid.
+   */
   public boolean test(final Google google) {
     try {
       google.oauth2Operations().getUserinfo();
@@ -39,6 +41,9 @@ public class GoogleAdapter implements ApiAdapter<Google> {
     }
   }
 
+  /**
+   * Set a value on the connection.
+   */
   public void setConnectionValues(final Google google, final ConnectionValues values) {
     final UserInfo userInfo = google.oauth2Operations().getUserinfo();
     values.setProviderUserId(userInfo.getId());
@@ -47,6 +52,9 @@ public class GoogleAdapter implements ApiAdapter<Google> {
     values.setImageUrl(userInfo.getPicture());
   }
 
+  /**
+   * Return the current user profile.
+   */
   public UserProfile fetchUserProfile(final Google google) {
     final UserInfo userInfo = google.oauth2Operations().getUserinfo();
     return new UserProfileBuilder().setUsername(userInfo.getId())
@@ -59,5 +67,4 @@ public class GoogleAdapter implements ApiAdapter<Google> {
   public void updateStatus(final Google google, final String message) {
     throw new UnsupportedOperationException();
   }
-
 }

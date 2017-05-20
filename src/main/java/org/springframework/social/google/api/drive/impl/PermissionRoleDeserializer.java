@@ -27,5 +27,4 @@ public class PermissionRoleDeserializer extends ApiEnumDeserializer<PermissionRo
   public PermissionRoleDeserializer() {
     super(PermissionRole.class);
   }
-
 }

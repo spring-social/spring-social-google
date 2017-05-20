@@ -86,5 +86,4 @@ public class CommentReply extends ApiEntity {
   public ReplyVerb getVerb() {
     return verb;
   }
-
 }

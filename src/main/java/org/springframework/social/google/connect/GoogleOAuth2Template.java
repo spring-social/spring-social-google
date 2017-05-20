@@ -32,7 +32,9 @@ import org.springframework.util.MultiValueMap;
  * @author Gabriel Axel
  */
 public class GoogleOAuth2Template extends OAuth2Template {
-
+  /**
+   * Constructor
+   */
   public GoogleOAuth2Template(final String clientId, final String clientSecret) {
     super(clientId, clientSecret,
       "https://accounts.google.com/o/oauth2/auth",
@@ -42,11 +44,13 @@ public class GoogleOAuth2Template extends OAuth2Template {
 
   @Override
   @SuppressWarnings({"unchecked", "rawtypes"})
-  protected AccessGrant postForAccessGrant(final String accessTokenUrl, final MultiValueMap<String, String> parameters) {
+  protected AccessGrant postForAccessGrant(final String accessTokenUrl,
+                                           final MultiValueMap<String, String> parameters) {
     final HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
     final HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(parameters, headers);
-    final ResponseEntity<Map> responseEntity = getRestTemplate().exchange(accessTokenUrl, HttpMethod.POST, requestEntity, Map.class);
+    final ResponseEntity<Map> responseEntity =
+      getRestTemplate().exchange(accessTokenUrl, HttpMethod.POST, requestEntity, Map.class);
     final Map<String, Object> responseMap = responseEntity.getBody();
     return extractAccessGrant(responseMap);
   }
@@ -62,5 +66,4 @@ public class GoogleOAuth2Template extends OAuth2Template {
 
     return createAccessGrant(accessToken, scope, refreshToken, expiresIn, result);
   }
-
 }

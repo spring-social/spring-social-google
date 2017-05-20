@@ -82,5 +82,4 @@ public class ProfileUrl {
   public UrlType getType() {
     return type;
   }
-
 }

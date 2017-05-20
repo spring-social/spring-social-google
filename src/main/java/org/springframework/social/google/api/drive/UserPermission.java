@@ -25,13 +25,9 @@ import org.springframework.social.google.api.ApiEntity;
  * @author Gabriel Axel
  */
 public class UserPermission extends ApiEntity {
-
   private String name;
-
   private PermissionRole role;
-
   private PermissionType type;
-
   private List<AdditionalRole> additionalRoles;
 
   /**
@@ -41,9 +37,11 @@ public class UserPermission extends ApiEntity {
   private String value;
 
   public UserPermission() {
+    // empty
   }
 
-  public UserPermission(final PermissionRole role, final PermissionType type, final List<AdditionalRole> additionalRoles, final String value) {
+  public UserPermission(final PermissionRole role, final PermissionType type,
+                        final List<AdditionalRole> additionalRoles, final String value) {
     this.role = role;
     this.type = type;
     this.additionalRoles = additionalRoles;
@@ -65,5 +63,4 @@ public class UserPermission extends ApiEntity {
   public List<AdditionalRole> getAdditionalRoles() {
     return additionalRoles;
   }
-
 }

@@ -231,5 +231,4 @@ public class EventModificationTests extends AbstractGoogleApiTest {
     mapper.writeValue(newFile, event);
     assertEquals(loadJsonResourceToString("post_non_null_values_2_event"), normalizeJsonObjectLineFeeds(loadFileToString(newFile)));
   }
-
 }

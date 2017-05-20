@@ -129,5 +129,4 @@ public class DriveTemplateTests extends AbstractGoogleApiTest {
       .andExpect(method(DELETE)).andRespond(withNoContent());
     google.driveOperations().delete("0B3DS_k_gCihOVXpISDlScnJpTFk");
   }
-
 }

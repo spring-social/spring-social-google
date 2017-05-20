@@ -40,5 +40,4 @@ public class Author {
   public String getUrl() {
     return url;
   }
-
 }

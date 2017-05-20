@@ -106,5 +106,4 @@ public class MomentTarget {
   public Artist getByArtist() {
     return byArtist;
   }
-
 }

@@ -141,7 +141,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
     assertEquals("string17", event.getRecurringEventId());
     assertEquals(Transparency.OPAQUE, event.getTransparency());
     assertEquals(Visibility.DEFAULT, event.getVisibility());
-    assertEquals("string21", event.getiCalUID());
+    assertEquals("string21", event.getiCalUid());
     assertEquals(1, event.getSequence().intValue());
     assertEquals("string29", event.getHangoutLink());
 
@@ -314,7 +314,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
     assertEquals("", event.getRecurringEventId());
     assertEquals(Transparency.TRANSPARENT, event.getTransparency());
     assertEquals(Visibility.PUBLIC, event.getVisibility());
-    assertEquals("", event.getiCalUID());
+    assertEquals("", event.getiCalUid());
     assertEquals(0, event.getSequence().intValue());
     assertEquals("", event.getHangoutLink());
 
@@ -487,7 +487,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
     assertNull(event.getRecurringEventId());
     assertNull(event.getTransparency());
     assertEquals(Visibility.PRIVATE, event.getVisibility());
-    assertNull(event.getiCalUID());
+    assertNull(event.getiCalUid());
     assertNull(event.getSequence());
     assertNull(event.getHangoutLink());
 
@@ -656,7 +656,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
     assertNull(event.getRecurringEventId());
     assertNull(event.getTransparency());
     assertEquals(Visibility.CONFIDENTIAL, event.getVisibility());
-    assertNull(event.getiCalUID());
+    assertNull(event.getiCalUid());
     assertNull(event.getSequence());
     assertNull(event.getHangoutLink());
 
@@ -811,7 +811,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
     assertNull(event.getRecurringEventId());
     assertNull(event.getTransparency());
     assertNull(event.getVisibility());
-    assertNull(event.getiCalUID());
+    assertNull(event.getiCalUid());
     assertNull(event.getSequence());
     assertNull(event.getHangoutLink());
 
@@ -935,7 +935,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
     assertNull(event.getRecurringEventId());
     assertNull(event.getTransparency());
     assertNull(event.getVisibility());
-    assertNull(event.getiCalUID());
+    assertNull(event.getiCalUid());
     assertNull(event.getSequence());
     assertNull(event.getHangoutLink());
 
@@ -1046,7 +1046,7 @@ public class CalendarTemplate_EventJsonTests extends AbstractGoogleApiTest {
     assertNull(event.getRecurringEventId());
     assertNull(event.getTransparency());
     assertNull(event.getVisibility());
-    assertNull(event.getiCalUID());
+    assertNull(event.getiCalUid());
     assertNull(event.getSequence());
     assertNull(event.getHangoutLink());
 

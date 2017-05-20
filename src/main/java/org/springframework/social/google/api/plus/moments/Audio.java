@@ -27,5 +27,4 @@ public class Audio {
   public String getEmbedUrl() {
     return embedUrl;
   }
-
 }

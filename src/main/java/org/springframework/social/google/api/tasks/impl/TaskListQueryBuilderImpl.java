@@ -32,5 +32,4 @@ class TaskListQueryBuilderImpl extends ApiQueryBuilderImpl<TaskListQueryBuilder,
   public TaskListQueryBuilderImpl(final RestTemplate restTemplate) {
     super(TASK_LISTS_URL, TaskListsPage.class, restTemplate);
   }
-
 }

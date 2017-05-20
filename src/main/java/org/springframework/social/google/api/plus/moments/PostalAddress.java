@@ -52,5 +52,4 @@ public class PostalAddress {
   public String getStreetAddress() {
     return streetAddress;
   }
-
 }

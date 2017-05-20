@@ -27,18 +27,17 @@ import java.util.Map;
  * The following code:
  * <pre>
  * new PatchBuilder()
- * 	.set("labels.starred", true)
- * 	.set("labels.hidden", false)
- * 	.getMap();
+ *   .set("labels.starred", true)
+ *   .set("labels.hidden", false)
+ *   .getMap();
  * </pre>
  * returns a Map, which will be serialized to the following JSON:
  * <pre>
  * {
- * 	"labels": {
- * 		"starred": true,
- * 		"hidden": false
+ *   "labels": {
+ *     "starred": true,
+ *     "hidden": false
  *    }
- *  }
  * }
  * </pre>
  * @see AbstractGoogleApiOperations#patch(String, Object, Class)
@@ -46,23 +45,26 @@ import java.util.Map;
  *
  */
 public class PatchBuilder {
-
   public static final String PATH_DELIMITER = ".";
 
-  private Map<String, Object> map = new HashMap<>();
+  private final Map<String, Object> map = new HashMap<>();
 
   private Map<String, Object> getNode(final Map<String, Object> map, final String[] path) {
     if (path.length == 0) {
       return map;
     }
+
     final String[] innerPath = new String[path.length - 1];
     arraycopy(path, 1, innerPath, 0, innerPath.length);
+
     @SuppressWarnings("unchecked")
     Map<String, Object> innerMap = (Map<String, Object>) map.get(path[0]);
+
     if (innerMap == null) {
       innerMap = new HashMap<>();
       map.put(path[0], innerMap);
     }
+
     return getNode(innerMap, innerPath);
   }
 

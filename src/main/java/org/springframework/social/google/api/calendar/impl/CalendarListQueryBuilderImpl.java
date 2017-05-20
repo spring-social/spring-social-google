@@ -27,9 +27,10 @@ import org.springframework.web.client.RestTemplate;
  *
  * @author Martin Wink
  */
-public class CalendarListQueryBuilderImpl extends ApiQueryBuilderImpl<CalendarListQueryBuilder, CalendarPage> implements CalendarListQueryBuilder {
-
-  public CalendarListQueryBuilderImpl(final String feedUrl, final Class<CalendarPage> type, final RestTemplate restTemplate) {
+public class CalendarListQueryBuilderImpl extends ApiQueryBuilderImpl<CalendarListQueryBuilder, CalendarPage>
+  implements CalendarListQueryBuilder {
+  public CalendarListQueryBuilderImpl(final String feedUrl, final Class<CalendarPage> type,
+                                      final RestTemplate restTemplate) {
     super(feedUrl, type, restTemplate);
   }
 

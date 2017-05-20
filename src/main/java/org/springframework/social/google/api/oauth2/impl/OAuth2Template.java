@@ -32,5 +32,4 @@ public class OAuth2Template extends AbstractGoogleApiOperations implements OAuth
   public UserInfo getUserinfo() {
     return getEntity(USERINFO_URL, UserInfo.class);
   }
-
 }

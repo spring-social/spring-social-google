@@ -49,5 +49,4 @@ public class GoogleApiHelper implements ApiHelper<Google> {
     }
     return connection != null ? connection.getApi() : null;
   }
-
 }

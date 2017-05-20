@@ -141,14 +141,14 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
   public void listEvents_primary_iCalUID() {
 
     mockServer
-      .expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?iCalUID=testiCalUID&access_token=ACCESS_TOKEN"))
+      .expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?iCalUid=testiCalUID&access_token=ACCESS_TOKEN"))
       .andExpect(method(GET))
       .andRespond(
         withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
 
     final EventPage eventPage = google.calendarOperations()
       .eventListQuery(CalendarOperations.PRIMARY_CALENDAR_ID)
-      .iCalUID("testiCalUID")
+      .iCalUid("testiCalUID")
       .getPage();
 
     assertNotNull(eventPage);
@@ -430,7 +430,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
   public void listEvents_primary_combined_options() {
 
     mockServer
-      .expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?alwaysIncludeEmail=true&orderBy=startTime&timeZone=GMT&pageToken=pretendPageToken&singleEvents=true&showHiddenInvitations=true&maxResults=50&maxAttendees=9&timeMin=2014-02-01T00:00:00.000Z&iCalUID=test-iCalUID&showDeleted=true&timeMax=2014-01-01T00:00:00.000Z&updatedMin=2014-03-01T00:00:00.000Z&access_token=ACCESS_TOKEN"))
+      .expect(requestTo("https://www.googleapis.com/calendar/v3/calendars/primary/events?alwaysIncludeEmail=true&orderBy=startTime&timeZone=GMT&pageToken=pretendPageToken&singleEvents=true&showHiddenInvitations=true&maxResults=50&maxAttendees=9&timeMin=2014-02-01T00:00:00.000Z&iCalUid=test-iCalUid&showDeleted=true&timeMax=2014-01-01T00:00:00.000Z&updatedMin=2014-03-01T00:00:00.000Z&access_token=ACCESS_TOKEN"))
       .andExpect(method(GET))
       .andRespond(
         withSuccess(jsonResource("mock_list_events"), APPLICATION_JSON));
@@ -446,7 +446,7 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
       .maxResultsNumber(50)
       .maxAttendees(9)
       .timeMin(TEST_TIME_MIN)
-      .iCalUID("test-iCalUID")
+      .iCalUid("test-iCalUid")
       .showDeleted(true)
       .timeMax(TEST_TIME_MAX)
       .updatedMin(TEST_UPDATED_MIN)
@@ -570,5 +570,4 @@ public class CalendarTemplate_EventUrlTests extends AbstractGoogleApiTest {
 
     google.calendarOperations().updateEvent("primary", event, true);
   }
-
 }

@@ -57,5 +57,4 @@ public class Rating {
   public String getWorstRating() {
     return worstRating;
   }
-
 }

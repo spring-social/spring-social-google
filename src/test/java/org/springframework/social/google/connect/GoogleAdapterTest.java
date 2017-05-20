@@ -50,5 +50,4 @@ public class GoogleAdapterTest {
     assertEquals("guznik@gmail.com", profile.getEmail());
     assertEquals("114863353858610846998", profile.getUsername());
   }
-
 }

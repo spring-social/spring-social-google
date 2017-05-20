@@ -16,9 +16,9 @@
 package org.springframework.social.google.api.calendar;
 
 /**
- * Interface defining operations for integrating with Google Calendar.
+ * <p>Interface defining operations for integrating with Google Calendar.</p>
  *
- * See the reference documentation at
+ * <p>See the reference documentation at
  * <a href="http://developers.google.com/google-apps/calendar/v3/reference/">
  * http://developers.google.com/google-apps/calendar/v3/reference/</a>.
  * <br>
@@ -29,8 +29,7 @@ package org.springframework.social.google.api.calendar;
  *  </ul>
  * See
  * <a href="http://developers.google.com/google-apps/calendar/auth">http://developers.google.com/google-apps/calendar/auth</a>
- * for details about the different scopes.
- *
+ * for details about the different scopes.</p>
  *
  * @author Martin Wink
  */
@@ -38,7 +37,7 @@ public interface CalendarOperations {
   /**
    * The identifier for the user's primary calendar.
    */
-  public static final String PRIMARY_CALENDAR_ID = "primary";
+  String PRIMARY_CALENDAR_ID = "primary";
 
   /**
    * Create a builder pattern object for refining a query that lists the calendars

@@ -134,5 +134,4 @@ public class UserInfo extends ApiEntity {
   public void setLocale(final String locale) {
     this.locale = locale;
   }
-
 }

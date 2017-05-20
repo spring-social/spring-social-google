@@ -115,5 +115,4 @@ public class Task extends ApiEntity {
     this.completed = completed;
     status = completed == null ? NEEDS_ACTION : COMPLETED;
   }
-
 }

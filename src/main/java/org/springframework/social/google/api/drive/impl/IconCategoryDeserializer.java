@@ -28,5 +28,4 @@ public class IconCategoryDeserializer extends ApiEnumDeserializer<IconCategory> 
   public IconCategoryDeserializer() {
     super(IconCategory.class);
   }
-
 }

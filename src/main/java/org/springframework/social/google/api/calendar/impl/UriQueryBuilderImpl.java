@@ -26,12 +26,18 @@ import org.springframework.social.google.api.query.impl.QueryBuilderImpl;
  *
  * @author Martin Wink
  */
-public abstract class UriQueryBuilderImpl<Q extends UriQueryBuilder<?, T>, T> extends QueryBuilderImpl<Q, T> implements UriQueryBuilder<Q, T> {
+public abstract class UriQueryBuilderImpl<Q extends UriQueryBuilder<?, T>, T> extends QueryBuilderImpl<Q, T>
+  implements UriQueryBuilder<Q, T> {
 
   public UriQueryBuilderImpl(final String urlTemplate) {
     super(urlTemplate);
   }
 
+  /**
+   * Used to create a URI from the given URL template.
+   *
+   * @return The URI
+   */
   public URI buildUri() {
     try {
       return new URI(super.build());

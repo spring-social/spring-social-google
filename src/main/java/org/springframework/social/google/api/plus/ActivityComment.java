@@ -54,5 +54,4 @@ public class ActivityComment extends ApiEntity {
     @JsonProperty
     private String content;
   }
-
 }

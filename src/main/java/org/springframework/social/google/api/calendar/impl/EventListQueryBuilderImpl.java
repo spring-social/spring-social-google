@@ -16,6 +16,7 @@
 package org.springframework.social.google.api.calendar.impl;
 
 import java.text.MessageFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -31,14 +32,15 @@ import org.springframework.web.client.RestTemplate;
  *
  * @author Martin Wink
  */
-public class EventListQueryBuilderImpl extends ApiQueryBuilderImpl<EventListQueryBuilder, EventPage> implements EventListQueryBuilder {
+public class EventListQueryBuilderImpl extends ApiQueryBuilderImpl<EventListQueryBuilder, EventPage>
+  implements EventListQueryBuilder {
 
-  private static final java.util.Calendar utcCalendar = java.util.Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+  private static final Calendar utcCalendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 
-  public EventListQueryBuilderImpl(final String urlTemplate, final String calendarId, final Class<EventPage> type, final RestTemplate restTemplate) {
+  public EventListQueryBuilderImpl(final String urlTemplate, final String calendarId, final Class<EventPage> type,
+                                   final RestTemplate restTemplate) {
     super(MessageFormat.format(urlTemplate, encode(calendarId)), type, restTemplate);
   }
-  ;
 
   private Date makeDate(final int year, final int month, final int day) {
     utcCalendar.setTimeInMillis(0);
@@ -108,8 +110,8 @@ public class EventListQueryBuilderImpl extends ApiQueryBuilderImpl<EventListQuer
   }
 
   @Override
-  public EventListQueryBuilder iCalUID(final String iCalUID) {
-    return appendQueryParam("iCalUID", encode(iCalUID));
+  public EventListQueryBuilder iCalUid(final String iCalUid) {
+    return appendQueryParam("iCalUid", encode(iCalUid));
   }
 
   @Override

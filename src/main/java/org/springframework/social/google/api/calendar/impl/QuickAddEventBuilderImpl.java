@@ -26,7 +26,8 @@ import org.springframework.util.Assert;
  *
  * @author Martin Wink
  */
-public class QuickAddEventBuilderImpl extends UriQueryBuilderImpl<QuickAddEventBuilder, Event> implements QuickAddEventBuilder {
+public class QuickAddEventBuilderImpl extends UriQueryBuilderImpl<QuickAddEventBuilder, Event>
+  implements QuickAddEventBuilder {
 
   public QuickAddEventBuilderImpl(final String urlTemplate, final String calendarId) {
     super(MessageFormat.format(urlTemplate, encode(calendarId)));
