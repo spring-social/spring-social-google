@@ -100,6 +100,7 @@ public class Event extends ApiEntity {
   @JsonInclude(value = Include.NON_NULL)
   private Visibility visibility;
 
+  @JsonProperty("iCalUID")
   @JsonInclude(value = Include.NON_NULL)
   private String iCalUid;
 
