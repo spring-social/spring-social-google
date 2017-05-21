@@ -32,12 +32,6 @@ import org.springframework.social.google.api.impl.GoogleTemplate;
 import org.springframework.test.web.client.MockRestServiceServer;
 
 public class AbstractGoogleApiTest {
-  private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
-
-  static {
-    dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-  }
-
   protected GoogleTemplate google;
   protected GoogleTemplate appAuthGoogle;
   protected MockRestServiceServer mockServer;
@@ -45,6 +39,8 @@ public class AbstractGoogleApiTest {
 
   protected static Date date(final String formatted) {
     try {
+      final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
+      dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
       return dateFormat.parse(formatted);
     } catch (final ParseException e) {
       throw new IllegalArgumentException(e);

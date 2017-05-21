@@ -35,7 +35,7 @@ import org.springframework.web.client.RestTemplate;
 public class EventListQueryBuilderImpl extends ApiQueryBuilderImpl<EventListQueryBuilder, EventPage>
   implements EventListQueryBuilder {
 
-  private static final Calendar utcCalendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+  private final Calendar utcCalendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 
   public EventListQueryBuilderImpl(final String urlTemplate, final String calendarId, final Class<EventPage> type,
                                    final RestTemplate restTemplate) {

@@ -34,7 +34,6 @@ import org.junit.Test;
 import org.springframework.social.google.api.AbstractGoogleApiTest;
 
 public class TaskTemplateTest extends AbstractGoogleApiTest {
-
   private static final String DEFAULT = "@default";
 
   private static final String FIRST_TASK_LIST_ID = "MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow";

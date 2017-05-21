@@ -43,11 +43,11 @@ public enum AgeRange {
    * @return an AgeRange
    */
   public static AgeRange fromMinMax(final Integer min, final Integer max) {
-    if (min == null && max == 17) {
+    if (min == null && max != null && max == 17) {
       return AGE_17_MINUS;
-    } else if (min == 18 && max == 20) {
+    } else if (min != null && min == 18 && max != null && max == 20) {
       return AGE_18_20;
-    } else if (min == 21 && max == null) {
+    } else if (min != null && min == 21 && max == null) {
       return AGE_21_PLUS;
     }
 
