@@ -2,7 +2,7 @@
 # This script will build the project.
 # Shamelessly "borrowed" from https://github.com/spring-projects/spring-metrics/blob/master/gradle/ciBuild.sh
 
-SWITCHES="-s --console=plain"
+SWITCHES="-s --console=plain --continue"
 
 if [ $TRAVIS_EVENT_TYPE == 'pull_request' ]; then
   echo -e "Build Pull Request #$TRAVIS_PULL_REQUEST => Branch [$TRAVIS_BRANCH]"
