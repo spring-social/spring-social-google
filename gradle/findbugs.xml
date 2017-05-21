@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+  <Match>
+    <Bug code="EI,EI2,UrF,UwF" />
+  </Match>
+
+  <Match>
+    <Class name="org.springframework.social.google.api.calendar.DateTimeDeserializerTests" />
+    <Bug code="DLS" />
+  </Match>
+</FindBugsFilter>

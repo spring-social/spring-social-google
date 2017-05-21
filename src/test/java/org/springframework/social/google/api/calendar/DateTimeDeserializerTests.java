@@ -38,13 +38,12 @@ import org.springframework.social.google.api.calendar.impl.DateTimeDeserializer;
  * @author Martin Wink
  */
 public class DateTimeDeserializerTests extends AbstractGoogleApiTest {
+  private final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.US);
+  private final DeserializationContext deserializationContext = null;
+  private JsonParser jsonParser;
+  private DateTimeDeserializer deserializer;
 
-  private static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.US);
-  private static DeserializationContext deserializationContext = null;
-  private static JsonParser jsonParser;
-  private static DateTimeDeserializer deserializer;
-
-  private static String formatDate(final Date date) {
+  private String formatDate(final Date date) {
     format.setTimeZone(DateUtils.TEST_TIMEZONE);
     return format.format(date);
   }

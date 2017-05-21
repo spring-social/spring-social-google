@@ -31,9 +31,9 @@ import com.fasterxml.jackson.databind.SerializerProvider;
  * @author Martin Wink
  */
 public class DateTimeSerializer extends JsonSerializer<Date> {
-  private static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.US);
+  private final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.US);
 
-  static {
+  public DateTimeSerializer() {
     final TimeZone timeZone = TimeZone.getTimeZone("GMT");
     format.setTimeZone(timeZone);
   }

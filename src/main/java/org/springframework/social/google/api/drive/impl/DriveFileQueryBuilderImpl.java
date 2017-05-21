@@ -70,7 +70,7 @@ class DriveFileQueryBuilderImpl extends ApiQueryBuilderImpl<DriveFileQueryBuilde
   private static final String OBJ_START = "{ ";
   private static final String OBJ_END = " }";
 
-  private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+  private final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
   private boolean negate;
   private final List<String> qTerms = new ArrayList<>();
@@ -80,7 +80,7 @@ class DriveFileQueryBuilderImpl extends ApiQueryBuilderImpl<DriveFileQueryBuilde
   }
 
   private DriveFileQueryBuilder addStringCompareTerm(final String field, final String operator, final String value) {
-    qTerms.add(new StringBuilder(field).append(operator).append('\'').append(value).append('\'').toString());
+    qTerms.add(field + operator + '\'' + value + '\'');
     return this;
   }
 
@@ -89,30 +89,25 @@ class DriveFileQueryBuilderImpl extends ApiQueryBuilderImpl<DriveFileQueryBuilde
   }
 
   private DriveFileQueryBuilder addBooleanTerm(final String field, final boolean value) {
-    qTerms.add(new StringBuilder(field).append(EQ).append(value).toString());
+    qTerms.add(field + EQ + value);
     return this;
   }
 
   private DriveFileQueryBuilder addInTerm(final String field, final String value) {
-    qTerms.add(new StringBuilder().append('\'').append(value).append('\'').append(IN).append(field).toString());
+    qTerms.add("'" + value + '\'' + IN + field);
     return this;
   }
 
   private DriveFileQueryBuilder addHasTerm(final String field, final Map<String, Object> item) {
     final List<String> criteria = new ArrayList<>();
+
     for (final Entry<String, Object> p : item.entrySet()) {
       if (p.getValue() != null) {
-        criteria.add(new StringBuffer().append(p.getKey()).append(EQ).append('\'').append(p.getValue())
-          .append('\'').toString());
+        criteria.add(p.getKey() + EQ + '\'' + p.getValue() + '\'');
       }
     }
-    qTerms.add(new StringBuilder()
-      .append(field)
-      .append(HAS)
-      .append(OBJ_START)
-      .append(collectionToDelimitedString(criteria, AND))
-      .append(OBJ_END)
-      .toString());
+
+    qTerms.add(field + HAS + OBJ_START + collectionToDelimitedString(criteria, AND) + OBJ_END);
     return this;
   }
 

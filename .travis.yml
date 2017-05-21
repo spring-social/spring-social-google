@@ -13,7 +13,8 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
-install: true
+install:
+  - echo "Skipping 'gradle assemble' step"
 
 script:
   - ./gradle/ciBuild.sh

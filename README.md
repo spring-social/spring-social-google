@@ -6,7 +6,7 @@
 
 ## Reference Documentation
 
-You can view an early preview of the reference [documentation here](https://spring-social-google.github.io/spring-metrics/). Lots more to come.
+You can view an early preview of the reference [documentation here](https://spring-social-google.github.io/spring-social-google/). Lots more to come.
 
 ## Goals
 
