@@ -1,0 +1,65 @@
+{
+  "kind": "plus#activity",
+  "etag": "\"9Q4kEgczRt3gWehMocqSxXqUhYo/jcJdQG2M7ph9tBjtmvhQ3-eWoGQ\"",
+  "title": "Spring Social Google 1.0.0.M3 supports Google+ App Activities https://github.com/GabiAxel/spring-social...",
+  "published": "2013-09-11T12:14:11.274Z",
+  "updated": "2013-09-11T12:15:08.000Z",
+  "id": "z13djjbraz2fdfp5g04chb0rkrvwhnmpch4",
+  "url": "https://plus.google.com/114863353858610846998/posts/VszgJt887pm",
+  "actor": {
+    "id": "114863353858610846998",
+    "displayName": "Gabriel Axel",
+    "url": "https://plus.google.com/114863353858610846998",
+    "image": {
+      "url": "https://lh5.googleusercontent.com/-UyuMuAWmKIM/AAAAAAAAAAI/AAAAAAAAAn0/rCC-XL5bxAM/photo.jpg?sz=50"
+    }
+  },
+  "verb": "post",
+  "object": {
+    "objectType": "note",
+    "content": "Spring Social Google 1.0.0.M3 supports Google+ App Activities \u003ca href=\"https://github.com/GabiAxel/spring-social-google\" class=\"ot-anchor\" rel=\"nofollow\"\u003ehttps://github.com/GabiAxel/spring-social-google\u003c/a\u003e Documentation: \u003ca href=\"http://gabiaxel.github.io/spring-social-google-reference/\" class=\"ot-anchor\" rel=\"nofollow\"\u003ehttp://gabiaxel.github.io/spring-social-google-reference/\u003c/a\u003e  \u003ca class=\"ot-hashtag\" href=\"https://plus.google.com/s/%23springframework\"\u003e#springframework\u003c/a\u003e   \u003ca class=\"ot-hashtag\" href=\"https://plus.google.com/s/%23googleapis\"\u003e#googleapis\u003c/a\u003e   \u003ca class=\"ot-hashtag\" href=\"https://plus.google.com/s/%23googleplus\"\u003e#googleplus\u003c/a\u003e  ",
+    "url": "https://plus.google.com/114863353858610846998/posts/VszgJt887pm",
+    "replies": {
+      "totalItems": 0,
+      "selfLink": "https://www.googleapis.com/plus/v1/activities/z13djjbraz2fdfp5g04chb0rkrvwhnmpch4/comments"
+    },
+    "plusoners": {
+      "totalItems": 0,
+      "selfLink": "https://www.googleapis.com/plus/v1/activities/z13djjbraz2fdfp5g04chb0rkrvwhnmpch4/people/plusoners"
+    },
+    "resharers": {
+      "totalItems": 0,
+      "selfLink": "https://www.googleapis.com/plus/v1/activities/z13djjbraz2fdfp5g04chb0rkrvwhnmpch4/people/resharers"
+    },
+    "attachments": [
+      {
+        "objectType": "article",
+        "displayName": "spring-social-google",
+        "content": "spring-social-google - Spring Social extension with connection support and an API binding for Google",
+        "url": "https://github.com/GabiAxel/spring-social-google",
+        "image": {
+          "url": "https://lh6.googleusercontent.com/proxy/HXa3YsniUc8vczq91QirQ0Ch4CYBa8mzbdwgvIYvtf-1XwqCPcJT44eYaXWKF9RgCTG5ZDCBqme3-zmj0qTQ6Utq_7A2J3lhTFbicYTK_DMUbElyDMsFJtoa=w120-h120",
+          "type": "image/jpeg",
+          "height": 120,
+          "width": 120
+        },
+        "fullImage": {
+          "url": "https://github.global.ssl.fastly.net/images/modules/logos_page/Octocat.png",
+          "type": "image/jpeg"
+        }
+      }
+    ]
+  },
+  "provider": {
+    "title": "Google+"
+  },
+  "access": {
+    "kind": "plus#acl",
+    "description": "Public",
+    "items": [
+      {
+        "type": "public"
+      }
+    ]
+  }
+}

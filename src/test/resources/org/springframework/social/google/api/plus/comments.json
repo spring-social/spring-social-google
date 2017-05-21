@@ -1,0 +1,67 @@
+{
+  "kind": "plus#commentFeed",
+  "etag": "\"9Q4kEgczRt3gWehMocqSxXqUhYo/KBuai6h-MrRDNpTGTIMvt8ISHgw\"",
+  "title": "Google+ List of Comments for an Activity",
+  "items": [
+    {
+      "kind": "plus#comment",
+      "etag": "\"9Q4kEgczRt3gWehMocqSxXqUhYo/6Yvy8EHrcrmBnmIJnyiwpy2CEEM\"",
+      "verb": "post",
+      "id": "z12ge3o4orj2sdkbb04chb0rkrvwhnmpch4.1364410988265921",
+      "published": "2013-03-27T19:03:08.265Z",
+      "updated": "2013-03-27T19:03:08.265Z",
+      "actor": {
+        "id": "112147361367898278139",
+        "displayName": "Diventa popolare con Spidly",
+        "url": "https://plus.google.com/112147361367898278139",
+        "image": {
+          "url": "https://lh5.googleusercontent.com/-w3cS77NcWNg/AAAAAAAAAAI/AAAAAAAAADE/BoGkzRLqf8U/photo.jpg?sz=50"
+        }
+      },
+      "object": {
+        "objectType": "comment",
+        "content": "Great project. I&#39;m exploring it. \u003cbr /\u003eI saw you don&#39;t mention how to post on Google Plus streams. \u003cbr /\u003eYou don&#39;t think about it ot it&#39;s just impossibile due to read only access to Google Plus via apis?"
+      },
+      "selfLink": "https://www.googleapis.com/plus/v1/comments/z12ge3o4orj2sdkbb04chb0rkrvwhnmpch4#1364410988265921",
+      "inReplyTo": [
+        {
+          "id": "z12ge3o4orj2sdkbb04chb0rkrvwhnmpch4",
+          "url": "https://plus.google.com/114863353858610846998/posts/fiqsmgdgqmh"
+        }
+      ],
+      "plusoners": {
+        "totalItems": 0
+      }
+    },
+    {
+      "kind": "plus#comment",
+      "etag": "\"9Q4kEgczRt3gWehMocqSxXqUhYo/Nw9TVPVCg9R40pj2k9uexRCGZJ0\"",
+      "verb": "post",
+      "id": "z12ge3o4orj2sdkbb04chb0rkrvwhnmpch4.1369027932569419",
+      "published": "2013-05-20T05:32:12.569Z",
+      "updated": "2013-05-20T05:32:12.569Z",
+      "actor": {
+        "id": "114863353858610846998",
+        "displayName": "Gabriel Axel",
+        "url": "https://plus.google.com/114863353858610846998",
+        "image": {
+          "url": "https://lh5.googleusercontent.com/-UyuMuAWmKIM/AAAAAAAAAAI/AAAAAAAAAn0/rCC-XL5bxAM/photo.jpg?sz=50"
+        }
+      },
+      "object": {
+        "objectType": "comment",
+        "content": "Sorry for the late response. Currently write operations are not supported for activities and people, but I&#39;m working on integration for the Moments API, which let you write app activities."
+      },
+      "selfLink": "https://www.googleapis.com/plus/v1/comments/z12ge3o4orj2sdkbb04chb0rkrvwhnmpch4#1369027932569419",
+      "inReplyTo": [
+        {
+          "id": "z12ge3o4orj2sdkbb04chb0rkrvwhnmpch4",
+          "url": "https://plus.google.com/114863353858610846998/posts/fiqsmgdgqmh"
+        }
+      ],
+      "plusoners": {
+        "totalItems": 0
+      }
+    }
+  ]
+}

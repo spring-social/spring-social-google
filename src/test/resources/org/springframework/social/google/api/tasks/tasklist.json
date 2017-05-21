@@ -1,0 +1,8 @@
+{
+  "kind": "tasks#taskList",
+  "id": "MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow",
+  "etag": "\"zhaMOBt6ugsBcjvafpKQm19UaRq/TzP33gzMvkrZ35Ro737HYR6FbZs\"",
+  "title": "First Task List",
+  "updated": "2011-01-01T01:01:01.000Z",
+  "selfLink": "https://www.googleapis.com/tasks/v1/users/@me/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow"
+}

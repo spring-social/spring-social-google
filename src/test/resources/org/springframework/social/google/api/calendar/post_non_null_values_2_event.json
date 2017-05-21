@@ -1,0 +1,38 @@
+{
+  "id": "onn6d9kbhps6fc47m96auhtkdo",
+  "etag": "\"2831656302604000\"",
+  "status": "tentative",
+  "htmlLink": "https://www.google.com/calendar/event?eid=b25uNmQ5a2JocHM2ZmM0N205NmF1aHRrZG9fMjAxNTA2MDNUMDkwMDAwWiBtYXJ0eHdpbmtAbQ",
+  "created": "2014-11-12T21:35:51.000Z",
+  "updated": "2014-11-12T21:35:51.302Z",
+  "summary": "Another title",
+  "location": "Another place",
+  "creator": {
+    "email": "martxw@gmail.com",
+    "displayName": "Martin Wink",
+    "self": true
+  },
+  "organizer": {
+    "email": "martxw@gmail.com",
+    "displayName": "Martin Wink",
+    "self": true
+  },
+  "start": {
+    "date": "2013-11-27",
+    "dateTime": "2013-11-28T00:00:00.000Z",
+    "timeZone": "CET"
+  },
+  "end": {
+    "date": "2013-11-29",
+    "dateTime": "2013-11-30T00:00:00.000Z",
+    "timeZone": "MST"
+  },
+  "recurrence": ["RRULE:FREQ=MONTHLY;INTERVAL=1", "RRULE:FREQ=MONTHLY;INTERVAL=3"],
+  "iCalUID": "onn6d9kbhps6fc47m96auhtkdo@google.com",
+  "sequence": 0,
+  "guestsCanInviteOthers": false,
+  "guestsCanSeeOtherGuests": true,
+  "reminders": {
+    "useDefault": true
+  }
+}

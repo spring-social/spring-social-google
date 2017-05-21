@@ -1,0 +1,12 @@
+{
+  "kind": "tasks#task",
+  "id": "MTY1OTA2NzU4OTQyMQAzMjM0MDc6MDo4GTI5NjMfMTc",
+  "etag": "\"zhaMOBt6ugsBcjvafbKQm19UaRg/LTY1NjAwMDY2OQ\"",
+  "title": "Active Task",
+  "updated": "2010-01-01T01:02:03.000Z",
+  "selfLink": "https://www.googleapis.com/tasks/v1/lists/MTY1OTA3NzU4OTQyMFAzMjM0MDc6MDow/tasks/MTY1OTA2NzU4OTQyMQAzMjM0MDc6MDo4GTI5NjMfMTc",
+  "position": "00000000003221225471",
+  "notes": "Task notes",
+  "status": "needsAction",
+  "due": "2012-02-02T00:00:00.000Z"
+}
