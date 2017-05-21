@@ -94,3 +94,17 @@ tasks.withType(Checkstyle) {
     html.stylesheet resources.text.fromFile("${rootDir}/gradle/checkstyle.xsl")
   }
 }
+
+findbugs {
+  toolVersion = "3.0.1"
+  excludeFilter = file("${rootDir}/gradle/findbugs.xml")
+  ignoreFailures = false
+}
+
+tasks.withType(FindBugs) {
+  reports {
+    xml.enabled false
+    html.enabled true
+    html.stylesheet resources.text.fromFile("${rootDir}/gradle/findbugs.xsl")
+  }
+}
