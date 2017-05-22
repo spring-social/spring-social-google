@@ -52,6 +52,8 @@ license {
   includes(["**/*.java", "**/*.properties"])
 }
 
+bintray.pkg.userOrg = 'spring-social-google'
+
 [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:all', '-Xlint:-processing', '-Werror']
 
 test.systemProperty('java.awt.headless', 'true')
