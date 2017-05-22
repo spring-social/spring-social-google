@@ -17,11 +17,13 @@ elif [ $TRAVIS_TAG ]; then
   case "$TRAVIS_TAG" in
   *-rc\.*)
     ./gradlew clean
-    ./gradlew -Prelease.disableGitChecks=true -Prelease.useLastTag=true build candidate $SWITCHES
+    ./gradlew -PgithubToken=$GITHUB_TOKEN -Prelease.disableGitChecks=true -Prelease.useLastTag=true build candidate
+    $SWITCHES
     ;;
   *)
     ./gradlew clean
-    ./gradlew -Prelease.disableGitChecks=true -Prelease.useLastTag=true build final $SWITCHES
+    ./gradlew -PgithubToken=$GITHUB_TOKEN -Prelease.disableGitChecks=true -Prelease.useLastTag=true build final
+    $SWITCHES
     ;;
   esac
 else
