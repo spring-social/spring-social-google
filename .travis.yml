@@ -18,11 +18,3 @@ install:
 
 script:
   - ./gradle/ciBuild.sh
-
-deploy:
-  provider: pages
-  local_dir: build/asciidoc/html5
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  on:
-    branch: master
