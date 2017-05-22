@@ -16,14 +16,16 @@ elif [ $TRAVIS_TAG ]; then
   echo -e 'Build Branch for Release => Branch ['$TRAVIS_BRANCH']  Tag ['$TRAVIS_TAG']'
   case "$TRAVIS_TAG" in
   *-rc\.*)
+    echo "Running RC build"
     ./gradlew clean
-    ./gradlew -PgithubToken=$GITHUB_TOKEN -Prelease.disableGitChecks=true -Prelease.useLastTag=true build candidate
-    $SWITCHES
+    ./gradlew -PgithubToken=$GITHUB_TOKEN -PbintrayUser=$BINTRAY_USER -PbintrayKey=$BINTRAY_TOKEN \
+    -Prelease.disableGitChecks=true -Prelease.useLastTag=true build candidate $SWITCHES
     ;;
   *)
+    echo "Running release build"
     ./gradlew clean
-    ./gradlew -PgithubToken=$GITHUB_TOKEN -Prelease.disableGitChecks=true -Prelease.useLastTag=true build final
-    $SWITCHES
+    ./gradlew -PgithubToken=$GITHUB_TOKEN -PbintrayUser=$BINTRAY_USER -PbintrayKey=$BINTRAY_TOKEN \
+    -Prelease.disableGitChecks=true -Prelease.useLastTag=true build final $SWITCHES
     ;;
   esac
 else

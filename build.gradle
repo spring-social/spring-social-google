@@ -4,6 +4,7 @@ buildscript {
     maven { url 'https://plugins.gradle.org/m2/' }
     maven { url 'http://repo.spring.io/plugins-release' }
   }
+
   dependencies {
     classpath 'com.netflix.nebula:gradle-extra-configurations-plugin:3.1.0'
     classpath 'io.spring.gradle:spring-release-plugin:0.2.0'
@@ -50,6 +51,8 @@ contacts {
 license {
   includes(["**/*.java", "**/*.properties"])
 }
+
+bintray.pkg.userOrg = 'spring-social-google'
 
 [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:all', '-Xlint:-processing', '-Werror']
 
