@@ -12,8 +12,11 @@ buildscript {
   }
 }
 
+apply plugin: 'java'
 apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
 apply plugin: 'io.spring.release'
 apply plugin: 'nebula.optional-base'
 
@@ -53,7 +56,24 @@ license {
   includes(["**/*.java", "**/*.properties"])
 }
 
-bintray.pkg.userOrg = 'spring-social-google'
+publishing {
+  publications {
+    SpringSocialGooglePublication(MavenPublication) {
+      from components.java
+      artifact tasks.sourceJar
+      artifact tasks.javadocJar
+    }
+  }
+}
+
+bintray {
+  publications = ['SpringSocialGooglePublication']
+
+  pkg {
+    userOrg = 'spring-social-google'
+    labels = ['spring', 'spring-social', 'google']
+  }
+}
 
 [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:all', '-Xlint:-processing', '-Werror']
 
