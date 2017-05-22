@@ -18,13 +18,13 @@ elif [ $TRAVIS_TAG ]; then
   *-rc\.*)
     echo "Running RC build"
     ./gradlew clean
-    ./gradlew -PgithubToken=$GITHUB_TOKEN -Pbintray.user=$BINTRAY_USER -Pbintray.key=$BINTRAY_TOKEN \
+    ./gradlew -PgithubToken=$GITHUB_TOKEN -PbintrayUser=$BINTRAY_USER -PbintrayKey=$BINTRAY_TOKEN \
     -Prelease.disableGitChecks=true -Prelease.useLastTag=true build candidate $SWITCHES
     ;;
   *)
     echo "Running release build"
     ./gradlew clean
-    ./gradlew -PgithubToken=$GITHUB_TOKEN -Pbintray.user=$BINTRAY_USER -Pbintray.key=$BINTRAY_TOKEN \
+    ./gradlew -PgithubToken=$GITHUB_TOKEN -PbintrayUser=$BINTRAY_USER -PbintrayKey=$BINTRAY_TOKEN \
     -Prelease.disableGitChecks=true -Prelease.useLastTag=true build final $SWITCHES
     ;;
   esac
