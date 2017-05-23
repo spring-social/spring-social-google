@@ -12,6 +12,9 @@ elif [ -z $TRAVIS_TAG ]; then
   echo -e ?'Build Branch with Snapshot => Branch ['$TRAVIS_BRANCH']'
   ./gradlew clean
   ./gradlew build $SWITCHES
+  if [ $TRAVIS_BRANCH == 'master' ]; then
+    ./gradlew clean && ./gradlew -PgithubToken=$GITHUB_TOKEN publishGhPages
+  fi
 elif [ $TRAVIS_TAG ]; then
   echo -e 'Build Branch for Release => Branch ['$TRAVIS_BRANCH']  Tag ['$TRAVIS_TAG']'
   case "$TRAVIS_TAG" in
