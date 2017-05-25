@@ -4,6 +4,10 @@
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg?style=plastic)](https://raw.githubusercontent.com/spring-social/spring-social-google/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/spring-social/spring-social-google.svg?style=plastic)](https://github.com/spring-social/spring-social-google/issues)
 
+<aside class="warning">
+Please note that we recently changed organizations from <code>org.springframework.social</code> to <b><code>com.github.spring-social</code></b> due to Maven Central sync issues.
+</aside>
+
 ## Reference Documentation
 
 You can view an early preview of the reference [documentation here](https://spring-social.github.io/spring-social-google/). Lots more to come.
