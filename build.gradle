@@ -42,7 +42,7 @@ ext {
   mockitoVersion = findProperty('mockitoVersion') ?: '2.8.9'
 }
 
-group = 'org.springframework.social'
+group = 'com.github.spring-social'
 description = 'Google API for Spring Social'
 
 contacts {
@@ -70,7 +70,7 @@ bintray {
   publications = ['SpringSocialGooglePublication']
 
   pkg {
-    userOrg = 'spring-social-google'
+    userOrg = 'spring-social'
     labels = ['spring', 'spring-social', 'google']
   }
 }

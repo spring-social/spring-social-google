@@ -1,5 +1,5 @@
 :github-tag: master
-:github-repo: spring-social-google/spring-social-google
+:github-repo: spring-social/spring-social-google
 :github-raw: http://raw.github.com/{github-repo}/{github-tag}
 :github-code: http://github.com/{github-repo}/tree/{github-tag}
 :all: {asterisk}{asterisk}
@@ -7,7 +7,7 @@
 :imagesdir: ./images
 = Spring Social Google
 
-image::https://travis-ci.org/spring-social-google/spring-social-google.svg?branch=master[Build Status, link=https://travis-ci.org/spring-social-google/spring-social-google]
+image::https://travis-ci.org/spring-social/spring-social-google.svg?branch=master[Build Status, link=https://travis-ci.org/spring-social/spring-social-google]
 image:https://img.shields.io/badge/License-Apache%202.0-blue.svg[Apache License,link="http://www.apache.org/licenses/LICENSE-2.0"]
 
 Allow a developer to interact, easily, with Google from the Spring ecosystem.
@@ -21,14 +21,14 @@ Production releases are available on Maven central.
 In Gradle:
 
 ```groovy
-compile 'org.springframework.social:spring-social-google:latest.release'
+compile 'com.github.spring-social:spring-social-google:latest.release'
 ```
 
 Or in Maven:
 
 ```xml
 <dependency>
-  <groupId>org.springframework.social</groupId>
+  <groupId>com.github.spring-social</groupId>
   <artifactId>spring-social-google</artifactId>
   <version>${social.version}</version>
 </dependency>
@@ -41,14 +41,14 @@ Pre-release artifacts are being published frequently, but are NOT intended for p
 In Gradle:
 
 ```groovy
-compile 'org.springframework.social:spring-social-google:latest.snapshot'
+compile 'com.github.spring-social:spring-social-google:latest.snapshot'
 ```
 
 Or in Maven:
 
 ```xml
 <dependency>
-  <groupId>org.springframework.social</groupId>
+  <groupId>com.github.spring-social</groupId>
   <artifactId>spring-social-google</artifactId>
   <version>${social.version}</version>
 </dependency>

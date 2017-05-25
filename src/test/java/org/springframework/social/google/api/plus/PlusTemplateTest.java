@@ -137,7 +137,7 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
     assertNotNull(activity);
     assertEquals("z13djjbraz2fdfp5g04chb0rkrvwhnmpch4", activity.getId());
     assertEquals(
-      "Spring Social Google 1.0.0.M3 supports Google+ App Activities https://github.com/GabiAxel/spring-social...",
+      "Spring Social Google supports Google Activities - https://github.com/spring-social/spring-social-google",
       activity.getTitle());
     assertEquals(date("2013-09-11T12:14:11.274Z"), activity.getPublished());
     assertEquals(date("2013-09-11T12:15:08.000Z"), activity.getUpdated());
@@ -150,7 +150,7 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
       "https://lh5.googleusercontent.com/-UyuMuAWmKIM/AAAAAAAAAAI/AAAAAAAAAn0/rCC-XL5bxAM/photo.jpg?sz=50",
       activity.getActor().getImageUrl());
     assertEquals(
-      "Spring Social Google 1.0.0.M3 supports Google+ App Activities \u003ca href=\"https://github.com/GabiAxel/spring-social-google\" class=\"ot-anchor\" rel=\"nofollow\"\u003ehttps://github.com/GabiAxel/spring-social-google\u003c/a\u003e Documentation: \u003ca href=\"http://gabiaxel.github.io/spring-social-google-reference/\" class=\"ot-anchor\" rel=\"nofollow\"\u003ehttp://gabiaxel.github.io/spring-social-google-reference/\u003c/a\u003e  \u003ca class=\"ot-hashtag\" href=\"https://plus.google.com/s/%23springframework\"\u003e#springframework\u003c/a\u003e   \u003ca class=\"ot-hashtag\" href=\"https://plus.google.com/s/%23googleapis\"\u003e#googleapis\u003c/a\u003e   \u003ca class=\"ot-hashtag\" href=\"https://plus.google.com/s/%23googleplus\"\u003e#googleplus\u003c/a\u003e  ",
+      "Spring Social Google supports Google Activities \u003ca href=\"https://github.com/spring-social/spring-social-google\" class=\"ot-anchor\" rel=\"nofollow\"\u003ehttps://github.com/spring-social/spring-social-google\u003c/a\u003e Documentation: \u003ca href=\"http://gabiaxel.github.io/spring-social-google-reference/\" class=\"ot-anchor\" rel=\"nofollow\"\u003ehttp://gabiaxel.github.io/spring-social-google-reference/\u003c/a\u003e  \u003ca class=\"ot-hashtag\" href=\"https://plus.google.com/s/%23springframework\"\u003e#springframework\u003c/a\u003e   \u003ca class=\"ot-hashtag\" href=\"https://plus.google.com/s/%23googleapis\"\u003e#googleapis\u003c/a\u003e   \u003ca class=\"ot-hashtag\" href=\"https://plus.google.com/s/%23googleplus\"\u003e#googleplus\u003c/a\u003e  ",
       activity.getContent());
     assertNotNull(activity.getAttachments());
     assertEquals(1, activity.getAttachments().size());
@@ -159,7 +159,7 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
     assertEquals(
       "spring-social-google - Spring Social extension with connection support and an API binding for Google",
       activity.getAttachments().get(0).getContent());
-    assertEquals("https://github.com/GabiAxel/spring-social-google",
+    assertEquals("https://github.com/spring-social/spring-social-google",
       activity.getAttachments().get(0).getUrl());
     assertEquals(
       "https://lh6.googleusercontent.com/proxy/HXa3YsniUc8vczq91QirQ0Ch4CYBa8mzbdwgvIYvtf-1XwqCPcJT44eYaXWKF9RgCTG5ZDCBqme3-zmj0qTQ6Utq_7A2J3lhTFbicYTK_DMUbElyDMsFJtoa=w120-h120",
@@ -310,7 +310,7 @@ public class PlusTemplateTest extends AbstractGoogleApiTest {
         UrlType.OTHER_PROFILE), new ProfileUrl(
         "http://twitter.com/GabiAxel", "gabiaxel",
         UrlType.OTHER_PROFILE), new ProfileUrl(
-        "https://github.com/GabiAxel/spring-social-google",
+        "https://github.com/spring-social/spring-social-google",
         "Spring Social Google", UrlType.CONTRIBUTOR), new ProfileUrl(
         "http://www.gabiaxel.com", "Blog", UrlType.WEBSITE),
       new ProfileUrl("https://www.docollab.com",

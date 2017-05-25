@@ -1,12 +1,12 @@
 # Spring Social Google
 
-[![Build Status](https://travis-ci.org/spring-social-google/spring-social-google.svg?branch=master)](https://travis-ci.org/spring-social-google/spring-social-google)
-[![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg?style=plastic)](https://raw.githubusercontent.com/spring-social-google/spring-social-google/master/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/spring-social-google/spring-social-google.svg?style=plastic)](https://github.com/spring-social-google/spring-social-google/issues)
+[![Build Status](https://travis-ci.org/spring-social/spring-social-google.svg?branch=master)](https://travis-ci.org/spring-social/spring-social-google)
+[![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg?style=plastic)](https://raw.githubusercontent.com/spring-social/spring-social-google/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/spring-social/spring-social-google.svg?style=plastic)](https://github.com/spring-social/spring-social-google/issues)
 
 ## Reference Documentation
 
-You can view an early preview of the reference [documentation here](https://spring-social-google.github.io/spring-social-google/). Lots more to come.
+You can view an early preview of the reference [documentation here](https://spring-social.github.io/spring-social-google/). Lots more to come.
 
 ## Goals
 
@@ -21,14 +21,14 @@ Production releases are available on Maven central.
 In Gradle:
 
 ```groovy
-compile 'org.springframework.social:spring-social-google:latest.release'
+compile 'com.github.spring-social:spring-social-google:latest.release'
 ```
 
 Or in Maven:
 
 ```xml
 <dependency>
-  <groupId>org.springframework.social</groupId>
+  <groupId>com.github.spring-social</groupId>
   <artifactId>spring-social-google</artifactId>
   <version>${social.version}</version>
 </dependency>
@@ -41,14 +41,14 @@ Pre-release artifacts are being published frequently, but are NOT intended for p
 In Gradle:
 
 ```groovy
-compile 'org.springframework.social:spring-social-google:latest.snapshot'
+compile 'com.github.spring-social:spring-social-google:latest.snapshot'
 ```
 
 Or in Maven:
 
 ```xml
 <dependency>
-  <groupId>org.springframework.social</groupId>
+  <groupId>com.github.spring-social</groupId>
   <artifactId>spring-social-google</artifactId>
   <version>${social.version}</version>
 </dependency>
@@ -64,7 +64,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.springframework.social:spring-social-google:latest.integration'
+    compile 'com.github.spring-social:spring-social-google:latest.integration'
 }
 ```
 
