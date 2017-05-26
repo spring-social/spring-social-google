@@ -62,6 +62,18 @@ publishing {
       from components.java
       artifact tasks.sourceJar
       artifact tasks.javadocJar
+
+
+      pom.withXml {
+        asNode().with {
+          appendNode('licenses').with {
+            appendNode('license').with {
+              appendNode('name', 'Apache-2.0')
+              appendNode('url', 'https://opensource.org/licenses/Apache-2.0')
+            }
+          }
+        }
+      }
     }
   }
 }
