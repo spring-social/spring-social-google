@@ -20,6 +20,7 @@ import org.springframework.social.google.api.calendar.CalendarOperations;
 import org.springframework.social.google.api.drive.DriveOperations;
 import org.springframework.social.google.api.impl.GoogleTemplate;
 import org.springframework.social.google.api.oauth2.OAuth2Operations;
+import org.springframework.social.google.api.people.PeopleOperations;
 import org.springframework.social.google.api.plus.PlusOperations;
 import org.springframework.social.google.api.tasks.TaskOperations;
 import org.springframework.web.client.RestOperations;
@@ -87,6 +88,14 @@ public interface Google extends ApiBinding {
    * @return {@link CalendarOperations} for the authenticated user if authenticated
    */
   CalendarOperations calendarOperations();
+
+  /**
+   * Retrieves {@link PeopleOperations}, used for interacting with Google People API.
+   * Some methods require OAuth2 scope https://people.googleapis.com/v1/me
+   *
+   * @return {@link PeopleOperations} for the authenticated user if authenticated
+   */
+  PeopleOperations peopleOperations();
 
   /**
    * Returns the access token, allowing interoperability with other libraries
