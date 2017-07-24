@@ -24,6 +24,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.social.google.api.people.impl.PeopleTemplate.ALL_FIELDS;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -31,9 +32,10 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 public class PeopleTemplateTest extends AbstractGoogleApiTest {
 
   @Test
-  public void getPersonById() {
+  public void getFullPersonById() {
     mockServer
-      .expect(requestTo("https://people.googleapis.com/v1/people/115661085724677333632?access_token=ACCESS_TOKEN"))
+      .expect(requestTo("https://people.googleapis.com/v1/people/115661085724677333632?personFields=" +
+        ALL_FIELDS + "&access_token=ACCESS_TOKEN"))
       .andExpect(method(GET))
       .andRespond(
         withSuccess(jsonResource("people"), APPLICATION_JSON));
@@ -42,14 +44,40 @@ public class PeopleTemplateTest extends AbstractGoogleApiTest {
   }
 
   @Test
-  public void getSelfProfile() {
+  public void getFullSelfProfile() {
     mockServer
-      .expect(requestTo("https://people.googleapis.com/v1/people/me?access_token=ACCESS_TOKEN"))
+      .expect(requestTo("https://people.googleapis.com/v1/people/me?personFields="
+        + ALL_FIELDS + "&access_token=ACCESS_TOKEN"))
       .andExpect(method(GET))
       .andRespond(
         withSuccess(jsonResource("people"), APPLICATION_JSON));
     final PeoplePerson person = google.peopleOperations().getGoogleProfile();
     assertPerson(person);
+  }
+
+  @Test
+  public void getPersonByIdAndFields() {
+    mockServer
+      .expect(requestTo("https://people.googleapis.com/v1/people/115661085724677333632?" +
+        "personFields=names,genders&access_token=ACCESS_TOKEN"))
+      .andExpect(method(GET))
+      .andRespond(
+        withSuccess(jsonResource("people"), APPLICATION_JSON));
+    final PeoplePerson person = google.peopleOperations().getPerson("115661085724677333632", "names,genders");
+    assertPerson(person); // In a real api call only names and genders would be there.
+  }
+
+
+  @Test
+  public void getSelfProfileWithFields() {
+    mockServer
+      .expect(requestTo("https://people.googleapis.com/v1/people/me?" +
+        "personFields=names,genders&access_token=ACCESS_TOKEN"))
+      .andExpect(method(GET))
+      .andRespond(
+        withSuccess(jsonResource("people"), APPLICATION_JSON));
+    final PeoplePerson person = google.peopleOperations().getGoogleProfile("names,genders");
+    assertPerson(person); // In a real api call only names and genders would be there.
   }
 
   private void assertPerson(final PeoplePerson person) {

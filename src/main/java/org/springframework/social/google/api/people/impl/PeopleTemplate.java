@@ -19,6 +19,7 @@ import org.springframework.social.google.api.impl.AbstractGoogleApiOperations;
 import org.springframework.social.google.api.people.PeopleOperations;
 import org.springframework.social.google.api.people.PeoplePerson;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 
 /**
@@ -34,8 +35,13 @@ public class PeopleTemplate extends AbstractGoogleApiOperations implements Peopl
   }
 
   @Override
-  public PeoplePerson getPerson(final String id) {
-    return getEntity(PEOPLE_URL + id, PeoplePerson.class);
+  public PeoplePerson getPerson(String id) {
+    return getEntity(buildUrl(PEOPLE_URL + id, ALL_FIELDS), PeoplePerson.class);
+  }
+
+  @Override
+  public PeoplePerson getPerson(String id, String fields) {
+    return getEntity(buildUrl(PEOPLE_URL + id, fields), PeoplePerson.class);
   }
 
   @Override
@@ -43,5 +49,14 @@ public class PeopleTemplate extends AbstractGoogleApiOperations implements Peopl
     return getPerson("me");
   }
 
+  @Override
+  public PeoplePerson getGoogleProfile(String fields) {
+    return getPerson("me", fields);
+  }
 
+  private static String buildUrl(String url, String personFieldsValue) {
+    return UriComponentsBuilder.fromHttpUrl(url)
+      .queryParam("personFields", personFieldsValue)
+      .build().toString();
+  }
 }

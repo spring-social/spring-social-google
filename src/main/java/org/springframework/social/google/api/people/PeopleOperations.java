@@ -15,23 +15,69 @@
  */
 package org.springframework.social.google.api.people;
 
-
+/**
+ * Defines operations for searching and retrieving Google people information. To use "me" as user ID,
+ * requires OAuth2 authentication.
+ *
+ *
+ * @author Oscar Carballo
+ */
 public interface PeopleOperations {
 
   /**
-   * Retrieves a user's Google profile.
+   * All the fields available in google people api. In order to get a field value, the authentication
+   * must have been done with the right scope.
+   */
+  String ALL_FIELDS = "addresses,ageRanges,biographies,birthdays,braggingRights,coverPhotos,"
+    + "emailAddresses,events,genders,imClients,interests,locales,memberships,metadata,names,nicknames,occupations,"
+    + "organizations,phoneNumbers,photos,relations,relationshipInterests,relationshipStatuses,residences,skills"
+    + "taglines,urls";
+
+  /**
+   * Retrieves a user's Google profile. Google people api requires to send the fields you want back.
+   * This will try to retrieve all fields for that user. The expected values will be returned
+   * as long as the right scope has been requested previously
    *
    * @param id user ID or "me"
    * @return the retrieved {@link PeoplePerson}
    */
   PeoplePerson getPerson(final String id);
 
+  /**
+   * Retrieves a user's Google profile populated with the requested fields. Google people api
+   * requires to send the fields you want back. This will try to retrieve the fields passed in.
+   * The expected values will be returned as long as the right scope has been
+   * requested previously
+   *
+   * @param id user ID or "me"
+   * @param fields comma separated values containing the desired fields
+   * @return the retrieved {@link PeoplePerson}
+   */
+  PeoplePerson getPerson(final String id, String fields);
+
 
   /**
-   * Retrieves the authenticated user's Google profile.
+   * Retrieves the authenticated user's complete Google profile. Google people api requires to
+   * send the fields you want back.
+   * This will try to retrieve all fields for that user. The expected values will be
+   * returned as long as the right scope has been requested previously
    *
    * @return the retrieved {@link PeoplePerson}
    */
   PeoplePerson getGoogleProfile();
+
+
+  /**
+   * Retrieves the authenticated user's complete Google profile. Google people api requires to
+   * send the fields you want back.
+   * This will try to retrieve the fields passed in. The expected values will be
+   * returned as long as the right scope has been requested previously
+   *
+   * @param fields user ID or "me"
+   * @return the retrieved {@link PeoplePerson}
+   */
+  PeoplePerson getGoogleProfile(final String fields);
+
+
 
 }
