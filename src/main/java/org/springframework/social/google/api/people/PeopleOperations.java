@@ -30,7 +30,7 @@ public interface PeopleOperations {
    */
   String ALL_FIELDS = "addresses,ageRanges,biographies,birthdays,braggingRights,coverPhotos,"
     + "emailAddresses,events,genders,imClients,interests,locales,memberships,metadata,names,nicknames,occupations,"
-    + "organizations,phoneNumbers,photos,relations,relationshipInterests,relationshipStatuses,residences,skills"
+    + "organizations,phoneNumbers,photos,relations,relationshipInterests,relationshipStatuses,residences,skills,"
     + "taglines,urls";
 
   /**
