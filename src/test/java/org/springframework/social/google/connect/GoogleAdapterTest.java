@@ -44,6 +44,7 @@ public class GoogleAdapterTest {
 
     Mockito.when(oauth2Operations.getUserinfo()).thenReturn(userInfo);
     final UserProfile profile = apiAdapter.fetchUserProfile(google);
+    assertEquals("114863353858610846998", profile.getId());
     assertEquals("Gabriel Axel", profile.getName());
     assertEquals("Gabriel", profile.getFirstName());
     assertEquals("Axel", profile.getLastName());
