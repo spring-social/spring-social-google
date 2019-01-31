@@ -86,14 +86,14 @@ public class PeopleTemplateTest extends AbstractGoogleApiTest {
     assertEquals("115661085724677333632", person.getId());
     assertEquals("#8OZqg2xl60w=", person.getMetadata().getSources().get(0).getEtag());
     assertEquals("#8OZqg2xl60w=", person.getEtag());
-    assertThat(person.getNames().get(0).getGivenName(), is("Oscar"));
-    assertThat(person.getNames().get(0).getFamilyName(), is("Carballo"));
-    assertThat(person.getBirthdays().get(0).getDate().getDay(), is(21));
-    assertThat(person.getBirthdays().get(0).getDate().getMonth(), is(10));
-    assertThat(person.getBirthdays().get(0).getDate().getYear(), is(1979));
+    assertThat(person.getNames().get(0).getGivenName(), is("Name"));
+    assertThat(person.getNames().get(0).getFamilyName(), is("FName"));
+    assertThat(person.getBirthdays().get(0).getDate().getDay(), is(10));
+    assertThat(person.getBirthdays().get(0).getDate().getMonth(), is(3));
+    assertThat(person.getBirthdays().get(0).getDate().getYear(), is(1981));
     assertThat(person.getGenders().get(0).getValue(), is("male"));
-    assertThat(person.getEmailAddresses().get(0).getValue(), is("oscar.carballo@scout24.com"));
-    assertThat(person.getPhotos().get(0).getUrl(), is("https://lh6.googleusercontent.com/-1lUywZzxLoQ/AAAAAAAAAAI/AAAAAAAAAC0/c95Whdc5AAA/s100/photo.jpg"));
+    assertThat(person.getEmailAddresses().get(0).getValue(), is("some.person@gmail.com"));
+    assertThat(person.getPhotos().get(0).getUrl(), is("https://lh3.googleusercontent.com/a-/AAuE7mBnpXpWH1YvoJMrzTsC3H34HeWaFPYSTsIrk1bQrA=s100"));
   }
 
 }

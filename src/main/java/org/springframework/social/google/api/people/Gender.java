@@ -30,4 +30,11 @@ public class Gender {
 
   private String value;
 
+  public String getFormattedValue() {
+    return formattedValue;
+  }
+
+  private String formattedValue;
+
+
 }

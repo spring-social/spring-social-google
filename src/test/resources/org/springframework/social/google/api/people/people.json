@@ -1,113 +1,274 @@
 {
-  "resourceName": "people/115661085724677333632",
-  "etag": "%EgcBBwgCAwku",
-  "metadata": {
-    "sources": [
-      {
-        "type": "PROFILE",
-        "id": "115661085724677333632",
-        "etag": "#8OZqg2xl60w=",
-        "profileMetadata": {
-          "objectType": "PERSON",
-          "userTypes": [
-            "GOOGLE_USER"
-          ]
-        }
+  "organizations": [
+    {
+      "formattedType": "Work",
+      "endDate": {
+        "month": 1,
+        "day": 2,
+        "year": 2018
+      },
+      "name": "SomeOrg",
+      "startDate": {
+        "month": 1,
+        "day": 2,
+        "year": 2018
+      },
+      "title": "Software Developer",
+      "jobDescription": "dev work",
+      "type": "work",
+      "metadata": {
+        "source": {
+          "type": "PROFILE",
+          "id": "115661085724677333632"
+        },
+        "primary": true
       }
-    ],
-    "objectType": "PERSON"
-  },
-  "names": [
-    {
-      "metadata": {
-        "primary": true,
-        "source": {
-          "type": "PROFILE",
-          "id": "115661085724677333632"
-        }
-      },
-      "displayName": "Oscar Carballo",
-      "familyName": "Carballo",
-      "givenName": "Oscar",
-      "displayNameLastFirst": "Carballo, Oscar"
     }
   ],
-  "photos": [
+  "phoneNumbers": [
     {
+      "formattedType": "Home",
+      "type": "home",
+      "value": "555-5555",
       "metadata": {
-        "primary": true,
         "source": {
           "type": "PROFILE",
           "id": "115661085724677333632"
-        }
-      },
-      "url": "https://lh6.googleusercontent.com/-1lUywZzxLoQ/AAAAAAAAAAI/AAAAAAAAAC0/c95Whdc5AAA/s100/photo.jpg"
+        },
+        "primary": true
+      }
     }
   ],
-  "genders": [
+  "addresses": [
     {
+      "formattedValue": "Some Address",
+      "formattedType": "Home",
+      "type": "home",
       "metadata": {
-        "primary": true,
         "source": {
           "type": "PROFILE",
           "id": "115661085724677333632"
-        }
-      },
-      "value": "male",
-      "formattedValue": "Male"
+        },
+        "primary": true
+      }
+    }
+  ],
+  "nicknames": [
+    {
+      "type": "GPLUS",
+      "value": "Somebody",
+      "metadata": {
+        "source": {
+          "type": "PROFILE",
+          "id": "115661085724677333632"
+        },
+        "primary": true
+      }
+    }
+  ],
+  "residences": [
+    {
+      "current": true,
+      "value": "Summit NJ",
+      "metadata": {
+        "source": {
+          "type": "PROFILE",
+          "id": "115661085724677333632"
+        },
+        "primary": true
+      }
     }
   ],
   "birthdays": [
     {
+      "date": {
+        "month": 3,
+        "day": 10,
+        "year": 1981
+      },
       "metadata": {
-        "primary": true,
         "source": {
           "type": "PROFILE",
           "id": "115661085724677333632"
-        }
-      },
-      "date": {
-        "year": 1979,
-        "month": 10,
-        "day": 21
+        },
+        "primary": true
       }
     },
     {
+      "date": {
+        "month": 3,
+        "day": 10,
+        "year": 1981
+      },
       "metadata": {
         "source": {
           "type": "ACCOUNT",
           "id": "115661085724677333632"
         }
-      },
-      "date": {
-        "year": 1977,
-        "month": 12,
-        "day": 21
       }
     }
   ],
-  "emailAddresses": [
+  "ageRanges": [
     {
+      "ageRange": "TWENTY_ONE_OR_OLDER",
       "metadata": {
-        "primary": true,
-        "verified": true,
         "source": {
-          "type": "ACCOUNT",
+          "type": "PROFILE",
           "id": "115661085724677333632"
-        }
-      },
-      "value": "oscar.carballo@scout24.com"
+        },
+        "primary": true
+      }
+    }
+  ],
+  "photos": [
+    {
+      "url": "https://lh3.googleusercontent.com/a-/AAuE7mBnpXpWH1YvoJMrzTsC3H34HeWaFPYSTsIrk1bQrA=s100",
+      "metadata": {
+        "source": {
+          "type": "PROFILE",
+          "id": "115661085724677333632"
+        },
+        "primary": true
+      }
+    }
+  ],
+  "etag": "%EiEBAj0DBAUGBwgJPgoLPwwNDg8QQBESExQVFzUZN3ciJS4aDAECAwQFBgcICQoLDCIMM2NBWUsvREI0bW89",
+  "names": [
+    {
+      "givenName": "Name",
+      "familyName": "FName",
+      "displayName": "Name FName",
+      "displayNameLastFirst": "FName, Name",
+      "metadata": {
+        "source": {
+          "type": "PROFILE",
+          "id": "115661085724677333632"
+        },
+        "primary": true
+      }
+    }
+  ],
+  "urls": [
+    {
+      "formattedType": "Profile",
+      "type": "profile",
+      "value": "https://plus.google.com/115661085724677333632",
+      "metadata": {
+        "source": {
+          "type": "PROFILE",
+          "id": "115661085724677333632"
+        },
+        "verified": true,
+        "primary": true
+      }
     },
     {
+      "formattedType": "GitHub",
+      "type": "GitHub",
+      "value": "https://github.com/some-person",
       "metadata": {
         "source": {
           "type": "PROFILE",
           "id": "115661085724677333632"
         }
-      },
-      "value": "personal.email@google.com",
-      "type": "home",
-      "formattedType": "Home"
+      }
     }
-  ]
+  ],
+  "genders": [
+    {
+      "formattedValue": "Male",
+      "value": "male",
+      "metadata": {
+        "source": {
+          "type": "PROFILE",
+          "id": "115661085724677333632"
+        },
+        "primary": true
+      }
+    }
+  ],
+  "ageRange": "TWENTY_ONE_OR_OLDER",
+  "resourceName": "people/115661085724677333632",
+  "emailAddresses": [
+    {
+      "value": "some.person@gmail.com",
+      "metadata": {
+        "source": {
+          "type": "ACCOUNT",
+          "id": "115661085724677333632"
+        },
+        "verified": true,
+        "primary": true
+      }
+    },
+    {
+      "formattedType": "Home",
+      "type": "home",
+      "value": "some.person@hotmail.com",
+      "metadata": {
+        "source": {
+          "type": "PROFILE",
+          "id": "115661085724677333632"
+        }
+      }
+    }
+  ],
+  "imClients": [
+    {
+      "username": "someperson",
+      "formattedType": "Home",
+      "protocol": "skype",
+      "formattedProtocol": "Skype",
+      "type": "home",
+      "metadata": {
+        "source": {
+          "type": "PROFILE",
+          "id": "115661085724677333632"
+        },
+        "primary": true
+      }
+    }
+  ],
+  "coverPhotos": [
+    {
+      "url": "https://lh3.googleusercontent.com/c5dqxl-2uHZ82ah9p7yxrV#1ZssrJNSV_15Nu0TUZwzCWqmtoLxCUJgEzLGtxsrJ6-v6R6rKU_-FYm881TTiMCJ_=s1600",
+      "default": true,
+      "metadata": {
+        "source": {
+          "type": "PROFILE",
+          "id": "115661085724677333632"
+        },
+        "primary": true
+      }
+    }
+  ],
+  "locales": [
+    {
+      "value": "en",
+      "metadata": {
+        "source": {
+          "type": "ACCOUNT",
+          "id": "115661085724677333632"
+        },
+        "primary": true
+      }
+    }
+  ],
+  "metadata": {
+    "sources": [
+      {
+        "etag": "#8OZqg2xl60w=",
+        "type": "PROFILE",
+        "id": "115661085724677333632",
+        "profileMetadata": {
+          "userTypes": [
+            "GOOGLE_USER",
+            "GPLUS_USER"
+          ],
+          "objectType": "PERSON"
+        }
+      }
+    ],
+    "objectType": "PERSON"
+  }
 }
