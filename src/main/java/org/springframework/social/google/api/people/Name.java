@@ -26,8 +26,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Name {
 
   private String familyName;
-
   private String givenName;
+  private String displayName;
+
+
+
+  private String displayNameLastFirst;
 
   public String getFamilyName() {
     return familyName;
@@ -35,5 +39,13 @@ public class Name {
 
   public String getGivenName() {
     return givenName;
+  }
+
+  public String getDisplayName() {
+    return displayName;
+  }
+
+  public String getDisplayNameLastFirst() {
+    return displayNameLastFirst;
   }
 }

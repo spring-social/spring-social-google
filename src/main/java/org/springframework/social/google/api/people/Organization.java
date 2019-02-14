@@ -17,28 +17,43 @@ package org.springframework.social.google.api.people;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-/**
- * Model class representing an email address in google people
- * @author Oscar Carballo
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class EmailAddress {
+public class Organization {
 
-  private String value;
   private String formattedType;
+  private String name;
+  private String title;
+  private String jobDescription;
   private String type;
-
-
-  public String getValue() {
-    return value;
-  }
-
+  private Date startDate;
+  private Date endDate;
 
   public String getFormattedType() {
     return formattedType;
   }
 
+  public String getName() {
+    return name;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public String getJobDescription() {
+    return jobDescription;
+  }
+
   public String getType() {
     return type;
   }
+
+  public Date getStartDate() {
+    return startDate;
+  }
+
+  public Date getEndDate() {
+    return endDate;
+  }
+
 }

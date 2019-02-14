@@ -39,6 +39,22 @@ public class PeoplePerson extends ApiEntity {
 
   private List<Photo> photos;
 
+  private List<Photo> coverPhotos;
+
+  private List<Url> urls;
+
+  private List<Organization> organizations;
+
+  private List<PhoneNumber> phoneNumbers;
+
+  private List<Residence> residences;
+
+  private List<AgeRange> ageRanges;
+
+  private List<ImClient> imClients;
+
+  private List<Local> locals;
+
   @Override
   public String getId() {
     return getMetadata().getSources().get(0).getId();
@@ -58,10 +74,18 @@ public class PeoplePerson extends ApiEntity {
     return genders;
   }
 
+  /**
+   * Will need https://www.googleapis.com/auth/user.birthday.read scope
+   * @return list of birthdays
+   */
   public List<Birthday> getBirthdays() {
     return birthdays;
   }
 
+  /**
+   * For account email address will need https://www.googleapis.com/auth/user.emails.read scope
+   * @return list of email addresses
+   */
   public List<EmailAddress> getEmailAddresses() {
     return emailAddresses;
   }
@@ -73,4 +97,42 @@ public class PeoplePerson extends ApiEntity {
   public List<Photo> getPhotos() {
     return photos;
   }
+
+  public List<Url> getUrls() {
+    return urls;
+  }
+
+  public List<Organization> getOrganizations() {
+    return organizations;
+  }
+
+  public List<PhoneNumber> getPhoneNumbers() {
+    return phoneNumbers;
+  }
+
+  public List<Residence> getResidences() {
+    return residences;
+  }
+
+  /**
+   * Will need https://www.googleapis.com/auth/user.birthday.read scope
+   * @return list of age ranges
+   */
+  public List<AgeRange> getAgeRanges() {
+    return ageRanges;
+  }
+
+
+  public List<ImClient> getImClients() {
+    return imClients;
+  }
+
+  public List<Local> getLocals() {
+    return locals;
+  }
+
+  public List<Photo> getCoverPhotos() {
+    return coverPhotos;
+  }
+
 }
