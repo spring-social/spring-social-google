@@ -27,6 +27,7 @@ public class Url {
   public String getValue() {
     return value;
   }
+  
   public String getType() {
     return type;
   }

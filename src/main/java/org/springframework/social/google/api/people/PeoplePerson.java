@@ -76,7 +76,7 @@ public class PeoplePerson extends ApiEntity {
 
   /**
    * Will need https://www.googleapis.com/auth/user.birthday.read scope
-   * @return
+   * @return list of birthdays
    */
   public List<Birthday> getBirthdays() {
     return birthdays;
@@ -84,7 +84,7 @@ public class PeoplePerson extends ApiEntity {
 
   /**
    * For account email address will need https://www.googleapis.com/auth/user.emails.read scope
-   * @return
+   * @return list of email addresses
    */
   public List<EmailAddress> getEmailAddresses() {
     return emailAddresses;
@@ -98,7 +98,9 @@ public class PeoplePerson extends ApiEntity {
     return photos;
   }
 
-  public List<Url> getUrls() { return urls; }
+  public List<Url> getUrls() {
+    return urls;
+  }
 
   public List<Organization> getOrganizations() {
     return organizations;
@@ -114,7 +116,7 @@ public class PeoplePerson extends ApiEntity {
 
   /**
    * Will need https://www.googleapis.com/auth/user.birthday.read scope
-   * @return
+   * @return list of age ranges
    */
   public List<AgeRange> getAgeRanges() {
     return ageRanges;
