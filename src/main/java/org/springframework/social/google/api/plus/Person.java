@@ -197,7 +197,7 @@ public class Person extends ApiEntity {
   public String getAccountEmail() {
     if (emails != null) {
       for (final Entry<String, String> entry : emails.entrySet()) {
-        if (entry.getValue().equals("account")) {
+        if (entry.getValue().equalsIgnoreCase("account")) {
           return entry.getKey();
         }
       }
